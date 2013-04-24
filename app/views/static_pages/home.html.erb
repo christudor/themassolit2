@@ -1,3 +1,16 @@
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+		<section>
+        <%= render 'shared/stats' %>
+      </section>
+     </aside>
+  </div>
+<% else %>    
+
 <h1>Welcome to the MASSOLIT</h1>
 	<p>
 	Inspired by the ongoing dialogue between Pilate and Yeshua Ha-Nosri
@@ -5,3 +18,4 @@
 
 <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
 </div>
+<% end %>

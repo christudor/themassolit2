@@ -1,0 +1,14 @@
+<% provide(:title, 'All providers') %>
+<h1>All providers</h1>
+
+<%= will_paginate %>
+
+<ul class="providers">
+  <% @providers.each do |provider| %>
+    <li>
+      <%= link_to provider.name, provider %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def index
+    @users = User.paginate(page: params[:page])
+  end
+
   def update
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
@@ -34,11 +38,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def studying
+    @title = "Studying"
+    @course = Course.find(params[:id])
+    @courses = @user.courses_taken.paginate(page: params[:page])
+    render 'show_study'
+  end
+
   private
 
- 	def signed_in_user
+ 	  def signed_in_user
       unless signed_in?
         store_location
+       
         redirect_to signin_url, notice: "Please sign in."
       end
     end

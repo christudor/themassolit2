@@ -15,8 +15,24 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:admin) }
+  it { should respond_to(:courses_taken)}
+  it { should respond_to(:studying?) }
+  it { should respond_to(:study!) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:reverse_relationships) }
 
   it { should be_valid }
+  it { should_not be_admin }
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle(:admin)
+    end
+
+    it { should be_admin }
+  end
 
   describe "when name is not present" do
   	before { @user.name = " " }
@@ -113,5 +129,28 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "studying" do
+    let(:course) { FactoryGirl.create(:course) }
+    before do
+      @user.save
+      @user.study!(course)
+    end
+
+    it { should be_studying(course) }
+    its(:courses_taken) {should include (course) }
+
+    describe "course taken" do
+      subject { course }
+      its(:students) {should include (@user) }
+    end
+
+    describe "and unstudying" do
+      before { @user.unstudy!(course) }
+
+      it { should_not be_studying(course) }
+      its(:courses_taken) { should_not include(course) }
+    end
   end
 end
