@@ -43,10 +43,7 @@ end
 def make_relationships
   users = User.all
   courses = Course.all
-  user  = users.first
   course = courses.first
-  courses_taken = courses[2..50]
-  students      = users[3..40]
-  courses_taken.each { |course| user.study!(course) }
-  students.each      { |student| student.study!(course) }
+  students = users[1..10]
+  students.each { |student| student.study!(course) }
 end

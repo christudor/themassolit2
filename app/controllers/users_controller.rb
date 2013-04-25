@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_filter :signed_in_user, only: [:edit, :update]
+	before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :studying]
 	before_filter :correct_user, only: [:edit, :update]
   
   def show
@@ -39,9 +39,9 @@ class UsersController < ApplicationController
   end
 
   def studying
-    @title = "Studying"
-    @course = Course.find(params[:id])
-    @courses = @user.courses_taken.paginate(page: params[:page])
+    @title = "Courses Taken"
+    @user = User.find(params[:id])
+    @courses = @user.studied_courses
     render 'show_study'
   end
 

@@ -14,6 +14,7 @@ FactoryGirl.define do
   	name		"Introduction to Bulgakov"
   	category	"Literature"
   	description	"Introduction to the works of Mikhail Bulgakov, starting with The Master and Margarita"
+    provider
   end
 
   factory :provider do

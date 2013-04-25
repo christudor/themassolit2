@@ -1,5 +1,4 @@
-<%= form_for(current_user.relationships.build(course_id: @course.id),
-             remote: true) do |f| %>
+<%= form_for(current_user.relationships.build(course_id: @course.id)) do |f| %>
   <div><%= f.hidden_field :course_id %></div>
   <%= f.submit "Study this course!", class: "btn btn-large btn-primary" %>
 <% end %>

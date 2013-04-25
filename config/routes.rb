@@ -1,14 +1,21 @@
 Massolit::Application.routes.draw do
  resources :users do
     member do
-      get :courses_taken
+      get :studying
     end
   end
+
+  resources :courses do
+    member do
+       get :students
+    end
+  end
+
 
   resources :sessions, only: [:new, :create, :destroy]
   
   resources :providers
-  resources :courses
+  
   
   resources :relationships, only: [:create, :destroy]
 

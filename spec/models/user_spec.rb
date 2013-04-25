@@ -16,7 +16,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
   it { should respond_to(:admin) }
-  it { should respond_to(:courses_taken)}
+  it { should respond_to(:studied_courses)}
   it { should respond_to(:studying?) }
   it { should respond_to(:study!) }
   it { should respond_to(:relationships) }
@@ -139,7 +139,7 @@ describe User do
     end
 
     it { should be_studying(course) }
-    its(:courses_taken) {should include (course) }
+    its(:studied_courses) {should include (course) }
 
     describe "course taken" do
       subject { course }
@@ -150,7 +150,7 @@ describe User do
       before { @user.unstudy!(course) }
 
       it { should_not be_studying(course) }
-      its(:courses_taken) { should_not include(course) }
+      its(:studied_courses) { should_not include(course) }
     end
   end
 end

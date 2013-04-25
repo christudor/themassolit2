@@ -11,7 +11,6 @@ describe Course do
   it { should respond_to(:name) }
   it { should respond_to(:category) }
   it { should respond_to(:description) }
-
-  it { should be_valid }
+  it { should respond_to(:relationships) }
 
 end

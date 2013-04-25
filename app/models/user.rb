@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :relationships, foreign_key: "student_id", dependent: :destroy
-  has_many :courses_taken, through: :relationships, source: :course
+  has_many :studied_courses, through: :relationships, source: :course
   has_many :reverse_relationships, foreign_key: "course_id", class_name: "Relationship", dependent: :destroy
 
   before_save { |user| user.email = email.downcase }
