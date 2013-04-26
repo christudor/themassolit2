@@ -13,9 +13,8 @@ Massolit::Application.routes.draw do
 
 
   resources :sessions, only: [:new, :create, :destroy]
-  
   resources :providers
-  
+  resources :imports  
   
   resources :relationships, only: [:create, :destroy]
 

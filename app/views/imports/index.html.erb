@@ -1,0 +1,14 @@
+<h1>Podcasts </h1>
+<p> I see you've been listening to these podcasts...</p>
+
+<ul class="tracks">
+	<%= @tracks.each do |track| %>
+	<% if track.last["Genre"] == "Podcast" %>
+	<li>
+		<strong><%= track.last["Name"] %></strong>
+		<p>
+		<%= track.last["Comments"] %>
+	</li>
+	<% end %>
+	<% end %>
+</ul>
