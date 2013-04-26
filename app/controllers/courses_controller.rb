@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_filter :signed_in_user
   
   def show
     @course = Course.find(params[:id])
@@ -15,5 +16,15 @@ class CoursesController < ApplicationController
   def index
   	@courses = Course.paginate(page: params[:page])
   end
+
+  private
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+       
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
 
 end

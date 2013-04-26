@@ -3,6 +3,7 @@ namespace :db do
   task populate: :environment do
     make_users
     make_courses
+    make_providers
     make_relationships
   end
 end
@@ -29,7 +30,7 @@ def make_courses
     name = Faker::Name.name
     category = "Example Category-#{n+1}"
     description = "Example Description#{n+1}"
-    Course.create!(name:  name, category: category, description: description, provider_id: n)
+    Course.create!(name:  name, category: category, description: description, provider_id: n+1)
   end
 end
 
