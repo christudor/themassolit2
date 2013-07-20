@@ -3,11 +3,9 @@
 
 <ul class="tracks">
 	<%= @tracks.each do |track| %>
-	<% if track.last["Genre"] == "Podcast" %>
+	<% if track.last["Podcast"] == true %>
 	<li>
-		<strong><%= track.last["Name"] %></strong>
-		<p>
-		<%= track.last["Comments"] %>
+		<strong><%= track.last["Name"].titleize %></strong>
 	</li>
 	<% end %>
 	<% end %>
