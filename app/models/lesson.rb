@@ -1,7 +1,5 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :description, :length, :title
-  validates :provider_id, presence: true
+  attr_accessible :lessondescription, :length, :title, :course_id
+  validates :course_id, presence: true
   belongs_to :course
-
-  has_many :relationships
 end

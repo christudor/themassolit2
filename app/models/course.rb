@@ -4,5 +4,6 @@ class Course < ActiveRecord::Base
   belongs_to :provider
 
   has_many :relationships
+  has_many :lessons
 
 end

@@ -38,8 +38,8 @@ end
   def make_lessons
     10.times do |n|
       title = "Lecture #{n+1}"
-      description = "This lecture will be a really important part of your learning"
-      Course.create!(title: title, description: description, length: "15:00")
+      lessondescription = "This lecture will be a really important part of your learning"
+      Lesson.create!(title: title, lessondescription: lessondescription, length: "15:00", course_id: 1)
     end
   end
 

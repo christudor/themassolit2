@@ -1,20 +1,39 @@
+
 <div class="container">
-  <div class="row">
-    <div class="span12">
-      <h1>
-        <%= @course.name %>
-      </h1>
+  <div class="media">
+    <div class="pull-left">
+      <img class="media-object" src="http://placebox.es/300/" alt="Picture to go here!">
     </div>
-  </div>
+    <div class="span7">
+      <h3 class="media-heading"><%= @course.name %></h3><%= render 'study_form' %>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      
+    </div>
 
-<div class="media">
-  <div class="pull-left">
-    <img class="media-object" src="http://placebox.es/300/" alt="Picture to go here!">
   </div>
-  <div class="span7">
-    <h4 class="media-heading"><%= @course.name %></h4>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
-</div>
+    
 </div>
 
+<div class="container">
+  <ul class="nav nav-list">
+    <li class="divider"></li>
+  </ul>
+
+  <ul class="courses">
+    <% @course.lessons.each do |lesson| %>
+      <li>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://placebox.es/200/" alt="Picture to go here!">
+          </a>
+          <div class="span9">
+            <h4 class="media-heading">
+              <%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %>
+            </h4>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+        </div>
+     </li>
+    <% end %>
+  </ul>
+</div>

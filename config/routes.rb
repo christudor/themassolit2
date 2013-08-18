@@ -11,13 +11,10 @@ Massolit::Application.routes.draw do
     end
   end
 
-
   resources :sessions, only: [:new, :create, :destroy]
   resources :providers
   resources :imports
-  resources :podcasts do
-    collection { post :import }
-  end 
+  resources :lessons
   
   resources :relationships, only: [:create, :destroy]
 
