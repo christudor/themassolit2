@@ -1,0 +1,13 @@
+<% provide(:title, 'All teachers') %>
+<div class="container">
+<h1>All users</h1>
+
+<ul class="teachers">
+  <% @teachers.each do |teacher| %>
+    <li>
+      <%= link_to teacher.email, teacher %>
+    </li>
+  <% end %>
+</ul>
+
+</div>

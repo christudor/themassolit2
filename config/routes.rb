@@ -1,4 +1,7 @@
 Massolit::Application.routes.draw do
+  get "interested_teachers/new"
+  get "interested_students/new"
+
  resources :users do
     member do
       get :studying
@@ -15,8 +18,9 @@ Massolit::Application.routes.draw do
   resources :providers
   resources :imports
   resources :lessons
-  
   resources :relationships, only: [:create, :destroy]
+  resources :learners
+  resources :teachers
 
   root to: 'static_pages#home'
 
@@ -26,6 +30,8 @@ Massolit::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
+  match '/studentsplash', to: 'static_pages#studentsplash'
+  match '/teachersplash', to: 'static_pages#teachersplash'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
