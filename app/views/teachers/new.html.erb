@@ -1,16 +1,26 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Want to contribute?') %>
 <div class="container">
-<h1>Sign up</h1>
 
+<div class="featurette">
+   <h2 class="featurette-heading">Want to contribute?</h2>
+      <p class="lead">We want to create the broadest and most diverse range of humanities courses available anywhere. So if you're a postgraduate from one of the best universities in the world, we'd love to hear from you.</p>
+   </div>
+</div>
+
+<div class="container">
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@teacher) do |f| %>
-    	<%= render 'shared/teacher_error_messages' %>
+      <%= render 'shared/teacher_error_messages' %>
 
-      <%= f.label :email %>
+    <center>
+      <%= f.label :email, "E-mail address:" %>
+    </center>
       <%= f.text_field :email %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+    <center>
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    </center>
     <% end %>
   </div>
 </div>
