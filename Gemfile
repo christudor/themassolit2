@@ -9,7 +9,12 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'jquery-rails', '2.0.2'
 gem 'plist'
 gem 'roo'
-
+gem 'devise', '2.1.2'
+gem 'cancan', '1.6.8'
+gem 'rolify', '3.2.0'
+gem 'stripe'
+gem 'stripe_event'
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
