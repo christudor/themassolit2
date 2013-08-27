@@ -1,6 +1,17 @@
 Massolit::Application.routes.draw do
-  get "interested_teachers/new"
-  get "interested_students/new"
+  get "content/silver"
+
+  get "content/gold"
+
+  get "content/platinum"
+
+  get "admin/index"
+
+  authenticated :user do
+    root :to => 'static_pages#home'
+  end
+  root :to => "static_pages#home"
+  devise_for :users
 
  resources :users do
     member do
@@ -22,7 +33,10 @@ Massolit::Application.routes.draw do
   resources :learners
   resources :teachers
 
-  root to: 'static_pages#home'
+  devise_scope :user do 
+    root to: 'static_pages#home'
+    match '/sessions/user', to: 'devise/sessions#create', via: :post
+  end
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

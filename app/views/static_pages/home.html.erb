@@ -16,9 +16,35 @@
     <h2 class="featurette-heading">Learn from the best</h2>
       <p class="lead">Whatever you want to learn, you'll be learning from the best. Our courses are created by postgraduates from the world's best universities.</p>
     </div>
-
 </div>
 <br><br>
+<div class="row span8 plans">
+  <div class="span2 well">
+    <div class="plan"><h2>Silver</h2></div>
+    <ul class="unstyled">
+      <li>One lesson a month</li>
+    </ul>
+    <h3>$9/month</h3>
+    <%= link_to 'Subscribe', content_silver_path, :class => 'btn btn-primary' %>
+  </div>
+  <div class="span2 well featured">
+    <div class="plan featured-plan"><h2>Gold</h2></div>
+    <ul class="unstyled">
+      <li>Ten lessons a month</li>
+    </ul>
+    <h3>$19/month</h3>
+    <%= link_to 'Subscribe', content_gold_path, :class => 'btn btn-primary' %>
+  </div>
+  <div class="span2 well">
+    <div class="plan"><h2>Platinum</h2></div>
+    <ul class="unstyled">
+      <li>Thirty lessons a month</li>
+    </ul>
+    <h3>$29/month</h3>
+    <%= link_to 'Subscribe', content_platinum_path, :class => 'btn btn-primary' %>
+  </div>
+</div>
+
 <div class="container">
       <div class="row">
         <div class="span6 offset3">

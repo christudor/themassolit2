@@ -7,14 +7,14 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'jquery-rails', '2.0.2'
-gem 'plist'
-gem 'roo'
 gem 'devise', '2.1.2'
 gem 'cancan', '1.6.8'
 gem 'rolify', '3.2.0'
+gem 'simple_form', '2.0.4'
 gem 'stripe'
 gem 'stripe_event'
-gem 'figaro'
+gem 'figaro', '0.5.0'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -22,6 +22,10 @@ group :development, :test do
   gem 'guard-rspec', '1.2.1'
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
+  gem 'better_errors', '0.2.0'
+  gem 'binding_of_caller', '0.6.8'
+  gem 'quiet_assets', '1.0.1'
+
 end
 
 # Gems used only for assets and not required
@@ -40,6 +44,9 @@ group :test do
   gem 'rb-notifu', '0.0.4'
   gem 'win32console', '1.3.0'
   gem 'factory_girl_rails', '4.1.0'
+  gem 'launchy', '2.1.2'
+  gem 'email_spec','1.2.1'
+  gem 'database_cleaner', '0.9.1'
 end 
 
 group :production do
