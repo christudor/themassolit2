@@ -20,7 +20,7 @@ gem 'simple_form', '2.0.4'
 
 gem 'stripe'
 gem 'stripe_event'
-gem 'figaro', '0.5.0'
+gem 'figaro'
 
 # Paperclip and Amazon Web Services gems for association
 # of database items (e.g. users, courses, etc) with images
