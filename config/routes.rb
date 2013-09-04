@@ -1,31 +1,24 @@
 Massolit::Application.routes.draw do
+  mount StripeEvent::Engine => '/stripe'
   get "content/silver"
-
   get "content/gold"
-
   get "content/platinum"
-
   get "admin/index"
 
   authenticated :user do
     root :to => 'static_pages#home'
   end
   root :to => "static_pages#home"
-  devise_for :users
-
- resources :users do
-    member do
-      get :studying
-    end
+ 
+ devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_scope :user do
+    put 'update_plan', :to => 'registrations#update_plan'
+    put 'update_card', :to => 'registrations#update_card'
   end
 
-  resources :courses do
-    member do
-       get :students
-    end
-  end
-
+  resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :courses
   resources :providers
   resources :imports
   resources :lessons

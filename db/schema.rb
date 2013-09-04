@@ -11,15 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826213238) do
+ActiveRecord::Schema.define(:version => 20130903184217) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
     t.string   "category"
     t.string   "description"
     t.integer  "provider_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "avatar"
   end
 
   create_table "learners", :force => true do |t|

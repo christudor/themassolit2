@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//= require jquery.readyselector
+//= require jquery.externalscript

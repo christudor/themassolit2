@@ -10,10 +10,28 @@ gem 'jquery-rails', '2.0.2'
 gem 'devise', '2.1.2'
 gem 'cancan', '1.6.8'
 gem 'rolify', '3.2.0'
+
+# Simple Form for form construction (for use with 
+# Stripe (see below)
+
 gem 'simple_form', '2.0.4'
+
+# Stripe gems for credit card payments
+
 gem 'stripe'
 gem 'stripe_event'
 gem 'figaro', '0.5.0'
+
+# Paperclip and Amazon Web Services gems for association
+# of database items (e.g. users, courses, etc) with images
+
+gem "paperclip", "~> 3.0"
+gem 'aws-sdk', '~> 1.5.7'
+
+# Carrierwave for course images.
+
+gem 'carrierwave'
+gem 'fog', '~> 1.3.1'
 
 
 group :development, :test do

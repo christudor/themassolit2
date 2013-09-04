@@ -1,7 +1,13 @@
 <% provide(:title, 'Contact') %>
+
 <div class="container">
-<h1>Contact</h1>
-	<p>
-	Want to get in touch? Come to Griboyedov's House.
-	</p>
+  
+  <div class="featurette">
+    <h2 class="featurette-heading">Get in Touch</h2>
+      <p class="lead">We love feedback - so if you have anything to say about MASSOLIT, we'd love to hear from you. Use either of the e-mails below and we promise to get back to you as soon as possible.
+      	<p class="lead"><%= mail_to("chris@massolit.co.uk") %></p>
+      	<p class="lead"><%= mail_to("col@massolit.co.uk") %></p>
+    </div>
+
+
 </div>
