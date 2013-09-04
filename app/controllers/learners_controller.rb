@@ -8,7 +8,7 @@ class LearnersController < ApplicationController
     @learner = Learner.new(params[:learner])
     if @learner.save
       flash[:success] = "Thanks for your interest - we'll be in touch shortly!"
-      redirect_to :back
+      redirect_to root_path
     else
       render 'new'
     end

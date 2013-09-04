@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
     @teacher = Teacher.new(params[:teacher])
     if @teacher.save
       flash[:success] = "Thanks for your interest - we'll be in touch shortly!"
-      redirect_to :back
+      redirect_to root_path      
     else
       render 'new'
     end
