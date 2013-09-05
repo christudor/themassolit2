@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
   end
 
    def update
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @course = Course.find(params[:id])
     if @course.update_attributes(params[:course])
       flash[:success] = "Course updated"
@@ -25,6 +26,7 @@ class CoursesController < ApplicationController
   end
 
   def create
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @course = Course.new(params[:course])
     if @course.save
       redirect_to action: :show, id: @course.id
@@ -34,6 +36,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @course = Course.find(params[:id])
     @course.destroy
     redirect_to courses_path, :notice => "Course deleted."
