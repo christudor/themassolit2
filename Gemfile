@@ -25,8 +25,7 @@ gem 'figaro'
 # Paperclip and Amazon Web Services gems for association
 # of database items (e.g. users, courses, etc) with images
 
-gem "paperclip", "~> 3.0"
-gem 'aws-sdk', '~> 1.5.7'
+
 
 # Carrierwave for course images.
 
@@ -35,7 +34,7 @@ gem 'carrierwave_direct'
 gem 'sidekiq'
 gem 'fog', '~> 1.3.1'
 gem 'mime-types'
-
+gem 'aws-sdk', '~> 1.5.7'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
