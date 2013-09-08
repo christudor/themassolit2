@@ -31,7 +31,10 @@ gem 'aws-sdk', '~> 1.5.7'
 # Carrierwave for course images.
 
 gem 'carrierwave'
+gem 'carrierwave_direct'
+gem 'sidekiq'
 gem 'fog', '~> 1.3.1'
+gem 'mime-types'
 
 
 group :development, :test do

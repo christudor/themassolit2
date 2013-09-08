@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 
   def new
   	authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @course = Course.new
+    @course = Course.new(key: params[:key])
   end
 
   def edit
@@ -44,5 +44,7 @@ class CoursesController < ApplicationController
 
   def index
   	@courses = Course.paginate(page: params[:page])
+    @uploader = Course.new.avatar
+    @uploader.success_action_redirect = new_course_url 
   end
 end

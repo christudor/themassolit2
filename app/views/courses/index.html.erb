@@ -3,7 +3,12 @@
 <h1>All courses</h1>
 <% if user_signed_in? %>
         <% if current_user.has_role? :admin %>
-          <p><%= link_to "Add New Course", new_course_path(@course) %></p>
+         <h2>Add New Course (Stage 1 of 2)</h2>
+          <%= direct_upload_form_for @uploader do |f| %>
+            <p><%= f.file_field :image %></p>
+            <p><%= f.submit "Upload image" %></p>
+          <h2>Current Courses</h2>
+          <% end %>
         <% end %>
         <% else %>
       <% end %>
