@@ -25,8 +25,6 @@ gem 'figaro'
 # Paperclip and Amazon Web Services gems for association
 # of database items (e.g. users, courses, etc) with images
 
-
-
 # Carrierwave for course images.
 
 gem 'carrierwave'
