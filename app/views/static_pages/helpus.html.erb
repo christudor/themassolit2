@@ -1,0 +1,24 @@
+<% provide(:title, 'Help Us Out') %>
+
+<div class="container">
+ <h1>Rails Developer Wanted</h1>
+  <br>
+  <div>
+    <h2>Details</h2>
+      <p>MASSOLIT is looking for a Rails developer to help us out on a project or two. Both should take no more than a couple of weeks to complete - though there is an opportunity to work for longer if you're enjoying yourself and the fit is right. We think both projects are also pretty fun!
+      <p>Firstly, we want you to design and implement a pay-wall and payment system which can deal with three kinds of customer/user:
+      <ol>
+      	<li>The school, which <code>has_many</code> pupils</li>
+      	<li>The pupil, who <code>belongs_to</code> a school</li>
+      	<li>The individual user, who doesn't <code>belong_to</code> anyone</li>
+      </ol>
+      <p>Both schools and individuals pay to gain access to content: the only difference is that whereas schools pay on behalf of their pupils (of which each <code>has_many</code>), individuals pay on behalf of themselves. Pupils, by contrast, should be able to get access because they <code>belong_to</code> a school. Hopefully this makes sense in theory - but we look forward to seeing your solutions.
+      <p>Secondly, we want you to design and implement a user dashboard for each type of user (i.e. the school, the pupil, and the individual). The dashboard will form the 'homepage' for users after they log in. While we want to keep this simple in the first instance, we have some cool features in mind which you would be more than welcome to help us build if you decide to stick around.
+      <p>This role would be working directly for the Founders, and could lead to a full-time position (with equity) if you're enjoying what you're doing and the fit is right.
+  </div>
+</br>
+	<div>
+		<h2>Interested?</h2>
+			<p>If you're interested in finding out more about what we're looking for - and what we are able to offer you - please get in touch by e-mailing <%= mail_to("chris@massolit.co.uk") %>
+	</div>
+</div>
