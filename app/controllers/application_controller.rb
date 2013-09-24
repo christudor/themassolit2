@@ -5,18 +5,21 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  def after_sign_in_path_for(resource)
-    case current_user.roles.first.name
-      when 'admin'
-        users_path
-      when 'silver'
-        content_silver_path
-      when 'gold'
-        content_gold_path
-      when 'platinum'
-        content_platinum_path
-      else
-        root_path
+  def current_auth_resource
+    if subscriber_signed_in?
+      current_subscriber
+    else
+      current_user
+    end
+  end
+
+  def current_ability
+  @current_ability ||= case
+    when current_user
+      UserAbility.new(current_user)
+    when current_subscriber
+      SubscriberAbility.new(current_subscriber)
+    else
     end
   end
 

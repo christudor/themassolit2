@@ -1,9 +1,16 @@
 Massolit::Application.routes.draw do
+
   mount StripeEvent::Engine => '/stripe'
   get "content/silver"
   get "content/gold"
   get "content/platinum"
   get "admin/index"
+
+  authenticated :subscriber do
+    root :to => 'static_pages#home'
+  end
+  root :to => 'static_pages#home'
+  devise_for :subscribers
 
   authenticated :user do
     root :to => 'static_pages#home'
@@ -25,10 +32,16 @@ Massolit::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :learners
   resources :teachers
+  resources :subscribers
 
   devise_scope :user do 
     root to: 'static_pages#home'
     match '/sessions/user', to: 'devise/sessions#create', via: :post
+  end
+
+  devise_scope :subscriber do
+    root to: 'static_pages#home'
+    match '/sessions/subscriber', to: 'devise/sessions#create', via: :post
   end
 
   match '/signup',  to: 'users#new'

@@ -1,0 +1,30 @@
+<h3>Subscribers</h3>
+<div class="span8">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Registered</th>
+          <th>Role</th>
+          <th></th>
+          <th></th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @subscribers.each do |subscriber| %>
+    <tr>
+        <td><%= link_to subscriber.name, subscriber %></td>
+        <td><%= subscriber.email %></td>
+        <td><%= subscriber.created_at.to_date %></td>
+        <td><%= subscriber.roles.first.name.titleize unless subscriber.roles.first.nil? %></td>
+        <td>
+          <a data-toggle="modal" href="#role-options-<%= subscriber.id %>" class="btn btn-mini" type="button">Change role</a>
+          <%= render subscriber %>
+        </td>
+        <td><%= link_to("Delete subscriber", subscriber_path(subscriber), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless subscriber == current_subscriber %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
