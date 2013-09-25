@@ -14,4 +14,11 @@ class Subscriber < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :email, :case_sensitive => false
+
+  before_create :assign_role
+
+  def assign_role
+  # assign a default role if no role is assigned
+  self.add_role :invalidstudent if self.roles.first.nil?
+  end
 end

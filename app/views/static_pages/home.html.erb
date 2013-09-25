@@ -19,6 +19,8 @@
 </div>
 <br><br>
 
+
+
 <% if user_signed_in? %>
         <% if current_user.has_role? :admin %>
 
@@ -63,3 +65,5 @@
         </div>
       </div>
 </div>
+
+Not affiliated with a school? Pay now to gain instant access to the full MASSOLIT library: <%= link_to 'Subscribe', new_user_registration_path(:plan => 'gold') %>

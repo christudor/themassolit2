@@ -6,9 +6,9 @@ class SubscriberAbility
     if subscriber.has_role? :admin
       can :manage, :all
     else
-      can :view, :silver if subscriber.has_role? :silver
-      can :view, :gold if subscriber.has_role? :gold
-      can :view, :platinum if subscriber.has_role? :platinum
+      can :view, :silver if subscriber.has_role? :validstudent
+      can :view, :gold if subscriber.has_role? :validstudent
+      can :view, :platinum if subscriber.has_role? :validteacher
     end
   end
 end
