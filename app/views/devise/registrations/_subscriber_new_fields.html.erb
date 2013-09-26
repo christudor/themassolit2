@@ -1,0 +1,14 @@
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+
+  <%= f.hidden_field :job, :value => params[:job] %>
+  <%= f.error_notification %>
+  <%= display_base_errors resource %>
+  <%= f.input :name, :autofocus => true %>
+  <%= f.input :email, :required => true %>
+  <%= f.input :password, :required => true %>
+  <%= f.input :password_confirmation, :required => true %>
+  <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
+<% end %>
+<%= render "devise/shared/links" %>
+
+<center><small>Not affiliated with a school? Get access to all MASSOLIT content for just £10 a month. <%= link_to "Sign up here", new_user_registration_path(:plan => 'gold') %></small></center>

@@ -11,8 +11,7 @@ gem 'devise', '2.1.2'
 gem 'cancan', '1.6.8'
 gem 'rolify', '3.2.0'
 
-# Simple Form for form construction (for use with 
-# Stripe (see below)
+# Simple Form for form construction (for use with Stripe)
 
 gem 'simple_form', '2.0.4'
 
@@ -43,6 +42,8 @@ group :development, :test do
   gem 'better_errors', '0.2.0'
   gem 'binding_of_caller', '0.6.8'
   gem 'quiet_assets', '1.0.1'
+  gem 'pry-rails'
+  gem 'pry-debugger'
 
 end
 

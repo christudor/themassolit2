@@ -8,7 +8,9 @@
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %> 
   <%= render 'layouts/shim' %>
 </head>
-<body>
+
+<body class="<%= controller_name %> <%= action_name %>">
+  
     <%= render 'layouts/splashheader' %>
     <div class="container">
       <% flash.each do |key, value| %>

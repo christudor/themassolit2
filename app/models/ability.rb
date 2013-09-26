@@ -1,14 +1,27 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(subscriber)
-    subscriber ||= Subscriber.new # guest user (not logged in)
-    if subscriber.has_role? :admin
+  def initialize(person)
+    person ||= User.new # guest user (not logged in)
+    if person.has_role? :admin
       can :manage, :all
     else
-      can :view, :silver if subscriber.has_role? :validstudent
-      can :view, :gold if subscriber.has_role? :validstudent
-      can :view, :platinum if subscriber.has_role? :validteacher
+      
+    # Paid subscriber permissions
+
+    can :view, :gold if person.has_role? :gold
+    can :view, :course if person.has_role? :gold
+
+    # Student permissions
+
+    can :view, :gold if person.has_role? :validstudent
+    can :view, :course if person.has_role? :validstudent
+
+    # Teacher permissions
+
+    can :view, :platinum if person.has_role? :validteacher
+    can :view, :course if person.has_role? :validteacher
+
     end
   end
 

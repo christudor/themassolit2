@@ -17,53 +17,18 @@
       <p class="lead">Whatever you want to learn, you'll be learning from the best. Our courses are created by academics from the world's best universities.</p>
     </div>
 </div>
-<br><br>
 
-
-
-<% if user_signed_in? %>
-        <% if current_user.has_role? :admin %>
-
-<div class="row span8 plans">
-  <div class="span2 well">
-    <div class="plan"><h2>Silver</h2></div>
-    <ul class="unstyled">
-      <li>One lesson a month</li>
-    </ul>
-    <h3>$9/month</h3>
-    <%= link_to 'Subscribe', new_user_registration_path(:plan => 'silver'), :class => 'btn btn-primary' %>
-  </div>
-  <div class="span2 well featured">
-    <div class="plan featured-plan"><h2>Gold</h2></div>
-    <ul class="unstyled">
-      <li>Ten lessons a month</li>
-    </ul>
-    <h3>$19/month</h3>
-    <%= link_to 'Subscribe', new_user_registration_path(:plan => 'gold'), :class => 'btn btn-primary' %>
-  </div>
-  <div class="span2 well">
-    <div class="plan"><h2>Platinum</h2></div>
-    <ul class="unstyled">
-      <li>Thirty lessons a month</li>
-    </ul>
-    <h3>$29/month</h3>
-    <%= link_to 'Subscribe', new_user_registration_path(:plan => 'platinum'), :class => 'btn btn-primary' %>
-  </div>
-</div>
-
-    <% end %>
-    <% else %>
-    <% end %>
 
 <div class="container">
       <div class="row">
         <div class="span6 offset3">
           <center>
-          <%= link_to "I'm interested in learning", "learners/new", class: "btn btn-large btn-primary" %>
-          <%= link_to "I'm interested in teaching", "teachers/new", class: "btn btn-large btn-primary" %>
+          <%= link_to "Student sign-up", new_subscriber_registration_path(:job => 'student'), class: "btn btn-large btn-primary" %>
+          <%= link_to "Teacher sign-up", new_subscriber_registration_path(:job => 'teacher'),  class: "btn btn-large btn-primary" %>
           </center>
         </div>
       </div>
 </div>
-
-Not affiliated with a school? Pay now to gain instant access to the full MASSOLIT library: <%= link_to 'Subscribe', new_user_registration_path(:plan => 'gold') %>
+<br>
+<br>
+<small><center>Not affiliated with a school? <%= link_to 'Subscriber sign-up', new_user_registration_path(:plan => 'gold') %></center></small>

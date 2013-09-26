@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130924132119) do
+ActiveRecord::Schema.define(:version => 20130926154911) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20130924132119) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
+    t.string   "job"
   end
 
   add_index "subscribers", ["email"], :name => "index_subscribers_on_email", :unique => true
@@ -152,6 +153,8 @@ ActiveRecord::Schema.define(:version => 20130924132119) do
     t.string   "last_sign_in_ip"
     t.integer  "profile_id"
     t.string   "profile_type"
+    t.string   "customer_id"
+    t.string   "last_4_digits"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

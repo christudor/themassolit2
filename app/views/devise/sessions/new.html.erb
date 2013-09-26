@@ -1,5 +1,7 @@
 <h2>Sign in</h2>
 
+
+
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div class="form-inputs">
     <%= f.input :email, :required => false, :autofocus => true %>
@@ -13,3 +15,13 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+
+<% path = request.env['PATH_INFO'] %>
+	<% if path == '/subscribers/sign_in' %>
+		<center><small>Paid subscriber? <%= link_to "Log in here", new_user_session_path %></small></center>
+	<% elsif path == '/users/sign_in' %>
+		<center><small>Affiliated with a school? <%= link_to "Log in here", new_subscriber_session_path %></small></center>
+	<% else %>
+<% end %>
+

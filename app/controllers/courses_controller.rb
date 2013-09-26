@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
+before_filter :authenticate_person!
   
   def show
+    authorize! :view, :course, :message => 'Access limited to subscribers only.'
     @course = Course.find(params[:id])
   end
 

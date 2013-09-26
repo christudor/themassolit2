@@ -8,18 +8,22 @@
           <li><%= link_to "Our Courses", courses_path %></li>
           <li><%= link_to "About", about_path %></li>
           <li><%= link_to "Contact", contact_path %></li>
-            <% if subscriber_signed_in? %>
+            <% if subscriber_signed_in? && !user_signed_in? %>
                 <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
                   <% if current_subscriber.has_role? :admin %>          
                   <li><%= link_to "Edit account", edit_subscriber_registration_path %></li>
                   <li><%= link_to "Admin", subscribers_path %></li>
                   <% else %>
                   <% end %>
-            <% else %>
+            <% elsif !subscriber_signed_in? && !user_signed_in? %>
                 <li><%= link_to "Login", new_subscriber_session_path %></li>
                 <li><%= link_to "Sign Up", new_subscriber_registration_path %></li>
+            <% else %>
             <% end %>
-                     
+            <% if user_signed_in? && !subscriber_signed_in? %>
+                <li><%= link_to "Logout", destroy_user_session_path, :method=>'delete' %></li>
+            <% else %>
+            <% end %>
         </ul>
       </nav>
     </div>

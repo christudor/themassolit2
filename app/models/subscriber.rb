@@ -7,10 +7,9 @@ class Subscriber < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :job
+  before_create :assign_role
 
   validates_presence_of :name
   validates_uniqueness_of :email, :case_sensitive => false
@@ -19,6 +18,7 @@ class Subscriber < ActiveRecord::Base
 
   def assign_role
   # assign a default role if no role is assigned
-  self.add_role :invalidstudent if self.roles.first.nil?
+  self.add_role :invalidteacher if self.job == "teacher"
+  self.add_role :invalidstudent if self.job == "student"
   end
 end
