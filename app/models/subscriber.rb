@@ -8,12 +8,14 @@ class Subscriber < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :job
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :job, :school_id
   before_create :assign_role
 
   validates_presence_of :name
   validates_uniqueness_of :email, :case_sensitive => false
 
+  belongs_to :school
+  
   before_create :assign_role
 
   def assign_role

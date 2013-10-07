@@ -14,4 +14,7 @@ class StaticPagesController < ApplicationController
   def helpus
   end
 
+  def faqs
+  end
+
 end

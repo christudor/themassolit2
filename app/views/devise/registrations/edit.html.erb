@@ -1,6 +1,6 @@
-<h2>Sign up</h2>
+<% provide(:title, 'Edit User') %>
+<h1>Update Account</h1>
 
 <% user_type = params[:plan] || 'subscriber' %>
-<%= user_type %>
 
 <%= render :partial => "#{user_type.underscore}_edit_fields" %>

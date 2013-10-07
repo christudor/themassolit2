@@ -1,0 +1,18 @@
+<% provide(:title, 'Edit School') %>
+
+<div class="container">
+<h2>Edit Course</h2>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @school, :html => {:multipart => true} do |f| %>
+      <%= render 'shared/school_error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.submit "Update School", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>

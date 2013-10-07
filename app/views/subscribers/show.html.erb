@@ -1,3 +1,12 @@
-<h3>Subcriber</h3>
-<p>Subscriber: <%= @Subscriber.name %></p>
+<% provide(:title, @subscriber.name) %>
+
+<h1><%= @subscriber.name %></h1>
+
+<h2>User information</h2>
+<p>Position: <%= @subscriber.job.titleize %></p>
+<p>School: <%= link_to @school.name, @school %></p>
 <p>Email: <%= @subscriber.email if @subscriber.email %></p>
+
+<h2>Usage statistics</h2>
+<p>Sign in count: <%= @subscriber.sign_in_count %></p>
+<p>Last sign in date: <%= @subscriber.last_sign_in_at.to_date %></p>

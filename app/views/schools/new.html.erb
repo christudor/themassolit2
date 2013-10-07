@@ -1,0 +1,14 @@
+<% provide(:title, 'New School') %>
+<h1>Add School</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@school) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <center><%= f.submit "Create school", class: "btn btn-large btn-primary" %></center>
+    <% end %>
+  </div>
+</div>

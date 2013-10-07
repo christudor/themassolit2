@@ -1,10 +1,29 @@
-<h2>Sign up</h2>
+<% provide(:title, 'Sign up') %>
+
+<% user_type = params[:plan] || 'subscriber' %>
+<% heading_type = params[:job] || 'subscriber' %>
+
+<h1><%= "#{heading_type.titleize} Sign Up" %></h1>
+
+<% if heading_type == 'student' %>
+  <small><center>Not a student? If you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %></small></center>
+<% elsif heading_type == 'teacher' %>
+  <small><center>Not a teacher? If you're a student, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'student') %></small></center>
+<% else %>
+<% end %>
+<% if user_type == 'gold' %>
+	<div class="span6 offset3">  
+  		<p class="body">If you are not at school, or if your school is not currently signed up to MASSOLIT, you can purchase access to all of the site's content for £10 per month.
+  		<p class="body">Remember: if you are student and your school is a member of MASSOLIT, you can sign up for free <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>.</p>
+  	</div>
+<% elsif user_type == 'student' || 'teacher' %>
+  <center><small>No longer at school? Sign up <%= link_to "here", new_user_registration_path(:plan => 'gold') %></small></center>
+<% else %>
+<% end %>
 
 <% content_for :head do %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
 <% end %>
 
-<% user_type = params[:plan] || 'subscriber' %>
-<% user_type %>
-
 <%= render :partial => "#{user_type.underscore}_new_fields" %>
+

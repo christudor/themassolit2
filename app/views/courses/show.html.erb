@@ -1,43 +1,76 @@
+<% provide(:title, @course.name) %>
+
+<% if user_signed_in? %>
+  <% if current_user.has_role? :admin %>
+    <h2>Add Lecture to Course (Stage 1 of 2)</h2>
+      <%= direct_upload_form_for @lessonuploader do |f| %>
+        <p><%= f.file_field :image %></p>
+        <p><%= f.submit "Upload image" %></p>
+        <h2>Current Course</h2>
+      <% end %>
+   <% end %>
+   <% else %>
+<% end %>
+
+<% if subscriber_signed_in? %>
+  <% if current_subscriber.has_role? :admin %>
+    <h2>Add Lecture to Course (Stage 1 of 2)</h2>
+      <%= direct_upload_form_for @lessonuploader do |f| %>
+        <p><%= f.file_field :image %></p>
+        <p><%= f.submit "Upload image" %></p>
+        <h2>Current Course</h2>
+      <% end %>
+   <% end %>
+   <% else %>
+<% end %>
 
 <div class="container">
   <div class="media">
     <div class="pull-left">
-      <%= image_tag @course.avatar_url.to_s, :size => "260x180" %>
+      <%= image_tag @course.avatar_url.to_s, :size => "250x250" %>
     </div>
     <div class="span7">
       <h3 class="media-heading"><%= @course.name %></h3>
       <p class="muted">Category: <%= @course.category %></p>
       <p><%= @course.description %></p>
+
+      <% if subscriber_signed_in? %>
+        <% if current_subscriber.has_role? :admin %>
+          <p><%= link_to "Edit", edit_course_path(@course) %></p>
+          <p><%= link_to "Remove", @course, :confirm => 'Are you sure?', :method => :delete %>
+        <% else %>
+        <% end %>
+      <% else %>
+      <% end %>
+
       <% if user_signed_in? %>
         <% if current_user.has_role? :admin %>
           <p><%= link_to "Edit", edit_course_path(@course) %></p>
           <p><%= link_to "Remove", @course, :confirm => 'Are you sure?', :method => :delete %>
-        <% end %>
         <% else %>
-      <% end %>
+        <% end %>
+      <% else %>
+      <% end %> 
       </div>
+    </div>
   </div>
 </div>
 
 <div class="container">
-  <ul class="nav nav-list">
-  </ul>
+  <h1>Lectures</h1>
 
-  <ul class="courses">
-    <% @course.lessons.each do |lesson| %>
-      <li>
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="http://placebox.es/200/" alt="Picture to go here!">
-          </a>
-          <div class="span9">
-            <h4 class="media-heading">
-              <%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %>
-            </h4>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </div>
-        </div>
-     </li>
-    <% end %>
-  </ul>
-</div>
+<ul class="courselist">
+  <% @course.lessons.each do |lesson| %>
+    <li>
+    <div class="media">
+      <div class="pull-left">
+        <%= image_tag lesson.lessonimage_url.to_s, :size => "150x150" %>
+      </div>
+      <div class="span5">
+        <h4 class="media-heading"><%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %></h4>
+        <%= lesson.lessondescription %>
+      </div>
+  </div>
+    </li>
+  <% end %>
+</ul>

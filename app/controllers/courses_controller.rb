@@ -1,9 +1,10 @@
 class CoursesController < ApplicationController
-before_filter :authenticate_person!
   
   def show
     authorize! :view, :course, :message => 'Access limited to subscribers only.'
     @course = Course.find(params[:id])
+    @lessonuploader = Lesson.new.lessonimage
+    @lessonuploader.success_action_redirect = new_lesson_url
   end
 
   def new
@@ -47,6 +48,6 @@ before_filter :authenticate_person!
   def index
   	@courses = Course.paginate(page: params[:page])
     @uploader = Course.new.avatar
-    @uploader.success_action_redirect = new_course_url 
+    @uploader.success_action_redirect = new_course_url
   end
 end

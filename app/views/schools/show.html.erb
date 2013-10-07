@@ -1,0 +1,42 @@
+<h1><%= @school.name %></h1>
+
+<div class="container">
+<h2>Associated Teachers</h2>
+<ul class="courselist">
+  <% @school.subscribers.each do |subscriber| %>
+  <% if subscriber.has_role? :invalidteacher || :validteacher %>
+  <li>
+	<div class="span9">
+		<h4 class="media-heading"><%= link_to subscriber.name, subscriber %></h4>
+	</div>
+  </li>
+  <% else %>
+  <% end %>
+  <% end %>
+</ul>
+</div>
+<br>
+<br>
+
+<div class="container">
+<h2>Associated Students</h2>
+<ul class="courselist">
+  <% @school.subscribers.each do |subscriber| %>
+  <% if subscriber.has_role? :invalidstudent || :validstudent %>
+  <li>
+	<div class="span9">
+		<h4 class="media-heading"><%= link_to subscriber.name, subscriber %></h4>
+	</div>
+  </li>
+  <% else %>
+  <% end %>
+  <% end %>
+</ul>
+</div>
+<br>
+<br>
+
+<p><%= link_to "Edit", edit_school_path(@school), class: "btn btn-large btn-primary" %></p>
+<p><%= link_to "Remove", @school, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-large btn-primary" %>
+
+</h2>

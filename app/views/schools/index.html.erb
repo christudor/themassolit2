@@ -1,0 +1,27 @@
+<% provide(:title, 'Schools Dashboard') %>
+<div class="container">
+<h1>Schools Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>No. of Users</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @schools.each do |school| %>
+    <tr>
+        <td><%= link_to school.name, school %></td>
+        <td><%= school.subscribers.count %></td>
+        <td><%= link_to("Delete School", school_path(school), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+	<center><%= link_to "Add new school", new_school_path, :class => "btn btn-large btn-primary" %></center>
+</div>

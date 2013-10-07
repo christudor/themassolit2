@@ -33,6 +33,7 @@ Massolit::Application.routes.draw do
   resources :learners
   resources :teachers
   resources :subscribers
+  resources :schools
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -51,6 +52,7 @@ Massolit::Application.routes.draw do
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
   match '/helpus',  to: 'static_pages#helpus'
+  match '/faqs',    to: 'static_pages#faqs'
   match '/studentsplash', to: 'static_pages#studentsplash'
   match '/teachersplash', to: 'static_pages#teachersplash'
 

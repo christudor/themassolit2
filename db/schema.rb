@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926154911) do
+ActiveRecord::Schema.define(:version => 20131006145253) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(:version => 20130926154911) do
 
   create_table "lessons", :force => true do |t|
     t.string   "title"
-    t.string   "lessondescription"
+    t.text     "lessondescription"
     t.string   "length"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "course_id"
+    t.string   "lessonimage"
   end
 
   create_table "profiles", :force => true do |t|
@@ -81,6 +82,12 @@ ActiveRecord::Schema.define(:version => 20130926154911) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "student_profiles", :force => true do |t|
     t.string   "school"
     t.datetime "created_at", :null => false
@@ -109,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20130926154911) do
     t.string   "last_sign_in_ip"
     t.string   "name"
     t.string   "job"
+    t.integer  "school_id"
   end
 
   add_index "subscribers", ["email"], :name => "index_subscribers_on_email", :unique => true

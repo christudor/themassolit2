@@ -6,11 +6,16 @@ class LessonsController < ApplicationController
   end
 
   def new
-  	@lesson = Lesson.new
+  	@lesson = Lesson.new(key: params[:key])
   end
 
   def create
     @lesson = Lesson.new(params[:lesson])
+    if @lesson.save
+      redirect_to root_path
+    else
+      render 'new'
+    end    
   end
 
   def index

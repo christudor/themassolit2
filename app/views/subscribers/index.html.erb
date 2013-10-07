@@ -1,20 +1,23 @@
-<h3>Subscribers</h3>
-<div class="span8">
+<% provide(:title, 'Users Dashboard') %>
+
+<div class="container">
+<h1>Users Dashboard</h1>
+<div class="span12">
 <table class="table table-condensed">
     <thead>
       <tr>
           <th>Name</th>
+          <th>School</th>
           <th>Email</th>
           <th>Registered</th>
           <th>Role</th>
-          <th></th>
-          <th></th>
       </tr>
   </thead>
   <tbody>
   <% @subscribers.each do |subscriber| %>
     <tr>
         <td><%= link_to subscriber.name, subscriber %></td>
+        <td><%= link_to subscriber.school.name, subscriber.school unless subscriber.school.nil? %></td>
         <td><%= subscriber.email %></td>
         <td><%= subscriber.created_at.to_date %></td>
         <td><%= subscriber.roles.first.name.titleize unless subscriber.roles.first.nil? %></td>
@@ -27,4 +30,5 @@
   <% end %>
   </tbody>
 </table>
+</div>
 </div>

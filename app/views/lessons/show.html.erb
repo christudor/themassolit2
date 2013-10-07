@@ -1,4 +1,11 @@
 <div class="container">
-	<p class="lead"><%= @lesson.title %></p>
-<iframe width="853" height="480" src="//www.youtube.com/embed/JCl7ZMmbPA0" frameborder="0" allowfullscreen></iframe>
+  <div class="media">
+    <div class="pull-left">
+      <%= image_tag @lesson.lessonimage_url.to_s, :size => "250x250" %>
+    </div>
+    <div class="span7">
+      <h3 class="media-heading"><%= @lesson.title %></h3>
+      <p><%= @lesson.lessondescription %></p>
+    </div>
+  </div>
 </div>

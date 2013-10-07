@@ -21,6 +21,7 @@ class Ability
 
     can :view, :platinum if person.has_role? :validteacher
     can :view, :course if person.has_role? :validteacher
+    can :view, :school if person.has_role? :validteacher
 
     end
   end
