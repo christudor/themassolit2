@@ -14,6 +14,7 @@
     <tr>
         <td><%= link_to school.name, school %></td>
         <td><%= school.subscribers.count %></td>
+        <td><%= link_to("Edit School", edit_school_path(school), :class => 'btn btn-mini') %></td>
         <td><%= link_to("Delete School", school_path(school), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
     </tr>
   <% end %>

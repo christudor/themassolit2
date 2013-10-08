@@ -1,29 +1,5 @@
 <% provide(:title, @course.name) %>
 
-<% if user_signed_in? %>
-  <% if current_user.has_role? :admin %>
-    <h2>Add Lecture to Course (Stage 1 of 2)</h2>
-      <%= direct_upload_form_for @lessonuploader do |f| %>
-        <p><%= f.file_field :image %></p>
-        <p><%= f.submit "Upload image" %></p>
-        <h2>Current Course</h2>
-      <% end %>
-   <% end %>
-   <% else %>
-<% end %>
-
-<% if subscriber_signed_in? %>
-  <% if current_subscriber.has_role? :admin %>
-    <h2>Add Lecture to Course (Stage 1 of 2)</h2>
-      <%= direct_upload_form_for @lessonuploader do |f| %>
-        <p><%= f.file_field :image %></p>
-        <p><%= f.submit "Upload image" %></p>
-        <h2>Current Course</h2>
-      <% end %>
-   <% end %>
-   <% else %>
-<% end %>
-
 <div class="container">
   <div class="media">
     <div class="pull-left">
@@ -34,43 +10,29 @@
       <p class="muted">Category: <%= @course.category %></p>
       <p><%= @course.description %></p>
 
-      <% if subscriber_signed_in? %>
-        <% if current_subscriber.has_role? :admin %>
-          <p><%= link_to "Edit", edit_course_path(@course) %></p>
-          <p><%= link_to "Remove", @course, :confirm => 'Are you sure?', :method => :delete %>
-        <% else %>
-        <% end %>
-      <% else %>
-      <% end %>
-
-      <% if user_signed_in? %>
-        <% if current_user.has_role? :admin %>
-          <p><%= link_to "Edit", edit_course_path(@course) %></p>
-          <p><%= link_to "Remove", @course, :confirm => 'Are you sure?', :method => :delete %>
-        <% else %>
-        <% end %>
-      <% else %>
-      <% end %> 
       </div>
     </div>
   </div>
 </div>
-
+<br>
+<br>
 <div class="container">
-  <h1>Lectures</h1>
+  <h3>Lecture List</h3>
 
 <ul class="courselist">
   <% @course.lessons.each do |lesson| %>
     <li>
-    <div class="media">
-      <div class="pull-left">
-        <%= image_tag lesson.lessonimage_url.to_s, :size => "150x150" %>
+      <div class="media">
+        <div class="pull-left">
+          <%= image_tag lesson.lessonimage_url.to_s, :size => "150x150" %>
+        </div>
+        <div class="span5">
+         <h4 class="media-heading"><%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %></h4>
+         <%= lesson.lessondescription %>
+        </div>
       </div>
-      <div class="span5">
-        <h4 class="media-heading"><%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %></h4>
-        <%= lesson.lessondescription %>
-      </div>
-  </div>
     </li>
   <% end %>
 </ul>
+
+</div>

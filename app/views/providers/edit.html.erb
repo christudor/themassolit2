@@ -1,0 +1,33 @@
+<% provide(:title, 'Edit Tutor') %>
+
+<div class="container">
+<h1>Edit Tutor</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @provider, :html => {:multipart => true} do |f| %>
+      <%= render 'shared/provider_error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :position %>
+      <%= f.text_field :position %>
+
+      <%= f.label :department %>
+      <%= f.text_field :department %>
+
+      <%= f.label :college %>
+      <%= f.text_field :college %>
+
+      <%= f.label :university %>
+      <%= f.text_field :university %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.submit "Update Tutor", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>

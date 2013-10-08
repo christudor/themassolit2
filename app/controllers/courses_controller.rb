@@ -12,6 +12,16 @@ class CoursesController < ApplicationController
     @course = Course.new(key: params[:key])
   end
 
+  def addcourse
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    @uploader = Course.new.avatar
+    @uploader.success_action_redirect = new_course_url
+  end
+
+  def coursedash
+    @courses = Course.all
+  end
+
   def edit
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @course = Course.find(params[:id])
@@ -22,7 +32,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     if @course.update_attributes(params[:course])
       flash[:success] = "Course updated"
-      redirect_to action: :show, id: @course.id
+      redirect_to coursedash_path
     else
       render 'edit'
     end
@@ -42,12 +52,10 @@ class CoursesController < ApplicationController
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @course = Course.find(params[:id])
     @course.destroy
-    redirect_to courses_path, :notice => "Course deleted."
+    redirect_to coursedash_path, :notice => "Course deleted."
   end
 
   def index
   	@courses = Course.paginate(page: params[:page])
-    @uploader = Course.new.avatar
-    @uploader.success_action_redirect = new_course_url
   end
 end

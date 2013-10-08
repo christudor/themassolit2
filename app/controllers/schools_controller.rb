@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
     @school = School.find(params[:id])
     if @school.update_attributes(params[:school])
       flash[:success] = "School updated"
-      redirect_to action: :show, id: @school.id
+      redirect_to schools_path
     else
       render 'edit'
     end

@@ -1,7 +1,7 @@
 <% provide(:title, 'Add New Course') %>
 
 <div class="container">
-<h2>Add New Course (Stage 2 of 2)</h2>
+<h1>Add New Course (Stage 2 of 2)</h2>
 
 <div class="row">
   <div class="span6 offset3">
@@ -20,6 +20,9 @@
 
       <%= f.label :description %>
       <%= f.text_field :description %>
+
+      <%= f.label :provider_id %>
+      <%= f.collection_select :provider_id, Provider.all, :id, :name, {}, { :multiple => false } %>
 
       <%= f.submit "Add Course", class: "btn btn-large btn-primary" %>
     <% end %>

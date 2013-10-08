@@ -2,41 +2,91 @@
 
 <div class="container">
 <h2>Associated Teachers</h2>
-<ul class="courselist">
-  <% @school.subscribers.each do |subscriber| %>
-  <% if subscriber.has_role? :invalidteacher || :validteacher %>
-  <li>
-	<div class="span9">
-		<h4 class="media-heading"><%= link_to subscriber.name, subscriber %></h4>
-	</div>
-  </li>
-  <% else %>
-  <% end %>
-  <% end %>
-</ul>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>Valid?<th>
+        <th>Last Sign-in</th>
+        <th>Total Sign-ins</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @school.subscribers.each do |subscriber| %>
+        <% if subscriber.has_role? :validteacher %>
+        <tr>
+          <td><%= link_to subscriber.name, subscriber %></td>
+          <td><%= subscriber.email %></td>
+          <td>Yes</td>
+          <td><%= subscriber.last_sign_in_at.to_date %></td>
+          <td><%= subscriber.sign_in_count %></td>
+        </tr>
+        <% elsif subscriber.has_role? :invalidteacher %>
+        <tr>
+          <td><%= link_to subscriber.name, subscriber %></td>
+          <td><%= subscriber.email %></td>
+          <td>No</td>
+          <td><%= subscriber.last_sign_in_at.to_date %></td>
+          <td><%= subscriber.sign_in_count %></td>
+        </tr>
+        <% else %>
+        <% end %>
+      <% end %>
+    </tbody>
+</table>
 </div>
+</div>
+
 <br>
 <br>
 
 <div class="container">
 <h2>Associated Students</h2>
-<ul class="courselist">
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>E-Mail</th>
+          <th>Valid?</th>
+          <th>Last Sign-in</th>
+          <th>Total Sign-ins</th>
+      </tr>
+  </thead>
+  <tbody>
   <% @school.subscribers.each do |subscriber| %>
-  <% if subscriber.has_role? :invalidstudent || :validstudent %>
-  <li>
-	<div class="span9">
-		<h4 class="media-heading"><%= link_to subscriber.name, subscriber %></h4>
-	</div>
-  </li>
+  <% if subscriber.has_role? :validstudent %>
+    <tr>
+        <td><%= link_to subscriber.name, subscriber %></td>
+        <td><%= subscriber.email %></td>
+        <td>Yes</td>
+        <td><%= subscriber.last_sign_in_at.to_date %></td>
+        <td><%= subscriber.sign_in_count %></td>
+    </tr>
+  <% elsif subscriber.has_role? :invalidstudent %>
+    <tr>
+        <td><%= link_to subscriber.name, subscriber %></td>
+        <td><%= subscriber.email %></td>
+        <td>No</td>
+        <td><%= subscriber.last_sign_in_at.to_date %></td>
+        <td><%= subscriber.sign_in_count %></td>
+    </tr>
   <% else %>
   <% end %>
   <% end %>
-</ul>
+  </tbody>
+</table>
 </div>
-<br>
-<br>
+</div>
 
-<p><%= link_to "Edit", edit_school_path(@school), class: "btn btn-large btn-primary" %></p>
-<p><%= link_to "Remove", @school, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-large btn-primary" %>
-
-</h2>
+<% if current_subscriber.has_role? :admin %>
+  <div class="container">
+  <h2>School Options</h2>
+    <p>
+    <%= link_to "Edit", edit_school_path(@school), class: "btn btn-large btn-primary" %>
+    <%= link_to "Remove", @school, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-large btn-primary" %>
+    </p
+<% else %>
+<% end %>

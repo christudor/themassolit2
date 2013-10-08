@@ -45,6 +45,9 @@ Massolit::Application.routes.draw do
     match '/sessions/subscriber', to: 'devise/sessions#create', via: :post
   end
 
+  # The following lines match actions from weirdly-named controllers to simpler paths.
+  # Instead of /static_pages/about, for example, we have /about
+
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -55,6 +58,9 @@ Massolit::Application.routes.draw do
   match '/faqs',    to: 'static_pages#faqs'
   match '/studentsplash', to: 'static_pages#studentsplash'
   match '/teachersplash', to: 'static_pages#teachersplash'
+  match '/addcourse', to: 'courses#addcourse'
+  match '/addlecture', to: 'lessons#addlecture'
+  match '/coursedash', to: 'courses#coursedash'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

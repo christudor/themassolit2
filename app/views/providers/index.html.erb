@@ -1,14 +1,36 @@
-<% provide(:title, 'All providers') %>
-<h1>All providers</h1>
-
-<%= will_paginate %>
-
-<ul class="providers">
+<% provide(:title, 'Tutors Dashboard') %>
+<div class="container">
+<h1>Tutors Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>E-Mail</th>
+          <th>Position</th>
+          <th>College</th>
+          <th>University</th>
+          <th>Date Added</th>
+      </tr>
+  </thead>
+  <tbody>
   <% @providers.each do |provider| %>
-    <li>
-      <%= link_to provider.name, provider %>
-    </li>
+    <tr>
+        <td><%= link_to provider.name, provider %></td>
+        <td><%= provider.email %></td>
+        <td><%= provider.position %></td>
+        <td><%= provider.college %></td>
+        <td><%= provider.university %></td>
+        <td><%= provider.created_at.to_date %></td>
+        <td><%= link_to("Edit Tutor", edit_provider_path(provider), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete Tutor", provider_path(provider), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
+</div>
+</div>
 
-<%= will_paginate %>
+<div class="container">
+	<center><%= link_to "Add new tutor", new_provider_path, :class => "btn btn-large btn-primary" %></center>
+</div>

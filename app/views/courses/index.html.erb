@@ -2,32 +2,6 @@
 <div class="container">
 <h1>All Courses</h1>
 
-
-<% if user_signed_in? %>
-  <% if current_user.has_role? :admin %>
-    <h2>Add New Course (Stage 1 of 2)</h2>
-      <%= direct_upload_form_for @uploader do |f| %>
-        <p><%= f.file_field :image %></p>
-        <p><%= f.submit "Upload image" %></p>
-        <h2>Current Courses</h2>
-      <% end %>
-   <% end %>
-   <% else %>
-<% end %>
-
-<% if subscriber_signed_in? %>
-  <% if current_subscriber.has_role? :admin %>
-    <h2>Add New Course (Stage 1 of 2)</h2>
-      <%= direct_upload_form_for @uploader do |f| %>
-        <p><%= f.file_field :image %></p>
-        <p><%= f.submit "Upload image" %></p>
-        <h2>Current Courses</h2>
-      <% end %>
-   <% end %>
-   <% else %>
-<% end %>
-
-
 <%= will_paginate %>
 
 <ul class="courselist">

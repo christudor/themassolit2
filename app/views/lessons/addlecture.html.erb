@@ -1,0 +1,16 @@
+<% provide(:title, 'Add New Lecture') %>
+<div class="container">
+	<h1>Add New Lecture (Stage 1 of 2)</h1>
+		<div class="span8 offset2">
+		<p class="body">Note: Lectures are added in two stages. On this page, an image is uploaded to Amazon S3. On the next page (which you will be redirected to automatically) that image is linked to a lecture title, description, and - most importantly - to a parent course.</p>
+		<br>
+
+		<center><h3>Image Uploader</h3>
+		<br>
+		<%= direct_upload_form_for @lessonuploader do |f| %>
+        	<p><%= f.file_field :image %></p>
+        	<p><%= f.submit "Upload image", :class => "btn btn-large btn-primary" %></p>
+        <% end %>
+        </center>
+     </div>
+</div>

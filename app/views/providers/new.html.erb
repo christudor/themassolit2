@@ -1,2 +1,30 @@
-<h1>Providers#new</h1>
-<p>Find me in app/views/providers/new.html.erb</p>
+<% provide(:title, 'New Tutor') %>
+<h1>Add Tutor</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@provider) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :position %>
+      <%= f.text_field :position %>
+
+      <%= f.label :department %>
+      <%= f.text_field :department %>
+
+      <%= f.label :college %>
+      <%= f.text_field :college %>
+
+      <%= f.label :university %>
+      <%= f.text_field :university %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <center><%= f.submit "Add Tutor", class: "btn btn-large btn-primary" %></center>
+    <% end %>
+  </div>
+</div>
+
