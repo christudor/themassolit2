@@ -44,7 +44,6 @@ group :development, :test do
   gem 'quiet_assets', '1.0.1'
   gem 'pry-rails'
   gem 'pry-debugger'
-  gem 'thin'
 
 end
 
