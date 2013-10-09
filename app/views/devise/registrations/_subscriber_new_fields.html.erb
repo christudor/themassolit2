@@ -6,9 +6,8 @@
   <%= f.hidden_field :job, :value => params[:job] %>
   <%= f.error_notification %>
   <%= display_base_errors resource %>
+  <%= f.input :school_id, :label => "School", :collection => School.all, :selected => School.first %>
   <%= f.input :name, :label => "Name:", :autofocus => true %>
-  School:
-  <%= f.collection_select :school_id, School.all, :id, :name, {}, { :multiple => false } %>
   <%= f.input :email, :label => "E-Mail Address:", :required => true %>
   <%= f.input :password, :label => "Password:", :required => true %>
   <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>

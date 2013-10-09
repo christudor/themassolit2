@@ -17,12 +17,10 @@
 <% path = request.env['PATH_INFO'] %>
 	<% if path == '/subscribers/sign_in' %>
     <center><small>Not signed up yet? <%= link_to "Sign up here", new_subscriber_registration_path(:job => 'student') %></small></center>
-		<center><small>Paid subscriber? <%= link_to "Log in here", new_user_session_path %></small></center>
 	<% elsif path == '/users/sign_in' %>
     <center><small>Not signed up yet? <%= link_to "Sign up here", new_user_registration_path %></small></center>
 		<center><small>Affiliated with a school? <%= link_to "Log in here", new_subscriber_session_path %></small></center>
 	<% else %>
 <% end %>
-
 </div>
 </div>

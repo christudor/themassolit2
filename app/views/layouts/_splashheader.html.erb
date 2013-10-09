@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Courses", courses_path %></li>
-          <li><%= link_to "Settings", edit_subscriber_registration_path %></li>
+          
             <% if subscriber_signed_in? && !user_signed_in? %>
               <% if current_subscriber.has_role? :admin %>          
                 <li id="fat-menu" class="dropdown">
@@ -29,6 +29,7 @@
                 <li><%= link_to "My School", school_path(current_subscriber.school_id) %><li>
               <% else %>
               <% end %>
+              <li><%= link_to "Settings", edit_subscriber_registration_path %></li>
               <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
             <% elsif !subscriber_signed_in? && !user_signed_in? %>
               <li><%= link_to "Login", new_subscriber_session_path %></li>

@@ -1,12 +1,12 @@
 <% provide(:title, @course.name) %>
 
 <div class="container">
+  <h1><%= @course.name %></h1
   <div class="media">
     <div class="pull-left">
       <%= image_tag @course.avatar_url.to_s, :size => "250x250" %>
     </div>
-    <div class="span7">
-      <h3 class="media-heading"><%= @course.name %></h3>
+    <div class="span8">
       <p class="muted">Category: <%= @course.category %></p>
       <p><%= @course.description %></p>
 
@@ -28,7 +28,7 @@
         <div class="pull-left">
           <%= image_tag lesson.lessonimage_url.to_s, :size => "150x150" %>
         </div>
-        <div class="span5">
+        <div class="span8">
          <h4 class="media-heading"><%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %></h4>
          <%= lesson.lessondescription %>
         </div>

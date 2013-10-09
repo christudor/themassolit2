@@ -1,10 +1,7 @@
 class CoursesController < ApplicationController
   
   def show
-    authorize! :view, :course, :message => 'Access limited to subscribers only.'
     @course = Course.find(params[:id])
-    @lessonuploader = Lesson.new.lessonimage
-    @lessonuploader.success_action_redirect = new_lesson_url
   end
 
   def new

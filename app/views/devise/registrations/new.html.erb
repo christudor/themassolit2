@@ -16,8 +16,7 @@
   		<p class="body">If you are not at school, or if your school is not currently signed up to MASSOLIT, you can purchase access to all of the site's content for £10 per month.
   		<p class="body">Remember: if you are student and your school is a member of MASSOLIT, you can sign up for free <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>.</p>
   	</div>
-<% elsif user_type == 'student' || 'teacher' %>
-  <center><small>No longer at school? Sign up <%= link_to "here", new_user_registration_path(:plan => 'gold') %></small></center>
+
 <% else %>
 <% end %>
 

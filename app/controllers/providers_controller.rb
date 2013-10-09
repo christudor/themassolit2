@@ -1,7 +1,8 @@
 class ProvidersController < ApplicationController
 
   def show
-	  @provider = Provider.find(params[:id])
+	  authorize! :index, :provider, :message => 'Access limited to administrators only.'
+    @provider = Provider.find(params[:id])
   end
 
   def new
