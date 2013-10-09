@@ -14,9 +14,6 @@ puts 'DEFAULT USERS'
 subscriber = Subscriber.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'Subscriber: ' << subscriber.name
 subscriber.add_role :admin
-subscriber2 = Subscriber.find_or_create_by_email :name => 'Second Subscriber', :email => 'user2@example.com', :password => 'changeme', :password_confirmation => 'changeme'
-puts 'Subscriber: ' << subscriber2.name
-subscriber2.add_role :validteacher
-subscriber3 = Subscriber.find_or_create_by_email :name => 'Third Subscriber', :email => 'user3@example.com', :password => 'changeme', :password_confirmation => 'changeme'
-puts 'Subscriber: ' << subscriber3.name
-subscriber3.add_role :validstudent
+user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+puts 'User: ' << user.name
+user.add_role :admin
