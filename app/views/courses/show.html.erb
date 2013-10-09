@@ -17,9 +17,11 @@
 <br>
 <br>
 <div class="container">
-  <h3>Lecture List</h3>
 
-<ul class="courselist">
+  <% if @course.lessons.count == 0 %>
+  <% else %>
+  <h3>Lecture List</h3>
+  <ul class="courselist">
   <% @course.lessons.each do |lesson| %>
     <li>
       <div class="media">
@@ -32,6 +34,7 @@
         </div>
       </div>
     </li>
+  <% end %>
   <% end %>
 </ul>
 
