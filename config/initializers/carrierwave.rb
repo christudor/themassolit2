@@ -6,4 +6,6 @@ CarrierWave.configure do |config|
 		region: "us-west-2"
 		}
 	config.fog_directory = ENV["AWS_S3_BUCKET"]
+
+	config.max_file_size     = 1000.megabytes   
 end
