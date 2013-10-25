@@ -18,7 +18,7 @@
 <div class="span3 offset1">
   <h2>Key Information</h2>
   <ul class="courselist">
-    <li><i class="icon-folder-open"></i> Category: <%= link_to @course.category, courses_path(:category => @course.category) %></li>
+    <li><i class="icon-folder-open"></i> Category: <%= @course.category %></li>
     <li><i class="icon-user"></i> Tutor: <%= link_to @course.provider.name, @course.provider %></li>
       <% if subscriber_signed_in? %>
       <% else %>

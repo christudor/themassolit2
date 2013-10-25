@@ -10,33 +10,28 @@
 
 <div class="container">
 
-<div class="span8">
+<div class="span12">
 <ul class="courselist">
   <% @courses.each do |course| %>
     <li>
     <div class="media">
     	<div class="pull-left">
-    		<%= image_tag course.avatar_url.to_s, :size => "140x140" %>
+    		<%= image_tag course.avatar_url.to_s, :size => "170x170" %>
     	</div>
-	    <div class="span6">
+	    <div class="span7">
 	    	<h4 class="media-heading"><%= link_to course.name, course %></h4>
-	    	<p class="small"><%= truncate(course.description, :length => 200, :separator => ' ') %>
+	    	<p class="small"><%= truncate(course.description, :length => 350, :separator => ' ') %>
         <%= link_to "Read more", course %>
 	    </div>
+      <div class="span2">
+        <br><br>
+        <p> <i class="icon-folder-open"></i> <%= course.category %> </p>
+        <p> <i class="icon-user"></i> <%= link_to course.provider.name, course.provider %></p>
+        <br>
+        <%= link_to "Go to course", course, :class => "btn btn-large btn-primary" %>
+      </div>
 	</div>
     </li>
   <% end %>
 </ul>
-</div>
-
-<div class="span2 offset1">
-<h2>Categories</h2>
-<ul class="courselist">
-  <li><i class="icon-folder-open"></i> <%= link_to "All", courses_path %></li>
-  <% @categories.each do |category| %>
-  <li><i class="icon-folder-open"></i> <%= link_to category, courses_path(:category => category) %></li>
-  <% end %>
-</ul>
-</div>
-
 </div>
