@@ -1,41 +1,46 @@
+
 <% provide(:title, @course.name) %>
-
 <div class="container">
-  <h1><%= @course.name %></h1
-  <div class="media">
-    <div class="pull-left">
-      <%= image_tag @course.avatar_url.to_s, :size => "250x250" %>
-    </div>
-    <div class="span8">
-      <p class="muted">Category: <%= @course.category %></p>
-      <p><%= @course.description %></p>
-
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <h1><%= @course.name %></h1>
 </div>
-<br>
-<br>
+
 <div class="container">
-
-  <% if @course.lessons.count == 0 %>
-  <% else %>
-  <h3>Lecture List</h3>
+<div class="span7">
+  <h2>About this Course</h2>
+  <p class="media"><%= @course.description %></p>
+  <br><br>
+  <h2>About <%= @course.provider.name %></h2>
+  <p class="media"><%= @course.provider.bio %></p>
+  <br><br>
+  <center><p class="courselist"><i class="icon-chevron-left"></i> <%= link_to "Return to course index", courses_path %></p></center>
+</div>
+<div class="span3 offset1">
+  <h2>Key Information</h2>
   <ul class="courselist">
-  <% @course.lessons.each do |lesson| %>
-    <li>
-      <div class="media">
-        <div class="pull-left">
-          <%= image_tag lesson.lessonimage_url.to_s, :size => "150x150" %>
-        </div>
-        <div class="span8">
-         <h4 class="media-heading"><%= link_to lesson.title, controller: "lessons", action: "show", id: lesson.id %></h4>
-         <%= lesson.lessondescription %>
-        </div>
-      </div>
-    </li>
-  <% end %>
-  <% end %>
-</ul>
+    <li><i class="icon-folder-open"></i> Category: <%= link_to @course.category, courses_path(:category => @course.category) %></li>
+    <li><i class="icon-user"></i> Tutor: <%= link_to @course.provider.name, @course.provider %></li>
+      <% if subscriber_signed_in? %>
+      <% else %>
+      <li><i class="icon-exclamation-sign"></i> <%= link_to "Log in", new_subscriber_session_path %> or <%= link_to "sign up", new_subscriber_registration_path(:job => 'student') %> to register for this course.</li>
+      <% end %>
+  </ul>
+  <br>
+      <%= render 'study_form' %>
+  <br>
 
+  <% if subscriber_signed_in? %>
+    <% if current_subscriber.studying?(@course) %>
+    <h2>Lecture Quick Links</h2>
+      <ul class="courselist">
+      <% @course.lessons.each do |lesson| %>
+      <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
+      <% end %>
+      <% else %>
+      <% end %>
+  <% else %>
+  <% end %>
+  </ul>
+
+</div>
 </div>

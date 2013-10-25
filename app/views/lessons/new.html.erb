@@ -4,7 +4,6 @@
 <h2>Add New Lecture (Stage 2 of 2)</h2>
 
 
-
 <div class="row">
   <div class="span6 offset3">
     <%= form_for @lesson, :html => {:multipart => true} do |f| %>
@@ -12,7 +11,7 @@
 
       <%= f.hidden_field :key %>
 
-      <p>File: <%= @lesson.lessonimage_name %><p>
+      <p>Video File: <%= @lesson.video_name %></p> 
 
       <%= f.label :course_id %>
       <%= f.collection_select :course_id, Course.all, :id, :name, {}, { :multiple => false } %>
@@ -30,4 +29,4 @@
     <% end %>
   </div>
 </div>
-</div> 
+</div>

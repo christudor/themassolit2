@@ -1,11 +1,51 @@
+
+<% provide(:title, @lesson.title) %>
+
 <div class="container">
-  <div class="media">
-    <div class="pull-left">
-      <%= image_tag @lesson.lessonimage_url.to_s, :size => "250x250" %>
-    </div>
-    <div class="span7">
-      <h3 class="media-heading"><%= @lesson.title %></h3>
-      <p><%= @lesson.lessondescription %></p>
-    </div>
-  </div>
+<h1><%= @lesson.course.name %></h1>
+</div>
+
+</div>
+<div class="container">
+<div class="span7">
+  <h2><%= @lesson.title %></h2>
+  <center>
+  <%= video_tag @lesson.video, :size => "600x480", :controls => true %> %>
+  </center>
+  <br><br>
+</div>
+
+
+<div class="span3 offset1">
+  
+  <h2>Navigation</h2>
+  <ul class="courselist">
+  <li><i class="icon-chevron-left"></i> <%= link_to "Return to course overview", @lesson.course %></li>
+  <% if @lesson == @lesson.course.lessons.first %>
+  <% else %>
+    <li><i class="icon-chevron-left"></i> <%= link_to "Previous module", lesson_path(@prev) %></li>
+  <% end %>
+  <% if @lesson == @lesson.course.lessons.last %>
+  <% else %>
+    <li><i class="icon-chevron-right"></i> <%= link_to "Next module", lesson_path(@next) %></li>
+  <% end %>
+  </ul>  
+
+  <br><br>
+
+  <h2>Key Files</h2>
+  <ul class="courselist">
+    <% if @lesson.transcripts.count == 0 && @lesson.handouts.count == 0 %>
+    There are no files associated with this module.
+    <% elsif @lesson.transcripts.count == 0 %>
+    <li><i class="icon-file"></i> <%= link_to 'Module Handout', @lesson.handouts.first.handout.url %>
+    <% elsif @lesson.handouts.count == 0 %>
+    <li><i class="icon-file"></i> <%= link_to 'Module Transcript', @lesson.transcripts.first.transcript.url %></li>
+    <% else %>
+    <% end %>
+  </ul>
+
+  <br><br>
+
+</div>
 </div>

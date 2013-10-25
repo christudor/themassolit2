@@ -2,6 +2,11 @@ class LessonsController < ApplicationController
   
   def show
     @lesson = Lesson.find(params[:id])
+    @prev = @lesson.previous
+    @next = @lesson.next
+    respond_to do |format|
+      format.html
+    end
   end
 
   def new
@@ -11,8 +16,8 @@ class LessonsController < ApplicationController
 
   def addlecture
     authorize! :view, :lesson, :message => 'Access limited to administrators only.'
-    @lessonuploader = Lesson.new.lessonimage
-    @lessonuploader.success_action_redirect = new_lesson_url
+    @videouploader = Lesson.new.video
+    @videouploader.success_action_redirect = new_lesson_url
   end
 
   def edit

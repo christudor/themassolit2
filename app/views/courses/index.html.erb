@@ -1,24 +1,42 @@
 <% provide(:title, 'All courses') %>
+<% category = params[:category] || "All" %>
+
+
 <div class="container">
-<h1>All Courses</h1>
+<h1><%= category.titleize %> Courses</h1>
+</div>
 
-<%= will_paginate %>
 
+
+<div class="container">
+
+<div class="span8">
 <ul class="courselist">
   <% @courses.each do |course| %>
     <li>
     <div class="media">
     	<div class="pull-left">
-    		<%= image_tag course.avatar_url.to_s, :size => "200x200" %>
+    		<%= image_tag course.avatar_url.to_s, :size => "140x140" %>
     	</div>
-	    <div class="span9">
+	    <div class="span6">
 	    	<h4 class="media-heading"><%= link_to course.name, course %></h4>
-	    	<%= course.description %>
+	    	<p class="small"><%= truncate(course.description, :length => 200, :separator => ' ') %>
+        <%= link_to "Read more", course %>
 	    </div>
 	</div>
     </li>
   <% end %>
 </ul>
+</div>
 
-<%= will_paginate %>
+<div class="span2 offset1">
+<h2>Categories</h2>
+<ul class="courselist">
+  <li><i class="icon-folder-open"></i> <%= link_to "All", courses_path %></li>
+  <% @categories.each do |category| %>
+  <li><i class="icon-folder-open"></i> <%= link_to category, courses_path(:category => category) %></li>
+  <% end %>
+</ul>
+</div>
+
 </div>

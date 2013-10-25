@@ -15,6 +15,8 @@ class Subscriber < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
 
   belongs_to :school
+  has_many :relationships, foreign_key: "student_id", dependent: :destroy
+  has_many :studied_courses, through: :relationships, source: :studied
   
   before_create :assign_role
 
@@ -23,4 +25,17 @@ class Subscriber < ActiveRecord::Base
   self.add_role :invalidteacher if self.job == "teacher"
   self.add_role :invalidstudent if self.job == "student"
   end
+
+  def studying?(course)
+    relationships.find_by_course_id(course.id)
+  end
+
+  def study!(course)
+    relationships.create!(course_id: course.id)
+  end
+
+  def unstudy!(course)
+    relationships.find_by_course_id(course.id).destroy
+  end
+
 end

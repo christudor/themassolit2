@@ -15,8 +15,8 @@
   <% @lessons.each do |lesson| %>
     <tr>
         <td><%= link_to lesson.title, lesson %></td>
-        <td><%= lesson.course.name %></td>
-        <td><%= lesson.course.provider.name %></td>
+        <td><%= link_to lesson.course.name, lesson.course %></td>
+        <td><%= link_to lesson.course.provider.name, lesson.course.provider %></td>
         <td><%= lesson.created_at.to_date %></td>
         <td><%= link_to("Edit Lecture", edit_lesson_path(lesson), :class => 'btn btn-mini') %></td>
         <td><%= link_to("Delete Lecture", lesson_path(lesson), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>

@@ -1,65 +1,46 @@
 <h1><%= @school.name %></h1>
 
+<% if current_subscriber.has_role? :admin %>
+
 <div class="container">
-<h2>Associated Teachers</h2>
+<h2>Associated Individuals</h2>
 <div class="span12">
 <table class="table table-condensed">
     <thead>
       <tr>
         <th>Name</th>
+        <th>Role</th>
         <th>E-Mail</th>
-        <th>Valid?<th>
+        <th>Valid?</th>
         <th>Last Sign-in</th>
         <th>Total Sign-ins</th>
       </tr>
     </thead>
+
     <tbody>
       <% @school.subscribers.each do |subscriber| %>
-        <% if subscriber.has_role? :validteacher %>
+      <% if subscriber.has_role? :validteacher %>
         <tr>
           <td><%= link_to subscriber.name, subscriber %></td>
+          <td>Teacher</td>
           <td><%= subscriber.email %></td>
           <td>Yes</td>
           <td><%= subscriber.last_sign_in_at.to_date %></td>
           <td><%= subscriber.sign_in_count %></td>
         </tr>
-        <% elsif subscriber.has_role? :invalidteacher %>
+      <% elsif subscriber.has_role? :invalidteacher %>
         <tr>
           <td><%= link_to subscriber.name, subscriber %></td>
+          <td>Teacher</td>
           <td><%= subscriber.email %></td>
           <td>No</td>
           <td><%= subscriber.last_sign_in_at.to_date %></td>
           <td><%= subscriber.sign_in_count %></td>
         </tr>
-        <% else %>
-        <% end %>
-      <% end %>
-    </tbody>
-</table>
-</div>
-</div>
-
-<br>
-<br>
-
-<div class="container">
-<h2>Associated Students</h2>
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Name</th>
-          <th>E-Mail</th>
-          <th>Valid?</th>
-          <th>Last Sign-in</th>
-          <th>Total Sign-ins</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @school.subscribers.each do |subscriber| %>
-  <% if subscriber.has_role? :validstudent %>
-    <tr>
+        <% elsif subscriber.has_role? :validstudent %>
+          <tr>
         <td><%= link_to subscriber.name, subscriber %></td>
+        <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>Yes</td>
         <td><%= subscriber.last_sign_in_at.to_date %></td>
@@ -68,18 +49,65 @@
   <% elsif subscriber.has_role? :invalidstudent %>
     <tr>
         <td><%= link_to subscriber.name, subscriber %></td>
+        <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>No</td>
         <td><%= subscriber.last_sign_in_at.to_date %></td>
         <td><%= subscriber.sign_in_count %></td>
     </tr>
-  <% else %>
-  <% end %>
-  <% end %>
-  </tbody>
+        <% end %>
+        <% end %>
+    </tbody>
 </table>
 </div>
 </div>
+<% else %>
+
+<div class="container">
+<h2>My Students</h2>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>E-Mail</th>
+        <th>Valid?</th>
+        <th>Last Sign-in</th>
+        <th>Total Sign-ins</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @school.subscribers.each do |subscriber| %>
+        <% if subscriber.has_role? :validstudent %>
+          <tr>
+        <td><%= link_to subscriber.name, subscriber %></td>
+        <td>Student</td>
+        <td><%= subscriber.email %></td>
+        <td>Yes</td>
+        <td><%= subscriber.last_sign_in_at.to_date %></td>
+        <td><%= subscriber.sign_in_count %></td>
+    </tr>
+  <% elsif subscriber.has_role? :invalidstudent %>
+    <tr>
+        <td><%= link_to subscriber.name, subscriber %></td>
+        <td>Student</td>
+        <td><%= subscriber.email %></td>
+        <td>No</td>
+        <td><%= subscriber.last_sign_in_at.to_date %></td>
+        <td><%= subscriber.sign_in_count %></td>
+    </tr>
+        <% end %>
+        <% end %>
+    </tbody>
+</table>
+</div>
+</div>
+<% end %>
+
+<br>
+<br>
 
 <% if current_subscriber.has_role? :admin %>
   <div class="container">

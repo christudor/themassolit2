@@ -21,8 +21,7 @@ gem 'stripe'
 gem 'stripe_event'
 gem 'figaro'
 
-# Paperclip and Amazon Web Services gems for association
-# of database items (e.g. users, courses, etc) with images
+# Amazon Web Services gems for association of database items (e.g. users, courses, etc) with images
 
 # Carrierwave for course images.
 
@@ -32,6 +31,7 @@ gem 'sidekiq'
 gem 'fog', '~> 1.3.1'
 gem 'mime-types'
 gem 'aws-sdk', '~> 1.5.7'
+gem 'panda', '~> 1.6.0'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -53,6 +53,7 @@ group :assets do
   gem 'sass-rails',   '3.2.5'
   gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
+  gem 'foundation-icons-sass-rails'
 end
 
 gem 'jquery-rails', '2.0.2'

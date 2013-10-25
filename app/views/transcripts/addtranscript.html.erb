@@ -1,0 +1,16 @@
+<% provide(:title, 'Add Transcript') %>
+<div class="container">
+	<h1>Add Transcript (Stage 1 of 2)</h1>
+		<div class="span8 offset2">
+		<p class="body">Note: Transcripts are added in two stages. On this page, a PDF file of the transcript is uploaded to Amazon S3. On the next page (which you will be redirected to automatically) that transcript is given a name and linked to a lecture.</p>
+		<br>
+
+		<center><h3>Transcript Uploader</h3>
+		<br>
+		<%= direct_upload_form_for @transcriptuploader do |f| %>
+        	<p><%= f.file_field :transcript %></p>
+        	<p><%= f.submit "Upload transcript", :class => "btn btn-large btn-primary" %></p>
+        <% end %>
+        </center>
+     </div>
+</div>

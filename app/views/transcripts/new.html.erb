@@ -1,0 +1,25 @@
+<% provide(:title, 'Add New Transcript') %>
+
+<div class="container">
+<h2>Add New Transcript (Stage 2 of 2)</h2>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @transcript, :html => {:multipart => true} do |f| %>
+    	<%= render 'shared/transcript_error_messages' %>
+
+      <%= f.hidden_field :key %>
+
+      <p>Transcript File: <%= @transcript.transcript_name %></p> 
+
+      <%= f.label :lesson_id %>
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>  
+
+      <%= f.submit "Add Transcript", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>

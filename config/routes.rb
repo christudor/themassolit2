@@ -32,8 +32,15 @@ Massolit::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :learners
   resources :teachers
-  resources :subscribers
+  resources :subscribers do
+    member do
+      get :studying
+    end
+  end
   resources :schools
+  resources :videos
+  resources :transcripts
+  resources :handouts
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -61,6 +68,8 @@ Massolit::Application.routes.draw do
   match '/addcourse', to: 'courses#addcourse'
   match '/addlecture', to: 'lessons#addlecture'
   match '/coursedash', to: 'courses#coursedash'
+  match '/addtranscript', to: 'transcripts#addtranscript'
+  match '/addhandout', to: 'handouts#addhandout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,33 @@
+<% provide(:title, 'Transcripts Dashboard') %>
+<div class="container">
+<h1>Transcripts Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Lesson</th>
+          <th>Course</th>
+          <th>Provider</th>
+          <th>Date Added</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @transcripts.each do |transcript| %>
+    <tr>
+        <td><%= link_to transcript.name, transcript %></td>
+        <td><%= link_to transcript.lesson.title, transcript.lesson %></td>
+        <td><%= link_to transcript.lesson.course.provider.name, transcript.lesson.course.provider %></td>
+        <td><%= transcript.created_at.to_date %></td>
+        <td><%= link_to("Edit Transcript", edit_transcript_path(transcript), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete Transcript", transcript_path(transcript), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+  <center><%= link_to "Add new transcript", addtranscript_path, :class => "btn btn-large btn-primary" %></center>
+</div>

@@ -6,7 +6,7 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Courses", courses_path %></li>
-          
+                  
             <% if subscriber_signed_in? && !user_signed_in? %>
               <% if current_subscriber.has_role? :admin %>          
                 <li id="fat-menu" class="dropdown">
@@ -19,11 +19,15 @@
                       <li><%= link_to "Tutors Dashboard", providers_path %></li>
                       <li><%= link_to "Courses Dashboard", coursedash_path %></li>
                       <li><%= link_to "Lectures Dashboard", lessons_path %></li>
+                      <li><%= link_to "Transcripts Dashboard", transcripts_path %></li>
+                      <li><%= link_to "Handouts Dashboard", handouts_path %></li>
                       <li class="divider"></li>
                       <li><%= link_to "Add New School", new_school_path %></li>
                       <li><%= link_to "Add New Tutor", new_provider_path %></li>
                       <li><%= link_to "Add New Course", addcourse_path %><li>
                       <li><%= link_to "Add New Lecture", addlecture_path %></li>
+                      <li><%= link_to "Add New Transcript", addtranscript_path %></li>
+                      <li><%= link_to "Add New Handout", addhandout_path %></li>
                     </ul>
               <% elsif current_subscriber.has_role? :validteacher %>
                 <li><%= link_to "My School", school_path(current_subscriber.school_id) %><li>
@@ -34,10 +38,8 @@
             <% elsif !subscriber_signed_in? && !user_signed_in? %>
               <li><%= link_to "Login", new_subscriber_session_path %></li>
               <li><%= link_to "Sign Up", new_subscriber_registration_path(:job => 'student') %></li>
-            <% else %>
-            <% end %>
-            <% if user_signed_in? && !subscriber_signed_in? %>
-              <li><%= link_to "Logout", destroy_user_session_path, :method=>'delete' %></li>
+            <% elsif user_signed_in? && !subscriber_signed_in? %>
+              <li><%= link_to "Logout", destroy_user_session_path, :method=>'delete' %></li>           
             <% else %>
             <% end %>
         </ul>

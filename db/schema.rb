@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131008205839) do
+ActiveRecord::Schema.define(:version => 20131025145955) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20131008205839) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "avatar"
+  end
+
+  create_table "handouts", :force => true do |t|
+    t.text     "name"
+    t.integer  "lesson_id"
+    t.string   "handout"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "learners", :force => true do |t|
@@ -41,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20131008205839) do
     t.datetime "updated_at",        :null => false
     t.integer  "course_id"
     t.string   "lessonimage"
+    t.string   "video"
   end
 
   create_table "profiles", :force => true do |t|
@@ -56,13 +65,20 @@ ActiveRecord::Schema.define(:version => 20131008205839) do
 
   create_table "providers", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "position"
     t.string   "department"
     t.string   "college"
     t.string   "university"
     t.string   "email"
+    t.text     "bio"
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "googleplus"
+    t.string   "blog"
+    t.string   "academiaedu"
+    t.string   "huffpo"
   end
 
   create_table "relationships", :force => true do |t|
@@ -142,6 +158,14 @@ ActiveRecord::Schema.define(:version => 20131008205839) do
 
   create_table "teachers", :force => true do |t|
     t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "transcripts", :force => true do |t|
+    t.text     "name"
+    t.integer  "lesson_id"
+    t.string   "transcript"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

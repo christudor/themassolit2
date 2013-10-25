@@ -1,0 +1,16 @@
+<% provide(:title, 'Add Handout') %>
+<div class="container">
+	<h1>Add Handout (Stage 1 of 2)</h1>
+		<div class="span8 offset2">
+		<p class="body">Note: Handouts are added in two stages. On this page, a PDF file of the handout is uploaded to Amazon S3. On the next page (which you will be redirected to automatically) that handout is given a name and linked to a lecture.</p>
+		<br>
+
+		<center><h3>Handout Uploader</h3>
+		<br>
+		<%= direct_upload_form_for @handoutuploader do |f| %>
+        	<p><%= f.file_field :handout %></p>
+        	<p><%= f.submit "Upload handout", :class => "btn btn-large btn-primary" %></p>
+        <% end %>
+        </center>
+     </div>
+</div>

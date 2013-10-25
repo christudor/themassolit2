@@ -1,0 +1,19 @@
+<% provide(:title, @title) %>
+<div class="container">
+<div class="row">
+<div class="span8">
+    <h3><%= @title %></h3>
+    <% if @courses.any? %>
+      
+      <ul class="courses">
+        <% @courses.each do |course| %>
+        <li>
+          <%= link_to course.name, course %>
+        </li>
+      <% end %>
+
+      </ul>
+    <% end %>
+   </div>
+</div>
+</div>

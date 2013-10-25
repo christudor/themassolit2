@@ -30,6 +30,12 @@ class SubscribersController < ApplicationController
     end
   end
 
+  def studying
+    @title = "My Courses"
+    @subscriber = Subscriber.find(params[:id])
+    @courses = @subscriber.studied_courses.paginate(page: params[:page])
+    render 'show_study'
+  end
 
   private
 

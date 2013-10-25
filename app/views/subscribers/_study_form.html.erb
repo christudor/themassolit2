@@ -1,0 +1,9 @@
+<% unless current_subscriber?(@subscriber) %>
+  <div id="study_form">
+  <% if current_subscriber.studying?(@course) %>
+    <%= render 'unstudy' %>
+  <% else %>
+    <%= render 'study' %>
+  <% end %>
+  </div>
+<% end %>
