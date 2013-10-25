@@ -5,9 +5,6 @@ class Course < ActiveRecord::Base
 
   has_many :relationships
   has_many :lessons
-  has_many :reverse_relationships, foreign_key: "studied_id",
-                                   class_name:  "Relationship",
-                                   dependent:   :destroy
   has_many :students, through: :reverse_relationships, source: :student
 
   def avatar_name

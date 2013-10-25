@@ -40,7 +40,8 @@ class LessonsController < ApplicationController
     authorize! :index, :lesson, :message => 'Access limited to administrators only.'
     @lesson = Lesson.new(params[:lesson])
     if @lesson.save
-      redirect_to root_path
+      flash[:success] = "Lecture added"
+      redirect_to lessons_path
     else
       render 'new'
     end    

@@ -26,7 +26,10 @@
       <% end %>
   </ul>
   <br>
+      <% if subscriber_signed_in? %>
       <%= render 'study_form' %>
+      <% else %>
+      <% end %>
   <br>
 
   <% if subscriber_signed_in? %>
