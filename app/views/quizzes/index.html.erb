@@ -1,0 +1,31 @@
+<% provide(:title, 'Tests Dashboard') %>
+<div class="container">
+<h1>Tests Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>No. of Questions</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @quizzes.each do |quiz| %>
+    <tr>
+        <td><%= link_to quiz.name, quiz %></td>
+        <td><%= quiz.questions.count %></td>
+        <td><%= link_to("Edit Test", edit_quiz_path(quiz), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete Test", quiz_path(quiz), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+	<center>
+    <%= link_to "Scores Dashboard", scores_path, :class => "btn btn-large btn-primary" %>
+    <%= link_to "Add new quiz", new_quiz_path, :class => "btn btn-large btn-primary" %>
+  </center>
+</div>

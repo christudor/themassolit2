@@ -12,8 +12,24 @@
   <center>
   <%= video_tag @lesson.video, :size => "600x338", :controls => true %> %>
   </center>
+
   <br><br>
+
+  <h2>Further Activities</h2>
+
+  <% unless @lesson.quiz == nil %>
+  <p class="media">Once you have watched the video, check how much you learned by taking a short test. This test has <%= @lesson.quiz.questions.count %> questions, and should take no longer than 5 minutes to complete.</p>
+  <p class="body">
+    <strong>Please note: you can take the test as many times as you like, but only your first score will be counted.</strong></p>
+  <br>
+  <center>
+    <%= link_to "Take Test", quiz_path(@lesson.quiz), :class => "btn btn-large btn-primary" %>
+  <center>
+  <% end %>
+
 </div>
+
+
 
 
 <div class="span3 offset1">
@@ -46,6 +62,23 @@
   </ul>
 
   <br><br>
+
+  <% unless @lesson.quiz == nil %>
+    <h2>Test Score</h2>
+      <% if current_subscriber.scores.count == 0 %>
+        <p class="body">You have not taken the test yet.</p>
+      <% else %>
+        <% i = 0 %>
+          <% current_subscriber.scores.each do |score| %>
+            <% if score.quiz.id == @lesson.quiz.id && score.subscriber_id == current_subscriber.id && i<1 %>
+              <p>You scored <%= score.score %> out of <%= score.possible %> (<%= score.percentage %>%)</p>
+              <% i += 1 %>
+            <% else %>
+            <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
 
 </div>
 </div>

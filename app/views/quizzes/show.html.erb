@@ -1,0 +1,38 @@
+<% provide(:title, "Test") %>
+
+<div class="container">
+<div class="span8 offset2">
+
+<h1>Test</h1>
+
+<%= form_tag({:controller => "quizzes", :action => "check", :quiz_id => @quiz.id}) do %>
+  <ul class="unstyled">
+  	<% i=1 %>
+	<% @quiz.questions.each do |question| %>
+	<center><h3>Question <%= i %></h3></center><br>
+	  <li>
+	  	<p class="body"><%= question.question %></p>
+	      
+	    	<% question.answers.each do |answer| %>
+	    		<div class="radio">
+	    		<div class="answeroption">
+	      		<%= radio_button_tag "answer[#{question.id}]", answer.answer,
+	      		question.answers.first.answer == answer.answer ? true : false %> 
+	      		<%= answer.answer %>
+	      		</div>
+	      		</div>
+	      	<% end %>
+			<br><br>
+		</li>
+	   <% i += 1 %>
+	<% end %>
+  </ul>
+  <br><br>
+  <center>
+  	<%= submit_tag("Finish Test", :class => "btn btn-large btn-primary") %>
+  </center>
+  <% end %>
+
+
+</div>
+</div>

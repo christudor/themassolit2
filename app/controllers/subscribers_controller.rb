@@ -1,6 +1,6 @@
 class SubscribersController < ApplicationController
   before_filter :authenticate_subscriber!
-  before_filter :only_allow_admin, :only => [ :index, :update, :destroy ]
+
   
   def index
   	@subscribers = Subscriber.all

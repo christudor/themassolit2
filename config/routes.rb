@@ -41,6 +41,10 @@ Massolit::Application.routes.draw do
   resources :videos
   resources :transcripts
   resources :handouts
+  resources :quizzes
+  resources :questions
+  resources :answers
+  resources :scores
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -70,6 +74,7 @@ Massolit::Application.routes.draw do
   match '/coursedash', to: 'courses#coursedash'
   match '/addtranscript', to: 'transcripts#addtranscript'
   match '/addhandout', to: 'handouts#addhandout'
+  match '/check', to: 'quizzes#check'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

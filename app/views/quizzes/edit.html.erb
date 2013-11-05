@@ -1,0 +1,28 @@
+<% provide(:title, 'Edit Quiz') %>
+
+<div class="container">
+<h2>Edit Quiz</h2>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @quiz, :html => {:multipart => true} do |f| %>
+      <%= render 'shared/quiz_error_messages' %>
+
+      <%= f.label :name, "Test Name:" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :lesson_id, "Associated Module:" %>
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
+
+      <%= f.fields_for :questions do |builder| %>
+        <%= render 'question_fields', f: builder %>
+      <% end %>
+
+      <%= link_to_add_fields "Add Question", f, :questions %>
+      <br>
+      <br>
+      <%= f.submit "Update Quiz", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>

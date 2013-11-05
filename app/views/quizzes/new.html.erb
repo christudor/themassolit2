@@ -1,0 +1,23 @@
+<% provide(:title, 'New Test') %>
+<h1>Add Test</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@quiz) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.fields_for :questions do |builder| %>
+        <%= render 'question_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Add Question", f, :questions %>
+      <br>
+
+      <%= f.label :lesson_id %>
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
+
+      <center><%= f.submit "Add Test", class: "btn btn-large btn-primary" %></center>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+
+<fieldset>
+	<br><br><br>
+
+	<div class="span4">
+ 		<%= f.label :question, "Question:" %>
+ 		<%= f.text_area :question, :rows => "2" %>
+	</div>
+  
+  	<div class="span2">
+  		<%= f.hidden_field :_destroy %>
+  		<br><br><%= link_to "Remove Question", '#', class: "remove_fields" %>
+  	</div>
+  
+  	<div class="span6">
+  		<%= f.fields_for :answers do |builder| %>
+    		<%= render 'answer_fields', f: builder %>
+  		<% end %>
+
+  		<%= link_to_add_fields "Add Answer", f, :answers %>
+  		<br><br>
+  		<%= f.label :correct_answer, "Of these, which is the correct answer?" %>
+  		<%= f.text_area :correct_answer, :rows => "2" %>
+  		<br><br>
+  		<%= f.label :correct_explanation, "Explanation of the answer if the user is correct..." %>
+  		<%= f.text_area :correct_explanation, :rows => "2" %>
+  		<br><br>
+  		<%= f.label :incorrect_explanation, "Explanation of the answer is the user is incorrect..." %>
+  		<%= f.text_area :incorrect_explanation, :rows => "2"  %>
+
+  		<br><br><br>
+  	</div>
+
+</fieldset>

@@ -17,6 +17,8 @@ class Subscriber < ActiveRecord::Base
   belongs_to :school
   has_many :relationships, foreign_key: "student_id", dependent: :destroy
   has_many :studied_courses, through: :relationships, source: :studied
+  has_many :scores
+  has_many :quizzes, :through => :scores
   
   before_create :assign_role
 

@@ -1,0 +1,59 @@
+<% provide(:title, "Results") %>
+
+<div class="container">
+<div class="span8 offset2">
+<h1>Results</h1>
+
+  <ul class="unstyled">
+  	<% i=1 %>
+  	<% j=0 %>
+	<% @quiz.questions.each do |question| %>
+	<center><h3>Question <%= i %></h3></center><br>
+	  <li>
+	  	<p class="body"><%= question.question %></p>
+	    	<% question.answers.each do |answer| %>
+	    		<div class="radio">
+	    		<div class="answeroption">
+		      		<%= radio_button_tag("answer[#{question.id}]", answer.answer,
+		      		@answers.values[j] == answer.answer ? true : false ,
+		      		disabled: true) %>
+	      			<%= answer.answer %>
+	      		</div>
+	      		</div>
+	      	<% end %>
+	      	<% j += 1 %>
+
+			<br><br>
+		</li>
+			<% if @answers.values[i-1] == @correct_answers[i-1] %>
+			<p class="body"><strong>Correct! <%= question.correct_explanation %></strong></p>
+			<% @score += 1 %>
+			<% else %>
+			<p class="body"><strong>Incorrect. <%= question.incorrect_explanation %></strong></p>
+			<% end %>
+
+		<br><br>
+
+	   <% i += 1 %>
+	<% end %>
+  </ul>
+  <br>
+  <center>
+
+<p class="media"><strong>You scored: <%= @score %> out of <%= @possible %>.</strong></p>
+
+<% @percentage = ((@score.to_f/@possible)*100).to_i %>
+
+<%= form_for :score, :url => {:controller => "scores", :action => "create" }, :method => 'post' do |f| %>
+
+	<%= f.hidden_field :score,			:value => @score %>
+	<%= f.hidden_field :possible,		:value => @possible %>
+	<%= f.hidden_field :percentage, 	:value => @percentage %>
+	<%= f.hidden_field :quiz_id, 		:value => @quiz.id %>
+	<%= f.hidden_field :subscriber_id,	:value => current_subscriber.id %>
+
+	<center><%= f.submit "Back to Course Page", class: "btn btn-large btn-primary" %></center>
+<% end %>
+
+</div>
+</div>

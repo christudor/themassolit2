@@ -1,0 +1,30 @@
+<% provide(:title, 'A-Levels Dashboard') %>
+<div class="container">
+<h1>A-Levels Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Board</th>
+          <th>Code</th>
+          <th>Name</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @alevels.each do |alevel| %>
+    <tr>
+        <td><%= alevel.board %></td>
+        <td><%= alevel.code %></td>
+        <td><%= link_to alevel.name, alevel %></td>
+        <td><%= link_to("Edit A-Level", edit_alevel_path(alevel), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete A-Level", alevel_path(alevel), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+	<center><%= link_to "Add new A-Level", new_alevel_path, :class => "btn btn-large btn-primary" %></center>
+</div>

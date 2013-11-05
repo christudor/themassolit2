@@ -1,0 +1,20 @@
+<% provide(:title, 'New A-Level') %>
+<h1>Add A-Level</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@alevel) do |f| %>
+
+      <%= f.label :board %>
+      <%= f.text_field :board %>
+
+      <%= f.label :code %>
+      <%= f.text_field :code %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <center><%= f.submit "Add A-Level", class: "btn btn-large btn-primary" %></center>
+    <% end %>
+  </div>
+</div>

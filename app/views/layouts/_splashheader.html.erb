@@ -21,6 +21,7 @@
                       <li><%= link_to "Lectures Dashboard", lessons_path %></li>
                       <li><%= link_to "Transcripts Dashboard", transcripts_path %></li>
                       <li><%= link_to "Handouts Dashboard", handouts_path %></li>
+                      <li><%= link_to "Tests Dashboard", quizzes_path %></li>
                       <li class="divider"></li>
                       <li><%= link_to "Add New School", new_school_path %></li>
                       <li><%= link_to "Add New Tutor", new_provider_path %></li>
@@ -28,6 +29,7 @@
                       <li><%= link_to "Add New Lecture", addlecture_path %></li>
                       <li><%= link_to "Add New Transcript", addtranscript_path %></li>
                       <li><%= link_to "Add New Handout", addhandout_path %></li>
+                      <li><%= link_to "Add New Test", new_quiz_path %></li>
                     </ul>
               <% elsif current_subscriber.has_role? :validteacher %>
                 <li><%= link_to "My School", school_path(current_subscriber.school_id) %><li>

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025145955) do
+ActiveRecord::Schema.define(:version => 20131105021232) do
+
+  create_table "a_levels", :force => true do |t|
+    t.string   "board"
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "answers", :force => true do |t|
+    t.text     "answer"
+    t.integer  "question_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -25,6 +40,31 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "avatar"
+  end
+
+  create_table "dependencies", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "question_group_id"
+    t.string   "rule"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "dependency_conditions", :force => true do |t|
+    t.integer  "dependency_id"
+    t.string   "rule_key"
+    t.integer  "question_id"
+    t.string   "operator"
+    t.integer  "answer_id"
+    t.datetime "datetime_value"
+    t.integer  "integer_value"
+    t.float    "float_value"
+    t.string   "unit"
+    t.text     "text_value"
+    t.string   "string_value"
+    t.string   "response_other"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "handouts", :force => true do |t|
@@ -81,6 +121,32 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
     t.string   "huffpo"
   end
 
+  create_table "qualifications", :force => true do |t|
+    t.string   "board"
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.text     "question"
+    t.integer  "quiz_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.text     "correct_answer"
+    t.text     "correct_explanation"
+    t.text     "incorrect_explanation"
+  end
+
+  create_table "quizzes", :force => true do |t|
+    t.text     "name"
+    t.integer  "lesson_id"
+    t.text     "correct_answer"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "relationships", :force => true do |t|
     t.integer  "student_id"
     t.integer  "course_id"
@@ -91,6 +157,41 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
   add_index "relationships", ["course_id"], :name => "index_relationships_on_course_id"
   add_index "relationships", ["student_id", "course_id"], :name => "index_relationships_on_student_id_and_course_id", :unique => true
   add_index "relationships", ["student_id"], :name => "index_relationships_on_student_id"
+
+  create_table "response_sets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "survey_id"
+    t.string   "access_code"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "api_id"
+  end
+
+  add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
+  add_index "response_sets", ["api_id"], :name => "uq_response_sets_api_id", :unique => true
+
+  create_table "responses", :force => true do |t|
+    t.integer  "response_set_id"
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "datetime_value"
+    t.integer  "integer_value"
+    t.float    "float_value"
+    t.string   "unit"
+    t.text     "text_value"
+    t.string   "string_value"
+    t.string   "response_other"
+    t.string   "response_group"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "survey_section_id"
+    t.string   "api_id"
+  end
+
+  add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true
+  add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -105,8 +206,19 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
 
   create_table "schools", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "qualification"
+  end
+
+  create_table "scores", :force => true do |t|
+    t.integer  "score"
+    t.integer  "percentage"
+    t.integer  "subscriber_id"
+    t.integer  "quiz_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "possible"
   end
 
   create_table "student_profiles", :force => true do |t|
@@ -138,6 +250,18 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
     t.string   "name"
     t.string   "job"
     t.integer  "school_id"
+    t.string   "subject1"
+    t.string   "subject2"
+    t.string   "subject3"
+    t.string   "subject4"
+    t.string   "subject5"
+    t.string   "subject6"
+    t.integer  "age"
+    t.string   "sex"
+    t.integer  "birthday"
+    t.string   "birthmonth"
+    t.integer  "birthyear"
+    t.date     "date_of_birth"
   end
 
   add_index "subscribers", ["email"], :name => "index_subscribers_on_email", :unique => true
@@ -149,6 +273,28 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
   end
 
   add_index "subscribers_profiles", ["subscriber_id", "profile_id"], :name => "index_subscribers_profiles_on_subscriber_id_and_profile_id"
+
+  create_table "survey_sections", :force => true do |t|
+    t.integer  "survey_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "reference_identifier"
+    t.string   "data_export_identifier"
+    t.string   "common_namespace"
+    t.string   "common_identifier"
+    t.integer  "display_order"
+    t.string   "custom_class"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "survey_translations", :force => true do |t|
+    t.integer  "survey_id"
+    t.string   "locale"
+    t.text     "translation"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "teacher_profiles", :force => true do |t|
     t.string   "school"
@@ -204,5 +350,31 @@ ActiveRecord::Schema.define(:version => 20131025145955) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "validation_conditions", :force => true do |t|
+    t.integer  "validation_id"
+    t.string   "rule_key"
+    t.string   "operator"
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.datetime "datetime_value"
+    t.integer  "integer_value"
+    t.float    "float_value"
+    t.string   "unit"
+    t.text     "text_value"
+    t.string   "string_value"
+    t.string   "response_other"
+    t.string   "regexp"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "validations", :force => true do |t|
+    t.integer  "answer_id"
+    t.string   "rule"
+    t.string   "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
