@@ -3,7 +3,8 @@ class SubscribersController < ApplicationController
 
   
   def index
-  	@subscribers = Subscriber.all
+  	authorize! :index, :subscriber, :message => 'Access limited to administrators only.'
+    @subscribers = Subscriber.all
   end
 
   def show
@@ -21,6 +22,7 @@ class SubscribersController < ApplicationController
   end
 
   def destroy
+    authorize! :index, :subscriber, :message => 'Access limited to administrators only.'
     subscriber = Subscriber.find(params[:id])
     unless subscriber == current_subscriber
       subscriber.destroy
