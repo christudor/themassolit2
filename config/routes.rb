@@ -77,6 +77,10 @@ Massolit::Application.routes.draw do
   match '/addhandout', to: 'handouts#addhandout'
   match '/check', to: 'quizzes#check'
 
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', to: 'errors#error_404'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
