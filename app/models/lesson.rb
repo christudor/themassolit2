@@ -1,10 +1,13 @@
 class Lesson < ActiveRecord::Base
   attr_accessible :lessondescription, :length, :title, :course_id, :lessonimage, :video, :transcript
   validates :course_id, presence: true
-  belongs_to :course, :dependent => :destroy
+  belongs_to :course
   has_many :transcripts
   has_many :handouts
+
   has_one :quiz
+  has_many :scores, :through => :quiz
+  
   mount_uploader :lessonimage, LessonimageUploader
   mount_uploader :video, VideoUploader
 

@@ -3,7 +3,17 @@ class SchoolsController < ApplicationController
 
   def show
     authorize! :view, :school, :message => 'Access limited to teachers only.'
+
     @school = School.find(params[:id])
+    
+    @subscriber = Subscriber.find_by_id(current_subscriber.id)
+    @subscriber_school = @subscriber.school
+
+    if @school.id != @subscriber.school.id
+      redirect_to school_path(@subscriber_school) unless current_subscriber.has_role? :admin
+    else
+    end
+
   end
 
   def new

@@ -4,8 +4,12 @@ class Course < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   has_many :relationships
-  has_many :lessons
   has_many :students, through: :reverse_relationships, source: :student
+
+  has_many :lessons
+  has_many :scores, :through => :lessons
+
+  
 
   def avatar_name
   	File.basename(avatar.path || avatar.filename) if avatar

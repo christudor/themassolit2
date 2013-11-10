@@ -9,15 +9,49 @@ class SubscribersController < ApplicationController
 
   def show
   	@subscriber = Subscriber.find(params[:id])
+    @courses = @subscriber.studied_courses
+
     @school = @subscriber.school
+    @subscriber_school = current_subscriber.school
+
+    # Teachers are only able to view students at their own school.
+
+    if current_subscriber.has_role? :validteacher
+      if @subscriber.school != @subscriber_school
+        redirect_to school_path(@subscriber_school), :notice => "You can only see statistics for students at your school"
+      else
+      end
+    elsif current_subscriber.has_role? :invalidteacher
+      if @subscriber.school != @subscriber_school
+        redirect_to school_path(@subscriber_school), :notice => "You can only see statistics for students at your school"
+      else
+      end
+    else 
+    end
+
+    # Students are only able to view themselves
+
+    if current_subscriber.has_role? :validstudent
+      if @subscriber.id != @current_subscriber.id
+        redirect_to subscriber_path(@subscriber), :notice => "You can only view statistics for yourself!"
+      else
+      end
+    elsif current_subscriber.has_role? :invalidstudent
+       if @subscriber.id != @current_subscriber.id
+        redirect_to subscriber_path(@subscriber), :notice => "You can only view statistics for yourself!"
+      else
+      end
+    else
+    end      
+
   end
 
   def update
     @subscriber = Subscriber.find(params[:id])
     if @subscriber.update_attributes(params[:subscriber], :as => :admin)
-      redirect_to subscribers_path, :notice => "User updated."
+      redirect_to subscriber_path(current_subscriber), :notice => "User updated."
     else
-      redirect_to subscribers_path, :alert => "Unable to update subscriber."
+      redirect_to subscriber_path(current_subscriber), :alert => "Unable to update subscriber."
     end
   end
 

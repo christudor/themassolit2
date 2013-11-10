@@ -8,7 +8,8 @@ class Subscriber < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :job, :school_id
+  attr_accessible :name, :email, :password, :password_confirmation, :current_password, :remember_me, :job, :school_id, :sex, :date_of_birth
+  attr_accessor :current_password
   before_create :assign_role
 
   validates_presence_of :name
@@ -16,7 +17,7 @@ class Subscriber < ActiveRecord::Base
 
   belongs_to :school
   has_many :relationships, foreign_key: "student_id", dependent: :destroy
-  has_many :studied_courses, through: :relationships, source: :studied
+  has_many :studied_courses, through: :relationships, source: :course
   has_many :scores
   has_many :quizzes, :through => :scores
   
