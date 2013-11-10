@@ -78,7 +78,6 @@
 
   			   	<% if lesson.quiz == nil %>
               No test for this module.
-              <% raise "oops" %>
               <% i+= 1 %>
             <% elsif @subscriber.scores.where(:quiz_id => lesson.quiz.id).any? %>
               <%= @subscriber.scores.where(:quiz_id => lesson.quiz.id).first.score %> out of
