@@ -1,13 +1,21 @@
-<% provide(:title, 'Et Tu, Brute?') %>
+<% provide(:title, 'Et Tu, Brute') %>
 
 <div class="container">
 <div class="span6 offset3">
 
-<h1>500 Error: Et Tu Brute?</h1>
-<p class="body">When Julius Caesar was assassinated on the Ides of March 44 BC, it was the Roman equivalent of an Internal Server Error. In short, something had gone badly wrong.</p>
-<p class="body">Something's gone a little wrong here, too - so it might be worth clicking the button below to return to the Home Page.</p>
+<br>
+<br>
+	<h3>We're really sorry, but this page isn't loading properly.</h3>
+<br>
 
-<%= link_to "Back to Home Page", root_path, class: "btn btn-large btn-primary" %>
+<p class="body">This is most likely a problem our end, but it might be worth reloading the page just in case.</p>
+<p class="body">If this doesn't work, it would be great if you could <%= link_to "tell us what page you were trying to get to", "mailto:chris@massolit.co.uk?Subject=500" %> so we can check the logs and see what went wrong.</p>
+<p class="body">Otherwise, the button below will take you back to the home page.</p>
+<br>
+
+<center>
+	<%= link_to "Back to Home Page", root_path, class: "btn btn-large btn-primary" %>
+</center>
 
 </div>
 </div>

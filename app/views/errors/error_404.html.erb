@@ -3,11 +3,20 @@
 <div class="container">
 <div class="span6 offset3">
 
-<h1>404 Error: Welcome to Utopia!</h1>
-<p class="body">In 1516, Thomas More published 'Utopia', an account (in Latin) of a fictional island society and its religious, social, and political customs.  The word 'Utopia' itself comes from the Greek meaning 'no place', making it perfect for a 404 page.</p>
-<p class="body">You are in 'Utopia'. Stay here for as long as you like, but if you did want to go home, you can click the button below.</p>
+<br>
+<br>
+	<h3>We're really sorry, but the page you are trying to view cannot be found</h3>
+<br>
 
-<%= link_to "Back to Home Page", root_path, class: "btn btn-large btn-primary" %>
+<p class="body">If you typed in the address, try double-checking the spelling.</p>
+<p class="body">If you followed a link from elsewhere, <%= link_to "please let us know", "mailto:chris@massolit.co.uk?Subject=404" %>. Make sure to tell us where you came from and what you were looking for, and we'll do our best to fix it.
+<p class="body">Otherwise, feel free to <%= link_to "browse our courses", courses_path %> or click the button below to go back to the home page.
+<br>
+<br>
+
+<center>
+	<%= link_to "Back to Home Page", root_path, class: "btn btn-large btn-primary" %>
+</center>
 
 </div>
 </div>
