@@ -38,14 +38,9 @@
                 <li><%= link_to "My School", school_path(current_subscriber.school_id) %><li>
               <% else %>
               <% end %>
-              <li id="fat-menu" class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_subscriber.name %> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "My Profile", subscriber_path(current_subscriber) %></li>
-                  <li><%= link_to "Edit Profile", edit_subscriber_registration_path %></li>
-                  <li class="divider">
-                  <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
-                </ul>
+              <li><%= link_to current_subscriber.name, subscriber_path(current_subscriber) %></li>
+              <li><%= link_to "Edit My Profile", edit_subscriber_registration_path %></li>
+              <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
             <% elsif !subscriber_signed_in? && !user_signed_in? %>
               <li><%= link_to "Login", new_subscriber_session_path %></li>
               <li><%= link_to "Sign Up", new_subscriber_registration_path(:job => 'student') %></li>
