@@ -2,6 +2,7 @@ class LessonsController < ApplicationController
   
   def show
     @lesson = Lesson.find(params[:id])
+    @id = @lesson.id
     @prev = @lesson.previous
     @next = @lesson.next
     respond_to do |format|
