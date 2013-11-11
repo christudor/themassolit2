@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105021232) do
+ActiveRecord::Schema.define(:version => 20131111204228) do
 
   create_table "a_levels", :force => true do |t|
     t.string   "board"
@@ -90,6 +90,14 @@ ActiveRecord::Schema.define(:version => 20131105021232) do
     t.integer  "course_id"
     t.string   "lessonimage"
     t.string   "video"
+  end
+
+  create_table "movies", :force => true do |t|
+    t.string   "name"
+    t.integer  "lesson_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "movie"
   end
 
   create_table "profiles", :force => true do |t|
@@ -373,6 +381,13 @@ ActiveRecord::Schema.define(:version => 20131105021232) do
     t.integer  "answer_id"
     t.string   "rule"
     t.string   "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "videos", :force => true do |t|
+    t.string   "name"
+    t.integer  "lesson_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

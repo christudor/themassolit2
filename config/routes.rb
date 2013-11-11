@@ -1,5 +1,15 @@
 Massolit::Application.routes.draw do
 
+  get "movie/addmovie"
+
+  get "movie/edit"
+
+  get "movie/index"
+
+  get "movie/new"
+
+  get "movie/show"
+
   mount StripeEvent::Engine => '/stripe'
   get "content/silver"
   get "content/gold"
@@ -46,6 +56,7 @@ Massolit::Application.routes.draw do
   resources :questions
   resources :answers
   resources :scores
+  resources :movies
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -73,8 +84,11 @@ Massolit::Application.routes.draw do
   match '/addcourse', to: 'courses#addcourse'
   match '/addlecture', to: 'lessons#addlecture'
   match '/coursedash', to: 'courses#coursedash'
+
   match '/addtranscript', to: 'transcripts#addtranscript'
-  match '/addhandout', to: 'handouts#addhandout'
+  match '/addhandout',    to: 'handouts#addhandout'
+  match '/addmovie',      to: 'movies#addmovie'
+
   match '/check', to: 'quizzes#check'
 
   unless Rails.application.config.consider_all_requests_local

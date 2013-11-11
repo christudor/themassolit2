@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class VideoUploader < CarrierWave::Uploader::Base
+class MovieUploader < CarrierWave::Uploader::Base
   include CarrierWaveDirect::Uploader
 
   # Include RMagick or ImageScience support:

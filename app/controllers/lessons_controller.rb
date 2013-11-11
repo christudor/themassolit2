@@ -12,7 +12,7 @@ class LessonsController < ApplicationController
 
   def new
     authorize! :index, :lesson, :message => 'Access limited to administrators only.'
-  	@lesson = Lesson.new(key: params[:key])
+  	@lesson = Lesson.new(params[:id])
   end
 
   def addlecture

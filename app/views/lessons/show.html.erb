@@ -9,15 +9,27 @@
 <div class="container">
 <div class="span7">
   <h2><%= @lesson.title %></h2>
+
+  <% if @lesson.movies.empty? %>
+    <% if current_subscriber.has_role? :admin %>
+      <center>
+      <p class="body">There is not currently a video associated with this module.</p>
+      <%= link_to "Add Video", addmovie_path, :class => "btn btn-large btn-primary" %>
+      </center>
+    <% else %>
+      <p class="body">There is not currently a video associated with this module.</p>
+    <% end %>
+  <% else %>
   <center>
-  <%= video_tag @lesson.video, :size => "600x338", :controls => true %> %>
+    <%= video_tag @lesson.movies.first.movie, :size => "600x338", :controls => true %>
   </center>
+  <% end %>
 
   <br><br>
 
-  <h2>Further Activities</h2>
-
   <% unless @lesson.quiz == nil %>
+  <h2>Further Activities</h2>
+ 
   <p class="media">Once you have watched the video, check how much you learned by taking a short test. This test has <%= @lesson.quiz.questions.count %> questions, and should take no longer than 5 minutes to complete.</p>
   <p class="body">
     <strong>Please note: you can take the test as many times as you like, but only your first score will be counted.</strong></p>
