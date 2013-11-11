@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
 
   def coursedash
     authorize! :index, :course, :message => 'Access limited to administrators only.'
-    @courses = Course.all
+    @courses = Course.all(:order => "name")
   end
 
   def edit

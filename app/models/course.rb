@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
   has_many :relationships
   has_many :students, through: :reverse_relationships, source: :student
 
-  has_many :lessons
+  has_many :lessons, :order => 'title'
   has_many :scores, :through => :lessons
 
   
