@@ -1,7 +1,7 @@
 <% provide(:title, 'Add New Video') %>
 
 <div class="container">
-<h2>Add New Video (Stage 2 of 2)</h2>
+<h1>Add Video (Stage 2 of 2)</h1>
 
 <div class="row">
   <div class="span6 offset3">
@@ -12,13 +12,16 @@
 
       <p>Video File: <%= @movie.movie_name %></p> 
 
-      <%= f.label :lesson_id %>
+      <%= f.label :lesson_id, "Module:" %>
       <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
 
-      <%= f.label :name %>
+      <%= f.label :name, "Name:" %>
       <%= f.text_field :name %>  
 
-      <%= f.submit "Add Video", class: "btn btn-large btn-primary" %>
+      <br><br>
+      <center>
+        <%= f.submit "Add Video", class: "btn btn-large btn-primary" %>
+      </center>
     <% end %>
   </div>
 </div>

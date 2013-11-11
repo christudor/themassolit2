@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
   def addmovie
     authorize! :view, :movie, :message => 'Access limited to administrators only.'
     @movieuploader = Movie.new.movie
-    @movieuploader.success_action_redirect = movies_path
+    @movieuploader.success_action_redirect = new_movie_url
   end
 
   def edit
