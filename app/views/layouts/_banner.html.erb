@@ -1,4 +1,4 @@
-<% unless Banner.all.count == 0 %>
+<% unless Banner.all.empty? %>
 
 <% banner = Banner.order("RANDOM()").first %>
 
