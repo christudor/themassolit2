@@ -1,0 +1,17 @@
+<% provide(:title, 'Add Banner') %>
+<div class="container">
+	<h1>Add Banner (Stage 1 of 2)</h1>
+		<div class="span8 offset2">
+		<p class="body">Note: Banners are added in two stages. On this page, the image is uploaded to Amazon S3. On the next page (which you will be redirected to automatically) that banner is given a title, a description, and linked to a course.</p>
+		<p><strong>Please check the image dimensions are 2878 x 1280 (or in this ratio), to make sure they are all the same size.</strong></p>
+		<br>
+
+		<center><h3>Banner Uploader</h3>
+		<br>
+		<%= direct_upload_form_for @banneruploader do |f| %>
+        	<p><%= f.file_field :banner %></p>
+        	<p><%= f.submit "Upload banner", :class => "btn btn-large btn-primary" %></p>
+        <% end %>
+        </center>
+     </div>
+</div>

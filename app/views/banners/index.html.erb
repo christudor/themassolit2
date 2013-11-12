@@ -1,0 +1,30 @@
+<% provide(:title, 'Banners Dashboard') %>
+<div class="container">
+<h1>Banners Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Course</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @banners.each do |banner| %>
+    <tr>
+        <td><%= banner.name %></td>
+        <td><%= banner.description %>
+        <td><%= link_to banner.course.name, banner.course %></td>
+        <td><%= link_to("Edit Banner", edit_banner_path(banner), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete Banner", banner_path(banner), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+  <center><%= link_to "Add new banner", addbanner_path, :class => "btn btn-large btn-primary" %></center>
+</div>

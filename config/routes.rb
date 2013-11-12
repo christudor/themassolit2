@@ -1,5 +1,15 @@
 Massolit::Application.routes.draw do
 
+  get "banners/addbanner"
+
+  get "banners/show"
+
+  get "banners/edit"
+
+  get "banners/new"
+
+  get "banners/index"
+
   get "movie/addmovie"
 
   get "movie/edit"
@@ -57,6 +67,7 @@ Massolit::Application.routes.draw do
   resources :answers
   resources :scores
   resources :movies
+  resources :banners
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -88,6 +99,7 @@ Massolit::Application.routes.draw do
   match '/addtranscript', to: 'transcripts#addtranscript'
   match '/addhandout',    to: 'handouts#addhandout'
   match '/addmovie',      to: 'movies#addmovie'
+  match '/addbanner',     to: 'banners#addbanner'
 
   match '/check', to: 'quizzes#check'
 

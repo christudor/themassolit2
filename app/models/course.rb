@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
 
   has_many :lessons, :order => 'title'
   has_many :scores, :through => :lessons
+  has_many :banners
 
   
 

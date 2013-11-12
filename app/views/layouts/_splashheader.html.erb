@@ -20,6 +20,7 @@
                       <li><%= link_to "Courses Dashboard", coursedash_path %></li>
                       <li><%= link_to "Modules Dashboard", lessons_path %></li>
                       <li><%= link_to "Videos Dashboard", movies_path %></li>
+                      <li><%= link_to "Banners Dashboard", banners_path %></li>
                       <li><%= link_to "Transcripts Dashboard", transcripts_path %></li>
                       <li><%= link_to "Handouts Dashboard", handouts_path %></li>
                       <li><%= link_to "Tests Dashboard", quizzes_path %></li>
@@ -30,6 +31,7 @@
                       <li><%= link_to "Add New Course", addcourse_path %><li>
                       <li><%= link_to "Add New Module", new_lesson_path %></li>
                       <li><%= link_to "Add New Video", addmovie_path %></li>
+                      <li><%= link_to "Add Banner", addbanner_path %></li>
                       <li><%= link_to "Add New Transcript", addtranscript_path %></li>
                       <li><%= link_to "Add New Handout", addhandout_path %></li>
                       <li><%= link_to "Add New Test", new_quiz_path %></li>
@@ -39,7 +41,6 @@
               <% else %>
               <% end %>
               <li><%= link_to current_subscriber.name, subscriber_path(current_subscriber) %></li>
-              <li><%= link_to "Edit My Profile", edit_subscriber_registration_path %></li>
               <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
             <% elsif !subscriber_signed_in? && !user_signed_in? %>
               <li><%= link_to "Login", new_subscriber_session_path %></li>
