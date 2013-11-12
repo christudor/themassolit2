@@ -4,14 +4,17 @@
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
 
   <%= f.hidden_field :job, :value => params[:job] %>
+
   <%= f.error_notification %>
   <%= display_base_errors resource %>
+
   <%= f.input :school_id, :label => "School", :collection => School.all, :selected => School.first %>
   <%= f.input :name, :label => "Name:", :autofocus => true %>
   <%= f.input :email, :label => "E-Mail Address:", :required => true %>
   <%= f.input :password, :label => "Password:", :required => true %>
   <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>
   <center><%= f.button :submit, 'Sign up', :class => "btn btn-large btn-primary" %></center>
+
 <% end %>
 </div>
 </div>

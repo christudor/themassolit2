@@ -21,7 +21,7 @@ Massolit::Application.routes.draw do
   end
   root :to => 'static_pages#home'
   
-  devise_for :subscribers, :controllers => { :registrations => "registrations" }
+  devise_for :subscribers
 
   authenticated :user do
     root :to => 'static_pages#home'

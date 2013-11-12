@@ -23,6 +23,11 @@
 <body class="<%= controller_name %> <%= action_name %>">
   
     <%= render 'layouts/splashheader' %>
+    <% if request.fullpath == "/" %>
+      <%= render 'layouts/banner' %>
+    <% else %>
+    <% end %>
+
     <div class="container">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>">
