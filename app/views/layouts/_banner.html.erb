@@ -1,13 +1,6 @@
 <% unless Banner.all.empty? %>
 
-<% if Rails.env.production? %>
-	<% banner = Banner.first(:order => "RAND()") %>
-<% elsif Rails.env.development? %>
-	<% banner = Banner.order("RANDOM()").first %>
-<% else %>
-<% end %>
-
-
+<% banner = Banner.all.shuffle[0] %>
 
 <div id="myCarousel" class="carousel slide">
 	<div class="carousel-inner">
