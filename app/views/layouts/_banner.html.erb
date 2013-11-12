@@ -1,6 +1,7 @@
 <% unless Banner.all.empty? %>
 
 <% banner = Banner.all.shuffle[0] %>
+<% course = banner.course %>
 
 <div id="myCarousel" class="carousel slide">
 	<div class="carousel-inner">
@@ -15,7 +16,7 @@
 						</div>					
 						<div class="span3">
 
-							<%= link_to "Browse our courses", courses_path, class: "btn btn-large btn-primary btn-right" %>
+							<%= link_to "Go to Course", course_path(course), class: "btn btn-large btn-primary btn-right" %>
 						</div>
 						</div>
 					</div>
