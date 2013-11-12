@@ -28,11 +28,6 @@ class ApplicationController < ActionController::Base
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
   end
 
-  def self.random
-    ids = connection.select_all("SELECT id FROM widgets")
-    find(ids[rand(ids.length)]["id"].to_i) unless ids.blank?
-  end
-
   private
   def render_error(status, exception)
     respond_to do |format|
