@@ -42,7 +42,7 @@ Massolit::Application.configure do
   config.action_mailer.smtp_settings = {
   :address              => "smtpout.europe.secureserver.net",
   :port                 => 80,
-  :domain               => "herokuapp.com",
+  :domain               => "www.massolit.co.uk",
   :user_name            => "chris@massolit.co.uk",
   :password             => ENV["GODADDY_PASSWORD"],
   :authentication       => :plain,
