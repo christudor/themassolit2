@@ -41,16 +41,16 @@ Massolit::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :address              => "smtpout.europe.secureserver.net",
-  :port                 => 80,
+  :port                 => 3535,
   :domain               => "herokuapp.com",
   :user_name            => "chris@massolit.co.uk",
   :password             => ENV["GODADDY_PASSWORD"],
-  :authentication       => 'plain',
+  :authentication       => :plain,
   :enable_starttls_auto => true  }
 
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
-  
+
 end

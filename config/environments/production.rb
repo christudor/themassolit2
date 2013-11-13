@@ -80,7 +80,7 @@ Massolit::Application.configure do
     :domain               => "herokuapp.com",
     :user_name            => "chris@massolit.co.uk",
     :password             => ENV["GODADDY_PASSWORD"],
-    :authentication       => 'plain',
+    :authentication       => :plain,
     :enable_starttls_auto => true  }
 
   config.paperclip_defaults = {
