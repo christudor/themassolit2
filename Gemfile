@@ -21,6 +21,10 @@ gem 'stripe'
 gem 'stripe_event'
 gem 'figaro'
 
+# Sendgrid for e-mail
+
+gem 'sendgrid'
+
 # Amazon Web Services gems for association of database items (e.g. users, courses, etc) with images
 
 # Carrierwave for course images.
