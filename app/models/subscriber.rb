@@ -9,7 +9,6 @@ class Subscriber < ActiveRecord::Base
 
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :current_password, :remember_me, :job, :school_id, :sex, :date_of_birth
-  attr_accessor :current_password
   before_create :assign_role
 
   validates_presence_of :name

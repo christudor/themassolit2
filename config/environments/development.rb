@@ -40,13 +40,14 @@ Massolit::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address              => "smtpout.europe.secureserver.net",
-  :port                 => 80,
-  :domain               => "www.massolit.co.uk",
-  :user_name            => "chris@massolit.co.uk",
-  :password             => ENV["GODADDY_PASSWORD"],
-  :authentication       => :plain,
-  :enable_starttls_auto => true  }
+  :address        => 'smtp.sendgrid.net',
+:port           => '587',
+:authentication => :plain,
+:user_name      => ENV['SENDGRID_USERNAME'],
+:password       => ENV['SENDGRID_PASSWORD'],
+:domain         => 'heroku.com',
+:enable_starttls_auto => true
+}
 
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true

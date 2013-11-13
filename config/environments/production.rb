@@ -69,20 +69,22 @@ Massolit::Application.configure do
 
   # ActionMailer Config
   # =>  Setup for production - deliveries, no errors raised
+   config.action_mailer.default_url_options = { :host => 'smtp.sendgrid.net'} 
    config.action_mailer.delivery_method = :smtp
    config.action_mailer.perform_deliveries = true
    config.action_mailer.raise_delivery_errors = false
    config.action_mailer.default :charset => "utf-8"
 
    config.action_mailer.smtp_settings = {
-    :address              => "smtpout.europe.secureserver.net",
-    :port                 => 80,
-    :domain               => "www.massolit.co.uk",
-    :user_name            => "chris@massolit.co.uk",
-    :password             => ENV["GODADDY_PASSWORD"],
-    :authentication       => :plain,
-    :enable_starttls_auto => true  }
-
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+    }
+    
   config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {
