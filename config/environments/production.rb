@@ -65,25 +65,26 @@ Massolit::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => 'massolit.co.uk' }
+  #config.action_mailer.default_url_options = { :host => 'massolit.co.uk' }
+
   # ActionMailer Config
-# =>  Setup for production - deliveries, no errors raised
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  # =>  Setup for production - deliveries, no errors raised
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.perform_deliveries = true
+   config.action_mailer.raise_delivery_errors = false
+   config.action_mailer.default :charset => "utf-8"
 
-  config.action_mailer.smtp_settings = {
-  address: "smtp.gmail.com",
-  port: 587,
-  domain: "herokuapp.com",
-  authentication: "plain",
-  enable_starttls_auto: true,
-  user_name: ENV["GMAIL_USERNAME"],
-  password: ENV["GMAIL_PASSWORD"]
-}
+   config.action_mailer.smtp_settings = {
+    :address              => "smtpout.europe.secureserver.net",
+    :port                 => 80,
+    :domain               => "herokuapp.com",
+    :user_name            => "chris@massolit.co.uk",
+    :password             => ENV["GODADDY_PASSWORD"],
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+   }
 
-config.paperclip_defaults = {
+  config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {
     :bucket => ENV['AWS_BUCKET'],
