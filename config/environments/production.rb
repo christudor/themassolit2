@@ -82,7 +82,6 @@ Massolit::Application.configure do
     :password             => ENV["GODADDY_PASSWORD"],
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
-   }
 
   config.paperclip_defaults = {
   :storage => :s3,
@@ -90,6 +89,6 @@ Massolit::Application.configure do
     :bucket => ENV['AWS_BUCKET'],
     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
   }
-}
 end
