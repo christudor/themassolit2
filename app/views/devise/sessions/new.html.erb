@@ -9,21 +9,25 @@
   <div>
     <%= f.input :email, :label => "E-Mail Address:", :required => true, :autofocus => true %>
     <%= f.input :password, :label => "Password:", :required => true %>
-    <%= f.input :remember_me, :label => "Remember Me?", :as => :boolean if devise_mapping.rememberable? %>
+
+      <%= f.input :remember_me, :inline_label => "Remember Me?", :label => false, :as => :boolean if devise_mapping.rememberable? %>
+
+
     <center><%= f.button :submit, 'Sign in', :class => "btn btn-large btn-primary" %></center>
   </div>
 <% end %>
 
 <% path = request.env['PATH_INFO'] %>
 	<% if path == '/subscribers/sign_in' %>
-    <center><small>Not signed up yet? <%= link_to "Sign up here", new_subscriber_registration_path(:job => 'student') %></small></center>
+    <center>Not signed up yet? <%= link_to "Sign up here", new_subscriber_registration_path(:job => 'student') %></center>
 	<% elsif path == '/users/sign_in' %>
     <center><small>Not signed up yet? <%= link_to "Sign up here", new_user_registration_path %></small></center>
 		<center><small>Affiliated with a school? <%= link_to "Log in here", new_subscriber_session_path %></small></center>
 	<% else %>
 <% end %>
+<center><%= render "devise/shared/links" %></center>
 
-<%= render "devise/shared/links" %>
+
 
 </div>
 </div>

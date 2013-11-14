@@ -45,7 +45,6 @@ Massolit::Application.routes.draw do
   end
 
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
   resources :courses
   resources :providers
   resources :imports
@@ -72,19 +71,18 @@ Massolit::Application.routes.draw do
   devise_scope :user do 
     root to: 'static_pages#home'
     match '/sessions/user', to: 'devise/sessions#create', via: :post
+    match '/sessions/user.new', to: 'devise/sessions#create', via: :post
   end
 
   devise_scope :subscriber do
     root to: 'static_pages#home'
     match '/sessions/subscriber', to: 'devise/sessions#create', via: :post
+    match '/sessions/subscriber.new', to: 'devise/sessions#create', via: :post
   end
 
   # The following lines match actions from weirdly-named controllers to simpler paths.
   # Instead of /static_pages/about, for example, we have /about
 
-  match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
