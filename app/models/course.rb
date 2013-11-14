@@ -6,9 +6,9 @@ class Course < ActiveRecord::Base
   has_many :relationships
   has_many :students, through: :reverse_relationships, source: :student
 
-  has_many :lessons, :order => 'title'
+  has_many :lessons, :order => 'title', :dependent => :destroy
   has_many :scores, :through => :lessons
-  has_many :banners
+  has_many :banners, :dependent => :destroy
   
 
   def avatar_name

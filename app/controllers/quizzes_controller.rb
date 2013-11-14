@@ -23,6 +23,7 @@ class QuizzesController < ApplicationController
   def check
     @subscriber = current_subscriber
     @quiz = Quiz.find(params[:quiz_id])
+    @lesson = @quiz.lesson
     
     @question_numbers = []
     @quiz.questions.each do |question|

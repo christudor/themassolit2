@@ -44,7 +44,8 @@
 
 <% @percentage = ((@score.to_f/@possible)*100).to_i %>
 
-<%= form_for :score, :url => {:controller => "scores", :action => "create" }, :method => 'post' do |f| %>
+ <%= form_for :score, :remote => true, :url => {:controller => "scores", :action => "create" },
+	:method => 'post', :html => { :id => "autosubmit" } do |f| %>
 
 	<%= f.hidden_field :score,			:value => @score %>
 	<%= f.hidden_field :possible,		:value => @possible %>
@@ -52,8 +53,15 @@
 	<%= f.hidden_field :quiz_id, 		:value => @quiz.id %>
 	<%= f.hidden_field :subscriber_id,	:value => current_subscriber.id %>
 
-	<center><%= f.submit "Back to Course Page", class: "btn btn-large btn-primary" %></center>
 <% end %>
+
+	<script type="text/javascript">
+		$('form#autosubmit').trigger('submit.rails');
+    </script>
+
+	<center>
+		<%= link_to "Back to Course Page", lesson_path(@lesson), class: "btn btn-large btn-primary" %>
+	</center>
 
 </div>
 </div>

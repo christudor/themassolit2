@@ -8,14 +8,18 @@ class ScoresController < ApplicationController
   def new
     @score = Score.new(params[:score])
     @lesson = @score.quiz.lesson
-      redirect_to lesson_path(@lesson)
   end
 
   def create
     @score = Score.new(params[:score])
     @lesson = @score.quiz.lesson
     if @score.save
-      redirect_to lesson_path(@lesson)
+      
+      respond_to do |format|
+        format.html { redirect_to lesson_path(@lesson) }
+        format.js
+      end
+      
     else
       render 'new'
     end    

@@ -16,8 +16,8 @@
   <tbody>
   <% @scores.each do |score| %>
     <tr>
-        <td><%= score.quiz.lesson.course.name %></td>
-        <td><%= score.quiz.lesson.title %></td>
+        <td><%= score.quiz.lesson.course.name unless score.quiz == nil %></td>
+        <td><%= score.quiz.lesson.title unless score.quiz == nil %></td>
         <td><%= Subscriber.find(score.subscriber_id).name %></td>
         <td><%= score.score %></td>
         <td><%= score.possible %></td>

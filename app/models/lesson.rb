@@ -3,11 +3,11 @@ class Lesson < ActiveRecord::Base
   validates :course_id, presence: true
   belongs_to :course
 
-  has_many :movies
-  has_many :transcripts
-  has_many :handouts
+  has_many :movies, :dependent => :destroy
+  has_many :transcripts, :dependent => :destroy
+  has_many :handouts, :dependent => :destroy
 
-  has_one :quiz
+  has_one :quiz, :dependent => :destroy
   has_many :scores, :through => :quiz
 
     def previous
