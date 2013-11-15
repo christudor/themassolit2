@@ -158,7 +158,9 @@
 
   <% unless @lesson.quiz == nil %>
     <h2>Test Score</h2>
-      <% if current_subscriber.scores.count == 0 %>
+      
+      <% if @sub_scores.count == 0 %>
+      
         <p class="body">You have not taken the test yet.</p>
       <% else %>
         <% i = 0 %>

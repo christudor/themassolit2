@@ -2,6 +2,7 @@ class LessonsController < ApplicationController
   
   def show
     @lesson = Lesson.find(params[:id])
+    @sub_scores = @lesson.scores.where(:subscriber_id => current_subscriber.id)
     @id = @lesson.id
     @prev = @lesson.previous
     @next = @lesson.next
