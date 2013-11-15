@@ -57,11 +57,10 @@
 
   <% unless @lesson.sources.count == 0 %>
 
-    <h2><%= i %>. Primary Sources</h2>
+    <h2><%= i %>. Sources</h2>
     <% i += 1 %>
-      <p class="body">The following sources were mentioned in this module:</p>
-      
-      <ul class="courselist">
+     
+      <ul class="sourcelist">
       <% k=1 %>
         <% @lesson.sources.each do |source| %>
           <li>
@@ -87,9 +86,8 @@
 
     <h2><%= i %>. Further Reading</h2>
     <% i += 1 %>
-      <p class="body">If you want to learn more about this topic, you may find the following items useful:</p>
-      
-      <ul class="courselist">
+       
+      <ul class="sourcelist">
       <% k=1 %>
         <% @lesson.books.each do |book| %>
           <li>
@@ -99,27 +97,6 @@
             <% end %>
 
             <%= book.author %>, <em><%= book.title %></em> (<%= book.publication_date %>) 
-
-            
-            <% unless book.comment.empty? && book.perseus.empty? && book.amazon.empty? %>
-            <%= link_to "[More details]", 'javascript:;', 
-            :data => {:toggle => "collapse", :target => "#collapse_#{k}"} %>
-
-            <div id="collapse_<%= k %>" class="collapse">
-              <ul class="unstyled">
-                <% unless book.comment.empty? %>
-                  <li><%= book.comment %></li>
-                <% end %>
-                <% unless book.perseus.empty? %>
-                  <li><%= link_to "Read this book online", book.perseus, :target => "_blank" %></li>
-                <% end %>
-                <% unless book.amazon.empty? %>
-                  <li><%= link_to "Buy this book", book.amazon, :target => "_blank" %></li>
-                <% end %>
-              </ul>
-            </div>
-            <% end %>
-            <% k+= 1 %>
 
           </li>
 
@@ -133,7 +110,7 @@
 
   <h2><%= i %>. Discussion Questions</h2>
 
-  <ul class="courselist">
+  <ul class="sourcelist">
         
         <% @lesson.essays.each do |essay| %>
           <li><%= essay.question %></li>

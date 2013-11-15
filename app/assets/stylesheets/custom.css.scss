@@ -248,6 +248,23 @@ input {
   }
 }
 
+/* sources index */
+
+.sourcelist {
+  list-style: square outside none;
+  margin: 0;
+  li {
+    overflow: visible;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+
+
         /* Featurettes
     ------------------------- */
 
