@@ -1,0 +1,36 @@
+<% provide(:title, 'Sources Dashboard') %>
+<div class="container">
+<h1>Sources Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Source</th>
+          <th>Date</th>
+          <th>Original</th>
+          <th>Wikipedia</th>
+          <th>Module</th>
+          <th>Course</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @sources.each do |source| %>
+    <tr>
+        <td><%= source.name %></td>
+        <td><%= source.date %></td>
+        <td><%= link_to "[Link]", source.link, :target => "_blank" %></td>
+        <td><%= link_to "[Wiki]", source.wikipedia, :target => "_blank" %></td>
+        <td><%= link_to source.lesson.title, source.lesson %></td>
+        <td><%= link_to source.lesson.course.name, source.lesson.course %></td>
+        <td><%= link_to("Edit Source", edit_source_path(source), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete Source", source_path(source), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+	<center><%= link_to "Add New Source", new_source_path, :class => "btn btn-large btn-primary" %></center>
+</div>

@@ -21,8 +21,11 @@
                       <li><%= link_to "Modules Dashboard", lessons_path %></li>
                       <li><%= link_to "Videos Dashboard", movies_path %></li>
                       <li><%= link_to "Banners Dashboard", banners_path %></li>
+                      <li><%= link_to "Primary Sources Dashboad", sources_path %></li>
                       <li><%= link_to "Transcripts Dashboard", transcripts_path %></li>
                       <li><%= link_to "Handouts Dashboard", handouts_path %></li>
+                      <li><%= link_to "Further Reading Dashboard", books_path %></li>
+                      <li><%= link_to "Essay Questions Dashboard", essays_path %></li>
                       <li><%= link_to "Tests Dashboard", quizzes_path %></li>
                       <li><%= link_to "Scores Dashboard", scores_path %></li>
                     </ul>
@@ -35,8 +38,11 @@
                       <li><%= link_to "Add New Module", new_lesson_path %></li>
                       <li><%= link_to "Add New Video", addmovie_path %></li>
                       <li><%= link_to "Add New Banner", addbanner_path %></li>
+                      <li><%= link_to "Add New Primary Source", new_source_path %></li>
                       <li><%= link_to "Add New Transcript", addtranscript_path %></li>
                       <li><%= link_to "Add New Handout", addhandout_path %></li>
+                      <li><%= link_to "Add New Reading Item", new_book_path %></li>
+                      <li><%= link_to "Add New Essay Question", new_essay_path %></li>
                       <li><%= link_to "Add New Test", new_quiz_path %></li>
                     </ul>
               <% elsif current_subscriber.has_role? :validteacher %>

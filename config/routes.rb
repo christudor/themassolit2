@@ -1,25 +1,5 @@
 Massolit::Application.routes.draw do
 
-  get "banners/addbanner"
-
-  get "banners/show"
-
-  get "banners/edit"
-
-  get "banners/new"
-
-  get "banners/index"
-
-  get "movie/addmovie"
-
-  get "movie/edit"
-
-  get "movie/index"
-
-  get "movie/new"
-
-  get "movie/show"
-
   mount StripeEvent::Engine => '/stripe'
   get "content/silver"
   get "content/gold"
@@ -67,6 +47,9 @@ Massolit::Application.routes.draw do
   resources :scores
   resources :movies
   resources :banners
+  resources :books
+  resources :essays
+  resources :sources
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -98,6 +81,7 @@ Massolit::Application.routes.draw do
   match '/addhandout',    to: 'handouts#addhandout'
   match '/addmovie',      to: 'movies#addmovie'
   match '/addbanner',     to: 'banners#addbanner'
+  match '/addbook',       to: 'books#addbook'
 
   match '/check', to: 'quizzes#check'
 

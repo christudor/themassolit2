@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131112135146) do
+ActiveRecord::Schema.define(:version => 20131115150134) do
 
   create_table "a_levels", :force => true do |t|
     t.string   "board"
@@ -35,6 +35,19 @@ ActiveRecord::Schema.define(:version => 20131112135146) do
     t.integer  "course_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "books", :force => true do |t|
+    t.text     "title"
+    t.string   "author"
+    t.integer  "publication_date"
+    t.string   "amazon"
+    t.text     "comment"
+    t.integer  "lesson_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "section"
+    t.string   "perseus"
   end
 
   create_table "courses", :force => true do |t|
@@ -74,6 +87,13 @@ ActiveRecord::Schema.define(:version => 20131112135146) do
     t.string   "response_other"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "essays", :force => true do |t|
+    t.text     "question"
+    t.integer  "lesson_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "handouts", :force => true do |t|
@@ -236,6 +256,16 @@ ActiveRecord::Schema.define(:version => 20131112135146) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "possible"
+  end
+
+  create_table "sources", :force => true do |t|
+    t.text     "name"
+    t.string   "date"
+    t.string   "link"
+    t.integer  "lesson_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "wikipedia"
   end
 
   create_table "student_profiles", :force => true do |t|

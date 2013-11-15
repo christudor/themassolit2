@@ -9,7 +9,9 @@ class Course < ActiveRecord::Base
   has_many :lessons, :order => 'title', :dependent => :destroy
   has_many :scores, :through => :lessons
   has_many :banners, :dependent => :destroy
-  
+  has_many :books, :through => :lessons
+  has_many :essays, :through => :lessons
+  has_many :sources, :through => :lessons
 
   def avatar_name
   	File.basename(avatar.path || avatar.filename) if avatar

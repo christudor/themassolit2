@@ -1,0 +1,21 @@
+<% provide(:title, 'Edit Essay') %>
+
+<div class="container">
+<h2>Edit Essay</h2>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @essay, :html => {:multipart => true} do |f| %>
+      <%= render 'shared/essay_error_messages' %>
+
+      <%= f.label :question, "Question:" %>
+      <%= f.text_area :question, :rows => 4 %>
+
+      <%= f.label :lesson_id, "Lesson:" %>
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
+
+      <%= f.submit "Update Essay", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>

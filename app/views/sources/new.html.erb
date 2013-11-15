@@ -1,0 +1,28 @@
+<% provide(:title, 'New Source') %>
+<h1>Add Source</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@source) do |f| %>
+
+      <%= f.label :name, "Name:" %>
+      <%= f.text_field :name %>
+
+      <%= f.label :date, "Date:" %>
+      <%= f.text_field :date %>
+
+	  <%= f.label :link, "Link to Original (if available)" %>
+      <%= f.text_field :link %>
+
+      <%= f.label :wikipedia, "Link to Wikipedia Article (if available)" %>
+      <%= f.text_field :wikipedia %>
+
+      <%= f.label :lesson_id, "Lesson:" %>
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
+
+      <center><%= f.submit "Add Source", class: "btn btn-large btn-primary" %></center>
+    <% end %>
+  </div>
+</div>
+
+

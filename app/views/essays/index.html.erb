@@ -1,0 +1,30 @@
+<% provide(:title, 'Essays Dashboard') %>
+<div class="container">
+<h1>Essays Dashboard</h1>
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Question</th>
+          <th>Module</th>
+          <th>Course</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @essays.each do |essay| %>
+    <tr>
+        <td><%= essay.question %></td>
+        <td><%= link_to essay.lesson.title, essay.lesson %></td>
+        <td><%= link_to essay.lesson.course.name, essay.lesson.course %></td>
+        <td><%= link_to("Edit Essay", edit_essay_path(essay), :class => 'btn btn-mini') %></td>
+        <td><%= link_to("Delete Essay", essay_path(essay), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+	<center><%= link_to "Add New Essay", new_essay_path, :class => "btn btn-large btn-primary" %></center>
+</div>

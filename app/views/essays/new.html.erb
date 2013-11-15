@@ -1,0 +1,19 @@
+<% provide(:title, 'New Essay') %>
+<h1>Add Essay</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@essay) do |f| %>
+
+      <%= f.label :question, "Question:" %>
+      <%= f.text_area :question, :rows => 4 %>
+
+      <%= f.label :lesson_id, "Lesson:" %>
+      <%= f.collection_select :lesson_id, Lesson.all, :id, :title, {}, { :multiple => false } %>
+
+      <center><%= f.submit "Add Essay", class: "btn btn-large btn-primary" %></center>
+    <% end %>
+  </div>
+</div>
+
+

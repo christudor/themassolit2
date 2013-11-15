@@ -14,9 +14,12 @@
       <%= f.label :title, "Title:" %>
       <%= f.text_field :title %>
 
+      <%= f.label :lessondescription, "Synopsis:" %>
+      <%= f.text_area :lessondescription, :rows => 3 %>
+
       <br>
       <br>
-      <center><%= f.submit "Add Module", class: "btn btn-large btn-primary" %></center>
+      <center><%= f.submit "Edit Module", class: "btn btn-large btn-primary" %></center>
     <% end %>
   </div>
 </div>

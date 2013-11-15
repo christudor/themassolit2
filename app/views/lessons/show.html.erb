@@ -2,13 +2,21 @@
 <% provide(:title, @lesson.title) %>
 
 <div class="container">
-<h1><%= @lesson.course.name %></h1>
+<h1><%= @lesson.title %></h1>
 </div>
 
 </div>
 <div class="container">
 <div class="span7">
-  <h2><%= @lesson.title %></h2>
+<% i = 1 %>
+
+  <h2><%= i %>. Watch Video</h2>
+
+<% i += 1 %>
+
+  <p class="body"><%= @lesson.lessondescription %>
+
+  <br><br>
 
   <% if @lesson.movies.empty? %>
     <% if current_subscriber.has_role? :admin %>
@@ -25,19 +33,115 @@
   </center>
   <% end %>
 
-  <br><br>
+  <br>
 
   <% unless @lesson.quiz == nil %>
-  <h2>Further Activities</h2>
- 
-  <p class="media">Once you have watched the video, check how much you learned by taking a short test. This test has <%= @lesson.quiz.questions.count %> questions, and should take no longer than 5 minutes to complete.</p>
-  <p class="body">
-    <strong>Please note: you can take the test as many times as you like, but only your first score will be counted.</strong></p>
-  <br>
-  <center>
-    <%= link_to "Take Test", quiz_path(@lesson.quiz), :class => "btn btn-large btn-primary" %>
-  <center>
+
+  <h2><%= i %>. Take Test</h2>
+  <% i += 1 %>
+  
+    <p class="body">
+      Once you have watched the video, see how much you remember by <%= link_to "taking the test", quiz_path(@lesson.quiz), :target => "_blank" %>. Remember, you can watch the video as many times as you like if you are unsure of any of the answers. [Test will open in new tab or window]
+    <p class="body">
+    <strong>
+      Please note: you can take the test as many times as you like, but only your first score will be counted.
+    </strong>
+    <br>
+    <center>
+      <%= link_to "Take Test!", @lesson.quiz, :target => "_blank", :class => "btn btn-large btn-primary" %>
+    </center>
+  <br><br>
   <% end %>
+
+
+
+  <% unless @lesson.sources.count == 0 %>
+
+    <h2><%= i %>. Primary Sources</h2>
+    <% i += 1 %>
+      <p class="body">The following sources were mentioned in this module:</p>
+      
+      <ul class="courselist">
+      <% k=1 %>
+        <% @lesson.sources.each do |source| %>
+          <li>
+
+            <%= source.name %>
+            <% unless source.link.empty? %>
+              <%= link_to "[Read Online]", source.link, :target => "_blank" %>
+            <% end %>
+            
+            <% unless source.wikipedia.empty? %>
+              <%= link_to "[Wikipedia]", source.wikipedia, :target => "_blank" %>
+            <% end %>
+
+          </li>
+
+        <% end %>
+      </ul>
+
+  <br><br>
+  <% end %>
+
+  <% unless @lesson.books.count == 0 %>
+
+    <h2><%= i %>. Further Reading</h2>
+    <% i += 1 %>
+      <p class="body">If you want to learn more about this topic, you may find the following items useful:</p>
+      
+      <ul class="courselist">
+      <% k=1 %>
+        <% @lesson.books.each do |book| %>
+          <li>
+
+            <% unless book.section.empty? %>
+              <%= book.section %> of
+            <% end %>
+
+            <%= book.author %>, <em><%= book.title %></em> (<%= book.publication_date %>) 
+
+            
+            <% unless book.comment.empty? && book.perseus.empty? && book.amazon.empty? %>
+            <%= link_to "[More details]", 'javascript:;', 
+            :data => {:toggle => "collapse", :target => "#collapse_#{k}"} %>
+
+            <div id="collapse_<%= k %>" class="collapse">
+              <ul class="unstyled">
+                <% unless book.comment.empty? %>
+                  <li><%= book.comment %></li>
+                <% end %>
+                <% unless book.perseus.empty? %>
+                  <li><%= link_to "Read this book online", book.perseus, :target => "_blank" %></li>
+                <% end %>
+                <% unless book.amazon.empty? %>
+                  <li><%= link_to "Buy this book", book.amazon, :target => "_blank" %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+            <% k+= 1 %>
+
+          </li>
+
+
+        <% end %>
+      </ul>
+  <br><br>
+  <% end %>
+
+  <% unless @lesson.essays.count == 0 %>
+
+  <h2><%= i %>. Discussion Questions</h2>
+
+  <ul class="courselist">
+        
+        <% @lesson.essays.each do |essay| %>
+          <li><%= essay.question %></li>
+        <% end %>
+  </ul>
+
+  <% end %>
+
 
 </div>
 
@@ -51,11 +155,11 @@
   <li><i class="icon-chevron-left"></i> <%= link_to "Return to course overview", @lesson.course %></li>
   <% if @lesson == @lesson.course.lessons.first %>
   <% else %>
-    <li><i class="icon-chevron-left"></i> <%= link_to "Previous module", lesson_path(@prev) %></li>
+    <li><i class="icon-chevron-left"></i> <%= link_to "Go to previous module", lesson_path(@prev) %></li>
   <% end %>
   <% if @lesson == @lesson.course.lessons.last %>
   <% else %>
-    <li><i class="icon-chevron-right"></i> <%= link_to "Next module", lesson_path(@next) %></li>
+    <li><i class="icon-chevron-right"></i> <%= link_to "Go to next module", lesson_path(@next) %></li>
   <% end %>
   </ul>  
 
