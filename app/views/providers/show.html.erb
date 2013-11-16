@@ -38,7 +38,7 @@
 
 <br><br>
 
-  <h2>Social Media</h2>
+  <h2>Elsewhere on the Web</h2>
   <ul class="courselist">
   	<% unless @provider.facebook.empty? %>
   		<li><i class="fi-social-facebook"></i> <%= @provider.facebook %></li>
@@ -47,10 +47,10 @@
     	<li><i class="fi-social-twitter"></i> <%= link_to "@#{@provider.twitter}", "http://www.twitter.com/#{@provider.twitter}", :target => "_blank" %> </li>
     <% end %>
     <% unless @provider.blog.empty? %>
-    	<li><i class="icon-pencil"></i> <%= link_to "Personal Blog", @provider.blog, :target => "_blank" %> </li>
+    	<li><i class="icon-pencil"></i> <%= link_to "Blog", @provider.blog, :target => "_blank" %> </li>
     <% end %>
     <% unless @provider.huffpo.empty? %>
-    	<li><i class="icon-comment"></i> <%= link_to "HuffPo Profile", @provider.huffpo, :target => "_blank" %> </li>
+    	<li><i class="icon-comment"></i> <%= link_to "Huffington Post", @provider.huffpo, :target => "_blank" %> </li>
     <% end %>
     <% unless @provider.academiaedu.empty? %>
     	<li><i class="icon-book"></i> <%= link_to "Academia.edu", @provider.academiaedu, :target => "_blank" %> </li>
