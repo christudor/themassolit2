@@ -47,9 +47,15 @@
       Please note: you can take the test as many times as you like, but only your first score will be counted.
     </strong>
     <br>
+    <% if @sub_scores.count == 0 %>
     <center>
-      <%= link_to "Take Test!", @lesson.quiz, :target => "_blank", :class => "btn btn-large btn-primary" %>
+      <%= link_to "Take Test", @lesson.quiz, :target => "_blank", :class => "btn btn-large btn-primary" %>
     </center>
+    <% else %>
+    <center>
+      <%= link_to "Retake Test", @lesson.quiz, :target => "_blank", :class => "btn btn-large btn-primary" %>
+    </center>
+    <% end %>
   <br><br>
   <% end %>
 
