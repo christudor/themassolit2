@@ -97,6 +97,10 @@
               <em><%= source.fulltext.html_safe %></em>
               <br><br>
               <p class="text-right"><%= source.reference %></p>
+              <% if current_subscriber.has_role? :admin %>
+              <%= link_to "Edit Source", edit_source_path(source) %>
+              <% else %>
+              <% end %>
               </div>
             </div>
 
