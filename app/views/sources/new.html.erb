@@ -11,7 +11,19 @@
       <%= f.label :date, "Date:" %>
       <%= f.text_field :date %>
 
-	  <%= f.label :link, "Link to Original (if available)" %>
+      <%= f.label :fulltext, "Quote:" %>
+      <%= f.text_area :fulltext, :rows => 4 %>
+
+      <br>
+
+      <p class="body">Note: quotes can have embedded HTML, e.g. <code>&lt;br&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, etc. Remember that one <code>&lt;br&gt;</code> tag renders a new line, two <code>&lt;br&gt;</code> tags render a new paragraph.
+      
+      <br><br>
+
+      <%= f.label :reference, "Reference:" %>
+      <%= f.text_field :reference %>
+
+	    <%= f.label :link, "Link to Original (if available)" %>
       <%= f.text_field :link %>
 
       <%= f.label :wikipedia, "Link to Wikipedia Article (if available)" %>

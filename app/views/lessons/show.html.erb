@@ -72,12 +72,38 @@
           <li>
 
             <%= source.name %>
+
+            <% unless source.fulltext == nil %>
+              <% unless source.fulltext.empty? %>
+                
+                <%= link_to "[Read]", 'javascript:;',
+                :data => {:toggle => "collapse", :target => "#collapse_#{k}"}  %>
+
+            <% end %>
+            <% end %>
+
             <% unless source.link.empty? %>
-              <%= link_to "[Read Online]", source.link, :target => "_blank" %>
+              <%= link_to "[Full Text]", source.link, :target => "_blank" %>
             <% end %>
             
             <% unless source.wikipedia.empty? %>
               <%= link_to "[Wikipedia]", source.wikipedia, :target => "_blank" %>
+            <% end %>
+
+            <% unless source.fulltext == nil %>
+            <% unless source.fulltext.empty? %>
+
+            <div id="collapse_<%= k %>" class="collapse">
+              <div class="span6">
+              <% k+= 1 %>
+              <br>
+              <em><%= source.fulltext.html_safe %></em>
+              <br><br>
+              <p class="text-right"><%= source.reference %></p>
+              </div>
+            </div>
+
+            <% end %>
             <% end %>
 
           </li>
@@ -109,6 +135,7 @@
 
         <% end %>
       </ul>
+
   <br><br>
   <% end %>
 

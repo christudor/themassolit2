@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115150948) do
+ActiveRecord::Schema.define(:version => 20131118021437) do
 
   create_table "a_levels", :force => true do |t|
     t.string   "board"
@@ -266,6 +266,8 @@ ActiveRecord::Schema.define(:version => 20131115150948) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "wikipedia"
+    t.text     "fulltext"
+    t.text     "reference"
   end
 
   create_table "student_profiles", :force => true do |t|
