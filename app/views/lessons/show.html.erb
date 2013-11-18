@@ -73,13 +73,13 @@
 
             <%= source.name %>
 
-            <% unless source.fulltext == nil %>
-              <% unless source.fulltext.empty? %>
+            <% if source.fulltext == nil %>
+            <% elsif source.fulltext.empty? %>
+            <% else %>
                 
                 <%= link_to "[Read]", 'javascript:;',
                 :data => {:toggle => "collapse", :target => "#collapse_#{k}"}  %>
 
-            <% end %>
             <% end %>
 
             <% unless source.link.empty? %>
@@ -90,8 +90,9 @@
               <%= link_to "[Wikipedia]", source.wikipedia, :target => "_blank" %>
             <% end %>
 
-            <% unless source.fulltext == nil %>
-            <% unless source.fulltext.empty? %>
+            <% if source.fulltext == nil %>
+            <% elsif source.fulltext.empty? %>
+            <% else %>
 
             <div id="collapse_<%= k %>" class="collapse">
               <div class="span6">
@@ -103,7 +104,6 @@
               </div>
             </div>
 
-            <% end %>
             <% end %>
 
           </li>
