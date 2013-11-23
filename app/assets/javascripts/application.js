@@ -16,6 +16,8 @@
 //= require_tree .
 //= require jquery.readyselector
 //= require jquery.externalscript
+//= require jwplayer
+//= require jwplayer.html5
 
 $('.dropdown-toggle').click(function(e) {
   e.preventDefault();
