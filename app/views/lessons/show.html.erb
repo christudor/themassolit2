@@ -30,18 +30,19 @@
   <% else %>
   <div id="myElement">Loading the player ...</div>
   <script type='text/javascript'>
-    jwplayer('myElement').setup({
+    jwplayer("myElement").setup({
         file: "<%= @lesson.movies.first.movie %>",
         title: "<%= @lesson.title %>",
         width: '100%',
         aspectratio: '16:9',
         fallback: 'false',
         primary: 'flash'
-    });
+        });
   </script>
   <% end %>
 
   <%# For background image, use image: 'IMAGE URL' #%>
+  <%# primary: 'flash' %>
 
   <br>
   <br>
