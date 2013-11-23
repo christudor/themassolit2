@@ -28,11 +28,10 @@
       <p class="body">There is not currently a video associated with this module.</p>
     <% end %>
   <% else %>
-  <div id='playerrvNUyBdzNPIK'></div>
+  <div id="myElement">Loading the player ...</div>
   <script type='text/javascript'>
-    jwplayer('playerrvNUyBdzNPIK').setup({
+    jwplayer('myElement').setup({
         file: "<%= @lesson.movies.first.movie %>",
-
         title: "<%= @lesson.title %>",
         width: '100%',
         aspectratio: '16:9',
