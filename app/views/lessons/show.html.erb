@@ -28,11 +28,23 @@
       <p class="body">There is not currently a video associated with this module.</p>
     <% end %>
   <% else %>
-  <center>
-    <%= video_tag @lesson.movies.first.movie, :size => "600x338", :controls => true %>
-  </center>
+  <div id='playerrvNUyBdzNPIK'></div>
+  <script type='text/javascript'>
+    jwplayer('playerrvNUyBdzNPIK').setup({
+        file: "<%= @lesson.movies.first.movie %>",
+
+        title: "<%= @lesson.title %>",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+    });
+  </script>
   <% end %>
 
+  <%# For background image, use image: 'IMAGE URL' #%>
+
+  <br>
   <br>
 
   <% unless @lesson.quiz == nil %>
