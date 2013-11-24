@@ -51,7 +51,7 @@
               <br>
               No tests have been completed so far.
             <% else %>
-              <%= scores.count { |x| x != nil } %> out of <%= course.lessons.count %> tests completed, with an average score of <%= average_percentage %>%.
+              <%= scores.count { |x| x != nil } %> out of <%= course.lessons.count %> tests completed, with an average score of <%= number_with_precision average_percentage, :precision => 0 %>%.
             <% end %>
           </p>
       
