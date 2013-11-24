@@ -14,11 +14,11 @@ class Lesson < ActiveRecord::Base
   has_many :scores, :through => :quiz
 
     def previous
-      Lesson.where("course_id = ? AND id < ?", self.course.id, self.id).order(title: :desc).first
+      Lesson.where("course_id = ? AND id < ?", self.course.id, self.id).order("title DESC").first
     end
 
     def next
-      Lesson.where("course_id = ? AND id > ?", self.course.id, self.id).order(title: :desc).first
+      Lesson.where("course_id = ? AND id > ?", self.course.id, self.id).order("title ASC").first
     end
 
 end
