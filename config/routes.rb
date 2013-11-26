@@ -50,6 +50,7 @@ Massolit::Application.routes.draw do
   resources :books
   resources :essays
   resources :sources
+  resources :trailers
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -82,6 +83,7 @@ Massolit::Application.routes.draw do
   match '/addmovie',      to: 'movies#addmovie'
   match '/addbanner',     to: 'banners#addbanner'
   match '/addbook',       to: 'books#addbook'
+  match '/addtrailer',    to: 'trailers#addtrailer'
 
   match '/check', to: 'quizzes#check'
 

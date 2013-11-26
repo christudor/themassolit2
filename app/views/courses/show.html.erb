@@ -6,15 +6,54 @@
 </div>
 
 <div class="container">
+
 <div class="span7">
+  
+  <% if @course.trailers.empty? %>
+    <% if subscriber_signed_in? %>
+      <% if current_subscriber.has_role? :admin %>
+        <center>
+        <h2>Watch the Trailer</h2>
+        <p class="body">There is not currently a trailer associated with this module.</p>
+        <%= link_to "Add Trailer", addtrailer_path, :class => "btn btn-large btn-primary" %>
+        </center>
+        <br><br>
+      <% else %>
+      <% end %>
+    <% else %>
+    <% end %>
+  <% else %>
+  <h2>Watch the Trailer</h2>
+  <div id="myElement">Loading the player ...</div>
+  <script type='text/javascript'>
+    jwplayer("myElement").setup({
+        file: "<%= @course.trailers.first.trailer %>",
+        title: "<%= @course.name %>",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+  </script>
+  <br><br>
+  <% end %>
+
+  
+
   <h2>About this Course</h2>
   <p class="media"><%= @course.description %></p>
+
   <br><br>
+  
   <h2>About <%= @course.provider.name %></h2>
   <p class="media"><%= @course.provider.bio %></p>
+
   <br><br>
+  
   <center><p class="courselist"><i class="icon-chevron-left"></i> <%= link_to "Return to course index", courses_path %></p></center>
+
 </div>
+
 <div class="span3 offset1">
   <h2>Key Information</h2>
   <ul class="courselist">
