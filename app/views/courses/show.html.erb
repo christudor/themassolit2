@@ -25,6 +25,7 @@
   <% else %>
   <h2>Watch the Trailer</h2>
   <div id="myElement">Loading the player ...</div>
+  
   <script type='text/javascript'>
     jwplayer("myElement").setup({
         file: "<%= @course.trailers.first.trailer %>",
@@ -35,6 +36,7 @@
         primary: 'flash'
         });
   </script>
+  
   <br><br>
   <% end %>
 

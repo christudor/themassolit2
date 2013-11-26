@@ -4,7 +4,7 @@ class Course < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   has_many :relationships
-  has_many :students, through: :reverse_relationships, source: :student
+  has_many :students, through: :relationships, source: :student
 
   has_many :lessons, :order => 'title', :dependent => :destroy
   has_many :scores, :through => :lessons
