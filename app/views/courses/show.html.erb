@@ -75,7 +75,7 @@
 
   <% if subscriber_signed_in? %>
     <% if current_subscriber.studying?(@course) %>
-    <h2>Lecture Quick Links</h2>
+    <h2>Module Quick Links</h2>
       <ul class="courselist">
       <% @course.lessons.each do |lesson| %>
       <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>

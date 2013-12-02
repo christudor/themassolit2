@@ -8,7 +8,7 @@
   <%= f.error_notification %>
   <%= display_base_errors resource %>
 
-  <%= f.input :school_id, :label => "School", :collection => School.all, :selected => School.first %>
+  <%= f.input :school_id, :label => "School:", :collection => School.all, :selected => School.first, :disabled => true, :hint => "While we are in beta mode, please use 'Test School' as your school. A full school list will be added soon." %>
   <%= f.input :name, :label => "Name:", :autofocus => true %>
   <%= f.input :email, :label => "E-Mail Address:", :required => true %>
   <%= f.input :password, :label => "Password:", :required => true %>

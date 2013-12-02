@@ -172,17 +172,16 @@
 
 <div class="span3 offset1">
   
-  <h2>Navigation</h2>
+  <h2>Module Quick Links</h2>
   <ul class="courselist">
-  <li><i class="icon-chevron-left"></i> <%= link_to "Return to course overview", @lesson.course %></li>
-  <% if @lesson == @lesson.course.lessons.first %>
-  <% else %>
-    <li><i class="icon-chevron-left"></i> <%= link_to "Go to previous module", lesson_path(@prev) %></li>
-  <% end %>
-  <% if @lesson == @lesson.course.lessons.last %>
-  <% else %>
-    <li><i class="icon-chevron-right"></i> <%= link_to "Go to next module", lesson_path(@next) %></li>
-  <% end %>
+      <ul class="courselist">
+      <% @lesson.course.lessons.each do |lesson| %>
+      <% if @lesson.id == lesson.id %>
+      <li><i class="icon-facetime-video"></i> <%= lesson.title %></li>
+      <% else %>
+      <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
+      <% end %>
+      <% end %>
   </ul>  
 
   <br><br>

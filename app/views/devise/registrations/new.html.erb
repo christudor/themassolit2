@@ -6,9 +6,11 @@
 <h1><%= "#{heading_type.titleize} Sign Up" %></h1>
 
 <% if heading_type == 'student' %>
-  <small><center>Not a student? If you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %></small></center>
+  <center>Not a student? If you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %></center>
+ <br><br>
 <% elsif heading_type == 'teacher' %>
-  <small><center>Not a teacher? If you're a student, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'student') %></small></center>
+  <center>Not a teacher? If you're a student, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'student') %></center>
+<br><br>
 <% else %>
 <% end %>
 <% if user_type == 'gold' %>
