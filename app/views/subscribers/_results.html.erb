@@ -1,0 +1,94 @@
+  <h2>Test Scores</h2>
+
+   <ul class="courselist">
+  	<% k=0 %>
+
+    <% if @courses.any? %>
+	 	<% @courses.each do |course| %>
+	  	<li>
+       		<div class="media"><div class="pull-left">
+       		<%= image_tag course.avatar_url.to_s, :size => "135x135" %>
+       		</div>
+	    
+	   		<div class="span5">
+       		<h4 class="media-heading"><%= link_to course.name, course %></h4>
+      		
+          <% #First, we create the empty array 'scores'. This array will be used to store the first result for each test (since subsequent test results are ignored). %>
+
+          <% scores = [] %>
+
+          <% scores2 = course.scores.where(:subscriber_id => @subscriber.id) %>
+          
+          <% course.lessons.each do |lesson| %>
+              <% scores << scores2.where(:quiz_id => lesson.quiz.id).first unless lesson.quiz == nil %>
+          <% end %>
+
+          <% #In order to calculate the average percentage, it would be useful to create another array which stores only the percentages... %>
+ 
+          <% percentages = [] %>
+          <% scores.each do |score| %>
+            <% percentages << score.percentage unless score == nil %>
+          <% end %>
+
+          <% #Finally, we create the variable 'average_percentage', which should give us the average across all tests attempted. %>
+          
+          <% average_percentage = percentages.inject{ |sum, el| sum + el }.to_f / percentages.size %>
+
+          <% # The 'scores' array with include 'nil' if no score has been recorded. When it comes to countin the number of tests completing, therefore, we must exclude 'nils', which is what we are doing with { |x| x != nil } below.  If no tests has been completed (i.e. if the 'scores' array is full of 'nils') we have a specific message saying that the user has not completed any tests yet, and we don't try to provide an average score. %>
+
+          <br>
+
+          <p class="body">
+            <% if scores.count { |x| x != nil } == 0 %>
+                            No tests have been completed so far.
+            <% else %>
+              <%= scores.count { |x| x != nil } %> out of <%= course.lessons.count %> tests completed, with an average score of <%= number_with_precision average_percentage, :precision => 0 %>%.
+            <% end %>
+          </p>
+      
+          <% # We want to create a button which will expand to reveal more details about the user's test results. However, we don't want all buttons expanding and collapsing all sections, so we need to have dynamically named 'divs', and a button which only applies to those 'divs'. Both are dynamically named using Rails. %>          
+
+          <%= submit_tag "More Details", :class => "btn btn-large btn-primary",
+            :data => {:toggle => "collapse", :target => "#collapse_#{k}"} %>
+
+          <div id="collapse_<%= k %>" class="collapse">
+
+          <% k+= 1 %>
+
+          <% # With course average taken care of, we can move onto individual test results. First, we set the variable i, which will be used to number the lessons. %>
+
+      		<% i=1 %>
+          
+          <br>
+          <p class="body"><strong>Individual Test Results</strong></p>
+
+			    <% course.lessons.each do |lesson| %>
+      		<p class="body">Test <%= i %>:
+  	
+          <% # For each lesson, there are three options. First ('if'), there might might no test attached to the module. If that's the case ('lesson.quiz == nil'), we tell the user that no test exists. Secondly ('elsif'), there might be a test for which a score exists for that user. In that case, we simply present the score. If neither of these conditions are true (i.e. a test exists but there is no score attached to it), we assume that the test has not been taken yet. %>
+
+  			   	<% if lesson.quiz == nil %>
+              No test for this module.
+              <% i+= 1 %>
+            <% elsif @subscriber.scores.where(:quiz_id => lesson.quiz.id).any? %>
+              <%= @subscriber.scores.where(:quiz_id => lesson.quiz.id).first.score %> out of
+              <%= @subscriber.scores.where(:quiz_id => lesson.quiz.id).first.possible %>
+              (<%= @subscriber.scores.where(:quiz_id => lesson.quiz.id).first.percentage %>%)
+              <% i+= 1 %>
+            <% else %>
+              Test not yet attempted.
+  		    	  <% i+= 1 %>
+  				  <% end %>
+
+      		<% end %>
+
+          </div>
+          
+          
+	    <% end %>
+	
+	<% else %>
+	  	<p class="body"><%= @subscriber.name %> is not studying any courses... yet.</p>
+	<% end %>
+	</li>
+	</ul>

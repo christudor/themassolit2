@@ -92,11 +92,11 @@
 
             <% end %>
 
-            <% unless source.link.empty? %>
+            <% unless source.link.blank? %>
               <%= link_to "[Full Text]", source.link, :target => "_blank" %>
             <% end %>
             
-            <% unless source.wikipedia.empty? %>
+            <% unless source.wikipedia.blank? %>
               <%= link_to "[Wikipedia]", source.wikipedia, :target => "_blank" %>
             <% end %>
 
@@ -136,7 +136,7 @@
         <% @lesson.books.each do |book| %>
           <li>
 
-            <% unless book.section.empty? %>
+            <% unless book.section.blank? %>
               <%= book.section %> of
             <% end %>
 
@@ -151,7 +151,7 @@
   <br><br>
   <% end %>
 
-  <% unless @lesson.essays.count == 0 %>
+  <% unless @lesson.essays.blank? %>
 
   <h2><%= i %>. Discussion Questions</h2>
 
@@ -200,18 +200,17 @@
 
   <br><br>
 
-  <% unless @lesson.quiz == nil %>
+  <% unless @lesson.quiz.blank? %>
     <h2>Test Score</h2>
       
-      <% if @sub_scores.count == 0 %>
-      
+      <% if @sub_scores.blank? %>
         <p class="body">You have not taken the test yet.</p>
       <% else %>
-        <% i = 0 %>
+        <% k = 0 %>
           <% current_subscriber.scores.each do |score| %>
-            <% if score.quiz.id == @lesson.quiz.id && score.subscriber_id == current_subscriber.id && i<1 %>
+            <% if score.quiz.id == @lesson.quiz.id && score.subscriber_id == current_subscriber.id && k<1 %>
               <p>You scored <%= score.score %> out of <%= score.possible %> (<%= score.percentage %>%)</p>
-              <% i += 1 %>
+              <% k += 1 %>
             <% else %>
             <% end %>
       <% end %>
@@ -221,3 +220,4 @@
 
 </div>
 </div>
+

@@ -135,7 +135,11 @@ GEM
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.3.4.1)
     i18n (0.6.1)
+    impressionist (1.4.13)
+      httpclient (~> 2.2)
+      nokogiri (>= 1.5.0)
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -309,6 +313,7 @@ DEPENDENCIES
   foundation-icons-sass-rails
   guard-rspec (= 1.2.1)
   guard-spork (= 1.2.0)
+  impressionist
   jquery-rails (= 2.0.2)
   launchy (= 2.1.2)
   mime-types

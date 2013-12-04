@@ -35,6 +35,7 @@ gem 'sidekiq'
 gem 'fog', '~> 1.3.1'
 gem 'mime-types'
 gem 'aws-sdk', '~> 1.5.7'
+gem 'impressionist'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

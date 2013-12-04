@@ -16,6 +16,9 @@
 //= require_tree .
 //= require jquery.readyselector
 //= require jquery.externalscript
+//= require raphael
+//= require morris
+
 
 $('.dropdown-toggle').click(function(e) {
   e.preventDefault();
