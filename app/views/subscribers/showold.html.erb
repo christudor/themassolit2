@@ -93,36 +93,7 @@
 
           </div>
           
-          <%# Table version of results %>
-
-          <table class="table table-condensed">
-          <thead>
-            <tr>
-                <th>Module</th>
-                <th>Test Score</th>
-                <th>Date Completed</th>
-            </tr>
-        </thead>
-        <tbody>
-        <% course.lessons.each do |lesson| %>
-          <tr>
-              <td><%= link_to lesson.title, lesson %></td>
-              <td>
-                <% if lesson.quiz == nil %>
-                NA
-                <% elsif @subscriber.scores.where(:quiz_id => lesson.quiz.id).any? %>
-                <%= @subscriber.scores.where(:quiz_id => lesson.quiz.id).first.percentage %>%
-            <% else %>
-                NA
-            <% end %>
-
-              </td>
-              <td><%= lesson.created_at.to_date %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-
+          
 	    <% end %>
 	
 	<% else %>
