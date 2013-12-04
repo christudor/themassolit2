@@ -6,7 +6,7 @@
     <thead>
       <tr>
           <th>Course</th>
-          <th>Test</th>
+          <th>Module</th>
           <th>User</th>
           <th>Score</th>
           <th>Out Of</th>
@@ -16,12 +16,12 @@
   <tbody>
   <% @scores.each do |score| %>
     <tr>
-        <td><%= score.quiz.lesson.course.name unless score.quiz.blank? %></td>
-        <td><%= score.quiz.lesson.title unless score.quiz.blank? %></td>
-        <td><%#= Subscriber.find(score.subscriber_id).name %></td>
+        <td><%= link_to score.quiz.lesson.course.name, score.quiz.lesson.course unless Quiz.find_by_id(score.quiz).blank? %></td>
+        <td><%= link_to score.quiz.lesson.title, score.quiz.lesson unless Quiz.find_by_id(score.quiz).blank?  %></td>
+        <td><%= link_to Subscriber.find(score.subscriber_id).name, Subscriber.find(score.subscriber_id) %></td>
         <td><%= score.score unless score.score.blank? %></td>
         <td><%= score.possible unless score.possible.blank? %></td>
-        <td><%= score.percentage unless.score.percentage.blank? %>%</td>
+        <td><%= score.percentage unless score.percentage.blank? %>%</td>
         <td><%= link_to("Delete Score", score_path(score), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
     </tr>
   <% end %>
