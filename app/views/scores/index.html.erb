@@ -6,8 +6,8 @@
     <thead>
       <tr>
           <th>Course</th>
-          <th>Module</th>
-          <th>User</th>
+          <th>Quiz ID</th>
+          <th>User ID</th>
           <th>Score</th>
           <th>Out Of</th>
           <th>Percentage</th>
@@ -16,9 +16,9 @@
   <tbody>
   <% @scores.each do |score| %>
     <tr>
-        <td><%= link_to score.quiz.lesson.course.name, score.quiz.lesson.course unless Quiz.find_by_id(score.quiz).blank? %></td>
-        <td><%= link_to score.quiz.lesson.title, score.quiz.lesson unless Quiz.find_by_id(score.quiz).blank?  %></td>
-        <td><%= link_to Subscriber.find(score.subscriber_id).name, Subscriber.find(score.subscriber_id) unless Subscriber.find(score.subscriber_id).blank? %></td>
+        <td>Defunct</td>
+        <td><%= score.quiz_id %></td>
+        <td><%= score.subscriber_id %></td>
         <td><%= score.score unless score.score.blank? %></td>
         <td><%= score.possible unless score.possible.blank? %></td>
         <td><%= score.percentage unless score.percentage.blank? %>%</td>
