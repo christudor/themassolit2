@@ -15,7 +15,7 @@ class Subscriber < ActiveRecord::Base
   validates_uniqueness_of :email, :case_sensitive => false
 
   belongs_to :school
-  has_many :relationships, foreign_key: "student_id", dependent: :destroy
+  has_many :relationships, foreign_key: "student_id"
   has_many :studied_courses, through: :relationships, source: :course
   has_many :scores
   has_many :quizzes, :through => :scores

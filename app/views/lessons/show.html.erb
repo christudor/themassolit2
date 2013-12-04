@@ -208,11 +208,22 @@
       <% else %>
         <% k = 0 %>
           <% current_subscriber.scores.each do |score| %>
+
+          <% unless score.quiz.blank? %>
+          <% unless @lesson.quiz.blank? %>
+          <% unless score.subscriber_id.blank? %>
+
             <% if score.quiz.id == @lesson.quiz.id && score.subscriber_id == current_subscriber.id && k<1 %>
               <p>You scored <%= score.score %> out of <%= score.possible %> (<%= score.percentage %>%)</p>
               <% k += 1 %>
             <% else %>
             <% end %>
+
+          <% end %>
+          <% end %>
+          <% end %>
+
+
       <% end %>
     <% end %>
   <% end %>
