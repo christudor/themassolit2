@@ -1,0 +1,92 @@
+<% provide(:title, 'Sample Lectures') %>
+
+<div class="container">
+  
+    <div class="featurette">
+    <h2 class="featurette-heading">Seneca and Early Modern Drama</h2>
+      <p class="lead">Dr Helen Slaney is a Lecturer at St Hilda's College, Oxford. Her course on Seneca and Early Modern Drama examines the influence of the Roman tragic poet on the English playwrights of the 16th and 17th centuries, including Marlowe, Shakespeare, and Jonson.
+      <p class="lead"><strong>In this section, Helen discusses two of the most famous representatives of 'Senecan' drama on the early modern stage: Marlowe's 'Tamburlaine the Great' and Kyd's 'The Spanish Tragedy'</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(99).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video2">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video2").setup({
+        file: "<%= Lesson.find_by_id(36).movies.first.movie %>",
+        title: "Helen Slaney on Early Modern Theatre",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
+
+  <div class="featurette">
+    <h2 class="featurette-heading">The Aeneid</h2>
+      <p class="lead">Dr Llewelyn Morgan is a Tutorial Fellow in Classics at Brasenose College, Oxford. His course on the Aeneid covers six key themes across the epic poem, including Women and the Gods.
+      <p class="lead"><strong> In this section, Llewelyn talks about the importance of cities in the Aeneid.</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(15).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video2">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video2").setup({
+        file: "<%= Lesson.find_by_id(15).movies.first.movie %>",
+        title: "Llewelyn Morgan on the Aeneid",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
+
+    <div class="featurette">
+    <h2 class="featurette-heading">The Eastern Front in World War I</h2>
+      <p class="lead">Denis Clark is a final-year DPhil student at Jesus College, Oxford. In this course, Denis looks at the First World War in what might be considered the primary theatre of war - Eastern Europe - from the assassination of Archduke Franz Ferdinand to the Russian Revolution of 1917... and beyond!</p>
+      <p class="lead"><strong>In this section, Denis discusses the Russian Revolution and the impact on Russian war efforts against the German Empire.</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(99).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video2">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video2").setup({
+        file: "<%= Lesson.find_by_id(50).movies.first.movie %>",
+        title: "Denis Clark on The Eastern Front",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
+
+</div>

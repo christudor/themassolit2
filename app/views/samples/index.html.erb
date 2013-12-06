@@ -1,0 +1,36 @@
+<% provide(:title, 'Samples Dashboard') %>
+<div class="container">
+<h1>Samples Dashboard</h1>
+
+<div class="alert alert-error">
+  <strong>Heads up:</strong> Please only use this dashboard for deleting samples that are no longer needed. Editing records screws up the link with Amazon S3.
+</div>
+
+<div class="span12">
+<table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Sample Name</th>
+          <th>Course</th>
+          <th>Provider</th>
+          <th>Date Added</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @samples.each do |sample| %>
+    <tr>
+        <td><%= link_to sample.name, sample %></td>
+        <td><%= link_to sample.course.name, sample.course.name %></td>
+        <td><%= link_to sample.course.provider.name, sample.course.provider %></td>
+        <td><%= sample.created_at.to_date %></td>
+        <td><%= link_to("Delete Sample", sample_path(sample), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="container">
+  <center><%= link_to "Add New Sample", addsample_path, :class => "btn btn-large btn-primary" %></center>
+</div>

@@ -13,6 +13,7 @@ class Course < ActiveRecord::Base
   has_many :essays, :through => :lessons
   has_many :sources, :through => :lessons
   has_many :trailers
+  has_many :samples
 
   def avatar_name
   	File.basename(avatar.path || avatar.filename) if avatar

@@ -1,38 +1,62 @@
-<% provide(:title, 'Welcome') %>
-
-</div>
+<% provide(:title, 'Online lectures in the humanities') %>
 
 <div class="container">
   
   <div class="featurette">
-    <h2 class="featurette-heading">Welcome to MASSOLIT</h2>
-      <p class="lead">We are the first online education platform that specialises in the humanities. You can find everything here - from literature to history, philosophy to politics, and much, much more. 
-        <%= link_to "Browse our courses", courses_path %>
+    <h2 class="featurette-heading">What is MASSOLIT?</h2>
+      <p class="lead">We provide online lectures in the humanities, designed specifically for schools by academics from the world's very best universities. Want to find out more? <%= link_to "See our sample lectures", samplecourses_path %> or <%= link_to "browse our courses", courses_path %>
       <br>
+
+      <% unless Lesson.find_by_id(15).blank? %>
+      <div id="sample-video">
+        <div id="sample-video2">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video2").setup({
+        file: "<%= Lesson.find_by_id(15).movies.first.movie unless Lesson.find_by_id(15).movies.first.movie.blank? %>",
+        title: "Llewelyn Morgan on the Aeneid",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
     </div>
+  <div class="featurette">
+    <h2 class="featurette-heading">From A(belard) to Z(oraster)</h2>
+      <p class="lead">
+      Our lectures cover a huge range of subjects, including English Literature, History, Classics, Philosophy, and Modern Languages. We cover the subjects that matter to students and teachers: Shakespeare, The French Revolution, Frankenstein ... <%= link_to "and much, much more!", courses_path %>
+      <br>
 
 
   <div class="featurette">
-    <h2 class="featurette-heading">Go beyond the syllabus...</h2>
-      <p class="lead">Our content has been designed to help students make that first step towards higher education. Content is wider ranging, and delivered in a lecture format - just as would be the case at university.
+    <h2 class="featurette-heading">"O brave new world..."</h2>
+      <p class="lead">
+      Our lectures can be used as part of classroom teaching... or by students in their own time... or both! Our lectures are accessible whenever and wherever you need them - on desktop, tablet, and mobile.
       <br>
 
     <div class="featurette">
-    <h2 class="featurette-heading">... and learn from the best</h2>
+    <h2 class="featurette-heading">"... That has such people in't!"</h2>
       <p class="lead">
-        All our courses are designed and presented by academics from the world's very best universities, including Oxford and Cambridge.
+      If something's worth doing, it's worth doing well. That's why we only work with academics from the very best universities in the country - including Oxford and Cambridge.
     </div>
 
   <div class="featurette">
     <h2 class="featurette-heading">Powerful analytics</h2>
-      <p class="lead">Schools that sign up to MASSOLIT gain access to our powerful analytics tools, which tell you how much your students are using the site and engaging with content. We're able to customise any part of our analytics package to suit your needs. If you're a teacher and want to find out more, <%= link_to "sign up", new_subscriber_registration_path(:job => 'teacher') %> or 
-      <%= link_to "get in touch!", "mailto:chris@massolit.co.uk?Subject=MASSOLIT: Tell Me More" %>
+      <p class="lead">Keep track of your learning like never before with our powerful analytics package - available for both students and teachers... for free!<br>
       <br>
   </div>
 
   <br>
   <center>
-  <%= link_to "Sign up now!", new_subscriber_registration_path(:job => 'student'), class: "btn btn-large btn-primary" %>
+  <%= link_to "Student Sign Up", new_subscriber_registration_path(:job => 'student'), class: "btn btn-large btn-primary" %>
+  <%= link_to "Teacher Sign Up", new_subscriber_registration_path(:job => 'teacher'), class: "btn btn-large btn-primary" %>
+
   </center>
 
 

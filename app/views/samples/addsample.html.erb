@@ -1,0 +1,16 @@
+<% provide(:title, 'Add Sample') %>
+<div class="container">
+	<h1>Add Sample (Stage 1 of 2)</h1>
+		<div class="span8 offset2">
+		<p class="body">Note: Samples are added in two stages. On this page, the sample itself uploaded to Amazon S3. On the next page (which you will be redirected to automatically) that sample is given a name and linked to a module.</p>
+		<br>
+
+		<center><h3>Sample Uploader</h3>
+		<br>
+		<%= direct_upload_form_for @sampleuploader do |f| %>
+        	<p><%= f.file_field :sample %></p>
+        	<p><%= f.submit "Upload sample", :class => "btn btn-large btn-primary" %></p>
+        <% end %>
+        </center>
+     </div>
+</div>

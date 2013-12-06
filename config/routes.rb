@@ -51,6 +51,7 @@ Massolit::Application.routes.draw do
   resources :essays
   resources :sources
   resources :trailers
+  resources :samples
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -72,18 +73,22 @@ Massolit::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
   match '/helpus',  to: 'static_pages#helpus'
   match '/faqs',    to: 'static_pages#faqs'
+  match '/samplecourses', to: 'static_pages#samples'
+
   match '/studentsplash', to: 'static_pages#studentsplash'
   match '/teachersplash', to: 'static_pages#teachersplash'
-  match '/addcourse', to: 'courses#addcourse'
-  match '/addlecture', to: 'lessons#addlecture'
-  match '/coursedash', to: 'courses#coursedash'
 
+  match '/coursedash',    to: 'courses#coursedash'
+ 
+  match '/addcourse',     to: 'courses#addcourse'
+  match '/addlecture',    to: 'lessons#addlecture'
   match '/addtranscript', to: 'transcripts#addtranscript'
   match '/addhandout',    to: 'handouts#addhandout'
   match '/addmovie',      to: 'movies#addmovie'
   match '/addbanner',     to: 'banners#addbanner'
   match '/addbook',       to: 'books#addbook'
   match '/addtrailer',    to: 'trailers#addtrailer'
+  match '/addsample',     to: 'samples#addsample'
 
   match '/check', to: 'quizzes#check'
 

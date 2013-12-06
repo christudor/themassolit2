@@ -17,4 +17,7 @@ class StaticPagesController < ApplicationController
   def faqs
   end
 
+  def samples
+  end
+
 end
