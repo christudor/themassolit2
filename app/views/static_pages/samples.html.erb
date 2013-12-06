@@ -1,7 +1,8 @@
 <% provide(:title, 'Sample Lectures') %>
 
 <div class="container">
-  
+    <h1>Sample Modules</h1>
+    <br>
     <div class="featurette">
     <h2 class="featurette-heading">Seneca and Early Modern Drama</h2>
       <p class="lead">Dr Helen Slaney is a Lecturer at St Hilda's College, Oxford. Her course on Seneca and Early Modern Drama examines the influence of the Roman tragic poet on the English playwrights of the 16th and 17th centuries, including Marlowe, Shakespeare, and Jonson.
@@ -12,10 +13,10 @@
       <center>Video coming soon!</center>
       <% else %>
       <div id="sample-video">
-        <div id="sample-video2">Loading the player ...</div>
+        <div id="sample-video1">Loading the player ...</div>
         
         <script type='text/javascript'>
-        jwplayer("sample-video2").setup({
+        jwplayer("sample-video1").setup({
         file: "<%= Lesson.find_by_id(36).movies.first.movie %>",
         title: "Helen Slaney on Early Modern Theatre",
         width: '100%',
@@ -70,10 +71,10 @@
       <center>Video coming soon!</center>
       <% else %>
       <div id="sample-video">
-        <div id="sample-video2">Loading the player ...</div>
+        <div id="sample-video3">Loading the player ...</div>
         
         <script type='text/javascript'>
-        jwplayer("sample-video2").setup({
+        jwplayer("sample-video3").setup({
         file: "<%= Lesson.find_by_id(50).movies.first.movie %>",
         title: "Denis Clark on The Eastern Front",
         width: '100%',
