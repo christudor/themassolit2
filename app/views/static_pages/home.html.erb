@@ -7,25 +7,6 @@
       <p class="lead">We provide online lectures in the humanities, designed specifically for schools by academics from the world's very best universities. Want to find out more? <%= link_to "See our sample lectures", samplecourses_path %> or <%= link_to "browse our courses", courses_path %>
       <br>
 
-      <% unless Lesson.find_by_id(15).blank? %>
-      <div id="sample-video">
-        <div id="sample-video2">Loading the player ...</div>
-        
-        <script type='text/javascript'>
-        jwplayer("sample-video2").setup({
-        file: "<%= Lesson.find_by_id(15).movies.first.movie unless Lesson.find_by_id(15).movies.first.movie.blank? %>",
-        title: "Llewelyn Morgan on the Aeneid",
-        width: '100%',
-        aspectratio: '16:9',
-        fallback: 'false',
-        primary: 'flash'
-        });
-        </script>
-      
-      </div>
-
-      <% end %>
-
     </div>
   <div class="featurette">
     <h2 class="featurette-heading">From A(belard) to Z(oraster)</h2>
