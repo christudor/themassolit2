@@ -65,14 +65,22 @@
 	    <div class="span7">
 	    	<h4 class="media-heading"><%= link_to course.name, course %></h4>
 	    	<p class="small"><%= truncate(course.description, :length => 350, :separator => ' ') %>
-        <%= link_to "Read more", course %>
+        <% if course.lessons.blank? %>
+          <strong>Coming Soon</strong>
+        <% else %>
+          <%= link_to "Read more", course %>
+        <% end %>
 	    </div>
       <div class="span2">
         <br><br>
         <p> <i class="icon-folder-open"></i>  <%= raw course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %> </p>
         <p> <i class="icon-user"></i> <%= link_to course.provider.name, course.provider %></p>
         <br>
-        <%= link_to "Go to course", course, :class => "btn btn-large btn-primary" %>
+        <% if course.lessons.blank? %>
+          <%= link_to "Coming Soon", "#", :class => "btn btn-large disabled" %>
+        <% else %>
+          <%= link_to "Go to Course", course, :class => "btn btn-large btn-primary" %>
+        <% end %>
       </div>
 	</div>
     </li>

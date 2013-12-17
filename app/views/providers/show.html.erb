@@ -32,13 +32,17 @@
   <h2>Courses</h2>
   <ul class="courselist">
   	<% @provider.courses.each do |course| %>
-  		<li><i class="icon-list"></i> <%= link_to course.name, course %>
+      <% if course.lessons.blank? %>
+        <li><i class="icon-list"></i> <%= course.name %>
+      <% else %>
+  		  <li><i class="icon-list"></i> <%= link_to course.name, course %>
+      <% end %>
   	<% end %>
   </ul>
 
 <br><br>
 
-  <h2>Elsewhere on the Web</h2>
+  <h2>More Information</h2>
   <ul class="courselist">
   	<% unless @provider.facebook.empty? %>
   		<li><i class="fi-social-facebook"></i> <%= @provider.facebook %></li>
