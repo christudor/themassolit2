@@ -8,7 +8,7 @@
 <div class="navbar-inner">
 <ul class="nav pull-left">
 
-    <li><%= link_to "Select Category:", "#" %></li>
+    <li class="disabled"><%= link_to "Select Category:", "#" %></li>
       
     <% if params[:tag] == "Classics" %>
       <li class="active"><%= link_to "Classics", tag_path("Classics") %></li>
@@ -40,7 +40,7 @@
       <li><%= link_to "Philosophy", tag_path("Philosophy") %></li>
     <% end %>
 
-      <li><%= link_to "or", "#" %></li>
+      <li class="disabled"><%= link_to "or", "#" %></li>
 
     <% if params[:tag] %>
       <li><%= link_to "View All Categories", courses_path %></li>
