@@ -54,11 +54,12 @@ class CoursesController < ApplicationController
   end
 
   def index
-    @categories = Course.all_categories
-    @courses = Course.select(params[:category])
-
-    unless @categories.include?("Classics")
-      redirect_to courses_path, :notice => "That category doesn't exist... yet."
+    if params[:tag]
+      @courses = Course.tagged_with(params[:tag])
+      @title = "Courses on #{params[:tag]}"
+    else
+      @courses = Course.all
+      @title = "All Courses"
     end
   end
 end

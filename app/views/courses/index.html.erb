@@ -1,10 +1,17 @@
-<% provide(:title, 'All courses') %>
-<% category = params[:category] || "All" %>
-
+<% provide(:title, "Courses") %>
 
 <div class="container">
-<h1><%= category.titleize %> Courses</h1>
+<h1>Courses</h1>
 </div>
+
+<% if params[:tag] %>
+
+<div class="well">
+  Category: <%= params[:tag] %><a class="close" href="/courses">&times;</a>
+</div>
+
+<% else %>
+<% end %>
 
 <div class="container">
 
@@ -23,7 +30,7 @@
 	    </div>
       <div class="span2">
         <br><br>
-        <p> <i class="icon-folder-open"></i> <%= course.category %> </p>
+        <p> <i class="icon-folder-open"></i>  <%= raw course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %> </p>
         <p> <i class="icon-user"></i> <%= link_to course.provider.name, course.provider %></p>
         <br>
         <%= link_to "Go to course", course, :class => "btn btn-large btn-primary" %>

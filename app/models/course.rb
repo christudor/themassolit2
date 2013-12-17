@@ -1,5 +1,8 @@
 class Course < ActiveRecord::Base
-  attr_accessible :category, :description, :name, :provider_id, :avatar, :remote_avatar_url
+  attr_accessible :category, :description, :name, :provider_id, :avatar, :remote_avatar_url, :tag_list, :genre_list, :subgenre_list, :author_list, :text_list, :examoption_list, :theme_list
+  acts_as_taggable
+  acts_as_taggable_on :genres, :subgenres, :texts, :authors, :examoptions, :themes
+  
   belongs_to :provider
   mount_uploader :avatar, AvatarUploader
 
@@ -17,18 +20,6 @@ class Course < ActiveRecord::Base
 
   def avatar_name
   	File.basename(avatar.path || avatar.filename) if avatar
-  end
-
-  def self.all_categories
-    find_by_sql("SELECT category FROM courses GROUP BY category").map(&:category).select {|x| x}
-  end
-
-  def self.select(category)
-    if category
-      find_all_by_category(category)
-    else
-      find :all
-    end
   end
 
 end

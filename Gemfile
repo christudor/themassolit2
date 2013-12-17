@@ -25,6 +25,10 @@ gem 'figaro'
 
 gem 'sendgrid'
 
+# Add tags to courses
+
+gem 'acts-as-taggable-on'
+
 # Amazon Web Services gems for association of database items (e.g. users, courses, etc) with images
 
 # Carrierwave for course images.

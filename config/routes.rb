@@ -24,6 +24,7 @@ Massolit::Application.routes.draw do
     put 'update_card', :to => 'registrations#update_card'
   end
 
+  
   resources :users
   resources :courses
   resources :providers
@@ -52,6 +53,9 @@ Massolit::Application.routes.draw do
   resources :sources
   resources :trailers
   resources :samples
+  resources :options
+
+  get 'tags/:tag' => 'courses#index', :as => :tag
 
   devise_scope :user do 
     root to: 'static_pages#home'

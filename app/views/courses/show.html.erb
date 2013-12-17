@@ -40,8 +40,6 @@
   <br><br>
   <% end %>
 
-  
-
   <h2>About this Course</h2>
   <p class="media"><%= @course.description %></p>
 
@@ -59,7 +57,7 @@
 <div class="span3 offset1">
   <h2>Key Information</h2>
   <ul class="courselist">
-    <li><i class="icon-folder-open"></i> Category: <%= @course.category %></li>
+    <li><i class="icon-folder-open"></i> Category: <%= raw @course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p></li>
     <li><i class="icon-user"></i> Tutor: <%= link_to @course.provider.name, @course.provider %></li>
       <% if subscriber_signed_in? %>
       <% else %>
