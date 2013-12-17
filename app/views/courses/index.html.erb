@@ -4,14 +4,53 @@
 <h1>Courses</h1>
 </div>
 
-<% if params[:tag] %>
+<div class="navbar">
+<div class="navbar-inner">
+<ul class="nav pull-left">
 
-<div class="well">
-  Category: <%= params[:tag] %><a class="close" href="/courses">&times;</a>
+    <li><%= link_to "Select Category:", "#" %></li>
+      
+    <% if params[:tag] == "Classics" %>
+      <li class="active"><%= link_to "Classics", tag_path("Classics") %></li>
+    <% else %>
+      <li><%= link_to "Classics", tag_path("Classics") %></li>
+    <% end %>
+
+    <% if params[:tag] == "English Literature" %>
+      <li class="active"><%= link_to "English Literature", tag_path("English Literature") %></li>
+    <% else %>
+      <li><%= link_to "English Literature", tag_path("English Literature") %></li>
+    <% end %>
+
+    <% if params[:tag] == "History" %>
+      <li class="active"><%= link_to "History", tag_path("History") %></li>
+    <% else %>
+      <li><%= link_to "History", tag_path("History") %></li>
+    <% end %>
+
+    <% if params[:tag] == "Modern Languages" %>
+      <li class="active"><%= link_to "Modern Languages", tag_path("Modern Languages") %></li>
+    <% else %>
+      <li><%= link_to "Modern Languages", tag_path("Modern Languages") %></li>
+    <% end %>
+
+    <% if params[:tag] == "Philosophy" %>
+      <li class="active"><%= link_to "Philosophy", tag_path("Philosophy") %></li>
+    <% else %>
+      <li><%= link_to "Philosophy", tag_path("Philosophy") %></li>
+    <% end %>
+
+      <li><%= link_to "or", "#" %></li>
+
+    <% if params[:tag] %>
+      <li><%= link_to "View All Categories", courses_path %></li>
+    <% else %>
+      <li class="active"><%= link_to "View All Categories", courses_path %></li>
+    <% end %>
+
+</ul>
 </div>
-
-<% else %>
-<% end %>
+</div>
 
 <div class="container">
 

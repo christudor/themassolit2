@@ -28,3 +28,10 @@ $('.dropdown-toggle').click(function(e) {
     }
   }, this), 0);
 });
+
+$(function () {  
+  $('#courses th a').live('click', function () {  
+    $.getScript(this.href);  
+    return false;  
+  });  
+})  
