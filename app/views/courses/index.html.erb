@@ -65,11 +65,7 @@
 	    <div class="span7">
 	    	<h4 class="media-heading"><%= link_to course.name, course %></h4>
 	    	<p class="small"><%= truncate(course.description, :length => 350, :separator => ' ') %>
-        <% if course.lessons.blank? %>
-          <strong>Coming Soon</strong>
-        <% else %>
-          <%= link_to "Read more", course %>
-        <% end %>
+        <%= link_to "Read more", course %>
 	    </div>
       <div class="span2">
         <br><br>
