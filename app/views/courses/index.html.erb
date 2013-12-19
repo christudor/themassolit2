@@ -1,8 +1,21 @@
 <% provide(:title, "Courses") %>
 
 <div class="container">
-<h1>Courses</h1>
+<h1><%= @title %></h1>
 </div>
+
+<div class="container">
+<div class="span3 offset4">
+
+<%= form_tag courses_path, :method => 'get' do %>
+    <%= text_field_tag :search, params[:search], :autocomplete => :off, :data => { provide: "typeahead", source: Course.select('name').all.map(&:name), items: "9"}, class: "navbar-search pull-left", :placeholder => "Search by Course Name" %>
+    <%= submit_tag "Search", :name => nil, class: "btn", :style => "display:none" %>
+<% end %>
+
+</div>
+</div>
+
+<br>
 
 <div class="navbar">
 <div class="navbar-inner">

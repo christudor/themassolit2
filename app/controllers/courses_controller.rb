@@ -57,6 +57,9 @@ class CoursesController < ApplicationController
     if params[:tag]
       @courses = Course.tagged_with(params[:tag])
       @title = "Courses on #{params[:tag]}"
+    elsif params[:search]
+      @courses = Course.search(params[:search])
+      @title = "Search Results"
     else
       @courses = Course.all
       @title = "All Courses"

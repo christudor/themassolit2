@@ -1,3 +1,22 @@
+JS FOR TYPEAHEAD:
+
+<%# courselist = Course.select('name').all.map(&:name) %>
+<% genrelist = ['English Literature', 'Classics', 'History', 'Philosophy', 'Modern Languages'] %>
+
+<%= javascript_tag do %>
+  window.genres = <%= raw genrelist.to_json %>
+<% end %>
+
+  <script type="text/javascript">
+    $('.typeahead').typeahead({
+      items:4,
+      source: genres
+    });
+
+  </script>
+
+
+
 
 <% provide(:title, @course.name) %>
 
