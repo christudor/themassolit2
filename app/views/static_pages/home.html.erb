@@ -1,5 +1,10 @@
 <% provide(:title, 'Online lectures in the humanities') %>
 
+<% alist = ["A(ristotle)", "A(belard)", "A(eschylus)", "A(usten)", "A(menhotep III)"]%>
+<% zlist = ["Z(arathustra)", "Z(oroaster)", "Z(ola)", "Z(amyatin)", "Z(hukov)"] %>
+<% achoice = alist.shuffle[0] %>
+<% zchoice = zlist.shuffle[0] %>
+
 <div class="container">
   
   <div class="featurette">
@@ -9,7 +14,7 @@
 
     </div>
   <div class="featurette">
-    <h2 class="featurette-heading">From A(belard) to Z(oraster)</h2>
+    <h2 class="featurette-heading">From <%= achoice %> to <%= zchoice %></h2>
       <p class="lead">
       Our lectures cover a huge range of subjects, including English Literature, History, Classics, Philosophy, and Modern Languages. We cover the subjects that matter to students and teachers: Shakespeare, The French Revolution, Frankenstein ... <%= link_to "and much, much more!", courses_path %>
       <br>

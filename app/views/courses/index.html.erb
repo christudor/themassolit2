@@ -5,14 +5,88 @@
 </div>
 
 <div class="container">
-<div class="span3 offset4">
-
-<%= form_tag courses_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search], :autocomplete => :off, :data => { provide: "typeahead", source: Course.select('name').all.map(&:name), items: "9"}, class: "navbar-search pull-left", :placeholder => "Search by Course Name" %>
-    <%= submit_tag "Search", :name => nil, class: "btn", :style => "display:none" %>
-<% end %>
+  
+  <div class="span4 offset3">
+    <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_name, params[:search_name], :autocomplete => :off,
+          :data => { provide: "typeahead", source: Course.select('name').all.map(&:name), items: "9"},
+          class: "span4", :placeholder => "Search by Course Name", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+    </div>
+  </div>
 
 </div>
+
+<div class="container">
+
+<center>
+<%= link_to "More Search Options", "javascript:;", :data => {:toggle => "collapse", :target => "#collapse"} %>
+</center>
+
+<div id="collapse" class="collapse">
+<br>
+
+  <div class="span5">
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_genre, params[:search_genre], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_genre_list, items: "9"},
+          class: "span4", :placeholder => "Search by Category", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_subgenre, params[:search_subgenre], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_subgenre_list, items: "9"},
+          class: "span4", :placeholder => "Search by Subcategory", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_text, params[:search_text], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_text_list, items: "9"},
+          class: "span4", :placeholder => "Search by Text (e.g. 'Frankenstein')", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+  </div>
+
+  <div class="span5">
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_author, params[:search_author], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_author_list, items: "9"},
+          class: "span4", :placeholder => "Search by Author (e.g. 'Mary Shelley')", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_period, params[:search_period], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_period_list, items: "9"},
+          class: "span4", :placeholder => "Search by Period (e.g. '18th Century')", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_examoption, params[:search_examoption], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_examoption_list, items: "9"},
+          class: "span4", :placeholder => "Search by Exam Specificaton Number", :value => nil %>
+          <%= submit_tag "Search", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+  </div>
+</div>
+
 </div>
 
 <br>
@@ -22,35 +96,15 @@
 <ul class="nav pull-left">
 
     <li class="disabled"><%= link_to "Select Category:", "javascript:;" %></li>
-      
-    <% if params[:tag] == "Classics" %>
-      <li class="active"><%= link_to "Classics", tag_path("Classics") %></li>
-    <% else %>
-      <li><%= link_to "Classics", tag_path("Classics") %></li>
-    <% end %>
+  
+    <% @unique_genre_list.each do |genre| %>
 
-    <% if params[:tag] == "English Literature" %>
-      <li class="active"><%= link_to "English Literature", tag_path("English Literature") %></li>
-    <% else %>
-      <li><%= link_to "English Literature", tag_path("English Literature") %></li>
-    <% end %>
+      <% if params[:tag] == genre.to_s %>
+        <li class="active"><%= link_to genre, tag_path(genre) %></li>
+      <% else %>
+        <li><%= link_to genre, tag_path(genre) %></li>
+      <% end %>
 
-    <% if params[:tag] == "History" %>
-      <li class="active"><%= link_to "History", tag_path("History") %></li>
-    <% else %>
-      <li><%= link_to "History", tag_path("History") %></li>
-    <% end %>
-
-    <% if params[:tag] == "Modern Languages" %>
-      <li class="active"><%= link_to "Modern Languages", tag_path("Modern Languages") %></li>
-    <% else %>
-      <li><%= link_to "Modern Languages", tag_path("Modern Languages") %></li>
-    <% end %>
-
-    <% if params[:tag] == "Philosophy" %>
-      <li class="active"><%= link_to "Philosophy", tag_path("Philosophy") %></li>
-    <% else %>
-      <li><%= link_to "Philosophy", tag_path("Philosophy") %></li>
     <% end %>
 
       <li class="disabled"><%= link_to "or", "javascript:;" %></li>

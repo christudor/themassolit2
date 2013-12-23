@@ -54,15 +54,80 @@ class CoursesController < ApplicationController
   end
 
   def index
+    
+    @unique_genre_list = []
+    Course.all.each do |course|
+      @unique_genre_list << course.genre_list
+    end
+    @unique_genre_list.flatten!
+    @unique_genre_list.uniq!
+
+    @unique_subgenre_list = []
+    Course.all.each do |course|
+      @unique_subgenre_list << course.subgenre_list
+    end
+    @unique_subgenre_list.flatten!
+    @unique_subgenre_list.uniq!
+
+    @unique_period_list = []
+    Course.all.each do |course|
+      @unique_period_list << course.period_list
+    end
+    @unique_period_list.flatten!
+    @unique_period_list.uniq!
+
+    @unique_text_list = []
+    Course.all.each do |course|
+      @unique_text_list << course.text_list
+    end
+    @unique_text_list.flatten!
+    @unique_text_list.uniq!
+
+    @unique_author_list = []
+    Course.all.each do |course|
+      @unique_author_list << course.author_list
+    end
+    @unique_author_list.flatten!
+    @unique_author_list.uniq!
+
+    @unique_examoption_list = []
+    Course.all.each do |course|
+      @unique_examoption_list << course.examoption_list
+    end
+    @unique_examoption_list.flatten!
+    @unique_examoption_list.uniq!
+
+
     if params[:tag]
       @courses = Course.tagged_with(params[:tag])
       @title = "Courses on #{params[:tag]}"
-    elsif params[:search]
-      @courses = Course.search(params[:search])
+    elsif params[:search_name]
+      @courses = Course.where("name = ?", params[:search_name])
+      @title = "Search Results"
+    elsif params[:search_genre]
+      @courses = Course.tagged_with(params[:search_genre], :on => :genres)
+      @title = "Search Results"
+    elsif params[:search_subgenre]
+      @courses = Course.tagged_with(params[:search_subgenre], :on => :subgenres)
+      @title = "Search Results"
+    elsif params[:search_text]
+      @courses = Course.tagged_with(params[:search_text], :on => :texts)
+      @title = "Search Results"
+    elsif params[:search_author]
+      @courses = Course.tagged_with(params[:search_author], :on => :authors)
+      @title = "Search Results"
+    elsif params[:search_period]
+      @courses = Course.tagged_with(params[:search_period], :on => :periods)
+      @title = "Search Results"
+    elsif params[:search_examoption]
+      @courses = Course.tagged_with(params[:search_examoption], :on => :examoptions)
       @title = "Search Results"
     else
       @courses = Course.all
       @title = "All Courses"
     end
+
+
+
   end
 end
