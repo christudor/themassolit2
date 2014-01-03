@@ -1,0 +1,43 @@
+<div class="container">
+<div class="span6 offset3">
+<div id="stripe_error" class="alert alert-error" style="display:none" >
+</div>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'card_form form-vertical' }) do |f| %>
+  <%= hidden_field_tag 'plan', params[:plan] %>
+  <%= f.error_notification %>
+  <%= display_base_errors resource %>
+  <%= f.input :name, :autofocus => true, :label => "Full Name:", :required => true, :placeholder => "e.g. John Smith" %>
+  <%= f.input :email, :label => "E-Mail Address:", :required => true, :placeholder => "e.g. john@example.com" %>
+  <%= f.input :password, :required => true, :label => "Password:" %>
+  <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>
+  <% if @user.stripe_token %>
+    <p>Credit card acceptance is pending.</p>
+  <% else %>
+    <div class="field">
+      <%= label_tag :card_number, "Card Number:" %>
+      <%= text_field_tag :card_number, nil, name: nil, placeholder: "e.g. 4012888888881881" %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Card Security Code (CVV)" %>
+      <%= text_field_tag :card_code, nil, name: nil, placeholder: "e.g. 123" %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_month, "Card Expiration:" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}%>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, {name: nil, id: "card_year"}%>
+    </div>
+    <div class="field">
+      <%= f.input :coupon, :label => 'Promotional Coupon (if any):' %>
+    </div>
+  <% end %>
+  <%= f.hidden_field :stripe_token %>
+  <center><%= f.button :submit, 'Sign up', :class => "btn btn-large btn-primary" %></center>
+<% end %>
+<br>
+<p class="body"><strong>Remember:</strong> if you are student and your school is a member of MASSOLIT, you should already have free, unlimited access. If you're a student, sign up for free <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>, or if you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %>
+
+</div>
+</div>
+
+
+

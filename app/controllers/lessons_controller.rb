@@ -2,7 +2,14 @@ class LessonsController < ApplicationController
   
   def show
     @lesson = Lesson.find(params[:id])
-    @sub_scores = @lesson.scores.where(:subscriber_id => current_subscriber.id)
+    
+    if subscriber_signed_in?
+      @sub_scores = @lesson.scores.where(:subscriber_id => current_subscriber.id)
+    elsif user_signed_in?
+      @sub_scores = @lesson.scores.where(:user_id => current_user.id)
+    else
+    end
+
     @id = @lesson.id
     @prev = @lesson.previous
     @next = @lesson.next

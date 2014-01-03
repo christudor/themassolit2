@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   before_destroy :cancel_subscription
 
   has_many :relationships, foreign_key: "student_id", dependent: :destroy
+  has_many :scores
+  has_many :quizzes, :through => :scores
 
   def update_plan(role)
     self.role_ids = []

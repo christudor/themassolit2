@@ -1,0 +1,79 @@
+<% provide(:title, 'For Schools') %>
+
+<% alist = ["A(ristotle)", "A(belard)", "A(eschylus)", "A(usten)", "A(menhotep III)"]%>
+<% zlist = ["Z(arathustra)", "Z(oroaster)", "Z(ola)", "Z(amyatin)", "Z(hukov)"] %>
+<% achoice = alist.shuffle[0] %>
+<% zchoice = zlist.shuffle[0] %>
+
+<div class="container">
+  
+  <div class="featurette">
+    <h2 class="featurette-heading">Go beyond the syllabus</h2>
+      <p class="lead">Our philosophy is for courses to be "two thirds on the syllabus, one third beyond it". Our courses are relevant and accessible to the whole class, but can also stretch the brightest and best. <%= link_to "Browse our courses", courses_path %> or <%= link_to "make a course request", contact_path %>.
+      <br>
+  </div>
+
+
+  <div class="featurette">
+    <h2 class="featurette-heading">Designed by schools, for schools</h2>
+      <p class="lead">
+      We are working closely with <%= link_to "some of the best schools in the country", ourschools_path %> to ensure that our courses are suitable for use by teachers and students alike. Through listening to teachers and students, we've made sure our courses are well-pitched and accessible, and able to be used in class or at home... or somewhere in between. Have any suggestions? <%= link_to "We'd love to hear them", contact_path %>.
+      <br>
+  </div>
+
+
+  <div class="featurette">
+    <h2 class="featurette-heading">Simple pricing, unlimited use</h2>
+      <p class="lead">
+      <%= link_to "Our simple pricing", pricing_path %> means you don't have to worry about how much you're using the product: you can access <%= link_to "our extensive library of courses", courses_path %> whenever and wherever you like, all the same low price. See <%= link_to "how much we charge", pricing_path %>, or read <%= link_to "what people are saying about us", school_feedback_path %>.
+      <br>
+  </div>
+
+  <div class="featurette">
+    <h2 class="featurette-heading">Impressive feedback</h2>
+ 
+      <blockquote>
+        <p class="lead"><em>"We are delighted to be part of this <strong>exciting academic project</strong> which chimes so well with my own sense of <strong>academic extension and enrichment...</strong>"</em>
+        <p class="lead"><cite>- Headmaster, Independent School, London</cite>
+      </blockquote>
+
+      <br><br>
+
+      <blockquote>
+        <p class="lead"><em>"What a brilliant idea! <strong>An absolute winner!"</strong></em>
+        <p class="lead"><cite>- English Teacher, State Comprehensive, London</cite>
+      </blockquote>
+
+      <br><br>
+
+      <blockquote>
+        <p class="lead"><em>"A <strong>well-targeted resource</strong> that is picking up some very big names"</em>
+        <p class="lead"><cite>- English Teacher, Independent School, London</cite>
+      </blockquote>
+
+      <br><br>
+
+      <blockquote>
+        <p class="lead"><em>"The videos are a <strong>fantastic</strong> idea - interactive and easily understandable"</em>
+        <p class="lead"><cite>- Head Girl, State Comprehensive, Essex</cite>
+      </blockquote>
+      
+      <br><br>
+
+      <blockquote>
+        <p class="lead"><em>"MASSOLIT is excellent... <strong>a superb learning tool...</strong>"</em>
+        <p class="lead"><cite>- Head of Department, State Grammar, Kent </cite>
+      </blockquote>
+
+      <br><br>
+
+      <blockquote>
+        <p class="lead"><em>"Initial feedback from staff and kids has been <strong>stellar</strong>"</em>
+        <p class="lead"><cite>- Teacher, Independent School, Surrey </cite>
+      </blockquote>
+
+  </div>
+
+  <br>
+
+</div>

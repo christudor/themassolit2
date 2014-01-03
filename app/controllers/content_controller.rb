@@ -13,6 +13,10 @@ class ContentController < ApplicationController
     authorize! :view, :gold, :message => 'Access limited to subscribers.'
   end
 
+  def topaz
+    authorize! :view, :topaz, :message => 'Access limited to subscribers.'
+  end
+
   # Platinum pages include the student analytics, accessible only to teachers.
 
   def platinum

@@ -21,6 +21,7 @@ class QuizzesController < ApplicationController
   end
 
   def check
+    @user = current_user
     @subscriber = current_subscriber
     @quiz = Quiz.find(params[:quiz_id])
     @lesson = @quiz.lesson

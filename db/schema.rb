@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217105219) do
+ActiveRecord::Schema.define(:version => 20140103044357) do
 
   create_table "a_levels", :force => true do |t|
     t.string   "board"
@@ -297,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20131217105219) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "possible"
+    t.integer  "user_id"
   end
 
   create_table "sources", :force => true do |t|
@@ -352,8 +353,13 @@ ActiveRecord::Schema.define(:version => 20131217105219) do
     t.string   "birthmonth"
     t.integer  "birthyear"
     t.date     "date_of_birth"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "subscribers", ["confirmation_token"], :name => "index_subscribers_on_confirmation_token", :unique => true
   add_index "subscribers", ["email"], :name => "index_subscribers_on_email", :unique => true
   add_index "subscribers", ["reset_password_token"], :name => "index_subscribers_on_reset_password_token", :unique => true
 

@@ -21,8 +21,8 @@
 	<% if path == '/subscribers/sign_in' %>
     <center>Not signed up yet? <%= link_to "Sign up here", new_subscriber_registration_path(:job => 'student') %></center>
 	<% elsif path == '/users/sign_in' %>
-    <center><small>Not signed up yet? <%= link_to "Sign up here", new_user_registration_path %></small></center>
-		<center><small>Affiliated with a school? <%= link_to "Log in here", new_subscriber_session_path %></small></center>
+    <center>Not signed up yet? <%= link_to "Sign up here", new_user_registration_path(:plan => 'topaz') %></center>
+		<center>Affiliated with a school? <%= link_to "Log in here", new_subscriber_session_path %></center>
 	<% else %>
 <% end %>
 

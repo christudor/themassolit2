@@ -5,8 +5,30 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Courses", courses_path %></li>
-                  
+          <li><%= link_to "Our Courses", courses_path %></li>
+
+          <% if !subscriber_signed_in? && !user_signed_in? %>
+          <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Individuals<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "What We Offer", individual_users_path %></li>
+                      <li><%= link_to "Sign Up: 30-Day Free Trial", new_user_registration_path(:plan => 'topaz') %></li>
+                      <li><%= link_to "Login", new_user_session_path %></li>
+                    </ul>
+
+
+          <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Schools<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "What We Offer", school_users_path %></li>
+                      <li><%= link_to "Sign Up (Student)", new_subscriber_registration_path(:job => 'student') %></li>
+                      <li><%= link_to "Sign Up (Teacher)", new_subscriber_registration_path(:job => 'teacher') %></li>
+                      <li><%= link_to "Login", new_subscriber_session_path %></li>
+                  </ul>
+
+          <% else %>
+          <% end %>
+                
             <% if subscriber_signed_in? && !user_signed_in? %>
               <% if current_subscriber.has_role? :admin %>          
                 <li id="fat-menu" class="dropdown">
@@ -55,9 +77,6 @@
               <% end %>
               <li><%= link_to current_subscriber.name, subscriber_path(current_subscriber) %></li>
               <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
-            <% elsif !subscriber_signed_in? && !user_signed_in? %>
-              <li><%= link_to "Login", new_subscriber_session_path %></li>
-              <li><%= link_to "Sign Up", new_subscriber_registration_path(:job => 'student') %></li>
             <% elsif user_signed_in? && !subscriber_signed_in? %>
               <li><%= link_to "Logout", destroy_user_session_path, :method=>'delete' %></li>           
             <% else %>

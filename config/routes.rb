@@ -78,6 +78,15 @@ Massolit::Application.routes.draw do
   match '/helpus',  to: 'static_pages#helpus'
   match '/faqs',    to: 'static_pages#faqs'
   match '/samplecourses', to: 'static_pages#samples'
+  match '/privacypolicy', to: 'static_pages#privacypolicy'
+  match '/enduseragreement', to: 'static_pages#enduseragreement'
+  match '/pricing', to: 'static_pages#pricing'
+
+  match '/ourschools', to: 'static_pages#ourschools'
+  match '/school_feedback', to: 'static_pages#school_feedback'
+  match '/school_users', to: 'static_pages#school_users'
+  match '/individual_users', to: 'static_pages#individual_users'
+  match '/contributors', to: 'static_pages#contributors'
 
   match '/studentsplash', to: 'static_pages#studentsplash'
   match '/teachersplash', to: 'static_pages#teachersplash'

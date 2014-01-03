@@ -3,6 +3,9 @@ class Quiz < ActiveRecord::Base
   belongs_to :lesson
   has_many :questions
   has_many :scores
+
   has_many :subscribers, :through => :scores
+  has_many :users, :through => :scores
+  
   accepts_nested_attributes_for :questions, allow_destroy: true
 end

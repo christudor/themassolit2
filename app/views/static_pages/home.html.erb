@@ -1,7 +1,7 @@
 <% provide(:title, 'Online lectures in the humanities') %>
 
-<% alist = ["A(ristotle)", "A(belard)", "A(eschylus)", "A(usten)", "A(menhotep III)"]%>
-<% zlist = ["Z(arathustra)", "Z(oroaster)", "Z(ola)", "Z(amyatin)", "Z(hukov)"] %>
+<% alist = ["A(ristotle)", "A(belard)", "A(eschylus)", "A(usten)", "A(menhotep III)", "A(nne Bronte)"]%>
+<% zlist = ["Z(arathustra)", "Z(oroaster)", "Z(ola)", "Z(amyatin)", "Z(hukov)", "(Dr.) Z(hivago)"] %>
 <% achoice = alist.shuffle[0] %>
 <% zchoice = zlist.shuffle[0] %>
 
@@ -9,41 +9,32 @@
   
   <div class="featurette">
     <h2 class="featurette-heading">What is MASSOLIT?</h2>
-      <p class="lead">We provide online lectures in the humanities, designed specifically for schools by academics from the world's very best universities. Want to find out more? <%= link_to "See our sample lectures", samplecourses_path %> or <%= link_to "browse our courses", courses_path %>
+      <p class="lead">We provide online lectures in the humanities, designed and delivered by academics from the world's very best universities. Want to find out more? <%= link_to "See our sample lectures", samplecourses_path %> or <%= link_to "browse our courses", courses_path %>
       <br>
 
     </div>
+
   <div class="featurette">
     <h2 class="featurette-heading">From <%= achoice %> to <%= zchoice %></h2>
       <p class="lead">
       Our lectures cover a huge range of subjects, including English Literature, History, Classics, Philosophy, and Modern Languages. We cover the subjects that matter to students and teachers: Shakespeare, The French Revolution, Frankenstein ... <%= link_to "and much, much more!", courses_path %>
       <br>
+  </div>
 
 
   <div class="featurette">
-    <h2 class="featurette-heading">"O brave new world..."</h2>
+    <h2 class="featurette-heading">Perfect for schools...</h2>
       <p class="lead">
-      Our lectures can be used as part of classroom teaching... or by students in their own time... or both! Our lectures are accessible whenever and wherever you need them - on desktop, tablet, and mobile.
-      <br>
-
-    <div class="featurette">
-    <h2 class="featurette-heading">"... That has such people in't!"</h2>
-      <p class="lead">
-      If something's worth doing, it's worth doing well. That's why we only work with academics from the very best universities in the country - including Oxford and Cambridge.
-    </div>
-
-  <div class="featurette">
-    <h2 class="featurette-heading">Powerful analytics</h2>
-      <p class="lead">Keep track of your learning like never before with our powerful analytics package - available for both students and teachers... for free!<br>
+      Our lectures are perfect for use as part of classroom teaching... or by students in their own time... or both! Our lectures are accessible whenever and wherever you need them - on desktop, tablet, and mobile. See <%= link_to "what we can offer", school_users_path %>, read <%= link_to "what people are saying about us", school_feedback_path %> or find out about <%= link_to "our partner schools", ourschools_path %>.
       <br>
   </div>
 
+    <div class="featurette">
+    <h2 class="featurette-heading">... and lifelong learners.</h2>
+      <p class="lead">
+          <p class="lead">Have you ever read a book that you feel <%= link_to "has more to give", tag_path("English Literature") %>? Are you interested in <%= link_to "history of philosophy", tag_path("Philosophy") %> or perhaps the <%= link_to "philosophy of history", tag_path("History") %>, but don't know where to start? MASSOLIT offers unlimited access to its <%= link_to "extensive library of courses" %> for just <strong>£4.99 a month</strong>. Read about <%= link_to "what we offer", individual_users_path %> or <%= link_to "try it out for 30 days - absolutely free", new_user_registration_path(:plan => "topaz") %>.
+    </div>
+
   <br>
-  <center>
-  <%= link_to "Student Sign Up", new_subscriber_registration_path(:job => 'student'), class: "btn btn-large btn-primary" %>
-  <%= link_to "Teacher Sign Up", new_subscriber_registration_path(:job => 'teacher'), class: "btn btn-large btn-primary" %>
-
-  </center>
-
 
 </div>

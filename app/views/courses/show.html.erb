@@ -59,6 +59,7 @@
     <li><i class="icon-folder-open"></i> Category: <%= raw @course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p></li>
     <li><i class="icon-user"></i> Tutor: <%= link_to @course.provider.name, @course.provider %></li>
       <% if subscriber_signed_in? %>
+      <% elsif user_signed_in? %>
       <% else %>
       <li><i class="icon-exclamation-sign"></i> <%= link_to "Log in", new_subscriber_session_path %> or <%= link_to "sign up", new_subscriber_registration_path(:job => 'student') %> to register for this course.</li>
       <% end %>
@@ -72,13 +73,21 @@
 
   <% if subscriber_signed_in? %>
     <% if current_subscriber.studying?(@course) %>
+      <h2>Module Quick Links</h2>
+        <ul class="courselist">
+          <% @course.lessons.each do |lesson| %>
+            <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
+          <% end %>
+        </ul>
+    <% end %>
+  
+  <% elsif user_signed_in? %>
     <h2>Module Quick Links</h2>
       <ul class="courselist">
-      <% @course.lessons.each do |lesson| %>
-      <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
-      <% end %>
-      <% else %>
-      <% end %>
+        <% @course.lessons.each do |lesson| %>
+          <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
+        <% end %>
+      </ul>
   <% else %>
   <% end %>
   </ul>

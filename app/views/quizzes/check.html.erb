@@ -51,7 +51,15 @@
 	<%= f.hidden_field :possible,		:value => @possible %>
 	<%= f.hidden_field :percentage, 	:value => @percentage %>
 	<%= f.hidden_field :quiz_id, 		:value => @quiz.id %>
-	<%= f.hidden_field :subscriber_id,	:value => current_subscriber.id %>
+	<% if subscriber_signed_in? %>
+		<%= f.hidden_field :subscriber_id,	:value => current_subscriber.id %>
+		<%= f.hidden_field :user_id,		:value => nil %>
+	<% elsif user_signed_in? %>
+		<%= f.hidden_field :subscriber_id,	:value => nil %>
+		<%= f.hidden_field :user_id,		:value => current_user.id %>
+	<% else %>
+	<% end %>
+		
 
 <% end %>
 
