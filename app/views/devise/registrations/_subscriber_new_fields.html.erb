@@ -10,7 +10,7 @@
 
   <%= f.input :school_id, :label => "School:", :collection => School.all, :selected => School.first, :hint => "While we are in beta mode, please use 'Test School' as your school. A full school list will be added soon." %>
   <%= f.input :name, :label => "Full Name:", :autofocus => true, placeholder: "e.g. John Smith" %>
-  <%= f.input :email, :label => "E-Mail Address:", :required => true, placeholder: "e.g. john@example.com" %>
+  <%= f.input :email, :label => "E-Mail Address:", :required => true, placeholder: "e.g. john.smith@yourschool.ac.uk", :hint => "Please use your school e-mail address." %>
   <%= f.input :password, :label => "Password:", :required => true %>
   <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>
   <center><%= f.button :submit, 'Sign up', :class => "btn btn-large btn-primary" %></center>

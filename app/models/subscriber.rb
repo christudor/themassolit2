@@ -7,6 +7,44 @@ class Subscriber < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  VALID_DOMAINS = %w[
+    
+    alleyns.org.uk
+    beal.redbridge.sch.uk
+    caterhamschool.co.uk
+    dulwich.org.uk
+    godolphinandlatymer.com
+    kcs.org.uk
+    saintolaves.net
+    stmaryleboneschool.com
+
+    ardingly.com
+    bryanston.co.uk
+    kes.hants.sch.uk
+    sevenoaksschool.org
+    tonbridge-school.org
+    westminster.org.uk
+    wincoll.ac.uk
+
+    ed.ac.uk
+    kent.ac.uk
+    newcastle.ac.uk
+    ox.ac.uk
+    cam.ac.uk
+    kcl.ox.ac.uk
+    open.ac.uk
+    ucl.ac.uk
+    warwick.ac.uk
+  ]
+
+  VALID_EMAIL_REGEXP = Regexp.new('(?:' + VALID_DOMAINS.collect { |d| Regexp.escape(d) }.join('|') + ')$')
+
+  validates :email,
+    :format => {
+      :with => VALID_EMAIL_REGEXP,
+      :message => "Is this your school e-mail address?"
+    }
+
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :current_password, :remember_me, :job, :school_id, :sex, :date_of_birth
   before_create :assign_role
