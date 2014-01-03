@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
   
   def show
+    authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
     @lesson = Lesson.find(params[:id])
     
     if subscriber_signed_in?

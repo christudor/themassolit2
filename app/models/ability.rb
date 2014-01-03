@@ -9,13 +9,12 @@ class Ability
       
     # Paid subscriber permissions
 
-    can :view, :gold if person.has_role? :gold
-    can :view, :course if person.has_role? :gold
+    can :view, :lesson if person.has_role? :topaz
 
     # Student permissions
 
-    can :view, :gold if person.has_role? :validstudent
-    can :view, :course if person.has_role? :validstudent
+    can :view, :lesson if person.has_role? :invalidstudent
+    can :view, :lesson if person.has_role? :validstudent
 
     # Teacher permissions
 

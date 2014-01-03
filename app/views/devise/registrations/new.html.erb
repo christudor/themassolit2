@@ -4,34 +4,49 @@
 <% heading_type = params[:job] || 'subscriber' %>
 
 <% if user_type == 'topaz' %>
-<h1>Try MASSOLIT for free</h1>
+<h1>30-Day Free Trial</h1>
 <% elsif user_type == 'subscriber' %>
 <h1><%= "#{heading_type.titleize} Sign Up" %></h1>
 <% else %>
 <% end %>
 
+<div class="span6 offset3">
+  <% if heading_type == 'student' %>
 
-<% if heading_type == 'student' %>
-  <center>Not a student? If you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %></center>
-  <center>No longer at school? Sign up for a 30-day free trial <%= link_to "here", new_user_registration_path(:plan => 'topaz') %></center>
- <br><br>
-<% elsif heading_type == 'teacher' %>
-  <center>Not a teacher? If you're a student, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'student') %></center><br>
-    <center>Not at school? Sign up for a 30-day free trial <%= link_to "here", new_user_registration_path(:plan => 'topaz') %></center>
+    <p class="body">MASSOLIT is currently running a closed beta for a <%= link_to "select number of schools", ourschools_path %> in London and the South East.
+    
+    <p class="body">If you're at one of these schools, simply register using your <strong>school e-mail address</strong> to gain immediate access to our <%= link_to "extensive library of courses", courses_path %>.
+    
+    <p class="body">If you're at school which hasn't signed up yet, <%= link_to "let us know", contact_path %> and we'll see if we can sort something out. In the meantime, feel free to <%= link_to "sign up for a free trial", new_user_registration_path(:plan => 'topaz') %> to access videos immediately.
+    
+    <p class="body"><strong>Note:</strong> if you're actually a teacher (i.e. not a student), you should be signing up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %>.
 
-<% else %>
-<% end %>
-<% if user_type == 'topaz' %>
-	<div class="span6 offset3">
-  		<p class="body">Enjoy free, unlimited access to MASSOLIT's <%= link_to "extensive collection of courses", courses_path %> for 30 days by signing up for our free trial.
-  		<p class="body">You won't be charged until after your trial ends, and you can cancel at any time for absolutely no charge. <%= link_to "Find out what we offer", individual_users_path %> or <%= link_to "check out the most frequently asked questions", faqs_path %>.
+   <br><br>
+
+  <% elsif heading_type == 'teacher' %>
+
+    <p class="body">MASSOLIT is currently running a closed beta for a <%= link_to "select number of schools", ourschools_path %> in London and the South East.
+    
+    <p class="body">If you're at one of these schools, please sign up using your <strong>school e-mail address</strong> to gain access to our <%= link_to "extensive library of courses", courses_path %>.
+    
+    <p class="body">If you're at school which hasn't signed up yet, <%= link_to "let us know", contact_path %> and we'll see if we can sort something out. In the meantime, feel free to <%= link_to "sign up for a free trial", new_user_registration_path(:plan => 'topaz') %> to access videos immediately.
+    
+    <p class="body"><strong>Note:</strong> if you're actually a student (i.e. not a teacher), you should be signing up <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>.
+
     <br><br>
-  	</div>
 
-  	<br><br>
+  <% elsif user_type == 'topaz' %>
 
-<% else %>
-<% end %>
+  		<p class="body">Enjoy free, unlimited access to MASSOLIT's <%= link_to "extensive collection of courses", courses_path %> for 30 days by signing up for our free trial.
+  		
+      <p class="body">You won't be charged until after your trial ends, and you can cancel at any time. <%= link_to "Find out what we offer", individual_users_path %> or <%= link_to "check out the most frequently asked questions", faqs_path %>.
+
+      <br><br>
+
+  <% else %>
+  <% end %>
+  
+  </div>
 
 <% content_for :head do %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>

@@ -1,5 +1,6 @@
 <div class="container">
 <div class="span6 offset3">
+
 <div id="stripe_error" class="alert alert-error" style="display:none" >
 </div>
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'card_form form-vertical' }) do |f| %>
@@ -10,12 +11,13 @@
   <%= f.input :email, :label => "E-Mail Address:", :required => true, :placeholder => "e.g. john@example.com" %>
   <%= f.input :password, :required => true, :label => "Password:" %>
   <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>
+  <br />
   <% if @user.stripe_token %>
     <p>Credit card acceptance is pending.</p>
   <% else %>
     <div class="field">
       <%= label_tag :card_number, "Card Number:" %>
-      <%= text_field_tag :card_number, nil, name: nil, placeholder: "e.g. 4012888888881881" %>
+      <%= text_field_tag :card_number, nil, name: nil, placeholder: "e.g. 4012 8888 8888 1881" %>
     </div>
     <div class="field">
       <%= label_tag :card_code, "Card Security Code (CVV)" %>
@@ -33,9 +35,12 @@
   <%= f.hidden_field :stripe_token %>
   <center><%= f.button :submit, 'Sign up', :class => "btn btn-large btn-primary" %></center>
 <% end %>
-<br>
-<p class="body"><strong>Remember:</strong> if you are student and your school is a member of MASSOLIT, you should already have free, unlimited access. If you're a student, sign up for free <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>, or if you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %>
 
+<p class="body"><strong>Remember:</strong> if you are student and your school has signed up to MASSOLIT, you should already have free, unlimited access via your school. If that's the case, sign up for free <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>, or if you're a teacher, sign up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %>.
+<br><br>
+<center>
+<%= image_tag("/glossy.png", :alt => "Powered by Stripe") %>
+</center>
 </div>
 </div>
 
