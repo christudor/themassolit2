@@ -1,6 +1,6 @@
 class SubscribersController < ApplicationController
   before_filter :authenticate_subscriber!
-
+  before_filter :only_allow_admin, :only => [ :index, :update, :destroy ]
   
   def index
   	authorize! :index, :subscriber, :message => 'Access limited to administrators only.'
@@ -49,14 +49,13 @@ class SubscribersController < ApplicationController
   def update
     @subscriber = Subscriber.find(params[:id])
     if @subscriber.update_attributes(params[:subscriber], :as => :admin)
-      redirect_to subscriber_path(current_subscriber), :notice => "User updated."
+      redirect_to subscribers_path, :notice => "User updated."
     else
-      redirect_to subscriber_path(current_subscriber), :alert => "Unable to update subscriber."
+      redirect_to subscribers_path, :alert => "Unable to update subscriber."
     end
   end
 
   def destroy
-    authorize! :index, :subscriber, :message => 'Access limited to administrators only.'
     subscriber = Subscriber.find(params[:id])
     unless subscriber == current_subscriber
       subscriber.destroy
@@ -76,7 +75,7 @@ class SubscribersController < ApplicationController
   private
 
   def only_allow_admin
-    redirect_to root_path, :alert => 'Not authorized as an administrator.' unless current_subscriber.has_role? :admin
+    redirect_to subscribers_path, :alert => 'Not authorized as an administrator.' unless current_subscriber.has_role? :admin
   end
 
 end

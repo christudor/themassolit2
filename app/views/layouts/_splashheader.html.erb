@@ -73,6 +73,8 @@
                     </ul>
               <% elsif current_subscriber.has_role? :validteacher %>
                 <li><%= link_to "My School", school_path(current_subscriber.school_id) %><li>
+              <% elsif current_subscriber.has_role? :invalidteacher %>
+                <li><%= link_to "My School", school_path(current_subscriber.school_id) %><li>
               <% else %>
               <% end %>
               <li><%= link_to current_subscriber.name, subscriber_path(current_subscriber) %></li>

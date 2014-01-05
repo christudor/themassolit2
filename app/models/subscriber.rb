@@ -35,6 +35,8 @@ class Subscriber < ActiveRecord::Base
     open.ac.uk
     ucl.ac.uk
     warwick.ac.uk
+
+    massolit.co.uk
   ]
 
   VALID_EMAIL_REGEXP = Regexp.new('(?:' + VALID_DOMAINS.collect { |d| Regexp.escape(d) }.join('|') + ')$')

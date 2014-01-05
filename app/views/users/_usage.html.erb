@@ -1,0 +1,11 @@
+<h2>Engagement</h2>
+
+<% last_login = @user.last_sign_in_at %>
+
+<div class="well">
+  <%= @user.name %> has logged in a total of <strong><%= @user.sign_in_count %></strong> times.
+</div>
+
+<div class="well">
+  <%= @user.name %> last logged in on <strong><%= last_login.strftime("%A %d %B") %></strong> at <strong><%= last_login.strftime("%I:%M %p") %></strong>
+</div>

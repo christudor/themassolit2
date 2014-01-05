@@ -18,9 +18,14 @@ class Ability
 
     # Teacher permissions
 
-    can :view, :platinum if person.has_role? :validteacher
+    can :view, :lesson if person.has_role? :invalidteacher
+    can :view, :course if person.has_role? :invalidteacher
+    can :view, :school if person.has_role? :invalidteacher
+
+    can :view, :lesson if person.has_role? :validteacher
     can :view, :course if person.has_role? :validteacher
     can :view, :school if person.has_role? :validteacher
+
     end
   end
 

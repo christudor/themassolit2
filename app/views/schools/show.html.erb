@@ -1,3 +1,4 @@
+<% provide(:title, "School Profile") %>
 <h1><%= @school.name %></h1>
 
 <% if current_subscriber.has_role? :admin %>
@@ -34,7 +35,7 @@
           <td>Teacher</td>
           <td><%= subscriber.email %></td>
           <td>No</td>
-          <td><%= subscriber.last_sign_in_at.to_date %></td>
+          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
           <td><%= subscriber.sign_in_count %></td>
         </tr>
         <% elsif subscriber.has_role? :validstudent %>
@@ -95,7 +96,7 @@
         <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>No</td>
-        <td><%= subscriber.last_sign_in_at.to_date %></td>
+        <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
         <td><%= subscriber.sign_in_count %></td>
     </tr>
         <% end %>
