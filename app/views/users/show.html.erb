@@ -33,20 +33,22 @@
      
   		</ul>
 
-    <% if current_user.id == @user.id %>
-    
-    <center>
-    	
-    	<br>
-    	<%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-large btn-primary" %>
-    	<br><br>
-    	<% unless current_user.has_role? :admin %>
-    		<%= link_to "Cancel my Account", registration_path(current_user), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-large btn-danger" %>
-    	<% end %>
+	<% unless current_user.blank? %>
+	    <% if current_user.id == @user.id %>
+	    
+	    <center>
+	    	
+	    	<br>
+	    	<%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-large btn-primary" %>
+	    	<br><br>
+	    	<% unless current_user.has_role? :admin %>
+	    		<%= link_to "Cancel my Account", registration_path(current_user), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-large btn-danger" %>
+	    	<% end %>
 
-    </center>
-    <% else %>
-    <% end %>
+	    </center>
+	    <% else %>
+	    <% end %>
+	<% end %>
 
 </div>
 </div>
