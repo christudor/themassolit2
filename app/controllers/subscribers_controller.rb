@@ -33,12 +33,12 @@ class SubscribersController < ApplicationController
 
     if current_subscriber.has_role? :validstudent
       if @subscriber.id != @current_subscriber.id
-        redirect_to subscriber_path(@subscriber), :notice => "You can only view statistics for yourself!"
+        redirect_to subscriber_path(current_subscriber), :notice => "You can only view statistics for yourself!"
       else
       end
     elsif current_subscriber.has_role? :invalidstudent
        if @subscriber.id != @current_subscriber.id
-        redirect_to subscriber_path(@subscriber), :notice => "You can only view statistics for yourself!"
+        redirect_to subscriber_path(current_subscriber), :notice => "You can only view statistics for yourself!"
       else
       end
     else

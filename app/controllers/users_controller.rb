@@ -9,6 +9,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    if current_user.has_role? :topaz
+      if @user.id != @current_user.id
+        redirect_to user_path(current_user), :notice => "You can only view statistics for yourself!"
+      else
+      end
+    end
   end
 
   def update
