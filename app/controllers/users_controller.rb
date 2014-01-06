@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_person!
+  before_filter :only_allow_admin, :only => [ :index, :update, :destroy ]
 
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
@@ -33,4 +34,11 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
+
+  private
+
+  def only_allow_admin
+    redirect_to root_path, :alert => 'Not authorized as an administrator.' unless current_user.has_role? :admin
+  end
+
 end

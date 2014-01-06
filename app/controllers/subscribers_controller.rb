@@ -75,7 +75,7 @@ class SubscribersController < ApplicationController
   private
 
   def only_allow_admin
-    redirect_to subscribers_path, :alert => 'Not authorized as an administrator.' unless current_subscriber.has_role? :admin
+    redirect_to root_path, :alert => 'Not authorized as an administrator.' unless current_subscriber.has_role? :admin
   end
 
 end
