@@ -21,6 +21,7 @@ class Subscriber < ActiveRecord::Base
     ardingly.com
     bryanston.co.uk
     kes.hants.sch.uk
+    mcsoxford.org
     sevenoaksschool.org
     tonbridge-school.org
     westminster.org.uk
