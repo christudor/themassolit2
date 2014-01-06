@@ -80,6 +80,7 @@
               <li><%= link_to current_subscriber.name, subscriber_path(current_subscriber) %></li>
               <li><%= link_to "Logout", destroy_subscriber_session_path, :method=>'delete' %></li>
             <% elsif user_signed_in? && !subscriber_signed_in? %>
+              <li><%= link_to current_user.name, user_path(current_user) %></li>
               <li><%= link_to "Logout", destroy_user_session_path, :method=>'delete' %></li>           
             <% else %>
             <% end %>
