@@ -2,7 +2,13 @@ class LessonsController < ApplicationController
   
   def show
 
-    authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
+    if subscriber_signed_in?
+      authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
+    elsif user_signed_in?
+      authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
+    else
+      redirect_to root_path, :notice => "Sorry, you need to be logged in access this!"
+    end
 
     @lesson = Lesson.find(params[:id])
     
@@ -13,12 +19,6 @@ class LessonsController < ApplicationController
     else
     end
 
-    @id = @lesson.id
-    @prev = @lesson.previous
-    @next = @lesson.next
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
