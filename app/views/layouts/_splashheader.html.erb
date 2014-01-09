@@ -8,6 +8,7 @@
           <li><%= link_to "Our Courses", courses_path %></li>
 
           <% if !subscriber_signed_in? && !user_signed_in? %>
+          <li><%= link_to "Sample Lectures", samplecourses_path %></li>
           <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Individuals<b class="caret"></b></a>
                     <ul class="dropdown-menu">

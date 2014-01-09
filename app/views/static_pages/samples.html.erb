@@ -2,6 +2,37 @@
 
 <div class="container">
     <h1>Sample Modules</h1>
+    
+    <div class="featurette">
+    <h2 class="featurette-heading">Seamus Heaney: Prose and Poetry</h2>
+      <p class="lead">Rosie Lavan is a doctoral student at St Anne's College, Oxford. She is writing her thesis on 'Seamus Heaney and Society'
+      <p class="lead"><strong>In this module, Rosie discusses two sonnets of Heaney; the first ('Requiem for the Croppies') evoking the ghosts of Ireland's past, the second ('Strange Fruit') exploring the concept of identity and self-awareness in the context of a severed head.</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(56).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video1">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video1").setup({
+        file: "<%= Lesson.find_by_id(56).movies.first.movie %>",
+        title: "Rosie Lavan on Seamus Heaney",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
+
+
     <div class="featurette">
     <h2 class="featurette-heading">Seneca and Early Modern Drama</h2>
       <p class="lead">Dr Helen Slaney is a Lecturer at St Hilda's College, Oxford. Her course on Seneca and Early Modern Drama examines the influence of the Roman tragic poet on the English playwrights of the 16th and 17th centuries, including Marlowe, Shakespeare, and Jonson.
@@ -47,35 +78,6 @@
         jwplayer("sample-video2").setup({
         file: "<%= Lesson.find_by_id(15).movies.first.movie %>",
         title: "Llewelyn Morgan on the Aeneid",
-        width: '100%',
-        aspectratio: '16:9',
-        fallback: 'false',
-        primary: 'flash'
-        });
-        </script>
-      
-      </div>
-
-      <% end %>
-
-  </div>
-
-    <div class="featurette">
-    <h2 class="featurette-heading">The Eastern Front in World War I</h2>
-      <p class="lead">Denis Clark is a final-year DPhil student at Jesus College, Oxford. In this course, Denis looks at the First World War in what might be considered the primary theatre of war - Eastern Europe - from the assassination of Archduke Franz Ferdinand to the Russian Revolution of 1917... and beyond!</p>
-      <p class="lead"><strong>In this section, Denis discusses the Russian Revolution and the impact on Russian war efforts against the German Empire.</strong></p>
-      <br>
-
-      <% if Lesson.find_by_id(50).blank? %>
-      <center>Video coming soon!</center>
-      <% else %>
-      <div id="sample-video">
-        <div id="sample-video3">Loading the player ...</div>
-        
-        <script type='text/javascript'>
-        jwplayer("sample-video3").setup({
-        file: "<%= Lesson.find_by_id(50).movies.first.movie %>",
-        title: "Denis Clark on The Eastern Front",
         width: '100%',
         aspectratio: '16:9',
         fallback: 'false',
