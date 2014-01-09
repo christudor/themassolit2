@@ -72,10 +72,10 @@
       <center>Video coming soon!</center>
       <% else %>
       <div id="sample-video">
-        <div id="sample-video2">Loading the player ...</div>
+        <div id="sample-video3">Loading the player ...</div>
         
         <script type='text/javascript'>
-        jwplayer("sample-video2").setup({
+        jwplayer("sample-video3").setup({
         file: "<%= Lesson.find_by_id(15).movies.first.movie %>",
         title: "Llewelyn Morgan on the Aeneid",
         width: '100%',
