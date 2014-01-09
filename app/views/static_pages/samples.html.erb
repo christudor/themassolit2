@@ -43,10 +43,10 @@
       <center>Video coming soon!</center>
       <% else %>
       <div id="sample-video">
-        <div id="sample-video1">Loading the player ...</div>
+        <div id="sample-video2">Loading the player ...</div>
         
         <script type='text/javascript'>
-        jwplayer("sample-video1").setup({
+        jwplayer("sample-video2").setup({
         file: "<%= Lesson.find_by_id(36).movies.first.movie %>",
         title: "Helen Slaney on Early Modern Theatre",
         width: '100%',
