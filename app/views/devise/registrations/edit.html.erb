@@ -1,6 +1,10 @@
 <% provide(:title, 'Edit User') %>
 <h1>Update Account</h1>
 
-<% user_type = params[:plan] || 'subscriber' %>
+<% if subscriber_signed_in? %>
+	<% user_type = 'subscriber' %>
+<% elsif user_signed_in? %>
+	<% user_type = 'topaz' %>
+<% end %>
 
 <%= render :partial => "#{user_type.underscore}_edit_fields" %>
