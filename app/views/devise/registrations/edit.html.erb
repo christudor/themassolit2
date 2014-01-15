@@ -1,4 +1,6 @@
 <% provide(:title, 'Edit User') %>
+<div class="container">
+
 <h1>Update Account</h1>
 
 <% if subscriber_signed_in? %>
@@ -8,3 +10,9 @@
 <% end %>
 
 <%= render :partial => "#{user_type.underscore}_edit_fields" %>
+
+<div class="span6 offset3">
+	<h3>Cancel my account</h3>
+	<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini' %></p>
+</div>
+</div>

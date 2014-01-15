@@ -21,13 +21,10 @@
   			<li><i class="icon-user"></i> Name: <%= @user.name unless nil %></li>
 
     	<% unless @user.sex == nil %>
-        
         	<li><i class="icon-user"></i> Gender: <%= @user.sex %></li>
-    
     	<% end %>
     	
     	<% unless @user.date_of_birth == nil %>
-    		
     		<li><i class="icon-user"></i> Age: <%= Date.today.year - @user.date_of_birth.to_date.year %></li>
     	<% end %>
      
@@ -41,9 +38,6 @@
 	    	<br>
 	    	<%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-large btn-primary" %>
 	    	<br><br>
-	    	<% unless current_user.has_role? :admin %>
-	    		<%= link_to "Cancel my Account", registration_path(current_user), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-large btn-danger" %>
-	    	<% end %>
 
 	    </center>
 	    <% else %>

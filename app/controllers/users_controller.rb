@@ -1,24 +1,24 @@
 class UsersController < ApplicationController
   before_filter :authenticate_person!
-  before_filter :only_allow_admin, :only => [ :index, :update, :destroy ]
 
   def index
-    authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    authorize! :index, @user, :message => "This page is for admins only, I'm afraid!"
     @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
-    unless current_user.blank?
-      if @user.id != current_user.id
+    if user_signed_in?
+      if current_user.id != @user.id
         redirect_to user_path(current_user), :notice => "You can only view statistics for yourself!"
       else
       end
+    else
     end
   end
 
   def update
-    authorize! :update, @user, :message => 'Not authorized as an administrator.'
+    authorize! :update, @user, :message => "This action can only be performed by admins!"
     @user = User.find(params[:id])
     role = Role.find(params[:user][:role_ids]) unless params[:user][:role_ids].nil?
     params[:user] = params[:user].except(:role_ids)
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
+    authorize! :update, @user, :message => "This action can only be performed by admins!"
     user = User.find(params[:id])
     unless user == current_user
       user.destroy
