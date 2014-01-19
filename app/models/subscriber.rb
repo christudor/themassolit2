@@ -42,11 +42,11 @@ class Subscriber < ActiveRecord::Base
 
   VALID_EMAIL_REGEXP = Regexp.new('(?:' + VALID_DOMAINS.collect { |d| Regexp.escape(d) }.join('|') + ')$')
 
-  validates :email,
-    :format => {
-      :with => VALID_EMAIL_REGEXP,
-      :message => "Is this your school e-mail address?"
-    }
+  #validates :email,
+  #  :format => {
+  #    :with => VALID_EMAIL_REGEXP,
+  #    :message => "Is this your school e-mail address?"
+  #  }
 
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :current_password, :remember_me, :job, :school_id, :sex, :date_of_birth
