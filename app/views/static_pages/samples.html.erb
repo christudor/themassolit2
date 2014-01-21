@@ -91,4 +91,62 @@
 
   </div>
 
+  <div class="featurette">
+    <h2 class="featurette-heading">Nietzsche</h2>
+      <p class="lead">Ben Martin is a BPhil student at Brasenose College, Oxford. His course on Nietzsche explores the three essays that make up 'The Genealogy of Morality'
+      <p class="lead"><strong>In this section, Ben gives a brief biography of Nietzsche, before going on to explain the evolution of his thought over his lifetime.</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(90).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video4">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video4").setup({
+        file: "<%= Lesson.find_by_id(90).movies.first.movie %>",
+        title: "Ben Martin on Nietzsche",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
+
+  <div class="featurette">
+    <h2 class="featurette-heading">Sir Walter Scott</h2>
+      <p class="lead">Gabriel Schenk is a DPhil student at Pembroke College, Oxford - where J. R. R. Tolkien was a Fellow for twenty years - and is writing on the reception of Arthurian legend in 19th- and 20th-century literature.
+      <p class="lead"><strong>In this section, Gabriel talks about how Sir Walter Scott reignited a popular fascination with a certain version of the Middle Ages.</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(86).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video5">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video5").setup({
+        file: "<%= Lesson.find_by_id(86).movies.first.movie %>",
+        title: "Gabriel Schenk on Sir Walter Scott",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
+
 </div>
