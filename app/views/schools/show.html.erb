@@ -26,8 +26,8 @@
           <td>Teacher</td>
           <td><%= subscriber.email %></td>
           <td>Yes</td>
-          <td><%= subscriber.last_sign_in_at.to_date %></td>
-          <td><%= subscriber.sign_in_count %></td>
+          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
+          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
         </tr>
       <% elsif subscriber.has_role? :invalidteacher %>
         <tr>
@@ -36,7 +36,7 @@
           <td><%= subscriber.email %></td>
           <td>No</td>
           <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count %></td>
+          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
         </tr>
         <% elsif subscriber.has_role? :validstudent %>
           <tr>
@@ -44,8 +44,8 @@
         <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>Yes</td>
-        <td><%= subscriber.last_sign_in_at.to_date %></td>
-        <td><%= subscriber.sign_in_count %></td>
+          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
+          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
     </tr>
   <% elsif subscriber.has_role? :invalidstudent %>
     <tr>
@@ -53,8 +53,8 @@
         <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>No</td>
-        <td><%= subscriber.last_sign_in_at.to_date %></td>
-        <td><%= subscriber.sign_in_count %></td>
+          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
+          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
     </tr>
         <% end %>
         <% end %>
@@ -87,8 +87,8 @@
         <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>Yes</td>
-        <td><%= subscriber.last_sign_in_at.to_date %></td>
-        <td><%= subscriber.sign_in_count %></td>
+          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
+          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
     </tr>
   <% elsif subscriber.has_role? :invalidstudent %>
     <tr>
@@ -96,8 +96,8 @@
         <td>Student</td>
         <td><%= subscriber.email %></td>
         <td>No</td>
-        <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-        <td><%= subscriber.sign_in_count %></td>
+          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
+          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
     </tr>
         <% end %>
         <% end %>
