@@ -1,0 +1,21 @@
+<% provide(:title, "Edit subscriber") %>
+<div class="container">
+<h1>Admin: Edit User Details</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@subscriber) do |f| %>
+      <%= render 'shared/subscriber_error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :school_id, "School:" %>
+      <%= f.collection_select :school_id, School.all, :id, :name, {}, { :multiple => false } %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
+</div>

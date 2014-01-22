@@ -1,6 +1,6 @@
 class SubscribersController < ApplicationController
   before_filter :authenticate_subscriber!
-  before_filter :only_allow_admin, :only => [ :index, :update, :destroy ]
+  before_filter :only_allow_admin, :only => [ :index, :update, :destroy, :edit, :update ]
   
   def index
   	authorize! :index, :subscriber, :message => 'Access limited to administrators only.'
@@ -62,6 +62,20 @@ class SubscribersController < ApplicationController
       redirect_to subscribers_path, :notice => "Subscriber deleted."
     else
       redirect_to subscribers_path, :notice => "Can't delete yourself."
+    end
+  end
+
+  def edit
+    @subscriber = Subscriber.find(params[:id])
+  end
+
+  def update
+    @subscriber = Subscriber.find(params[:id])
+    if @subscriber.update_attributes(params[:subscriber])
+      flash[:success] = "Profile updated"
+      redirect_to subscribers_path
+    else
+      render 'edit'
     end
   end
 

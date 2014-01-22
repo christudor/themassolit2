@@ -7,5 +7,7 @@
 </div>
 
 <div class="well">
-  <%= @subscriber.name %> last logged in on <strong><%= last_login.strftime("%A %d %B") %></strong> at <strong><%= last_login.strftime("%I:%M %p") %></strong>
+  <% unless last_login.blank? %>
+  	<%= @subscriber.name %> last logged in on <strong><%= last_login.strftime("%A %d %B") %></strong> at <strong><%= last_login.strftime("%I:%M %p") %></strong>
+  <% end %>
 </div>

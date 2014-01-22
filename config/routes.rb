@@ -24,7 +24,20 @@ Massolit::Application.routes.draw do
     put 'update_card', :to => 'registrations#update_card'
   end
 
-  
+  get 'tags/:tag' => 'courses#index', :as => :tag
+
+  devise_scope :user do 
+    root to: 'static_pages#home'
+    match '/sessions/user', to: 'devise/sessions#create', via: :post
+    match '/sessions/user.new', to: 'devise/sessions#create', via: :post
+  end
+
+  devise_scope :subscriber do
+    root to: 'static_pages#home'
+    match '/sessions/subscriber', to: 'devise/sessions#create', via: :post
+    match '/sessions/subscriber.new', to: 'devise/sessions#create', via: :post
+  end
+
   resources :users
   resources :courses
   resources :providers
@@ -33,9 +46,11 @@ Massolit::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :learners
   resources :teachers
-  resources :subscribers do
-    member do
-      get :studying
+  scope "/admin" do
+    resources :subscribers do
+      member do
+        get :studying
+      end
     end
   end
   resources :schools
@@ -55,20 +70,6 @@ Massolit::Application.routes.draw do
   resources :samples
   resources :options
 
-  get 'tags/:tag' => 'courses#index', :as => :tag
-
-  devise_scope :user do 
-    root to: 'static_pages#home'
-    match '/sessions/user', to: 'devise/sessions#create', via: :post
-    match '/sessions/user.new', to: 'devise/sessions#create', via: :post
-  end
-
-  devise_scope :subscriber do
-    root to: 'static_pages#home'
-    match '/sessions/subscriber', to: 'devise/sessions#create', via: :post
-    match '/sessions/subscriber.new', to: 'devise/sessions#create', via: :post
-  end
-
   # The following lines match actions from weirdly-named controllers to simpler paths.
   # Instead of /static_pages/about, for example, we have /about
 
@@ -81,6 +82,8 @@ Massolit::Application.routes.draw do
   match '/privacypolicy', to: 'static_pages#privacypolicy'
   match '/enduseragreement', to: 'static_pages#enduseragreement'
   match '/pricing', to: 'static_pages#pricing'
+
+  match '/subscribers', to: 'subscribers#index'
 
   match '/ourschools', to: 'static_pages#ourschools'
   match '/school_feedback', to: 'static_pages#school_feedback'

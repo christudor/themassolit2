@@ -49,7 +49,7 @@ class Subscriber < ActiveRecord::Base
   #  }
 
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :current_password, :remember_me, :job, :school_id, :sex, :date_of_birth
+  attr_accessible :name, :email, :password, :password_confirmation, :current_password, :remember_me, :job, :school_id, :sex, :date_of_birth, :role_ids
   before_create :assign_role
 
   validates_presence_of :name
@@ -65,8 +65,13 @@ class Subscriber < ActiveRecord::Base
 
   def assign_role
   # assign a default role if no role is assigned
-  self.add_role :invalidteacher if self.job == "teacher"
-  self.add_role :invalidstudent if self.job == "student"
+    if self.job == "teacher" 
+      self.add_role :invalidteacher
+    elsif self.job == "student"
+      self.add_role :invalidstudent
+    else
+      self.add_role :invalidstudent
+    end
   end
 
   def studying?(course)

@@ -25,6 +25,7 @@
           <a data-toggle="modal" href="#role-options-<%= subscriber.id %>" class="btn btn-mini" type="button">Change role</a>
           <%= render subscriber %>
         </td>
+        <td><%= link_to("Edit Details", edit_subscriber_path(subscriber), :class => 'btn btn-mini') %></td>
         <td><%= link_to("Delete subscriber", subscriber_path(subscriber), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless subscriber == current_subscriber %></td>
     </tr>
   <% end %>
