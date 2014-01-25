@@ -5,7 +5,7 @@
 <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= f.error_notification %>
 
- <%= f.input :email, :label => "E-Mail:", :required => true, :hint => "Enter the e-mail you registered with so we can confim your account!" %>
+ <%= f.input :email, :label => "E-Mail:", :required => true, :hint => "Enter the e-mail you registered with so we can confirm your account!" %>
   <center>
   <%= f.button :submit, "Submit", :class => "btn btn-large btn-primary" %>
   </center>
