@@ -19,12 +19,7 @@
 //= require raphael
 //= require morris
 
-
-$('.dropdown-toggle').click(function(e) {
-  e.preventDefault();
-  setTimeout($.proxy(function() {
-    if ('ontouchstart' in document.documentElement) {
-      $(this).siblings('.dropdown-backdrop').off().remove();
-    }
-  }, this), 0);
-});
+$('.dropdown-submenu ul.dropdown-menu li a').click( function(e) {
+    e.preventDefault();
+    window.location.href = $(this).attr('href');
+})

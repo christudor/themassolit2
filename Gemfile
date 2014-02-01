@@ -52,7 +52,6 @@ group :development, :test do
   gem 'quiet_assets', '1.0.1'
   gem 'pry-rails'
   gem 'pry-debugger'
-
 end
 
 # Gems used only for assets and not required
@@ -63,8 +62,6 @@ group :assets do
   gem 'uglifier', '1.2.3'
   gem 'foundation-icons-sass-rails'
 end
-
-gem 'jquery-rails', '2.0.2'
 
 group :test do
   gem 'capybara', '1.1.2'
