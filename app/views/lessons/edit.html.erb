@@ -17,6 +17,13 @@
       <%= f.label :lessondescription, "Synopsis:" %>
       <%= f.text_area :lessondescription, :rows => 3 %>
 
+      <br><br>
+      <h2>Tags</h2>
+      <p>Tags should be separated by commas. They should include: sub-genre, period, authors, texts, and exam specification options.</p>
+
+      <%= f.label :lessontag_list, "Tags:" %>
+      <%= f.text_area :lessontag_list, :rows => 10 %>
+
       <br>
       <br>
       <center><%= f.submit "Edit Module", class: "btn btn-large btn-primary" %></center>

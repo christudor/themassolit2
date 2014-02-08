@@ -7,6 +7,7 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "About", about_path %></li>
           <li><%= link_to "Help", help_path %></li>
+
           <% if signed_in? %>
             <li><%= link_to "Courses", courses_path %></li>
             <li><%= link_to "Tutors", providers_path %></li>
@@ -26,6 +27,7 @@
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
+
         </ul>
       </nav>
     </div>

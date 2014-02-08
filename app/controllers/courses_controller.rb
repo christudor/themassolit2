@@ -62,6 +62,13 @@ class CoursesController < ApplicationController
     @unique_genre_list.flatten!
     @unique_genre_list.uniq!
 
+    @unique_lessontag_list = []
+    Lesson.all.each do |lesson|
+      @unique_lessontag_list << lesson.lessontag_list
+    end
+    @unique_lessontag_list.flatten!
+    @unique_lessontag_list.uniq!
+
     @unique_subgenre_list = []
     Course.all.each do |course|
       @unique_subgenre_list << course.subgenre_list
@@ -101,6 +108,11 @@ class CoursesController < ApplicationController
     if params[:tag]
       @courses = Course.tagged_with(params[:tag])
       @title = "Courses on #{params[:tag]}"
+    
+    elsif params[:search_lessontag]
+      @lessons = Lesson.tagged_with(params[:search_lessontag], :on => :lessontags, :order => "title")
+      @title = "Search Results"
+      
     elsif params[:search_name]
       @courses = Course.where("name = ?", params[:search_name])
       @title = "Search Results"
@@ -123,7 +135,7 @@ class CoursesController < ApplicationController
       @courses = Course.tagged_with(params[:search_examoption], :on => :examoptions)
       @title = "Search Results"
     else
-      @courses = Course.all
+      @courses = Course.all(:order => "name")
       @title = "All Courses"
     end
 

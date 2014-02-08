@@ -25,6 +25,8 @@ Massolit::Application.routes.draw do
   end
 
   get 'tags/:tag' => 'courses#index', :as => :tag
+  get 'tags/:lessontag' => 'courses#index', :as => :lessontag
+
 
   devise_scope :user do 
     root to: 'static_pages#home'
@@ -95,6 +97,7 @@ Massolit::Application.routes.draw do
   match '/teachersplash', to: 'static_pages#teachersplash'
 
   match '/coursedash',    to: 'courses#coursedash'
+  match '/lessondash',    to: 'lessons#lessondash'
  
   match '/addcourse',     to: 'courses#addcourse'
   match '/addlecture',    to: 'lessons#addlecture'

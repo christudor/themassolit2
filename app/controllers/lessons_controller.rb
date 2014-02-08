@@ -2,6 +2,15 @@ class LessonsController < ApplicationController
   
   def show
 
+    @lesson = Lesson.find(params[:id])
+
+    @unique_lessontag_list = []
+    Lesson.all.each do |lesson|
+      @unique_lessontag_list << lesson.lessontag_list
+    end
+    @unique_lessontag_list.flatten!
+    @unique_lessontag_list.uniq!
+
     if subscriber_signed_in?
       authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
     elsif user_signed_in?
@@ -9,8 +18,6 @@ class LessonsController < ApplicationController
     else
       redirect_to root_path, :notice => "Sorry, you need to be logged in access this!"
     end
-
-    @lesson = Lesson.find(params[:id])
     
     if subscriber_signed_in?
       @sub_scores = @lesson.scores.where(:subscriber_id => current_subscriber.id)
@@ -19,6 +26,22 @@ class LessonsController < ApplicationController
     else
     end
 
+    @recs = []
+    
+    @lesson.lessontags.each do |tag|
+      Lesson.tagged_with("#{tag.name}").each do |lesson|
+        @recs << lesson
+      end
+    end
+
+    @recs.flatten!
+    @recs.uniq!
+
+  end
+
+  def lessondash
+    authorize! :index, :lesson, :message => 'Access limited to administrators only.'
+    @lessons = Lesson.all(:order => "name")
   end
 
   def new

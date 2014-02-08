@@ -160,6 +160,7 @@
   <% unless @lesson.essays.blank? %>
 
   <h2><%= i %>. Discussion Questions</h2>
+  <% i += 1 %>
 
   <ul class="sourcelist">
         
@@ -170,10 +171,42 @@
 
   <% end %>
 
+  <% unless @lesson.lessontag_list.blank? %>
+
+  <h2><%= i %>. Related Modules </h2>
+  <% i += 1 %>
+
+  <ul class="courselist">
+  <% @recs.each do |rec| %>
+
+  <% unless rec.title == @lesson.title %>
+
+    <li class="coming-soon">
+    <div class="media">
+
+      <div class="pull-left">
+        <%= image_tag rec.course.avatar_url.to_s, :size => "140x140" %>
+      </div>
+
+      <div class="span5">
+        <h4 class="media-heading"><%= link_to rec.title, lesson_path(rec) %>
+          <p><small><%= link_to rec.course.name, course_path(rec.course) %></small>
+        </h4>
+        <p class="small"><%= truncate(rec.lessondescription, :length => 130, :separator => ' ') %>
+        <%= link_to "Read more", rec %>
+      </div>
+
+
+     </div>
+    </li>
+  <% end %>
+  <% end %>
+
+  </ul>
+
+  <% end %>
 
 </div>
-
-
 
 
 <div class="span3 offset1">

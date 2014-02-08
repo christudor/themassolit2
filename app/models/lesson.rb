@@ -1,7 +1,10 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :lessondescription, :length, :title, :course_id, :lessonimage, :video, :transcript
+  attr_accessible :lessondescription, :length, :title, :course_id, :lessonimage, :video, :transcript, :tag_list, :lessontag_list
   validates :course_id, presence: true
   belongs_to :course
+
+  acts_as_taggable
+  acts_as_taggable_on :lessontags
 
   has_many :movies, :dependent => :destroy
   has_many :transcripts, :dependent => :destroy

@@ -5,7 +5,31 @@
 </div>
 
 <div class="container">
-  <div class="span5">
+<div class="span7 offset2">
+
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_name, params[:search_name], :autocomplete => :off,
+          :data => { provide: "typeahead", source: Course.select('name').all.map(&:name), items: "9"},
+          class: "span6", :placeholder => "Search Courses (e.g. 'Utilitarianism')", :value => nil %>
+          <%= submit_tag "Search Courses", :name => nil, class: "btn" %>
+      <% end %>
+      </div>
+
+      <div class="input-append">
+      <%= form_tag courses_path, :method => 'get' do %>
+          <%= text_field_tag :search_lessontag, params[:search_lessontag], :autocomplete => :off,
+          :data => { provide: "typeahead", source: @unique_lessontag_list, items: "9"},
+          class: "span6", :placeholder => "Keyword Search (e.g. 'Frankenstein', Sophocles', '19th Century', etc.)", :value => nil %>
+          <%= submit_tag "Search Modules", :name => nil, class: "btn" %>
+      <% end %>
+      </diV>
+
+</div>
+</div>
+
+<% unless "Yes" != "No" %>
+
       <div class="input-append">
       <%= form_tag courses_path, :method => 'get' do %>
           <%= text_field_tag :search_name, params[:search_name], :autocomplete => :off,
@@ -64,6 +88,8 @@
   </div>
 </div>
 
+<% end %>
+
 <br>
 
 <div class="navbar">
@@ -98,6 +124,36 @@
 
 <div class="span12">
 <ul class="courselist">
+<% if params[:search_lessontag] %>
+
+<% @lessons.each do |lesson| %>
+    <li class="coming-soon">
+    <div class="media">
+      <div class="pull-left">
+        <%= image_tag lesson.course.avatar_url.to_s, :size => "170x170" %>
+      </div>
+
+      <div class="span7">
+        <h4 class="media-heading"><%= link_to lesson.title, lesson %>
+        <p><small><%= link_to lesson.course.name, course_path(lesson.course) %></small>
+        </h4>
+        <p class="small"><%= truncate(lesson.lessondescription, :length => 350, :separator => ' ') %>
+        <%= link_to "Read more", lesson %>
+      </div>
+
+      <div class="span2">
+        <br><br>
+        <p> <i class="icon-folder-open"></i>  <%= raw lesson.course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %> </p>
+        <p> <i class="icon-user"></i> <%= link_to lesson.course.provider.name, lesson.course.provider %></p>
+        <br>
+          <%= link_to "Go to Module", lesson, :class => "btn btn-large btn-primary" %>
+      </div>
+     </div>
+    </li>
+  <% end %>
+
+<% else %>
+
   <% @courses.each do |course| %>
     <li class="coming-soon">
     <div class="media">
@@ -120,8 +176,10 @@
           <%= link_to "Go to Course", course, :class => "btn btn-large btn-primary" %>
         <% end %>
       </div>
-	</div>
+	   </div>
     </li>
   <% end %>
+<% end %>
+
 </ul>
 </div>
