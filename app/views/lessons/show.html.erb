@@ -168,10 +168,12 @@
           <li><%= essay.question %></li>
         <% end %>
   </ul>
-
+  <br><br>
   <% end %>
 
-  <% unless @recs.blank? %>
+  
+
+  <% unless @recs.count < 1 %>
 
   <h2><%= i %>. Related Modules </h2>
   <% i += 1 %>
