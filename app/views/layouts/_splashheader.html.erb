@@ -4,9 +4,29 @@
       <%= link_to "MASSOLIT | Beta", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Our Courses", courses_path %></li>
+          <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Courses<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "All Courses", courses_path %></li>
+                      
+                      <li class="dropdown-submenu">
+                        <a tabindex="-1" href="#">Browse Courses</a>
+                        <ul class="dropdown-menu">
 
+                          <% Course.all.each do |course| %>
+                            <% if course.lessons.count < 1 %>
+                            <% else %>
+                              <li><%= link_to course.name, course_path(course) %></li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                      </li>
+
+                    </ul>
+          </li>
+
+
+          
           <% if !subscriber_signed_in? && !user_signed_in? %>
           <li><%= link_to "Sample Lectures", samplecourses_path %></li>
           <li id="fat-menu" class="dropdown">
