@@ -4,6 +4,7 @@
       <%= link_to "MASSOLIT | Beta", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
+        <li><%= link_to "Home", root_path %></li>
           <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Courses<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -13,7 +14,8 @@
                         <a tabindex="-1" href="#">Browse Courses</a>
                         <ul class="dropdown-menu">
 
-                          <% Course.all.each do |course| %>
+                          <% menu_courses = Course.find( :all, :order => "created_at DESC" , :limit => 10) %>
+                          <% menu_courses.each do |course| %>
                             <% if course.lessons.count < 1 %>
                             <% else %>
                               <li><%= link_to course.name, course_path(course) %></li>
