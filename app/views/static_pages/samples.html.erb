@@ -2,6 +2,35 @@
 
 <div class="container">
     <h1>Sample Modules</h1>
+
+  <div class="featurette">
+    <h2 class="featurette-heading">The Atomic Bombing of Hiroshima and Nagasaki</h2>
+      <p class="lead">Dr Christopher Harding is a lecturer in Asian History at the University of Edinburgh, specialising in particular in Japan and India. In 2013, he was selected as one of the AHCR/BBC's ten New Generation Thinkers.
+      <p class="lead"><strong>In this section, Christopher discusses the atomic bombings of Hiroshima and Nagasaki, looking in particular at whether the bombings were necessary and what the Americans were trying to achieve.</strong></p>
+      <br>
+
+      <% if Lesson.find_by_id(155).blank? %>
+      <center>Video coming soon!</center>
+      <% else %>
+      <div id="sample-video">
+        <div id="sample-video5">Loading the player ...</div>
+        
+        <script type='text/javascript'>
+        jwplayer("sample-video5").setup({
+        file: "<%= Lesson.find_by_id(155).movies.first.movie %>",
+        title: "Christopher Harding on the Atomic Bombs",
+        width: '100%',
+        aspectratio: '16:9',
+        fallback: 'false',
+        primary: 'flash'
+        });
+        </script>
+      
+      </div>
+
+      <% end %>
+
+  </div>
     
     <div class="featurette">
     <h2 class="featurette-heading">Seamus Heaney: Prose and Poetry</h2>
@@ -107,35 +136,6 @@
         jwplayer("sample-video4").setup({
         file: "<%= Lesson.find_by_id(90).movies.first.movie %>",
         title: "Ben Martin on Nietzsche",
-        width: '100%',
-        aspectratio: '16:9',
-        fallback: 'false',
-        primary: 'flash'
-        });
-        </script>
-      
-      </div>
-
-      <% end %>
-
-  </div>
-
-  <div class="featurette">
-    <h2 class="featurette-heading">Sir Walter Scott</h2>
-      <p class="lead">Gabriel Schenk is a DPhil student at Pembroke College, Oxford - where J. R. R. Tolkien was a Fellow for twenty years - and is writing on the reception of Arthurian legend in 19th- and 20th-century literature.
-      <p class="lead"><strong>In this section, Gabriel talks about how Sir Walter Scott reignited a popular fascination with a certain version of the Middle Ages.</strong></p>
-      <br>
-
-      <% if Lesson.find_by_id(86).blank? %>
-      <center>Video coming soon!</center>
-      <% else %>
-      <div id="sample-video">
-        <div id="sample-video5">Loading the player ...</div>
-        
-        <script type='text/javascript'>
-        jwplayer("sample-video5").setup({
-        file: "<%= Lesson.find_by_id(86).movies.first.movie %>",
-        title: "Gabriel Schenk on Sir Walter Scott",
         width: '100%',
         aspectratio: '16:9',
         fallback: 'false',
