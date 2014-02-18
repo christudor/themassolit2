@@ -24,7 +24,13 @@
       <%= f.text_field :university %>
 
       <%= f.label :bio %>
-      <%= f.text_field :bio %>
+      <%= f.text_area :bio, :rows => 10 %>
+
+      <br>
+
+      <p class="body">Note: quotes can have embedded HTML, e.g. <code>&lt;br&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, etc. Remember that one <code>&lt;br&gt;</code> tag renders a new line, two <code>&lt;br&gt;</code> tags render a new paragraph.
+      
+      <br><br>
 
       <%= f.label :facebook %>
       <%= f.text_field :facebook %>

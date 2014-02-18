@@ -9,7 +9,7 @@
 <div class="container">
 <div class="span7">
   <h2>About</h2>
-  <p class="media"><%= @provider.bio %></p>
+  <p class="media"><%= @provider.bio.html_safe %></p>
   <br><br>
   
   <center><p class="courselist"><i class="icon-chevron-left"></i> <%= link_to "Go back", :back %></p></center>
@@ -51,7 +51,7 @@
     	<li><i class="fi-social-twitter"></i> <%= link_to "@#{@provider.twitter}", "http://www.twitter.com/#{@provider.twitter}", :target => "_blank" %> </li>
     <% end %>
     <% unless @provider.blog.empty? %>
-    	<li><i class="icon-pencil"></i> <%= link_to "Blog", @provider.blog, :target => "_blank" %> </li>
+    	<li><i class="icon-pencil"></i> <%= link_to "Personal Website", @provider.blog, :target => "_blank" %> </li>
     <% end %>
     <% unless @provider.huffpo.empty? %>
     	<li><i class="icon-comment"></i> <%= link_to "Huffington Post", @provider.huffpo, :target => "_blank" %> </li>

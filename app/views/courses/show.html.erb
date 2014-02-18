@@ -45,7 +45,7 @@
   <br><br>
   
   <h2>About <%= @course.provider.name %></h2>
-  <p class="media"><%= @course.provider.bio %></p>
+  <p class="media"><%= @course.provider.bio.html_safe %></p>
 
   <br><br>
   
