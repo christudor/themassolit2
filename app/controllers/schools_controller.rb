@@ -49,7 +49,7 @@ class SchoolsController < ApplicationController
 
   def index
   	authorize! :index, :school, :message => 'Access limited to administrators only.'
-    @schools = School.paginate(page: params[:page])
+    @schools = School.all(:order => "name")
   end
 
   def destroy
