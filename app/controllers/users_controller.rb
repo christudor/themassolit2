@@ -39,16 +39,16 @@ class UsersController < ApplicationController
         customer = Stripe::Customer.retrieve(user.customer_id)
         unless customer.nil? or customer.respond_to?('deleted')
           if customer.subscription.status == 'active'
-            console.log("Subscription status is active")
+            raise "Customer subscription is active"
             customer.cancel_subscription
           elsif customer.subscription.status == 'trialing'
-            console.log("Subsription status is trialing")
+            raise "Customer subscription is trialling"
             customer.cancel_subscription
           end
         end
-        console.log("Customer was nil or responded to deleted")
+        raise "Customer was nil or responded to deleted"
       end
-      console.log("Customer ID was nil")
+      raise "Customer ID was nil"
       user.destroy
       redirect_to root_path, :notice => "Bye! Thanks for using MASSOLIT! We hope to see you again soon!"
     else
