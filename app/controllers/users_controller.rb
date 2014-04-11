@@ -31,13 +31,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    authorize! :update, @user, :message => "This action can only be performed by admins!"
     user = User.find(params[:id])
-    unless user == current_user
+    if user.has_role? :admin
+      redirect_to users_path, :notice => "Admins cannot be deleted."
+    elsif user == current_user
       user.destroy
-      redirect_to users_path, :notice => "User deleted."
+      redirect_to root_path, :notice => "Bye! Thanks for using MASSOLIT! We hope to see you again soon!"
     else
-      redirect_to users_path, :notice => "Can't delete yourself."
+      user.destroy
+      redirect_to users_path, :notice => "User deleted"
     end
   end
 
