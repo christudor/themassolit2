@@ -1,5 +1,6 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_person!
+  helper_method :sort_column, :sort_direction
 
   def show
     authorize! :view, :school, :message => 'Access limited to teachers only.'
@@ -49,7 +50,7 @@ class SchoolsController < ApplicationController
 
   def index
   	authorize! :index, :school, :message => 'Access limited to administrators only.'
-    @schools = School.all(:order => "name")
+    @schools = School.order(sort_column + " " + sort_direction)
   end
 
   def destroy
@@ -59,4 +60,14 @@ class SchoolsController < ApplicationController
     redirect_to schools_path, :notice => "School deleted!"
   end
 
+  private
+
+  def sort_column
+    School.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+   
 end
