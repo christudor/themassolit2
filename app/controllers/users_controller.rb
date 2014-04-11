@@ -40,6 +40,8 @@ class UsersController < ApplicationController
       user.destroy
       redirect_to root_path, :notice => "Bye! Thanks for using MASSOLIT! We hope to see you again soon!"
     else
+      customer = Stripe::Customer.retrieve(user.customer_id)
+      customer.delete
       user.destroy
       redirect_to users_path, :notice => "User deleted"
     end
