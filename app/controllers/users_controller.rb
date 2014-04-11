@@ -35,16 +35,6 @@ class UsersController < ApplicationController
     if user.has_role? :admin
       redirect_to users_path, :notice => "Admins cannot be deleted."
     elsif user == current_user
-      unless user.customer_id.nil?
-        customer = Stripe::Customer.retrieve(user.customer_id)
-        unless customer.nil? or customer.respond_to?('deleted')
-          if customer.subscription.status == 'active'
-            customer.cancel_subscription
-          elsif customer.subscription.status == 'trialing'
-            customer.cancel_subscription
-          end
-        end
-      end
       user.destroy
       redirect_to root_path, :notice => "Bye! Thanks for using MASSOLIT! We hope to see you again soon!"
     else
