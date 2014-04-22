@@ -27,7 +27,7 @@ gem 'sendgrid'
 
 # Add tags to courses
 
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '~> 2.4.1'
 
 # Amazon Web Services gems for association of database items (e.g. users, courses, etc) with images
 
