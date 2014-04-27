@@ -11,8 +11,10 @@ class LessonsController < ApplicationController
     @unique_lessontag_list.flatten!
     @unique_lessontag_list.uniq!
 
-    if subscriber_signed_in?
+    if subscriber_signed_in? && current_subscriber.school.active?
       authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
+    elsif subscriber_signed_in? && !current_subscriber.school.active?
+      redirect_to root_path, :notice => "Your school's subscription has now expired."
     elsif user_signed_in?
       authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
     else

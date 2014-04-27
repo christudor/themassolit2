@@ -65,13 +65,14 @@
       <% end %>
   </ul>
   <br>
-      <% if subscriber_signed_in? %>
+      <% if subscriber_signed_in? && current_subscriber.school.active? %>
       <%= render 'study_form' %>
       <% else %>
+      <strong>Your school's subscription has now expired.</strong>
       <% end %>
   <br>
 
-  <% if subscriber_signed_in? %>
+  <% if subscriber_signed_in? && current_subscriber.school.active? %>
     <% if current_subscriber.studying?(@course) %>
       <h2>Module Quick Links</h2>
         <ul class="courselist">
@@ -80,7 +81,10 @@
           <% end %>
         </ul>
     <% end %>
-  
+  <% elsif subscriber_signed_in? && !current_subscriber.school.active? %>
+    <% if current_subscriber.studying?(@course) %>
+      <strong>Your school's subscription has now expired.</strong>
+    <% end %>
   <% elsif user_signed_in? %>
     <h2>Module Quick Links</h2>
       <ul class="courselist">
@@ -89,6 +93,7 @@
         <% end %>
       </ul>
   <% else %>
+
   <% end %>
   </ul>
 

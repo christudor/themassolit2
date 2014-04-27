@@ -11,6 +11,9 @@
       <%= f.label :name %>
       <%= f.text_field :name %>
 
+      <%= f.label :active, "Active?" %>
+      <%= f.select :active, [["True", true],["False", false]], { :selected => "True"} %>
+
       <%= f.submit "Update School", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
