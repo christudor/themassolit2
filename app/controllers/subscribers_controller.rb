@@ -4,7 +4,7 @@ class SubscribersController < ApplicationController
   
   def index
   	authorize! :index, :subscriber, :message => 'Access limited to administrators only.'
-    @subscribers = Subscriber.paginate(page: params[:page])
+    @subscribers = Subscriber.paginate(page: params[:page], :order => "created_at DESC")
   end
 
   def show
