@@ -10,6 +10,7 @@ gem 'jquery-rails', '2.0.2'
 gem 'devise', '2.1.2'
 gem 'cancan', '1.6.8'
 gem 'rolify', '3.2.0'
+gem 'omniauth-twitter'
 
 # Simple Form for form construction (for use with Stripe)
 

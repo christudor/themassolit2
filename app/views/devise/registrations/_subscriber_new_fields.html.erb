@@ -11,8 +11,12 @@
   <%= f.input :school_id, :label => "School:", :collection => School.all, :selected => School.first %>
   <%= f.input :name, :label => "Full Name:", :autofocus => true, placeholder: "e.g. John Smith" %>
   <%= f.input :email, :label => "E-Mail Address:", :required => true, placeholder: "e.g. john.smith@yourschool.ac.uk", :hint => "Remember to use your school e-mail address!" %>
-  <%= f.input :password, :label => "Password:", :required => true %>
-  <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>
+  
+  <% if f.object.password_required? %>
+	  <%= f.input :password, :label => "Password:", :required => true %>
+	  <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true %>
+  <% end %>
+  
   <center><%= f.button :submit, 'Sign up', :class => "btn btn-large btn-primary" %></center>
 
 <% end %>

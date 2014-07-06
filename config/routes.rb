@@ -11,7 +11,7 @@ Massolit::Application.routes.draw do
   end
   root :to => 'static_pages#home'
   
-  devise_for :subscribers
+  devise_for :subscribers, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
   authenticated :user do
     root :to => 'static_pages#home'

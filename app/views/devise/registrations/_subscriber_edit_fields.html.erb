@@ -28,7 +28,10 @@
 
   <%= f.input :password, :label => "New Password:", :autocomplete => "off", :hint => "Leave blank if you do not want to make changes", :required => false %>
   <%= f.input :password_confirmation, :label => "New Password Confirmation:", :required => false %>
+  
+  <% if f.object.encrypted_password.present? %>
   <%= f.input :current_password, :label => "Current Password:", :hint => "Enter current password to confirm changes", :required => true %>
+  <% end %>
   <center><%= f.button :submit, 'Update', :class => "btn btn-large btn-primary" %></center>
 <% end %> 
 </div>

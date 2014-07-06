@@ -64,13 +64,6 @@
       <li><i class="icon-exclamation-sign"></i> <%= link_to "Log in", new_subscriber_session_path %> or <%= link_to "sign up", new_subscriber_registration_path(:job => 'student') %> to register for this course.</li>
       <% end %>
   </ul>
-  <br>
-      <% if subscriber_signed_in? && current_subscriber.school.active? %>
-      <%= render 'study_form' %>
-      <% else %>
-      <strong>Your school's subscription has now expired.</strong>
-      <% end %>
-  <br>
 
   <% if subscriber_signed_in? && current_subscriber.school.active? %>
     <% if current_subscriber.studying?(@course) %>
@@ -80,11 +73,13 @@
             <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
           <% end %>
         </ul>
+    <% else %>
+      <%= render 'study_form' %>
     <% end %>
   <% elsif subscriber_signed_in? && !current_subscriber.school.active? %>
-    <% if current_subscriber.studying?(@course) %>
-      <strong>Your school's subscription has now expired.</strong>
-    <% end %>
+      <br />
+      <strong>Your school's subscription has now expired.
+      <br><br> For information on how you can gain access to this course, please <%= mail_to "chris@massolit.co.uk", 'get in touch' %>.</strong>
   <% elsif user_signed_in? %>
     <h2>Module Quick Links</h2>
       <ul class="courselist">

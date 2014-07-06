@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "MASSOLIT | Beta", root_path, id: "logo" %>
+      <%= link_to "MASSOLIT", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
         <li><%= link_to "Home", root_path %></li>
@@ -36,6 +36,7 @@
                       <li><%= link_to "What We Offer", individual_users_path %></li>
                       <li><%= link_to "Sign Up: 30-Day Free Trial", new_user_registration_path(:plan => 'topaz') %></li>
                       <li><%= link_to "Login", new_user_session_path %></li>
+
                     </ul>
           </li>
           <li id="fat-menu" class="dropdown">

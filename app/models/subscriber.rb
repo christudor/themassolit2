@@ -63,6 +63,37 @@ class Subscriber < ActiveRecord::Base
   
   before_create :assign_role
 
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_create do |subscriber|
+      subscriber.provider = auth.provider
+      subscriber.uid = auth.uid
+      subscriber.username = auth.info.nickname
+    end
+  end
+
+  def self.new_with_session(params, session)
+    if session["devise.subscriber_attributes"]
+      new(session["devise.subscriber_attributes"], without_protection: true) do |subscriber|
+        subscriber.attributes = params
+        subscriber.valid?
+      end
+    else
+      super
+    end
+  end
+
+  def password_required?
+    super && provider.blank?
+  end
+
+  def update_with_password(params, *options)
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
+    end
+  end
+
   def assign_role
   # assign a default role if no role is assigned
     if self.job == "teacher" 

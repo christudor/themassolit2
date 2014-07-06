@@ -50,7 +50,7 @@ class SchoolsController < ApplicationController
 
   def index
   	authorize! :index, :school, :message => 'Access limited to administrators only.'
-    @schools = School.order("created_at")
+    @schools = School.order(sort_column + " " + sort_direction)
   end
 
   def destroy
