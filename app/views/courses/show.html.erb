@@ -67,6 +67,7 @@
 
   <% if subscriber_signed_in? && current_subscriber.school.active? %>
     <% if current_subscriber.studying?(@course) %>
+      <br />
       <h2>Module Quick Links</h2>
         <ul class="courselist">
           <% @course.lessons.each do |lesson| %>
