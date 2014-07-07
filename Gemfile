@@ -68,7 +68,7 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'rb-fchange', '0.0.5'
   gem 'rb-notifu', '0.0.4'
-  gem 'win32console', '1.3.0'
+  # gem 'win32console', '1.3.0'
   gem 'factory_girl_rails', '4.1.0'
   gem 'launchy', '2.1.2'
   gem 'email_spec','1.2.1'
@@ -76,5 +76,5 @@ group :test do
 end 
 
 group :production do
-  gem 'pg', '0.12.2'
+  # gem 'pg', '0.12.2'
 end

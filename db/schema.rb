@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20140513104058) do
 
-  create_table "a_levels", :force => true do |t|
-    t.string   "board"
-    t.string   "code"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "answers", :force => true do |t|
     t.text     "answer"
     t.integer  "question_id"
@@ -55,38 +47,9 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.string   "category"
     t.text     "description"
     t.integer  "provider_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "avatar"
-  end
-
-  create_table "dependencies", :force => true do |t|
-    t.integer  "question_id"
-    t.integer  "question_group_id"
-    t.string   "rule"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
-  create_table "dependency_conditions", :force => true do |t|
-    t.integer  "dependency_id"
-    t.string   "rule_key"
-    t.integer  "question_id"
-    t.string   "operator"
-    t.integer  "answer_id"
-    t.datetime "datetime_value"
-    t.integer  "integer_value"
-    t.float    "float_value"
-    t.string   "unit"
-    t.text     "text_value"
-    t.string   "string_value"
-    t.string   "response_other"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
   end
 
   create_table "essays", :force => true do |t|
@@ -228,41 +191,6 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
   add_index "relationships", ["student_id", "course_id"], :name => "index_relationships_on_student_id_and_course_id", :unique => true
   add_index "relationships", ["student_id"], :name => "index_relationships_on_student_id"
 
-  create_table "response_sets", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "survey_id"
-    t.string   "access_code"
-    t.datetime "started_at"
-    t.datetime "completed_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "api_id"
-  end
-
-  add_index "response_sets", ["access_code"], :name => "response_sets_ac_idx", :unique => true
-  add_index "response_sets", ["api_id"], :name => "uq_response_sets_api_id", :unique => true
-
-  create_table "responses", :force => true do |t|
-    t.integer  "response_set_id"
-    t.integer  "question_id"
-    t.integer  "answer_id"
-    t.datetime "datetime_value"
-    t.integer  "integer_value"
-    t.float    "float_value"
-    t.string   "unit"
-    t.text     "text_value"
-    t.string   "string_value"
-    t.string   "response_other"
-    t.string   "response_group"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-    t.integer  "survey_section_id"
-    t.string   "api_id"
-  end
-
-  add_index "responses", ["api_id"], :name => "uq_responses_api_id", :unique => true
-  add_index "responses", ["survey_section_id"], :name => "index_responses_on_survey_section_id"
-
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -313,19 +241,6 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.text     "reference"
   end
 
-  create_table "student_profiles", :force => true do |t|
-    t.string   "school"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "subscriber_profiles", :force => true do |t|
-    t.string   "customer_id"
-    t.string   "last_4_digits"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
   create_table "subscribers", :force => true do |t|
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
@@ -373,28 +288,6 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
 
   add_index "subscribers_profiles", ["subscriber_id", "profile_id"], :name => "index_subscribers_profiles_on_subscriber_id_and_profile_id"
 
-  create_table "survey_sections", :force => true do |t|
-    t.integer  "survey_id"
-    t.string   "title"
-    t.text     "description"
-    t.string   "reference_identifier"
-    t.string   "data_export_identifier"
-    t.string   "common_namespace"
-    t.string   "common_identifier"
-    t.integer  "display_order"
-    t.string   "custom_class"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
-  end
-
-  create_table "survey_translations", :force => true do |t|
-    t.integer  "survey_id"
-    t.string   "locale"
-    t.text     "translation"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -410,12 +303,6 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
-  end
-
-  create_table "teacher_profiles", :force => true do |t|
-    t.string   "school"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "teachers", :force => true do |t|
@@ -448,6 +335,8 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",                  :default => false
+    t.string   "customer_id"
+    t.string   "last_4_digits"
     t.string   "role"
     t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
@@ -458,10 +347,6 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "profile_id"
-    t.string   "profile_type"
-    t.string   "customer_id"
-    t.string   "last_4_digits"
     t.date     "date_of_birth"
     t.string   "sex"
   end
@@ -476,32 +361,6 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
-
-  create_table "validation_conditions", :force => true do |t|
-    t.integer  "validation_id"
-    t.string   "rule_key"
-    t.string   "operator"
-    t.integer  "question_id"
-    t.integer  "answer_id"
-    t.datetime "datetime_value"
-    t.integer  "integer_value"
-    t.float    "float_value"
-    t.string   "unit"
-    t.text     "text_value"
-    t.string   "string_value"
-    t.string   "response_other"
-    t.string   "regexp"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  create_table "validations", :force => true do |t|
-    t.integer  "answer_id"
-    t.string   "rule"
-    t.string   "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "videos", :force => true do |t|
     t.string   "name"
