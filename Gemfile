@@ -1,16 +1,19 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'bootstrap-sass', '2.1'
+gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
-gem 'bootstrap-will_paginate', '0.0.6'
+gem 'bootstrap-will_paginate'
 gem 'jquery-rails', '2.0.2'
 gem 'devise', '2.1.2'
 gem 'cancan', '1.6.8'
 gem 'rolify', '3.2.0'
 gem 'omniauth-twitter'
+gem 'ionicons-rails'
+gem 'turbolinks'
+gem 'gibbon'
 
 # Simple Form for form construction (for use with Stripe)
 
@@ -43,7 +46,7 @@ gem 'aws-sdk', '~> 1.5.7'
 gem 'impressionist'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.5'
+  gem 'pg'
   gem 'rspec-rails', '2.11.0'
   gem 'guard-rspec', '1.2.1'
   gem 'guard-spork', '1.2.0'

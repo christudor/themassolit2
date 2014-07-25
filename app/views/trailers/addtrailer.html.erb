@@ -1,16 +1,34 @@
-<% provide(:title, 'Add Trailer') %>
-<div class="container">
-	<h1>Add Trailer (Stage 1 of 2)</h1>
-		<div class="span8 offset2">
-		<p class="body">Note: Trailers are added in two stages. On this page, the trailer itself uploaded to Amazon S3. On the next page (which you will be redirected to automatically) that trailer is given a name and linked to a module.</p>
-		<br>
+<% provide(:title, 'New Trailer') %>
+<%= content_for :body_id, "form" %>
 
-		<center><h3>Trailer Uploader</h3>
-		<br>
-		<%= direct_upload_form_for @traileruploader do |f| %>
-        	<p><%= f.file_field :trailer %></p>
-        	<p><%= f.submit "Upload trailer", :class => "btn btn-large btn-primary" %></p>
-        <% end %>
-        </center>
-     </div>
+<div class="menubar">
+<div class="sidebar-toggler visible-xs">
+<i class="ion-navicon"></i>
+</div>
+
+	<div class="page-title">
+		Add New Trailer (Stage 1 of 2)
+	</div>
+</div>
+
+<div class="content-wrapper">
+	
+	<%= direct_upload_form_for @traileruploader, html: { class: "form-horizontal" } do |f| %>
+
+	<div class="form-group">
+    <label class="col-sm-2 col-md-2 control-label">Trailer</label>
+      	<div class="col-sm-10 col-md-8">
+      		<%= f.file_field :trailer, :class => 'form-control' %>
+  		</div>
+	</div>
+
+	<div class="form-group form-actions">
+				<div class="col-sm-offset-2 col-sm-10">
+		<%= link_to "Cancel", :back, :class => "btn btn-default" %>
+    		<%= f.submit "Upload trailer", class: "btn btn-success" %>
+    	</div>
+    </div>
+
+    <% end %>
+
 </div>

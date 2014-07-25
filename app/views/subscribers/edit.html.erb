@@ -1,21 +1,40 @@
-<% provide(:title, "Edit subscriber") %>
-<div class="container">
-<h1>Admin: Edit User Details</h1>
+<% provide(:title, 'Edit User') %>
+<%= content_for :body_id, "form" %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@subscriber) do |f| %>
-      <%= render 'shared/subscriber_error_messages' %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :school_id, "School:" %>
-      <%= f.collection_select :school_id, School.all, :id, :name, {}, { :multiple => false } %>
-
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-
+<div class="menubar">
+  <div class="sidebar-toggler visible-xs">
+    <i class="ion-navicon"></i>
+  </div>
+  <div class="page-title">
+    Edit User
   </div>
 </div>
+
+<div class="content-wrapper">
+  <%= form_for @subscriber, html: { class: "form-horizontal" } do |f| %>
+  <%= render 'shared/subscriber_error_messages' %>
+  
+  <div class="form-group">
+    <%= f.label :name, :class => 'col-sm-2 col-md-2 control-label' %>
+      <div class="col-sm-10 col-md-8">
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :school_id, :class => 'col-sm-2 col-md-2 control-label' %>
+      <div class="col-sm-10 col-md-8">
+        <%= f.collection_select :school_id, School.all, :id, :name, {}, { :multiple => false, :class => 'form-control' } %>
+      </div>
+  </div>
+
+  <div class="form-group form-actions">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= link_to "Cancel", :back, :class => "btn btn-default" %>
+        <%= f.submit "Edit Subscriber", class: "btn btn-success" %>
+      </div>
+  </div>
+
+  <% end %>
+
 </div>

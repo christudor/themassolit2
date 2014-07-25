@@ -1,60 +1,57 @@
 <% provide(:title, 'Edit Course') %>
+<%= content_for :body_id, "form" %>
 
-<%# courselist = Course.select('name').all.map(&:name) %>
-<% genrelist = ['English Literature', 'Classics', 'History', 'Philosophy', 'Modern Languages'] %>
+<div class="menubar">
+<div class="sidebar-toggler visible-xs">
+<i class="ion-navicon"></i>
+</div>
 
-<div class="container">
-<h1>Edit Course</h1>
-
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for @course, :html => {:multipart => true} do |f| %>
-      <%= render 'shared/course_error_messages' %>
-
-      <h2>Course Details</h2>
-
-      <%= f.label :name, "Course Title:" %>
-      <%= f.text_field :name %>
-
-      <%= f.label :category, "Category:" %>
-      <%= f.text_field :category %>
-
-      <%= f.label :description, "Course Synopsis:" %>
-      <%= f.text_area :description, :rows => "9" %>
-
-      <%= f.label :provider_id, "Tutor:" %>
-      <%= f.collection_select :provider_id, Provider.all, :id, :name, {}, { :multiple => false } %>
-
-      <br><br>
-      <h2>Tags</h2>
-      <p>Tags should be separated by commas.</p>
-
-      <%= f.label :genre_list, "Genre:" %>
-      <%= f.text_field :genre_list, :autocomplete => :off, :data => { provide: "typeahead", source: genrelist, items: "9" } %>
-
-      <%= f.label :subgenre_list, "Subgenre(s)" %>
-      <%= f.text_field :subgenre_list %>
-
-      <%= f.label :period_list, "Period(s)" %>
-      <%= f.text_field :period_list %>
-
-      <%= f.label :author_list, "Author(s)" %>
-      <%= f.text_field :author_list %>
-
-      <%= f.label :text_list, "Text(s)" %>
-      <%= f.text_field :text_list %>
-
-      <%= f.label :examoption_list, "Specification Option(s):" %>
-      <%= f.text_field :examoption_list %>
-
-      <%= f.label :theme_list, "Miscellaneous:" %>
-      <%= f.text_field :theme_list %>
-
-      <br><br>
-
-
-      <%= f.submit "Update Course", class: "btn btn-large btn-primary" %>
-    <% end %>
+  <div class="page-title">
+    Edit Course
   </div>
 </div>
+
+<div class="content-wrapper">
+  
+  <%= form_for @course, :html => {:class => "form-horizontal"} do |f| %>
+    <%= render 'shared/course_error_messages' %>
+
+  <div class="form-group">
+    <%= f.label :name, "Course Title", :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :genre_list, "Category", :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :genre_list, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "Summary", :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_area :description, :rows => "9", :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :provider_id, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.collection_select :provider_id, Provider.all, :id, :name, {}, { :multiple => false, :class => 'form-control' } %>
+      </div>
+  </div>
+
+  <div class="form-group form-actions">
+        <div class="col-sm-offset-2 col-sm-10">
+    <%= link_to "Cancel", :back, :class => "btn btn-default" %>
+
+        <%= f.submit "Edit Course", class: "btn btn-success" %>
+      </div>
+    </div>
+
+    <% end %>
+
 </div>

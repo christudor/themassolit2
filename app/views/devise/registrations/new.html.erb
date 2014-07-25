@@ -1,56 +1,116 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Sign Up') %>
+<%= content_for :body_id, "signup" %>
 
-<% user_type = params[:plan] || 'subscriber' %>
-<% heading_type = params[:job] || 'subscriber' %>
+  <div class="container">
+    <div class="row header">
+      <div class="col-md-12">
+        <h4>
+          Set up your new
+          <% if params[:user][:rolable_type].downcase.eql? 'member' %>
+            account today.</h4>
+            <p>Get unlimited access to MASSOLIT for just £4.99 a month.
+          <% elsif params[:user][:rolable_type].downcase.eql? 'admin' %>
+            account today.</h4>
+             <p>This sign-up is for admins only.
+          <% elsif params[:user][:rolable_type].downcase.eql? 'teacher' %>
+            account today.</h4>
+             <p>This sign-up is for teachers. If you're a student, you should <%= link_to "sign up here", student_sign_up_path %>
+          <% else %>
+            account today.</h4>
+             <p>Are you a teacher? <%= link_to "Sign up here", teacher_sign_up_path %>
+          <% end %>
+      </div>
+    </div>
 
-<% if user_type == 'topaz' %>
-<h1>30-Day Free Trial</h1>
-<% elsif user_type == 'subscriber' %>
-<h1><%= "#{heading_type.titleize} Sign Up" %></h1>
-<% else %>
-<% end %>
+<%
+  params[:user][:rolable_type] ||= 'student'
 
-<div class="span6 offset3">
-  <% if heading_type == 'student' %>
+  if ["member", "student", "teacher", "admin"].include? params[:user][:rolable_type].downcase
+    child_class_name = params[:user][:rolable_type].downcase.camelize
+    rolable_type = params[:user][:rolable_type].downcase
+  else
+    child_class_name = "Student"
+    rolable_type = "student"
+  end
 
-    <p class="body">MASSOLIT is currently running a closed beta for a <%= link_to "select number of schools", ourschools_path %> in London and the South East.
-    
-    <p class="body">If you're at one of these schools, simply register using your <strong>school e-mail address</strong> to gain immediate access to our <%= link_to "extensive library of courses", courses_path %>.
-    
-    <p class="body">If you're at school which hasn't signed up yet, <%= link_to "let us know", contact_path %> and we'll see if we can sort something out. In the meantime, feel free to <%= link_to "sign up for a free trial", new_user_registration_path(:plan => 'topaz') %> to access videos immediately.
-    
-    <p class="body"><strong>Note:</strong> if you're actually a teacher (i.e. not a student), you should be signing up <%= link_to "here", new_subscriber_registration_path(:job => 'teacher') %>.
+  resource.rolable = child_class_name.constantize.new if resource.rolable.nil?
+%>
 
-   <br><br>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+  :html => {:class => 'card_form form-horizontal' } ) do |f| %>
 
-  <% elsif heading_type == 'teacher' %>
+<%= f.error_notification %>
+  <%= display_base_errors resource %>
 
-    <p class="body">MASSOLIT is currently running a closed beta for a <%= link_to "select number of schools", ourschools_path %> in London and the South East.
-    
-    <p class="body">If you're at one of these schools, please sign up using your <strong>school e-mail address</strong> to gain access to our <%= link_to "extensive library of courses", courses_path %>.
-    
-    <p class="body">If you're at school which hasn't signed up yet, <%= link_to "let us know", contact_path %> and we'll see if we can sort something out. In the meantime, feel free to <%= link_to "sign up for a free trial", new_user_registration_path(:plan => 'topaz') %> to access videos immediately.
-    
-    <p class="body"><strong>Note:</strong> if you're actually a student (i.e. not a teacher), you should be signing up <%= link_to "here", new_subscriber_registration_path(:job => 'student') %>.
+    <div class="row">
+      <div class="col-md-12">
+        <div class="wrapper clearfix">
+          <div class="formy">
+            <div class="row">
+              <div class="col-md-12">
+                  
+                  <% unless rolable_type == 'member' %>
+                    <%= simple_fields_for resource.rolable do |rf| %>
+                      <% render "#{child_class_name.underscore}_fields", :f => rf %>
+                    <% end %>
+                  <% end %>
 
-    <br><br>
+                  <div class="form-group">
+                  <%= f.input :name, :label => "Full Name:", :autofocus => true, input_html: { class: 'form-control' } %>
+                  </div>
 
-  <% elsif user_type == 'topaz' %>
+                  <div class="form-group">
+                  <%= f.input :email, :label => "E-Mail Address:", :required => true, input_html: { class: 'form-control' }  %>
+                  </div>
 
-  		<p class="body">Enjoy free, unlimited access to MASSOLIT's <%= link_to "extensive collection of courses", courses_path %> for 30 days by signing up for our free trial.
-  		
-      <p class="body">You won't be charged until after your trial ends, and you can cancel at any time. <%= link_to "Find out what we offer", individual_users_path %> or <%= link_to "check out the most frequently asked questions", faqs_path %>.
+                  <div class="form-group">
+                    <%= f.input :password, :label => "Password:", :required => true, input_html: { class: 'form-control' }  %>
+                  </div>
 
-      <br><br>
+                  <div class="form-group">
+                    <%= f.input :password_confirmation, :label => "Password Confirmation:", :required => true, input_html: { class: 'form-control' }  %>
+                  </div>
 
-  <% else %>
-  <% end %>
-  
+                  <%= hidden_field :user, :rolable_type, :value => rolable_type %>
+
+                  <% if rolable_type == 'member' %>
+                    <%= simple_fields_for resource.rolable do |rf| %>
+                      <% render "#{child_class_name.underscore}_fields", :f => rf %>
+                    <% end %>
+                  <% end %>
+
+
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> I have read & agree to the 
+                      <%= link_to "Terms of service", terms_path %>.
+                    </label>
+                  </div>
+                  
+                  <br>
+
+                  <center>
+                  <button type="submit" class="button-clear">
+                      <span>Create my account</span>
+                  </button>
+                  </center>
+                  
+                  <% end %>
+              </div>
+            </div>            
+          </div>
+        </div>
+        <div class="already-account">
+          Already have an account?
+          <%= link_to "Go to sign in!", new_user_session_path %>
+          <% if ["student", "teacher"].include? params[:user][:rolable_type] %>
+            <br />
+            No longer at school? <%= link_to "Get a monthly subscription instead", member_sign_up_path %>
+          <% else %>
+            <br />
+            Still at school? <%= link_to "Sign up via your school instead", student_sign_up_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-<% content_for :head do %>
-  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
-<% end %>
-
-<%= render :partial => "#{user_type.underscore}_new_fields" %>
-

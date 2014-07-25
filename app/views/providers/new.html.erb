@@ -1,57 +1,84 @@
 <% provide(:title, 'New Tutor') %>
-<h1>Add Tutor</h1>
+<%= content_for :body_id, "form" %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@provider) do |f| %>
+<div class="menubar">
+<div class="sidebar-toggler visible-xs">
+<i class="ion-navicon"></i>
+</div>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :position %>
-      <%= f.text_field :position %>
-
-      <%= f.label :department %>
-      <%= f.text_field :department %>
-
-      <%= f.label :college %>
-      <%= f.text_field :college %>
-
-      <%= f.label :university %>
-      <%= f.text_field :university %>
-
-      <%= f.label :bio %>
-      <%= f.text_area :bio, :rows => 10 %>
-
-      <br>
-
-      <p class="body">Note: quotes can have embedded HTML, e.g. <code>&lt;br&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, etc. Remember that one <code>&lt;br&gt;</code> tag renders a new line, two <code>&lt;br&gt;</code> tags render a new paragraph.
-      
-      <br><br>
-
-      <%= f.label :facebook %>
-      <%= f.text_field :facebook %>
-
-      <%= f.label :twitter %>
-      <%= f.text_field :twitter %>
-
-      <%= f.label :googleplus %>
-      <%= f.text_field :googleplus %>
-
-      <%= f.label :blog %>
-      <%= f.text_field :blog %>
-
-      <%= f.label :huffpo %>
-      <%= f.text_field :huffpo %>
-
-      <%= f.label :academiaedu %>
-      <%= f.text_field :academiaedu %>
-
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <center><%= f.submit "Add Tutor", class: "btn btn-large btn-primary" %></center>
-    <% end %>
+  <div class="page-title">
+    Add New Tutor
   </div>
 </div>
 
+<div class="content-wrapper">
+  
+  <%= form_for @provider, html: { class: "form-horizontal" } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :position, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :position, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :department, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :department, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :college, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :college, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :university, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :university, :class => 'form-control' %>
+      </div>
+  </div>
+
+    <div class="form-group">
+    <%= f.label :bio, "Biography", :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_area :bio, :rows => 10, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :website, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, :class => 'col-sm-2 col-md-2 control-label' %>
+        <div class="col-sm-10 col-md-8">
+          <%= f.text_field :email, :class => 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group form-actions">
+        <div class="col-sm-offset-2 col-sm-10">
+    <%= link_to "Cancel", :back, :class => "btn btn-default" %>
+
+        <%= f.submit "Add new tutor", class: "btn btn-success" %>
+      </div>
+    </div>
+
+    <% end %>
+
+</div>

@@ -43,7 +43,7 @@ class LessonsController < ApplicationController
 
   def lessondash
     authorize! :index, :lesson, :message => 'Access limited to administrators only.'
-    @lessons = Lesson.all(:order => "name")
+    @lessons = Lesson.all
   end
 
   def new
@@ -67,7 +67,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
     if @lesson.update_attributes(params[:lesson])
       flash[:success] = "Lecture updated"
-      redirect_to lessons_path
+      redirect_to '/admin/lectures'
     else
       render 'edit'
     end
@@ -78,7 +78,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new(params[:lesson])
     if @lesson.save
       flash[:success] = "Lecture added"
-      redirect_to lessons_path
+      redirect_to '/admin/lectures'
     else
       render 'new'
     end    
@@ -93,7 +93,7 @@ class LessonsController < ApplicationController
     authorize! :index, :lesson, :message => 'Access limited to administrators only.'
     @lesson = Lesson.find(params[:id])
     @lesson.destroy
-    redirect_to lessons_path, :notice => "Lecture deleted!"
+    redirect_to '/admin/lectures', :notice => "Lecture deleted!"
   end
 
 end

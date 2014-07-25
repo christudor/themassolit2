@@ -1,0 +1,90 @@
+<div id="sidebar-default" class="main-sidebar fix-scroll">
+  <div class="current-user">
+  </div>
+  
+  <div class="menu-section">
+    <h3>Popular</h3>
+    <ul>
+      <li>
+        <%= link_to '/admin/users' do %>
+          <i class="ion-person-stalker"></i> <span>Users Dashboard</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to '/admin/add-course' do %>
+          <i class="ion-plus"></i> <span>Add New Course</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "/admin/add-lecture" do %>
+          <i class="ion-plus"></i> <span>Add New Lecture</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "/admin/add-video" do %>
+          <i class="ion-plus"></i> <span>Add New Video</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="menu-section">
+    <h3>Admin Tools</h3>
+    <ul>
+      <li class="option">
+        <a href="#" data-toggle="sidebar">
+          <i class="ion-clipboard"></i> <span>Dashboards</span>
+          <i class="fa fa-chevron-down"></i>
+        </a>
+        <ul class="submenu">
+          <li><%= link_to "Users", "/admin/users" %></li>
+          <li><%= link_to "Tutors", providers_path %></li>
+          <li><%= link_to "Schools", schools_path %></li>
+          <li><%= link_to "Courses", "/admin/courses" %></li>
+          <li><%= link_to "Lectures", lessons_path %></li>
+          <li><%= link_to "Videos", "/admin/videos" %></li>
+          <li><%= link_to "Trailers", "/admin/trailers" %></li>
+        </ul>
+      </li>
+      <li class="option">
+        <a href="#" data-toggle="sidebar">
+          <i class="ion-plus"></i> <span>Add New...</span>
+          <i class="fa fa-chevron-down"></i>
+        </a>
+        <ul class="submenu">
+          <li><%= link_to "School", "/admin/add-school" %></li>
+          <li><%= link_to "Tutor", "/admin/add-tutor" %></li>
+          <li><%= link_to "Course", "/admin/add-course" %></li>
+          <li><%= link_to "Lecture", "/admin/add-lecture" %></li>
+          <li><%= link_to "Trailer", "/admin/add-trailer" %></li>
+          <li><%= link_to "Video", "/admin/add-video" %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="menu-section">
+    <h3>Navigation</h3>
+    <ul>
+      <li>
+        <%= link_to root_path do %>
+          <i class="ion-arrow-left-a"></i> <span>Back to MASSOLIT</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <div class="bottom-menu hidden-sm">
+    <ul>
+      <li><a href="#"><i class="ion-help"></i></a></li>
+      <li>
+        <a href="#">
+          <i class="ion-archive"></i>
+        </a>
+      </li>
+      <li>
+        <%= link_to root_path do %>
+          <i class="ion-log-out"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -20,27 +20,27 @@ class CoursesController < ApplicationController
     @courses = Course.all(:order => "name")
   end
 
-  def edit
-    authorize! :index, :course, :message => 'Access limited to administrators only.'
-    @course = Course.find(params[:id])
-  end
-
    def update
     authorize! :index, :course, :message => 'Access limited to administrators only.'
     @course = Course.find(params[:id])
     if @course.update_attributes(params[:course])
       flash[:success] = "Course updated"
-      redirect_to coursedash_path
+      redirect_to '/admin/courses'
     else
       render 'edit'
     end
+  end
+
+  def edit
+    authorize! :index, :course, :message => 'Access limited to administrators only.'
+    @course = Course.find(params[:id])
   end
 
   def create
     authorize! :index, :course, :message => 'Access limited to administrators only.'
     @course = Course.new(params[:course])
     if @course.save
-      redirect_to action: :show, id: @course.id
+      redirect_to '/admin/courses'
     else
       render 'new'
     end    
@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
     authorize! :index, :course, :message => 'Access limited to administrators only.'
     @course = Course.find(params[:id])
     @course.destroy
-    redirect_to coursedash_path, :notice => "Course deleted."
+    redirect_to '/admin/courses', :notice => "Course deleted."
   end
 
   def index

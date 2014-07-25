@@ -1,186 +1,73 @@
 <% provide(:title, "Courses") %>
+<%= content_for :body_id, "portfolio" %>
 
-<div class="container">
-<h1><%= @title %></h1>
-</div>
-
-<div class="container">
-<div class="span7 offset2">
-
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_name, params[:search_name], :autocomplete => :off,
-          :data => { provide: "typeahead", source: Course.select('name').all.map(&:name), items: "9"},
-          class: "span6", :placeholder => "Search Courses (e.g. 'Utilitarianism')", :value => nil %>
-          <%= submit_tag "Search Courses", :name => nil, class: "btn" %>
-      <% end %>
+<div id="showcase">
+  <div class="container">
+      <div class="row header">
+        <div class="col-md-12">
+          <h3>Our Courses</h3>
+          <p>Here's a selection of our courses.</p>
+        </div>   
       </div>
 
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_lessontag, params[:search_lessontag], :autocomplete => :off,
-          :data => { provide: "typeahead", source: @unique_lessontag_list, items: "9"},
-          class: "span6", :placeholder => "Keyword Search (e.g. 'Frankenstein', Sophocles', '19th Century', etc.)", :value => nil %>
-          <%= submit_tag "Search Modules", :name => nil, class: "btn" %>
-      <% end %>
-      </diV>
+      <div class="col-md-12 filtering">
+        <ul id="filters">
+          
+          <% if params[:tag] %>
+            <li><%= link_to "All", '/courses' %></li>
+          <% else %>
+            <li><%= link_to "All", '/courses', :class => "active" %></li>
+          <% end %>
+          
+          <% categories = ["English Literature","History","Philosophy","Classics"] %>
 
-</div>
-</div>
-
-<% unless "Yes" != "No" %>
-
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_name, params[:search_name], :autocomplete => :off,
-          :data => { provide: "typeahead", source: Course.select('name').all.map(&:name), items: "9"},
-          class: "span4", :placeholder => "Search by Course Name", :value => nil %>
-          <%= submit_tag "Search", :name => nil, class: "btn" %>
-      <% end %>
+          <% categories.each do |category| %>
+            <% if params[:tag] == category %>
+              <li><%= link_to category, tag_path(category), :class => "active" %></li>
+            <% else %>
+              <li><%= link_to category, tag_path(category) %></li>
+            <% end %>
+          <% end %>
+        </ul>
       </div>
 
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_genre, params[:search_genre], :autocomplete => :off,
-          :data => { provide: "typeahead", source: @unique_genre_list, items: "9"},
-          class: "span4", :placeholder => "Search by Category", :value => nil %>
-          <%= submit_tag "Search", :name => nil, class: "btn" %>
-      <% end %>
-      </div>
+      <% @courses.each do |course| %>
 
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_text, params[:search_text], :autocomplete => :off,
-          :data => { provide: "typeahead", source: @unique_text_list, items: "9"},
-          class: "span4", :placeholder => "Search by Text (e.g. 'Frankenstein')", :value => nil %>
-          <%= submit_tag "Search", :name => nil, class: "btn" %>
+        <div class="col-md-12 project">
+          <div class="col-md-3 devices interfaces web no-padding">
+            <%= link_to course do %>
+              <%= image_tag course.avatar_url.to_s, :size => "210x210", :class => "img-circle" %>
+            <% end %>
+          </div>
+          
+          <div class="col-md-7 some-lateral-padding">
+            <h3><%= link_to course.name, course %></h3>
+            <p class="description">
+              <%= truncate(course.description, :length => 380, :separator => ' ') %>
+              <%= link_to "Read more", course %>
+            </p>
+          </div>
+            
+          <div class="col-md-2 no-lateral-padding">
+            <div id="cta">
+              <%= link_to "Go to course", course %>
+            </div>
+
+            <div class="description some-vertical-padding">
+              <p><%= link_to course.provider.name, course.provider %></p>
+              <p>
+                <% unless course.provider.website.blank? %>
+                  <%= link_to course.provider.website, :target => '_blank' do %>
+                    <%= course.provider.university %>
+                  <% end %>
+                <% end %>
+              <p><%= raw course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+            </div>
+          </div>
+
+        </div>
+      
       <% end %>
-      </div>
+
   </div>
-
-  <div class="span5">
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_author, params[:search_author], :autocomplete => :off,
-          :data => { provide: "typeahead", source: @unique_author_list, items: "9"},
-          class: "span4", :placeholder => "Search by Author (e.g. 'Mary Shelley')", :value => nil %>
-          <%= submit_tag "Search", :name => nil, class: "btn" %>
-      <% end %>
-      </div>
-
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_period, params[:search_period], :autocomplete => :off,
-          :data => { provide: "typeahead", source: @unique_period_list, items: "9"},
-          class: "span4", :placeholder => "Search by Period (e.g. '18th Century')", :value => nil %>
-          <%= submit_tag "Search", :name => nil, class: "btn" %>
-      <% end %>
-      </div>
-
-      <div class="input-append">
-      <%= form_tag courses_path, :method => 'get' do %>
-          <%= text_field_tag :search_examoption, params[:search_examoption], :autocomplete => :off,
-          :data => { provide: "typeahead", source: @unique_examoption_list, items: "9"},
-          class: "span4", :placeholder => "Search by Exam Specificaton Number", :value => nil %>
-          <%= submit_tag "Search", :name => nil, class: "btn" %>
-      <% end %>
-      </div>
-  </div>
-</div>
-
-<% end %>
-
-<br>
-
-<div class="navbar">
-<div class="navbar-inner">
-<ul class="nav pull-left">
-
-    <li class="disabled"><%= link_to "Select Category:", "javascript:;" %></li>
-  
-    <% @unique_genre_list.each do |genre| %>
-
-      <% if params[:tag] == genre.to_s %>
-        <li class="active"><%= link_to genre, tag_path(genre) %></li>
-      <% else %>
-        <li><%= link_to genre, tag_path(genre) %></li>
-      <% end %>
-
-    <% end %>
-
-      <li class="disabled"><%= link_to "or", "javascript:;" %></li>
-
-    <% if params[:tag] %>
-      <li><%= link_to "View All Categories", courses_path %></li>
-    <% else %>
-      <li class="active"><%= link_to "View All Categories", courses_path %></li>
-    <% end %>
-
-</ul>
-</div>
-</div>
-
-<div class="container">
-
-<div class="span12">
-
-<ul class="courselist">
-<% if params[:search_lessontag] %>
-
-<% @lessons.each do |lesson| %>
-    <li class="coming-soon">
-    <div class="media">
-      <div class="pull-left">
-        <%= image_tag lesson.course.avatar_url.to_s, :size => "170x170" %>
-      </div>
-
-      <div class="span7">
-        <h4 class="media-heading"><%= link_to lesson.title, lesson %>
-        <p><small><%= link_to lesson.course.name, course_path(lesson.course) %></small>
-        </h4>
-        <p class="small"><%= truncate(lesson.lessondescription, :length => 350, :separator => ' ') %>
-        <%= link_to "Read more", lesson %>
-      </div>
-
-      <div class="span2">
-        <br><br>
-        <p> <i class="icon-folder-open"></i>  <%= raw lesson.course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %> </p>
-        <p> <i class="icon-user"></i> <%= link_to lesson.course.provider.name, lesson.course.provider %></p>
-        <br>
-          <%= link_to "Go to Module", lesson, :class => "btn btn-large btn-primary" %>
-      </div>
-     </div>
-    </li>
-  <% end %>
-
-<% else %>
-
-  <% @courses.each do |course| %>
-    <li class="coming-soon">
-    <div class="media">
-    	<div class="pull-left">
-    		<%= image_tag course.avatar_url.to_s, :size => "170x170" %>
-    	</div>
-	    <div class="span7">
-	    	<h4 class="media-heading"><%= link_to course.name, course %></h4>
-	    	<p class="small"><%= truncate(course.description, :length => 350, :separator => ' ') %>
-        <%= link_to "Read more", course %>
-	    </div>
-      <div class="span2">
-        <br><br>
-        <p> <i class="icon-folder-open"></i>  <%= raw course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %> </p>
-        <p> <i class="icon-user"></i> <%= link_to course.provider.name, course.provider %></p>
-        <br>
-        <% if course.lessons.blank? %>
-          <%= link_to "Coming Soon", "javascript:;", :class => "btn btn-large disabled" %>
-        <% else %>
-          <%= link_to "Go to Course", course, :class => "btn btn-large btn-primary" %>
-        <% end %>
-      </div>
-	   </div>
-    </li>
-  <% end %>
-<% end %>
-
-</ul>
 </div>

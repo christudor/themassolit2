@@ -1,30 +1,26 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(person)
-    person ||= User.new # guest user (not logged in)
-    if person.has_role? :admin
+  def initialize(user)
+
+    if user.rolable_type == "Admin"
       can :manage, :all
     else
       
     # Paid subscriber permissions
 
-    can :view, :lesson if person.has_role? :topaz
-
-    # Student permissions
-
-    can :view, :lesson if person.has_role? :invalidstudent
-    can :view, :lesson if person.has_role? :validstudent
+    can :view, :lesson if user.rolable_type == "Member"
+    can :view, :course if user.rolable_type == "Member"
 
     # Teacher permissions
 
-    can :view, :lesson if person.has_role? :invalidteacher
-    can :view, :course if person.has_role? :invalidteacher
-    can :view, :school if person.has_role? :invalidteacher
+    can :view, :lesson if user.rolable_type == "Teacher"
+    can :view, :course if user.rolable_type == "Teacher"
 
-    can :view, :lesson if person.has_role? :validteacher
-    can :view, :course if person.has_role? :validteacher
-    can :view, :school if person.has_role? :validteacher
+    # Student permissions
+
+    can :view, :lesson if user.rolable_type == "Student"
+    can :view, :course if user.rolable_type == "Student"
 
     end
   end

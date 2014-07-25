@@ -1,15 +1,87 @@
-<% provide(:title, 'About') %>
+<% provide(:title, 'About us') %>
+<%= content_for :body_id, "about-us" %>
 
-<div class="container">
-  
-  <div class="featurette">
-    <h2 class="featurette-heading">About MASSOLIT</h2>
-      <p class="lead">MASSOLIT was founded in August 2013 to provide courses on the arts and humanities. We are bringing together academics from the world's best universities to make it happen - and hope to have our first <%= link_to "courses", courses_path %> ready for you very shortly.
-    </div>
-
-  <div class="featurette">
-    <h2 class="featurette-heading">About Us</h2>
-      <p class="lead">MASSOLIT was founded by Chris Tudor and Colum Elliott-Kelly. They first met during a performance of <%= link_to "Aristophanes' Clouds", "http://en.wikipedia.org/wiki/The_Clouds" %> (where Colum played the part of Socrates), before heading off to Oxford to study the humanities. After several years there, they decided to bring the humanities to a wider audience, and so MASSOLIT was born, a brand new online education provider specialising in the humanities</p>
-  </div>
-
+<div id="slider">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>About MASSOLIT</h3>
+					<p>
+					And seeing ignorance is the curse of God,
+					<br>Knowledge the wing wherewith we fly to heaven.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="flexslider">
+					  	<ul class="slides">
+						    <li>
+						      	<img src="assets/office2.png" alt="office2" />
+						    </li>
+						    <li>
+						      	<img src="assets/office1.png" alt="office1" />
+						    </li>
+						    <li>
+						      	<img src="assets/office3.png" alt="office3" />
+						    </li>
+					  	</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 </div>
+
+	<div id="info">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>About MASSOLIT</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">					
+					<p>
+						MASSOLIT is an educational content provider, specializing in arts and humanities resources for secondary school teachers. We work with some of the best academics in the world to produce ‘mini-lectures’ in English, Classics, History and Philosophy.
+					</p>
+					<p>
+						Founded in September 2013, we have in our first year worked with over 50 academics and filmed over 300 ‘mini-lectures’. We are currently being used in 50 schools across the UK and Australia.
+					</p>
+				</div>
+				<div class="col-md-6">
+					<p>
+						MASSOLIT is named after the writer’s union in Mikhail Bulgakov’s novel ‘The Master and Margarita’.
+					</p>
+					<%= link_to "Browse our courses", '/courses', :class => "join-team button button-small" %>
+				</div>
+			</div>
+			<div class="row stats">
+				<div class="col-sm-3">
+					<strong><%= Course.count %></strong>
+					courses
+				</div>
+				<div class="col-sm-3">
+					<strong><%= Lesson.count %></strong>
+					lectures
+				</div>
+				<div class="col-sm-3">
+					<strong><%= School.count %></strong>
+					schools using us
+				</div>
+				<div class="col-sm-3">
+					<strong>5</strong>
+					Platonic solids
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	  	$(function() {
+			$('.flexslider').flexslider({
+				directionNav: false,
+				slideshowSpeed: 4000
+			});
+			$('[data-toggle="tooltip"]').tooltip();
+	  	});
+	</script>

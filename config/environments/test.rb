@@ -42,6 +42,6 @@ Massolit::Application.configure do
   end
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'massolit.io' }
 
 end

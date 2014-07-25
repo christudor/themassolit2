@@ -1,32 +1,51 @@
-<% provide(:title, 'Modules Dashboard') %>
-<div class="container">
-<h1>Modules Dashboard</h1>
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Name</th>
-          <th>Course</th>
-          <th>Provider</th>
-          <th>Date Added</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @lessons.each do |lesson| %>
-    <tr>
-        <td><%= link_to lesson.title, lesson %></td>
-        <td><%= link_to lesson.course.name, lesson.course %></td>
-        <td><%= link_to lesson.course.provider.name, lesson.course.provider %></td>
-        <td><%= lesson.created_at.to_date %></td>
-        <td><%= link_to("Edit Lecture", edit_lesson_path(lesson), :class => 'btn btn-mini') %></td>
-        <td><%= link_to("Delete Lecture", lesson_path(lesson), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-</div>
+<%= content_for :body_id, "datatables" %>
+<% provide(:title, 'Lectures Dashboard') %>
+
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Lectures Dashboard
+  </div>
 </div>
 
-<div class="container">
-  <center><%= link_to "Add New Module", new_lesson_path, :class => "btn btn-large btn-primary" %></center>
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Course</th>
+                <th tabindex="0" rowspan="1" colspan="1">Tutor</th>
+                <th tabindex="0" rowspan="1" colspan="1">Date Added</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">Course</th>
+                <th rowspan="1" colspan="1">Tutor</th> 
+                <th rowspan="1" colspan="1">Date Added</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% Lesson.all.each do |lesson| %>
+            <tr>
+              <td><%= link_to lesson.title, lesson %></td>
+              <td><%= link_to lesson.course.name, lesson.course %></td>
+              <td><%= link_to lesson.course.provider.name, lesson.course.provider %></td>
+              <td><%= lesson.created_at.to_date.to_formatted_s(:rfc822) %>
+              <td>
+                  <%= link_to "Ed", edit_lesson_path(lesson) %>
+                  <%= link_to "Del", lesson_path(lesson), :data => { :confirm => "Delete lecture?" }, :method => :delete %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

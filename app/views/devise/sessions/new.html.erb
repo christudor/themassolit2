@@ -1,34 +1,48 @@
 <% provide(:title, 'Sign in') %>
-<h1>Sign in</h1>
-
-<div class="container">
-<div class="span6 offset3">
+<%= content_for :body_id, "signup" %>
 
 
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div>
-    <%= f.input :email, :label => "E-Mail Address:", :required => true, :autofocus => true %>
-    <%= f.input :password, :label => "Password:", :required => true %>
-
-      <%= f.input :remember_me, :inline_label => "Remember Me?", :label => false, :as => :boolean if devise_mapping.rememberable? %>
-
-
-    <center><%= f.button :submit, 'Sign in', :class => "btn btn-large btn-primary" %></center>
+<div class="container">
+    <div class="row header">
+      <div class="col-md-12">
+        <h4>Sign in to your account.</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="wrapper clearfix">
+          <div class="formy">
+            <div class="row">
+              <div class="col-md-12">
+                <form role="form">
+                    <div class="form-group">
+                      <%= f.input :email, :label => "E-Mail Address:", :required => true, :autofocus => true, input_html: { class: 'form-control' } %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.input :password, :label => "Password:", :required => true, input_html: { class: 'form-control' }  %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.input :remember_me, :inline_label => "Remember Me?", :label => false, :as => :boolean if devise_mapping.rememberable? %>
+                    </div>
+                  <center>
+                  <button type="submit" class="button-clear">
+                      <span>Sign in</span>
+                  </button>
+                  </center>
+                </form>
+              </div>
+            </div>            
+          </div>
+        </div>
+        <div class="already-account">
+          Don't have an account?
+          <%= link_to "Create one here", '/student/sign_up' %>
+          <br><%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
+
 <% end %>
 
-<% path = request.env['PATH_INFO'] %>
-	<% if path == '/subscribers/sign_in' %>
-    <center>Not signed up yet? <%= link_to "Sign up here", new_subscriber_registration_path(:job => 'student') %></center>
-	<% elsif path == '/users/sign_in' %>
-    <center>Not signed up yet? <%= link_to "Sign up here", new_user_registration_path(:plan => 'topaz') %></center>
-		<center>Affiliated with a school? <%= link_to "Log in here", new_subscriber_session_path %></center>
-	<% else %>
-<% end %>
-
-<center><%= render "devise/shared/links" %></center>
-
-
-
-</div>
-</div>

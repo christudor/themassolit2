@@ -1,46 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %> 
-  
-  <%= render 'layouts/shim' %>
+  <%= stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
 
-  <script src="https://jwpsrv.com/library/KJYThFOeEeOYuBIxOQfUww.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-44709438-1', 'massolit.herokuapp.com');
-    ga('send', 'pageview');
-  </script>
+  <%= csrf_meta_tags %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+
+  <%= render 'layouts/shim' %>
+  <%= render 'layouts/analytics' %>
+  <%= auto_discovery_link_tag :atom, "/feed" %>
+  <%= auto_discovery_link_tag :rss, "/feed.rss" %>
 
 </head>
 
-<body class="<%= controller_name %> <%= action_name %>">
-  
-    <%= render 'layouts/splashheader' %>
-    <% if request.fullpath == "/" %>
-      <%= render 'layouts/banner' %>
-    <% else %>
-    <% end %>
+<body id="<%= yield :body_id %>" class="<%= controller_name %> <%= action_name %>">
 
-    <div class="container">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>">
-          <%= value %></div>
-        <% end %>
-      <%= yield %>
-      <div class="container">
-      <%= render 'layouts/splashfooter' %>
+  <%= render 'layouts/errors' %>
+  
+  <% if request.fullpath.match("admin") || request.fullpath.match("bucket") %>
+    <div id="wrapper">
+      <%= render "shared/sidebar_menu" %>
+        <div id="content">
+          <%= yield %>
+        </div>  
+  </div>
+
+  <% else %> 
+
+    <% if request.fullpath == "/" %>
+      <%= render 'layouts/header-home' %>
+    <% elsif request.fullpath.match("/subscribers") %>
+    <% elsif request.fullpath.match("/users") %>
+    <% elsif request.fullpath.match("/sign_up") %>
+    <% elsif request.fullpath.match("/sign_in") %>
+    <% else %>
+      <%= render 'layouts/header' %>
+    <% end %>
+    
+    <%= yield %>
+
+    <% if request.fullpath.match("/subscribers") %>
+    <% elsif request.fullpath.match("/users") %>
+    <% elsif request.fullpath.match("/sign_up") %>
+    <% elsif request.fullpath.match("/sign_in") %>
+    <% else %>
+        <%= render 'layouts/footer' %>
+    <% end %>
       <%= debug(params) if Rails.env.development? %>
-    </div>
-    </div>
+    
+  <% end %>
+        
 </body>
 </html>

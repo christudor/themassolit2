@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     if @movie.update_attributes(params[:movie])
       flash[:success] = "Movie updated"
-      redirect_to movies_path
+      redirect_to '/admin/videos'
     else
       render 'edit'
     end
@@ -35,7 +35,7 @@ class MoviesController < ApplicationController
     authorize! :index, :movie, :message => 'Access limited to administrators only.'
     @movie = Movie.new(params[:movie])
     if @movie.save
-      redirect_to root_path
+      redirect_to '/admin/videos'
     else
       render 'new'
     end    
@@ -50,7 +50,7 @@ class MoviesController < ApplicationController
     authorize! :index, :movie, :message => 'Access limited to administrators only.'
     @movie = Movie.find(params[:id])
     @movie.destroy
-    redirect_to movies_path, :notice => "Movie deleted!"
+    redirect_to '/admin/videos', :notice => "Movie deleted!"
   end
 
 end

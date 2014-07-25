@@ -1,0 +1,47 @@
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+
+      <h3>Request a free trial</h3>
+      <p>
+      Enter your details below and we'll set your school up with a free trial.
+      <br/>
+      </p>
+
+    <br />
+
+    <%= form_for @message, :url => contact_path, :id => "contact-form" do |form| %>
+      <div class="form-group">
+        <%= form.label :name, "Full Name" %>
+        <%= form.text_field :name, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :body, "Position" %>
+        <%= form.text_field :body, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :subject, "School" %>
+        <%= form.text_field :subject, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :email, "E-Mail Address" %>
+        <%= form.text_field :email, :class => "form-control" %>
+      </div>
+
+      <div class="submit">
+        <%= form.submit "Send", :class => "button button-small" %>
+        <button class="btn-signup button-clear" data-dismiss="modal" aria-hidden="true"><span>Close</span></button>
+      </div>
+            
+    <% end %>
+
+    </div>
+  </div>
+</div>
+
+</div>

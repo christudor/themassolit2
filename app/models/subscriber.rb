@@ -60,27 +60,6 @@ class Subscriber < ActiveRecord::Base
   has_many :studied_courses, through: :relationships, source: :course
   has_many :scores
   has_many :quizzes, :through => :scores
-  
-  before_create :assign_role
-
-  def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |subscriber|
-      subscriber.provider = auth.provider
-      subscriber.uid = auth.uid
-      subscriber.username = auth.info.nickname
-    end
-  end
-
-  def self.new_with_session(params, session)
-    if session["devise.subscriber_attributes"]
-      new(session["devise.subscriber_attributes"], without_protection: true) do |subscriber|
-        subscriber.attributes = params
-        subscriber.valid?
-      end
-    else
-      super
-    end
-  end
 
   def password_required?
     super && provider.blank?
@@ -95,26 +74,8 @@ class Subscriber < ActiveRecord::Base
   end
 
   def assign_role
-  # assign a default role if no role is assigned
-    if self.job == "teacher" 
-      self.add_role :invalidteacher
-    elsif self.job == "student"
-      self.add_role :invalidstudent
-    else
-      self.add_role :invalidstudent
-    end
-  end
-
-  def studying?(course)
-    relationships.find_by_course_id(course.id)
-  end
-
-  def study!(course)
-    relationships.create!(course_id: course.id)
-  end
-
-  def unstudy!(course)
-    relationships.find_by_course_id(course.id).destroy
+    # assign a default role if no role is assigned
+    self.add_role :invalidstudent
   end
 
 end

@@ -1,34 +1,51 @@
-<% provide(:title, 'Course Dashboard') %>
+<%= content_for :body_id, "datatables" %>
+<% provide(:title, 'Courses Dashboard') %>
 
-<div class="container">
-<h1>Course Dashboard</h1>
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Provider</th>
-          <th>No. of Lectures</th>
-          <th>Popularity</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @courses.each do |course| %>
-    <tr>
-        <td><%= link_to course.name, course %></td>
-        <td><%= course.category %></td>
-        <td><%= link_to course.provider.name, provider_path(course.provider) %></td>
-        <td><%= course.lessons.count %></td>
-        <td><%= course.students.count %></td>
-        <td><%= link_to("Edit Course", edit_course_path(course), :class => 'btn btn-mini') %></td>
-        <td><%= link_to("Delete course", course_path(course), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<br>
-<center><%= link_to "Add New Course", addcourse_path, class: "btn btn-large btn-primary" %></center>
-
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Courses Dashboard
+  </div>
 </div>
+
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Category</th>
+                <th tabindex="0" rowspan="1" colspan="1">Tutor</th>
+                <th tabindex="0" rowspan="1" colspan="1">No. of Lectures</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">Category</th>
+                <th rowspan="1" colspan="1">Tutor</th> 
+                <th rowspan="1" colspan="1">No. of Lectures</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% @courses.each do |course| %>
+            <tr>
+                <td><%= link_to course.name, course %></td>
+                <td><%= raw course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+                <td><%= link_to course.provider.name, provider_path(course.provider) unless course.provider.blank? %></td>
+                <td><%= course.lessons.count %></td>
+                <td>
+                  <%= link_to "Ed", edit_course_path(course) %>
+                  <%= link_to "Del", course_path(course), :data => { :confirm => "Delete user?" }, :method => :delete %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

@@ -1,0 +1,52 @@
+   <div class="container">
+    <div class="row header">
+      <div class="col-md-12">
+        <h4>Update Card Details</h4>
+        <p>You are currently using the card ending with: <%= @user.last_4_digits %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="wrapper clearfix">
+          <div class="formy">
+            <div class="row">
+              <div class="col-md-12">
+              <%= simple_form_for resource, :as => rolable_name, :url => update_card_path, :html => {:method => :put, :class => 'form-horizontal card_form' } do |f| %>
+
+              <div class="form-group">
+                <%= label_tag :card_number, "Card Number" %>
+                <%= text_field_tag :card_number, nil, name: nil, :class => 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= label_tag :card_code, "Card Security Code (CVV)" %>
+                <%= text_field_tag :card_code, nil, name: nil, :class => 'form-control'  %>
+              </div>
+
+              <div class="form-group">
+                <%= label_tag :card_month, "Card Expiration" %>
+                <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", 
+                  :class => 'form-control' }%>
+                <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, {name: nil, id: "card_year", :class => 'form-control' }%>
+              </div>
+
+              <%= f.hidden_field :stripe_token %>
+              
+              <div class="submit">
+                <%= f.button :submit, "Submit", input_html: { class: 'button-clear' } %>
+              </div>
+              <% end %>
+
+              </div>
+            </div>            
+          </div>
+        </div>
+        <div class="already-account">
+          Unhappy? <%= link_to "Click here to cancel your account", user_path(current_user), :data => { :confirm => "Are you sure?" }, :method => :delete %>.
+          <br />Lost? Go back
+          <%= link_to "one step", :back %> or
+          <%= link_to "to the home page", root_path %>
+        </div>
+      </div>
+    </div>
+  </div>

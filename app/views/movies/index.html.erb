@@ -1,37 +1,53 @@
-<% provide(:title, 'Videos Dashboard') %>
-<div class="container">
-<h1>Videos Dashboard</h1>
+<%= content_for :body_id, "datatables" %>
+<% provide(:title, 'Lectures Dashboard') %>
 
-<div class="alert alert-error">
-  <strong>Heads up:</strong> Please only use this dashboard for deleting videos that are no longer needed. Editing records screws up the link with Amazon S3.
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Lectures Dashboard
+  </div>
 </div>
 
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Video Name</th>
-          <th>Module</th>
-          <th>Course</th>
-          <th>Provider</th>
-          <th>Date Added</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @movies.each do |movie| %>
-    <tr>
-        <td><%= link_to movie.name, movie %></td>
-        <td><%= link_to movie.lesson.title, movie.lesson %></td>
-        <td><%= link_to movie.lesson.course.provider.name, movie.lesson.course.provider %></td>
-        <td><%= movie.created_at.to_date %></td>
-        <td><%= link_to("Delete Video", movie_path(movie), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-</div>
-</div>
-
-<div class="container">
-  <center><%= link_to "Add New Video", addmovie_path, :class => "btn btn-large btn-primary" %></center>
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Lecture</th>
+                <th tabindex="0" rowspan="1" colspan="1">Course</th>
+                <th tabindex="0" rowspan="1" colspan="1">Tutor</th>
+                <th tabindex="0" rowspan="1" colspan="1">Date Added</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">Lecture</th>
+                <th rowspan="1" colspan="1">Course</th>
+                <th rowspan="1" colspan="1">Tutor</th> 
+                <th rowspan="1" colspan="1">Date Added</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% Movie.all.each do |movie| %>
+            <tr>
+              <td><%= movie.name %></td>
+              <td><%= link_to movie.lesson.title, movie.lesson %></td>
+              <td><%= link_to movie.lesson.course.name, movie.lesson.course %></td>
+              <td><%= link_to movie.lesson.course.provider.name, movie.lesson.course.provider %></td>
+              <td><%= movie.created_at.to_date.to_formatted_s(:rfc822) %>
+              <td>
+                  <%= link_to "Del", movie_path(movie), :data => { :confirm => "Delete video?" }, :method => :delete %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

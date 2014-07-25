@@ -1,292 +1,60 @@
-
 <% provide(:title, @lesson.title) %>
+<%= content_for :body_id, "portfolio-item" %>
 
-<div class="container">
-<h1><%= @lesson.title %></h1>
-</div>
+  <div class="st-container">
+    <div class="st-pusher">
+      <div class="st-content">
+        <div id="showcase">
+          <div class="container">
+            <div class="row gallery_container">
+              <div class="col-md-12">
+                <div class="project">
+                  <h1>
+                    <%= @lesson.title %>
+                  </h1>
+                  <div class="col-md-7 english screens">
+                  <% unless @lesson.movies.blank? %>
+                  <h3>Watch Lecture</h3>
+                  <div id="myElement">Loading the player ...</div>
+                        <script type='text/javascript'>
+                              jwplayer("myElement").setup({
+                              file: "<%= @lesson.movies.first.movie %>",
+                              title: "<%= @lesson.title %>",
+                              width: '100%',
+                              aspectratio: '16:9',
+                              fallback: 'false',
+                              primary: 'flash'
+                              });
+                        </script>
+                        <br /><br /><br />
+                    <% end %>
+                    <h3>About this Lecture</h3>
+                    <p class="text">
+                      <%= @lesson.lessondescription %>
+                    </p>
+                    <br />
+                    <p class="text"><%= link_to "« Back to Course", course_path(@lesson.course) %></p>
+                  </div>
 
-</div>
-<div class="container">
-<div class="span7">
-<% i = 1 %>
+                  <div class="col-md-4 col-md-offset-1 description">
+                    <div class="info">
+                      <h3>Modules</h3>
+                      <br />
+                        <% @lesson.course.lessons.all.each do |lesson| %>
+                          <% if @lesson.id == lesson.id %>
+                            <p class="text"> <%= lesson.title %></p>
+                          <% else %>
+                            <p class="text"> <%= link_to lesson.title, lesson %></p>
+                          <% end %>
+                        <% end %>
+                      <%= link_to "http://twitter.com/home?status=I'm taking the '#{@lesson.course.name}' course on MASSOLIT. Learn something new today at: https://www.massolit.io", :target => "_blank" do %>
+                        <i class="icon ion-social-twitter"></i> Share on Twitter
+                      <% end %>
 
-  <h2><%= i %>. Watch Video</h2>
-
-<% i += 1 %>
-
-  <p class="body"><%= @lesson.lessondescription %>
-
-  <br><br>
-
-  <% if @lesson.movies.empty? %>
-    <% if subscriber_signed_in? %>
-      <% if current_subscriber.has_role? :admin %>
-        <center>
-        <p class="body">There is not currently a video associated with this module.</p>
-        <%= link_to "Add Video", addmovie_path, :class => "btn btn-large btn-primary" %>
-        </center>
-      <% else %>
-        <p class="body">There is not currently a video associated with this module.</p>
-      <% end %>
-    <% else %>
-    <% end %>
-  <% else %>
-    <div id="myElement">Loading the player ...</div>
-    <script type='text/javascript'>
-      jwplayer("myElement").setup({
-          file: "<%= @lesson.movies.first.movie %>",
-          title: "<%= @lesson.title %>",
-          width: '100%',
-          aspectratio: '16:9',
-          fallback: 'false',
-          primary: 'flash'
-          });
-    </script>
-  <% end %>
-
-  <%# For background image, use image: 'IMAGE URL' #%>
-  <%# primary: 'flash' %>
-
-  <br>
-  <br>
-
-  <% unless @lesson.quiz == nil %>
-
-  <h2><%= i %>. Take Test</h2>
-  <% i += 1 %>
-  
-    <p class="body">
-      Once you have watched the video, see how much you remember by <%= link_to "taking the test", quiz_path(@lesson.quiz), :target => "_blank" %>. Remember, you can watch the video as many times as you like if you are unsure of any of the answers. [Test will open in new tab or window]
-    <p class="body">
-    <strong>
-      Please note: you can take the test as many times as you like, but only your first score will be counted.
-    </strong>
-    <br>
-    <% if @sub_scores.count == 0 %>
-    <center>
-      <%= link_to "Take Test", @lesson.quiz, :target => "_blank", :class => "btn btn-large btn-primary" %>
-    </center>
-    <% else %>
-    <center>
-      <%= link_to "Retake Test", @lesson.quiz, :target => "_blank", :class => "btn btn-large btn-primary" %>
-    </center>
-    <% end %>
-  <br><br>
-  <% end %>
-
-
-
-  <% unless @lesson.sources.count == 0 %>
-
-    <h2><%= i %>. Sources</h2>
-    <% i += 1 %>
-     
-      <ul class="sourcelist">
-      <% k=1 %>
-        <% @lesson.sources.each do |source| %>
-          <li>
-
-            <%= source.name %>
-
-            <% unless source.fulltext.blank? %>
-                
-                <%= link_to "[Read]", 'javascript:;',
-                :data => {:toggle => "collapse", :target => "#collapse_#{k}"}  %>
-
-            <% end %>
-
-            <% unless source.link.blank? %>
-              <%= link_to "[Full Text]", source.link, :target => "_blank" %>
-            <% end %>
-            
-            <% unless source.wikipedia.blank? %>
-              <%= link_to "[Wikipedia]", source.wikipedia, :target => "_blank" %>
-            <% end %>
-
-            <% unless source.fulltext.blank? %>
-
-            <div id="collapse_<%= k %>" class="collapse">
-              <div class="span6">
-              <% k+= 1 %>
-              <br>
-              <em><%= source.fulltext.html_safe %></em>
-              <br><br>
-              <p class="text-right"><%= source.reference %></p>
-              <% if subscriber_signed_in? %>
-                <% if current_subscriber.has_role? :admin %>
-                  <%= link_to "Edit Source", edit_source_path(source) %>
-                <% else %>
-                <% end %>
-              <% else %>
-              <% end %>
+                    </div>              
+                  </div>
+                </div>
               </div>
             </div>
-
-            <% end %>
-
-          </li>
-
-        <% end %>
-      </ul>
-
-  <br><br>
-  <% end %>
-
-  <% unless @lesson.books.count == 0 %>
-
-    <h2><%= i %>. Further Reading</h2>
-    <% i += 1 %>
-       
-      <ul class="sourcelist">
-      <% k=1 %>
-        <% @lesson.books.each do |book| %>
-          <li>
-
-            <% unless book.section.blank? %>
-              <%= book.section %> in
-            <% end %>
-
-            <%= book.author %>, <em><%= book.title %></em> (<%= book.publication_date %>) 
-
-          </li>
-
-
-        <% end %>
-      </ul>
-
-  <br><br>
-  <% end %>
-
-  <% unless @lesson.essays.blank? %>
-
-  <h2><%= i %>. Discussion Questions</h2>
-  <% i += 1 %>
-
-  <ul class="sourcelist">
-        
-        <% @lesson.essays.each do |essay| %>
-          <li><%= essay.question %></li>
-        <% end %>
-  </ul>
-  <br><br>
-  <% end %>
-
-  <% if @recs.count > 1 %>
-  <h2><%= i %>. Related Modules </h2>
-  <% i += 1 %>
-
-  <ul class="courselist">
-  <% @recs.each do |rec| %>
-
-  <% unless rec.title == @lesson.title %>
-
-    <li class="coming-soon">
-    <div class="media">
-
-      <div class="pull-left">
-        <%= image_tag rec.course.avatar_url.to_s, :size => "140x140" %>
-      </div>
-
-      <div class="span5">
-        <h4 class="media-heading"><%= link_to rec.title, lesson_path(rec) %>
-          <p><small><%= link_to rec.course.name, course_path(rec.course) %></small>
-        </h4>
-        <p class="small"><%= truncate(rec.lessondescription, :length => 130, :separator => ' ') %>
-        <%= link_to "Read more", rec %>
-      </div>
-
-
-     </div>
-    </li>
-  <% end %>
-  <% end %>
-
-  </ul>
-  <% else %>
-  <% end %>
-
-</div>
-
-
-<div class="span3 offset1">
-  
-  <h2>Module Quick Links</h2>
-  <ul class="courselist">
-      <ul class="courselist">
-      <% @lesson.course.lessons.each do |lesson| %>
-      <% if @lesson.id == lesson.id %>
-      <li><i class="icon-facetime-video"></i> <%= lesson.title %></li>
-      <% else %>
-      <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
-      <% end %>
-      <% end %>
-      <li><i class="icon-arrow-left"></i> <%= link_to "Back to Course Overview", @lesson.course %></li>
-  </ul>  
-
-  <br><br>
-
-  <h2>Key Files</h2>
-  <ul class="courselist">
-    <% if @lesson.transcripts.count == 0 && @lesson.handouts.count == 0 %>
-    There are no files associated with this module.
-    <% elsif @lesson.transcripts.count == 0 %>
-    <li><i class="icon-file"></i> <%= link_to 'Module Handout', @lesson.handouts.first.handout.url %>
-    <% elsif @lesson.handouts.count == 0 %>
-    <li><i class="icon-file"></i> <%= link_to 'Module Transcript', @lesson.transcripts.first.transcript.url %></li>
-    <% else %>
-    <% end %>
-  </ul>
-
-  <br><br>
-
-  <% unless @lesson.quiz.blank? %>
-    <h2>Test Score</h2>
-      
-      <% if @sub_scores.blank? %>
-        <p class="body">You have not taken the test yet.</p>
-      <% elsif subscriber_signed_in? %>
-        <% k = 0 %>
-          <% current_subscriber.scores.each do |score| %>
-
-            <% unless score.quiz.blank? %>
-            <% unless @lesson.quiz.blank? %>
-            <% unless score.subscriber_id.blank? %>
-
-              <% if score.quiz.id == @lesson.quiz.id && score.subscriber_id == current_subscriber.id && k<1 %>
-                <p>You scored <%= score.score %> out of <%= score.possible %> (<%= score.percentage %>%)</p>
-                <% k += 1 %>
-              <% else %>
-              <% end %>
-
-            <% end %>
-            <% end %>
-            <% end %>
-
-          <% end %>
-
-      <% elsif user_signed_in? %>
-        <% k = 0 %>
-          <% current_user.scores.each do |score| %>
-
-            <% unless score.quiz.blank? %>
-            <% unless @lesson.quiz.blank? %>
-            <% unless score.user_id.blank? %>
-
-              <% if score.quiz.id == @lesson.quiz.id && score.user_id == current_user.id && k<1 %>
-                <p>You scored <%= score.score %> out of <%= score.possible %> (<%= score.percentage %>%)</p>
-                <% k += 1 %>
-              <% else %>
-              <% end %>
-
-            <% end %>
-            <% end %>
-            <% end %>
-
-          <% end %>
-      <% end %>
-  <% end %>
-  
-
-</div>
-</div>
-
+          </div>
+        </div>

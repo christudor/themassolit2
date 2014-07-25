@@ -65,11 +65,11 @@ Massolit::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  #config.action_mailer.default_url_options = { :host => 'massolit.co.uk' }
+  #config.action_mailer.default_url_options = { :host => 'massolit.io' }
 
   # ActionMailer Config
   # =>  Setup for production - deliveries, no errors raised
-   config.action_mailer.default_url_options = { :host => 'www.massolit.co.uk'} 
+   config.action_mailer.default_url_options = { :host => 'www.massolit.io'} 
    config.action_mailer.delivery_method = :smtp
    config.action_mailer.perform_deliveries = true
    config.action_mailer.raise_delivery_errors = false

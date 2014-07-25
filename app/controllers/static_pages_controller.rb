@@ -1,8 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-  end
-
-  def help
+    @message = Message.new
   end
 
   def about
@@ -11,37 +9,23 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
-  def helpus
-  end
-
-  def faqs
-  end
-
   def samples
   end
 
-  def school_users
-  end
-
-  def ourschools
-  end
-
-  def individual_users
-  end
-
-  def school_feedback
-  end
-
-  def contributors
+  def testimonials
   end
 
   def privacypolicy
   end
 
-  def enduseragreement
+  def terms
   end
 
   def pricing
+    @message = Message.new
+  end
+
+  def blog
   end
 
 end

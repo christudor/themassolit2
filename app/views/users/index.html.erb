@@ -1,33 +1,61 @@
-<% provide(:title, "Subscribers Dashboard") %>
-<h1>Subscribers Dashboard</h1>
-<div class="container">
-<div class="span12">
-<table class="table">
-    <thead>
-      <tr>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Registered</th>
-          <th>Role</th>
-          <th></th>
-          <th></th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-        <td><%= link_to user.name, user %></td>
-        <td><%= user.email %></td>
-        <td><%= user.created_at.to_date %></td>
-        <td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
-        <td>
-          <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
-          <%= render user %>
-        </td>
-        <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= content_for :body_id, "datatables" %>
+<% provide(:title, 'Users Dashboard') %>
+
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Users Dashboard
+  </div>
 </div>
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Role</th>
+                <th tabindex="0" rowspan="1" colspan="1">School</th>
+                <th tabindex="0" rowspan="1" colspan="1">E-Mail</th>
+                <th tabindex="0" rowspan="1" colspan="1">Last Sign-in</th>
+                <th tabindex="0" rowspan="1" colspan="1">Sign-up Date</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">Role</th>
+                <th rowspan="1" colspan="1">School</th>
+                <th rowspan="1" colspan="1">E-Mail</th>
+                <th rowspan="1" colspan="1">Last Sign-in</th> 
+                <th rowspan="1" colspan="1">Sign-up Date</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% User.all.each do |u| %>
+            <tr>
+                <td><%= link_to u.name, u %></td>
+                <td><%= u.rolable_type %></td>
+                <td>
+                <% if ['Student', 'Teacher'].include? u.rolable_type %>
+                    <%= link_to School.find_by_id(u.rolable.school_id).name, School.find_by_id(u.rolable.school_id) %>
+                <% else %>
+                    -
+                <% end %>
+                </td>
+                <td><%= u.email %></td>
+                <td><%= u.last_sign_in_at.to_date.to_formatted_s(:rfc822) unless u.last_sign_in_at.blank? %></td>
+                <td><%= u.created_at.to_date.to_formatted_s(:rfc822) unless u.created_at.blank? %></td>
+                <td>
+                  <%= link_to "Del", user_path(u), :data => { :confirm => "Delete user?" }, :method => :delete unless u == current_user %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

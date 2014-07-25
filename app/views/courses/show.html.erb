@@ -1,97 +1,79 @@
 <% provide(:title, @course.name) %>
-<div class="container">
-<div class="container">
-  <h1><%= @course.name %></h1>
-</div>
+<%= content_for :body_id, "portfolio-item" %>
 
-<div class="container">
+  <div class="st-container">
+    <div class="st-pusher">
+      <div class="st-content">
+        <div id="showcase">
+          <div class="container">
+            <div class="row gallery_container">
+              <div class="col-md-12">
+                <div class="project">
+                  <h1>
+                    <%= @course.name %>
+                  </h1>
+                  <div class="col-md-7 english screens">
+                  <% unless @course.trailers.blank? %>
+                  <h3>Watch the Trailer</h3>
+                  <div id="myElement">Loading the player ...</div>
+                        <script type='text/javascript'>
+                              jwplayer("myElement").setup({
+                              file: "<%= @course.trailers.first.trailer %>",
+                              title: "<%= @course.name %>",
+                              width: '100%',
+                              aspectratio: '16:9',
+                              fallback: 'false',
+                              primary: 'flash'
+                              });
+                        </script>
+                        <br /><br /><br />
+                    <% end %>
+                                     
+                    <h3>About this Course</h3>
+                    <p class="text">
+                      <%= @course.description %>
+                    </p>
+                    <h3>About the Tutor: <%= @course.provider.name %></h3>
+                    <p class="text">
+                      <%= @course.provider.bio %>
+                    </p>
+                    <br />
+                    <p class="text"><%= link_to "« Back to Courses", "/courses" %></p>
+                  </div>
 
-<div class="span7">
-  
-  <% if @course.trailers.empty? %>
-    <% if subscriber_signed_in? %>
-      <% if current_subscriber.has_role? :admin %>
-        <center>
-        <h2>Watch the Trailer</h2>
-        <p class="body">There is not currently a trailer associated with this module.</p>
-        <%= link_to "Add Trailer", addtrailer_path, :class => "btn btn-large btn-primary" %>
-        </center>
-        <br><br>
-      <% else %>
-      <% end %>
-    <% else %>
-    <% end %>
-  <% else %>
-  <h2>Watch the Trailer</h2>
-  <div id="myElement">Loading the player ...</div>
-  
-  <script type='text/javascript'>
-    jwplayer("myElement").setup({
-        file: "<%= @course.trailers.first.trailer %>",
-        title: "<%= @course.name %>",
-        width: '100%',
-        aspectratio: '16:9',
-        fallback: 'false',
-        primary: 'flash'
-        });
-  </script>
-  
-  <br><br>
-  <% end %>
+                  <div class="col-md-4 col-md-offset-1 description">
+                    <div class="info">
+                      <h3>Key Information</h3>
+                      <br />
+                      <p>
+                        Tutor:
+                        <%= link_to @course.provider.name, @course.provider %>
+                      </p>
+                      <p>
+                        Subject:
+                        <%= raw @course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+                      </p>
+                      <br><br>
+                      <% unless @course.lessons.blank? %>
+                      <h3>Modules</h3>
+                      <br />
+                        <% @course.lessons.all.each do |lesson| %>
+                          <% if user_signed_in? %>
+                            <p class="text"> <%= link_to lesson.title, lesson %>
+                          <% else %>
+                            <p class="text"> <%= lesson.title %></p>
+                          <% end %>
+                        <% end %>
+                          <% if user_signed_in? %>
+                          <% else %>
+                            <p>Please <%= link_to "sign in", new_user_session_path %> or <%= link_to "sign up", 'student/sign_up' %> in order to view lectures.
+                          <% end %>
 
-  <h2>About this Course</h2>
-  <p class="media"><%= @course.description %></p>
-
-  <br><br>
-  
-  <h2>About <%= @course.provider.name %></h2>
-  <p class="media"><%= @course.provider.bio.html_safe %></p>
-
-  <br><br>
-  
-  <center><p class="courselist"><i class="icon-chevron-left"></i> <%= link_to "Return to course index", courses_path %></p></center>
-
-</div>
-
-<div class="span3 offset1">
-  <h2>Key Information</h2>
-  <ul class="courselist">
-    <li><i class="icon-folder-open"></i> Category: <%= raw @course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p></li>
-    <li><i class="icon-user"></i> Tutor: <%= link_to @course.provider.name, @course.provider %></li>
-      <% if subscriber_signed_in? %>
-      <% elsif user_signed_in? %>
-      <% else %>
-      <li><i class="icon-exclamation-sign"></i> <%= link_to "Log in", new_subscriber_session_path %> or <%= link_to "sign up", new_subscriber_registration_path(:job => 'student') %> to register for this course.</li>
-      <% end %>
-  </ul>
-
-  <% if subscriber_signed_in? && current_subscriber.school.active? %>
-    <% if current_subscriber.studying?(@course) %>
-      <br />
-      <h2>Module Quick Links</h2>
-        <ul class="courselist">
-          <% @course.lessons.each do |lesson| %>
-            <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
-          <% end %>
-        </ul>
-    <% else %>
-      <%= render 'study_form' %>
-    <% end %>
-  <% elsif subscriber_signed_in? && !current_subscriber.school.active? %>
-      <br />
-      <strong>Your school's subscription has now expired.
-      <br><br> For information on how you can gain access to this course, please <%= mail_to "chris@massolit.co.uk", 'get in touch' %>.</strong>
-  <% elsif user_signed_in? %>
-    <h2>Module Quick Links</h2>
-      <ul class="courselist">
-        <% @course.lessons.each do |lesson| %>
-          <li><i class="icon-facetime-video"></i> <%= link_to lesson.title, lesson %></li>
-        <% end %>
-      </ul>
-  <% else %>
-
-  <% end %>
-  </ul>
-
-</div>
-</div>
+                      <% end %>
+                    </div>              
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

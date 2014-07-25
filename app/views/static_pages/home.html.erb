@@ -1,40 +1,283 @@
-<% provide(:title, 'Online lectures in the humanities') %>
+<% provide(:title, "The best academics in the world in your classroom") %>
+<%= content_for :body_id, "home" %>
 
-<% alist = ["A(ristotle)", "A(belard)", "A(eschylus)", "A(usten)", "A(menhotep III)", "A(nne Bronte)"]%>
-<% zlist = ["Z(arathustra)", "Z(oroaster)", "Z(ola)", "Z(amyatin)", "Z(hukov)", "(Dr.) Z(hivago)"] %>
-<% achoice = alist.shuffle[0] %>
-<% zchoice = zlist.shuffle[0] %>
+<div id="hero">
+    <div class="container">
+      <h1 class="hero-text animated fadeInDown">
+        The world's best academics <br />
+        in your classroom
+      </h1>
+      <p class="sub-text animated fadeInDown">
+        Super-charge your teaching with video lectures from the best academics in the world.
+      </p>
+      <div class="cta animated fadeInDown">
+        <a href="#" class="button-outline">Watch the video</a>
+        <% if user_signed_in? %>
+          <%= link_to "Browse our lectures", '/courses', :class => "button" %>
+        <% else %>
+          <%= link_to "Sign up", 'student/sign_up', :class => "button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<div class="container">
+  <div id="features">
+    <div class="container">
+      <div class="row header">
+        <div class="col-md-12">
+          <h2>Teachers, introducing your new secret weapon.</h2>
+          <p>Hundreds of video lectures from the best academics in the world.</p>
+        </div>
+      </div>
+      <div class="row feature">
+        <div class="col-md-6 info">
+          <h4>Lectures from the world's best academics, direct to your classroom.</h4>
+          <p>
+          MASSOLIT provides your school with an extensive library of video lectures across four key subjects: English, Classics, History and Philosophy.
+          <p>With lectures designed specifically for sixth formers, students and teachers can benefit from the knowledge and expertise of some of the best academics in the world
+          </p>
+          <p><em>"I would heartily recommend MASSOLIT as a teaching product... The range, level and calibre of the courses is exceptional"</em>
+          <strong>Mathew Owen, Classics Teacher</strong>
+        </div>
+        <div class="col-md-6 image">
+          <br /><br /><br /><br />
+          <img src="assets/feature7.png" class="img-responsive" alt="feature1" />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row feature backwards">
+        <div class="col-md-6 info">
+          <h4>Get set up in minutes, for free.</h4>
+          <p>
+            Getting started with MASSOLIT couldn’t be easier. Get in touch and we can set you up with a free trial in less than two minutes.
+          </p>
+          <p>
+            MASSOLIT requires no software to be installed, no complex data integrations and no ongoing maintenance. We can get you started straightaway, so what you are you waiting for?
+          </p>
+          <p><em>"A well-targeted resource that is picking up some very big names"</em>
+          <strong>Ben Bransfield, English Teacher</strong>
+        </div>
+        <div class="col-md-6 image">
+          <br /><br />
+          <img src="assets/feature12.png" class="img-responsive" alt="feature2" />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row feature">
+        <div class="col-md-6 info">
+          <h4>Unlimited access for the whole school for less than £1 a day.</h4>
+          <p>
+           With prices starting from less than £1 a day, MASSOLIT represents great value for money for schools.
+           </p>
+           <p>We offer all schools a free trial, while our powerful analytics platform will show you exactly how much MASSOLIT is being used.
+          </p>
+          <p><em>"The videos are a fantastic idea - interactive and easily understandable."</em>
+          <strong>Hina Khalid, Head Girl</strong>
+        </div>
+        <div class="col-md-6 image">
+          <br /><br /><br />
+          <img src="assets/feature11.png" class="img-responsive" alt="feature1" />
+        </div>
+      </div>
+    </div>    
+  </div>
+
+  <div id="pricing">
+    <div class="container">
+      <div class="row header">
+        <div class="col-md-12">
+          <h3>Unlimited access for your whole school.</h3>
+          <p>All plans include a 60-day free trial.</p>
+        </div>
+      </div>
+      <div class="row charts">
+        <div class="col-md-4">
+          <div class="chart first">
+            <div class="quantity">
+              <span class="dollar">£</span>
+              <span class="price">295</span>
+              <span class="period">/year</span>
+            </div>
+            <div class="plan-name">Single Subject</div>
+                    <div class="specs">
+                      <div class="spec">
+                        <span class="variable">Unlimited</span>
+                        users
+                      </div>
+                       <div class="spec">
+                        <span class="variable">No</span>
+                        hidden usage fees
+                      </div>
+                      <div class="spec">
+                        <span class="variable">24/7</span>
+                        tech support
+                      </div>
+                      <div class="spec">
+                        <span class="variable">75+</span>
+                        lectures
+                      </div>
+                      <div class="spec">
+                        <span class="variable">1</span>
+                        subject
+                      </div>                                             
+                    </div>
+          <a href="#myModal" role="button" class="btn-signup button-clear" data-toggle="modal">
+            <span>Request free trial</span>
+          </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="chart featured">
+            <div class="popular">Most popular</div>
+            <div class="quantity">
+              <span class="dollar">£</span>
+              <span class="price">545</span>
+              <span class="period">/year</span>
+            </div>
+            <div class="plan-name">Two Subjects</div>
+                    <div class="specs">
+                      <div class="spec">
+                        <span class="variable">Unlimited</span>
+                        users
+                      </div>
+                       <div class="spec">
+                        <span class="variable">No</span>
+                        hidden usage fees
+                      </div>
+                      <div class="spec">
+                        <span class="variable">24/7</span>
+                        tech support
+                      </div>
+                      <div class="spec">
+                        <span class="variable">150+</span>
+                        lectures
+                      </div>
+                      <div class="spec">
+                        <span class="variable">2</span>
+                        subjects
+                      </div>                                             
+                    </div>
+          <a href="#myModal" role="button" class="btn-signup button-clear" data-toggle="modal">
+            <span>Request free trial</span>
+          </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="chart last">
+            <div class="quantity">
+              <span class="dollar">£</span>
+              <span class="price">995</span>
+              <span class="period">/year</span>
+            </div>
+            <div class="plan-name">Full License</div>
+                    <div class="specs">
+                      <div class="spec">
+                        <span class="variable">Unlimited</span>
+                        users
+                      </div>
+                       <div class="spec">
+                        <span class="variable">No</span>
+                        hidden usage fees
+                      </div>
+                      <div class="spec">
+                        <span class="variable">24/7</span>
+                        tech support
+                      </div>
+                      <div class="spec">
+                        <span class="variable">All</span>
+                        lectures
+                      </div>
+                      <div class="spec">
+                        <span class="variable">All</span>
+                        subjects
+                      </div>                                             
+                    </div>
+          <a href="#myModal" role="button" class="btn-signup button-clear" data-toggle="modal">
+            <span>Request free trial</span>
+          </a>
+          <%= render 'contact' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="testimonials">
+    <div class="container">
+      <div class="row header">
+        <div class="col-md-12">
+          <h3>Trusted by schools across the country.</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="testimonial pull-right">
+            <div class="quote">
+               "I would heartily recommend MASSOLIT as a teaching product... The range, level and calibre of the courses is exceptional"
+               <strong>Mathew Owen, Classics Teacher</strong>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="testimonial">
+            <div class="quote">
+             "We are delighted to be part of this exciting academic project which chimes so well with my own sense of academic extension and enrichment"
+             <strong>Dr Gary Savage, Headmaster</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   
-  <div class="featurette">
-    <h2 class="featurette-heading">What is MASSOLIT?</h2>
-      <p class="lead">We provide online lectures in the humanities, designed and delivered by academics from the world's very best universities. Want to find out more? <%= link_to "See our sample lectures", samplecourses_path %> or <%= link_to "browse our courses", courses_path %>
-      <br>
+  <br /><br />
 
+  <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="testimonial pull-right">
+            <div class="quote">
+               "A well-targeted resource that is picking up some very big names."
+               <strong>Ben Bransfield, English Teacher</strong>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="testimonial">
+            <div class="quote">
+             "The videos are a fantastic idea - interactive and easily understandable"
+             <strong>Hina Khalid, Head Girl</strong>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-  <div class="featurette">
-    <h2 class="featurette-heading">From <%= achoice %> to <%= zchoice %></h2>
-      <p class="lead">
-      Our lectures cover a huge range of subjects, including English Literature, History, Classics, Philosophy, and Modern Languages. We cover the subjects that matter to students and teachers: Shakespeare, The French Revolution, Frankenstein ... <%= link_to "and much, much more!", courses_path %>
-      <br>
   </div>
 
-
-  <div class="featurette">
-    <h2 class="featurette-heading">Perfect for schools...</h2>
-      <p class="lead">
-      Our lectures are perfect for use as part of classroom teaching... or by students in their own time... or both! Our lectures are accessible whenever and wherever you need them - on desktop, tablet, and mobile. See <%= link_to "what we can offer", school_users_path %>, read <%= link_to "what people are saying about us", school_feedback_path %> or find out about <%= link_to "our partner schools", ourschools_path %>.
-      <br>
+  <div id="cta">
+    <p>
+      Ready to get started with MASSOLIT?
+    </p>
+    <% if user_signed_in? %>
+      <%= link_to "Browse our lectures", '/courses' %>
+    <% else %>
+      <%= link_to "Sign up - it's free!", 'student/sign_up' %>
+    <% end %>
   </div>
 
-    <div class="featurette">
-    <h2 class="featurette-heading">... and lifelong learners.</h2>
-      <p class="lead">
-          <p class="lead">Have you ever read a book that you feel <%= link_to "has more to give", tag_path("English Literature") %>? Are you interested in <%= link_to "history of philosophy", tag_path("Philosophy") %> or perhaps the <%= link_to "philosophy of history", tag_path("History") %>, but don't know where to start? MASSOLIT offers unlimited access to its <%= link_to "extensive library of courses" %> for just <strong>£4.99 a month</strong>. Read about <%= link_to "what we offer", individual_users_path %> or <%= link_to "try it out for 30 days - absolutely free", new_user_registration_path(:plan => "topaz") %>.
+  <div id="clients">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Our Schools</h3>
+          <p>
+            We are used by over 50 schools in the UK and worldwide, including...
+          </p>
+          <div class="logos">
+            <img src="assets/logos/shhs-grey.png">
+            <img src="assets/logos/kcs-grey.png">
+            <img src="assets/logos/st-barts-grey.png">
+          </div>
+        </div>
+      </div>
     </div>
-
-  <br>
-
-</div>
+  </div>

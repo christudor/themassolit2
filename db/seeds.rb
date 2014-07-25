@@ -1,19 +1,15 @@
-puts 'PROFILES'
-YAML.load(ENV['PROFILES']).each do |profile|
-  Profile.find_or_create_by_name({ :name => profile }, :without_protection => true)
-  puts 'Profile: ' << profile
-end
+User.all.each do |u|
 
-puts 'ROLES'
-YAML.load(ENV['ROLES']).each do |role|
-  Role.find_or_create_by_name({ :name => role }, :without_protection => true)
-  puts 'Role: ' << role
+	if u.last_4_digits.blank?
+		puts "Not a paid subscriber: skipping"
+	elsif u.rolable_type == "Student"
+		puts "A student: skipping"
+	elsif u.rolable_type == "Teacher"
+		puts "A teacher: skipping"
+	else
+		puts "Updating user: " << u.email
+		u.rolable_type = "OldMember"
+		u.save
+		puts "Rolable_Type now: " << u.rolable_type
+	end
 end
-
-puts 'DEFAULT USERS'
-subscriber = Subscriber.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
-puts 'Subscriber: ' << subscriber.name
-subscriber.add_role :admin
-user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
-puts 'User: ' << user.name
-user.add_role :admin

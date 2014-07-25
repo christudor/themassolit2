@@ -1,4 +1,0 @@
-<%= form_for(current_subscriber.relationships.build(course_id: @course.id)) do |f| %>
-  <div><%= f.hidden_field :course_id %></div>
-  <%= f.submit "Take this course!", class: "btn btn-large btn-primary" %>
-<% end %>

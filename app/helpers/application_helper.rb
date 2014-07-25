@@ -20,6 +20,14 @@
 	    html.html_safe
   	end
 
+    def is_admin?
+      if current_user.rolable_type == "Admin"
+        true
+      else
+        render :text => 'Admins only'
+      end
+    end
+
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id

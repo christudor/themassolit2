@@ -1,36 +1,50 @@
+<%= content_for :body_id, "datatables" %>
 <% provide(:title, 'Trailers Dashboard') %>
-<div class="container">
-<h1>Trailers Dashboard</h1>
 
-<div class="alert alert-error">
-  <strong>Heads up:</strong> Please only use this dashboard for deleting trailers that are no longer needed. Editing records screws up the link with Amazon S3.
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Tutors Dashboard
+  </div>
 </div>
 
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Trailer Name</th>
-          <th>Course</th>
-          <th>Provider</th>
-          <th>Date Added</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @trailers.each do |trailer| %>
-    <tr>
-        <td><%= link_to trailer.name, trailer %></td>
-        <td><%= link_to trailer.course.name, trailer.course.name %></td>
-        <td><%= link_to trailer.course.provider.name, trailer.course.provider %></td>
-        <td><%= trailer.created_at.to_date %></td>
-        <td><%= link_to("Delete Trailer", trailer_path(trailer), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-</div>
-</div>
-
-<div class="container">
-  <center><%= link_to "Add New Trailer", addtrailer_path, :class => "btn btn-large btn-primary" %></center>
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Course</th>
+                <th tabindex="0" rowspan="1" colspan="1">Provider</th>
+                <th tabindex="0" rowspan="1" colspan="1">Date Added</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">Course</th>
+                <th rowspan="1" colspan="1">Provider</th>
+                <th rowspan="1" colspan="1">Date Added</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% Trailer.all.each do |trailer| %>
+            <tr>
+              <td><%= link_to trailer.name, trailer %></td>
+              <td><%= link_to trailer.course.name, trailer.course unless trailer.course.blank? %></td>
+              <td><%= link_to trailer.course.provider.name, trailer.course.provider unless trailer.course.blank? %></td>
+              <td><%= trailer.created_at.to_date.to_formatted_s(:rfc822) %></td>
+              <td>
+                  <%= link_to "Del", trailer_path(trailer), :data => { :confirm => "Delete trailer?" }, :method => :delete %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

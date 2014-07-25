@@ -1,6 +1,6 @@
 class Provider < ActiveRecord::Base
   attr_accessible :name, :position, :department, :college, :university, :email,
-  :bio, :facebook, :twitter, :googleplus, :blog, :academiaedu, :huffpo
+  :bio, :facebook, :twitter, :googleplus, :blog, :academiaedu, :huffpo, :website
   has_many :courses
 
   before_save { |provider| provider.email = email.downcase }

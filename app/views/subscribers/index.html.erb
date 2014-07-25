@@ -1,41 +1,60 @@
+<%= content_for :body_id, "datatables" %>
 <% provide(:title, 'Users Dashboard') %>
 
-<div class="container">
-<h1>Users Dashboard</h1>
-<div class="span12">
-
-<%= will_paginate %>
-
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Name</th>
-          <th>School</th>
-          <th>Email</th>
-          <th>Registered</th>
-          <th>Role</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @subscribers.each do |subscriber| %>
-    <tr>
-        <td><%= link_to subscriber.name, subscriber %></td>
-        <td><%= link_to subscriber.school.name, subscriber.school unless subscriber.school.nil? %></td>
-        <td><%= subscriber.email %></td>
-        <td><%= subscriber.created_at.to_date %></td>
-        <td><%= subscriber.roles.first.name.titleize unless subscriber.roles.first.nil? %></td>
-        <td>
-          <a data-toggle="modal" href="#role-options-<%= subscriber.id %>" class="btn btn-mini" type="button">Change role</a>
-          <%= render subscriber %>
-        </td>
-        <td><%= link_to("Edit Details", edit_subscriber_path(subscriber), :class => 'btn btn-mini') %></td>
-        <td><%= link_to("Delete subscriber", subscriber_path(subscriber), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless subscriber == current_subscriber %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<%= will_paginate %>
-
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Users Dashboard
+  </div>
 </div>
+
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">School</th>
+                <th tabindex="0" rowspan="1" colspan="1">E-Mail</th>
+                <th tabindex="0" rowspan="1" colspan="1">Role</th>
+                <th tabindex="0" rowspan="1" colspan="1">Last Sign-in</th>
+                <th tabindex="0" rowspan="1" colspan="1">Sign-up Date</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">School</th>
+                <th rowspan="1" colspan="1">E-Mail</th>
+                <th rowspan="1" colspan="1">Role</th>
+                <th rowspan="1" colspan="1">Last Sign-in</th> 
+                <th rowspan="1" colspan="1">Sign-up Date</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% Subscriber.all.each do |s| %>
+            <tr>
+                <td><%= link_to s.name, s %></td>
+                <td><%= link_to s.school.name, s.school unless s.school.blank?%></td>
+                <td><%= s.email %></td>
+                <td><%= s.roles.first.name.titleize unless s.roles.first.nil? %></td>
+                <td><%= s.last_sign_in_at.to_date.to_formatted_s(:rfc822) unless s.last_sign_in_at.blank? %></td>
+                <td><%= s.created_at.to_date.to_formatted_s(:rfc822) unless s.created_at.blank? %></td>
+                <td>
+                    <a data-toggle="modal" href="#role-options-<%= s.id %>">CR</a>
+                    <%= render s %>
+                  <%= link_to "Ed", edit_subscriber_path(s) %>
+                  <%= link_to "Del", subscriber_path(s), :data => { :confirm => "Delete user?" }, :method => :delete unless s == current_subscriber %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>
+

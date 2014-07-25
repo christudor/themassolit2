@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140513104058) do
+ActiveRecord::Schema.define(:version => 20140725002519) do
+
+  create_table "admins", :force => true do |t|
+    t.boolean  "admin"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "answers", :force => true do |t|
     t.text     "answer"
@@ -47,8 +53,12 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.string   "category"
     t.text     "description"
     t.integer  "provider_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.string   "avatar"
   end
 
@@ -109,6 +119,13 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.string   "video"
   end
 
+  create_table "members", :force => true do |t|
+    t.string   "customer_id"
+    t.string   "last_4_digits"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "movies", :force => true do |t|
     t.string   "name"
     t.integer  "lesson_id"
@@ -152,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.string   "blog"
     t.string   "academiaedu"
     t.string   "huffpo"
+    t.string   "website"
   end
 
   create_table "qualifications", :force => true do |t|
@@ -241,6 +259,12 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.text     "reference"
   end
 
+  create_table "students", :force => true do |t|
+    t.integer  "school_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "subscribers", :force => true do |t|
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
@@ -306,7 +330,7 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
   end
 
   create_table "teachers", :force => true do |t|
-    t.string   "email"
+    t.integer  "school_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -349,6 +373,9 @@ ActiveRecord::Schema.define(:version => 20140513104058) do
     t.string   "last_sign_in_ip"
     t.date     "date_of_birth"
     t.string   "sex"
+    t.integer  "rolable_id"
+    t.string   "rolable_type"
+    t.string   "user_type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

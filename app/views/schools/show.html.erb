@@ -1,121 +1,64 @@
 <% provide(:title, "School Profile") %>
-<h1><%= @school.name %></h1>
+<%= content_for :body_id, "datatables" %>
 
-<% if current_subscriber.has_role? :admin %>
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    <%= @school.name %>
 
-<div class="container">
-<h2>Associated Individuals</h2>
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>E-Mail</th>
-        <th>Valid?</th>
-        <th>Last Sign-in</th>
-        <th>Total Sign-ins</th>
-      </tr>
-    </thead>
+    <% if @school.active? %>
+      <span class="label label-success">Active</span>
+    <% else %>
+      <span class="label label-danger">Inactive</span>
+    <% end %>
 
-    <tbody>
-      <% @school.subscribers.each do |subscriber| %>
-      <% if subscriber.has_role? :validteacher %>
-        <tr>
-          <td><%= link_to subscriber.name, subscriber %></td>
-          <td>Teacher</td>
-          <td><%= subscriber.email %></td>
-          <td>Yes</td>
-          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
-        </tr>
-      <% elsif subscriber.has_role? :invalidteacher %>
-        <tr>
-          <td><%= link_to subscriber.name, subscriber %></td>
-          <td>Teacher</td>
-          <td><%= subscriber.email %></td>
-          <td>No</td>
-          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
-        </tr>
-        <% elsif subscriber.has_role? :validstudent %>
-          <tr>
-        <td><%= link_to subscriber.name, subscriber %></td>
-        <td>Student</td>
-        <td><%= subscriber.email %></td>
-        <td>Yes</td>
-          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
-    </tr>
-  <% elsif subscriber.has_role? :invalidstudent %>
-    <tr>
-        <td><%= link_to subscriber.name, subscriber %></td>
-        <td>Student</td>
-        <td><%= subscriber.email %></td>
-        <td>No</td>
-          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
-    </tr>
-        <% end %>
-        <% end %>
-    </tbody>
-</table>
+  </div>
 </div>
+
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">Email</th>
+                <th tabindex="0" rowspan="1" colspan="1">Last Sign-in</th>
+                <th tabindex="0" rowspan="1" colspan="1">Sign-up Date</th>
+                <th tabindex="0" rowspan="1" colspan="1">Total Sign-ins</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">Email</th>
+                <th rowspan="1" colspan="1">Last Sign-in</th>
+                <th rowspan="1" colspan="1">Sign-up Date</th>
+                <th rowspan="1" colspan="1">Total Sign-ins</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% @school.teachers.all.each do |s| %>
+            <tr>
+              <td><%= link_to s.user.name, s.user %></td>
+              <td><%= s.user.email %></td>
+              <td><%= s.user.last_sign_in_at.to_date.to_formatted_s(:rfc822) unless s.user.last_sign_in_at.blank? %></td>
+              <td><%= s.user.created_at.to_date.to_formatted_s(:rfc822) unless s.user.created_at.blank? %></td>
+              <td><%= s.user.sign_in_count unless s.user.sign_in_count.blank? %></td>
+            </tr>
+            <% end %>
+            <% @school.students.all.each do |s| %>
+            <tr>
+              <td><%= link_to s.user.name, s.user %></td>
+              <td><%= s.user.email %></td>
+              <td><%= s.user.last_sign_in_at.to_date.to_formatted_s(:rfc822) unless s.user.last_sign_in_at.blank? %></td>
+              <td><%= s.user.created_at.to_date.to_formatted_s(:rfc822) unless s.user.created_at.blank? %></td>
+              <td><%= s.user.sign_in_count unless s.user.sign_in_count.blank? %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>
-<% else %>
-
-<div class="container">
-<h2>My Students</h2>
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th>E-Mail</th>
-        <th>Valid?</th>
-        <th>Last Sign-in</th>
-        <th>Total Sign-ins</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @school.subscribers.each do |subscriber| %>
-        <% if subscriber.has_role? :validstudent %>
-          <tr>
-        <td><%= link_to subscriber.name, subscriber %></td>
-        <td>Student</td>
-        <td><%= subscriber.email %></td>
-        <td>Yes</td>
-          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
-    </tr>
-  <% elsif subscriber.has_role? :invalidstudent %>
-    <tr>
-        <td><%= link_to subscriber.name, subscriber %></td>
-        <td>Student</td>
-        <td><%= subscriber.email %></td>
-        <td>No</td>
-          <td><%= subscriber.last_sign_in_at.to_date unless subscriber.last_sign_in_at.blank? %></td>
-          <td><%= subscriber.sign_in_count unless subscriber.sign_in_count.blank? %></td>
-    </tr>
-        <% end %>
-        <% end %>
-    </tbody>
-</table>
-</div>
-</div>
-<% end %>
-
-<br>
-<br>
-
-<% if current_subscriber.has_role? :admin %>
-  <div class="container">
-  <h2>School Options</h2>
-    <p>
-    <%= link_to "Edit", edit_school_path(@school), class: "btn btn-large btn-primary" %>
-    <%= link_to "Remove", @school, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-large btn-primary" %>
-    </p>
-<% else %>
-<% end %>

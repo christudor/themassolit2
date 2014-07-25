@@ -1,12 +1,94 @@
-<footer class="footer">
-  <small>
-    Welcome to the <a href="http://www.massolit.co.uk">MASSOLIT</a>
-  </small>
-  <nav>
-    <ul>
-      <li><%= link_to "About",   about_path %></li>
-      <li><%= link_to "Contact", contact_path %></li>
-      <li><a href="http://www.massolit.co.uk">News</a></li>
-    </ul>
-  </nav>
-</footer>
+  <div id="footer-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 menu">
+          <h3>Menu</h3>
+          <ul>
+                <li>
+                  <%= link_to "Courses", courses_path %>
+                </li>
+                <li>
+                  <%= link_to "Pricing", pricing_path %>
+                </li>
+                <li>
+                  <%= link_to "Testimonials", testimonials_path %>
+                </li>
+                <li>
+                  <%= link_to "Blog", "http://themassolit.wordpress.com/", :target => '_blank' %>
+                </li>
+              </ul>
+        </div>
+        <div class="col-sm-3 menu">
+          <h3>Overview</h3>
+          <ul>
+                <li>
+                  <%= link_to "About Us", about_path %>
+                </li>
+                <li>
+                  <%= link_to "Contact Us", contact_path %>
+                </li>
+                <li>
+                  <%= link_to "Press", "http://themassolit.wordpress.com/category/press/", :target => '_blank' %>
+                </li>
+                <li>
+                  <%= link_to "Privacy Policy", privacy_path %>
+                </li>
+                <li>
+                  <%= link_to "Terms of Service", terms_path %>
+                </li>
+              </ul>
+        </div>
+        <div class="col-sm-2 menu">
+          <h3>Social</h3>
+          <ul>
+                <li>
+                  <%= link_to "YouTube", "https://www.youtube.com/user/themassolit/", target: "_blank" %>
+                </li>
+                <li>
+                  <%= link_to "Facebook", "http://www.facebook.com/massolit", target: "_blank" %>
+                </li>
+                <li>
+                  <%= link_to "Twitter", "http://www.twitter.com/themassolit", target: "_blank" %>
+                </li>
+              </ul>
+        </div>
+        <div class="col-sm-4 newsletter">
+          <div class="signup clearfix">
+            <p>
+              Sign up for the newsletter and we'll inform you of updates, offers and more.
+            </p>
+
+            <!-- Begin MailChimp Signup Form -->
+            <form action="//massolit.us7.list-manage.com/subscribe/post?u=f1eec28d9525bf2df08f6b100&amp;id=e5e3b7cd98" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
+
+            <div id="mce-responses" class="clear">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;"><input type="text" name="b_f1eec28d9525bf2df08f6b100_e5e3b7cd98" tabindex="-1" value=""></div>
+            <div class="clear">
+            <input type="submit" value="Sign up" name="subscribe" id="mc-embedded-subscribe"></div>
+            </form>
+
+            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+            <script type='text/javascript'>
+            (function($) {
+            window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';
+            }(jQuery));
+            var $mcj = jQuery.noConflict(true);
+            </script>
+            <!--End mc_embed_signup-->
+
+          </div>
+        </div>
+      </div>
+      <div class="row credits">
+        <div class="col-md-12">
+          Copyright © 2014. MASSOLIT
+        </div>
+      </div>
+    </div>
+  </div>

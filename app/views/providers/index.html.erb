@@ -1,36 +1,57 @@
+<%= content_for :body_id, "datatables" %>
 <% provide(:title, 'Tutors Dashboard') %>
-<div class="container">
-<h1>Tutors Dashboard</h1>
-<div class="span12">
-<table class="table table-condensed">
-    <thead>
-      <tr>
-          <th>Name</th>
-          <th>E-Mail</th>
-          <th>Position</th>
-          <th>Department</th>
-          <th>College</th>
-          <th>University</th>
-      </tr>
-  </thead>
-  <tbody>
-  <% @providers.each do |provider| %>
-    <tr>
-        <td><%= link_to provider.name, provider %></td>
-        <td><%= provider.email %></td>
-        <td><%= provider.position %></td>
-        <td><%= provider.department %></td>
-        <td><%= provider.college %></td>
-        <td><%= provider.university %></td>
-        <td><%= link_to("Edit Tutor", edit_provider_path(provider), :class => 'btn btn-mini') %></td>
-        <td><%= link_to("Delete Tutor", provider_path(provider), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-</div>
+
+<div class="menubar">
+    <div class="sidebar-toggler visible-xs">
+        <i class="ion-navicon"></i>
+    </div>
+    
+  <div class="page-title">
+    Tutors Dashboard
+  </div>
 </div>
 
-<div class="container">
-	<center><%= link_to "Add new tutor", new_provider_path, :class => "btn btn-large btn-primary" %></center>
+<div class="content-wrapper">
+  
+  <table id="orders-datatable">
+        <thead>
+            <tr>
+                <th tabindex="0" rowspan="1" colspan="1">Name</th>
+                <th tabindex="0" rowspan="1" colspan="1">E-Mail</th>
+                <th tabindex="0" rowspan="1" colspan="1">Position</th>
+                <th tabindex="0" rowspan="1" colspan="1">Department</th>
+                <th tabindex="0" rowspan="1" colspan="1">College</th>
+                <th tabindex="0" rowspan="1" colspan="1">University</th>
+                <th tabindex="0" rowspan="1" colspan="1">Options</th>
+            </tr>
+        </thead>
+        
+        <tfoot>
+            <tr>
+                <th rowspan="1" colspan="1">Name</th>
+                <th rowspan="1" colspan="1">E-Mail</th>
+                <th rowspan="1" colspan="1">Position</th>
+                <th rowspan="1" colspan="1">Department</th>
+                <th rowspan="1" colspan="1">College</th>
+                <th rowspan="1" colspan="1">University</th>
+                <th rowspan="1" colspan="1">Options</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% Provider.all.each do |provider| %>
+            <tr>
+              <td><%= link_to provider.name, provider %></td>
+              <td><%= provider.email %></td>
+              <td><%= provider.position unless provider.position.blank? %></td>
+              <td><%= provider.department unless provider.department.blank? %></td>
+              <td><%= provider.college unless provider.college.blank? %></td>
+              <td><%= provider.university unless provider.university.blank? %></td>
+              <td>
+                  <%= link_to "Ed", edit_provider_path(provider) %>
+                  <%= link_to "Del", provider_path(provider), :data => { :confirm => "Delete provider?" }, :method => :delete %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>

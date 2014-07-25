@@ -25,7 +25,7 @@ class TrailersController < ApplicationController
     @trailer = Trailer.find(params[:id])
     if @trailer.update_attributes(params[:trailer])
       flash[:success] = "Trailer updated"
-      redirect_to trailers_path
+      redirect_to '/admin/trailers'
     else
       render 'edit'
     end
@@ -35,7 +35,7 @@ class TrailersController < ApplicationController
     authorize! :index, :trailer, :message => 'Access limited to administrators only.'
     @trailer = Trailer.new(params[:trailer])
     if @trailer.save
-      redirect_to root_path
+      redirect_to '/admin/trailers'
     else
       render 'new'
     end    
@@ -50,7 +50,7 @@ class TrailersController < ApplicationController
     authorize! :index, :trailer, :message => 'Access limited to administrators only.'
     @trailer = Trailer.find(params[:id])
     @trailer.destroy
-    redirect_to trailers_path, :notice => "Trailer deleted!"
+    redirect_to '/admin/trailers', :notice => "Trailer deleted!"
   end
 
 end

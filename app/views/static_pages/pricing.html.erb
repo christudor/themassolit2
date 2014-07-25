@@ -1,19 +1,178 @@
-<% provide(:title, 'Pricing') %>
-<div class="container">
-	<h1>Pricing</h1>
+<% provide(:title, "Pricing") %>
+<%= content_for :body_id, "pricing" %>
 
-	<center><p class="lead">£1,995 per year (ex. VAT)</center>
-	<br><br>
-	<div class="span6 offset3">
-		<center><p class="lead"><strong>Why choose us?</strong></center>
-		<br>
-		<p class="lead">- Trusted and reliable content that you won't find anywhere else ...
-		<p class="lead">- ... designed and delivered by researchers and academics from the best universities in the country.
-		<p class="lead">- Unlimited and unfettered access to <%= link_to "our entire course library", courses_path %>. No hidden costs or usage fees.
-		<p class="lead">- Intuitive search and discovery makes it really easy for students and teachers to find courses that are relevant to them.
-		<p class="lead">- <%= link_to "Bitesize videos", samplecourses_path %> are really easy to use in class or at home... or anywhere in between.
-		<br><br>
-		<center><p class="lead"><%= link_to "What are people saying about us?", school_feedback_path %></center>
+	<div id="first-option">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>Unlimited access for your school.</h3>
+					<p>All plans include a 60-day free trial.</p>
+				</div>
+			</div>
+
+			<div class="row charts">
+				<div class="col-md-4">
+					<div class="chart first">
+						<div class="plan-name">Single Subject</div>
+						<div class="quantity">
+							<span class="dollar">£</span>
+							<span class="price">295</span>
+							<span class="period">/month</span>
+						</div>
+				            <div class="specs">
+				              <div class="spec">
+				                <span class="variable">Unlimited</span>
+				                users
+				              </div>
+				               <div class="spec">
+				                <span class="variable">No</span>
+				                hidden usage fees
+				              </div>
+				              <div class="spec">
+				                <span class="variable">24/7</span>
+				                tech support
+				              </div>
+				              <div class="spec">
+				                <span class="variable">75+</span>
+				                lectures
+				              </div>
+				              <div class="spec">
+				                <span class="variable">1</span>
+				                subject
+				              </div>			                                       
+				            </div>
+							<a href="#myModal" role="button" class="btn-signup button-clear" data-toggle="modal">
+								<span>Request free trial</span>
+							</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart featured">
+						<img src="assets/ribbon.png" class="popular" alt="ribbon" />
+						<div class="plan-name">Two Subjects</div>
+						<div class="quantity">
+							<span class="dollar">£</span>
+							<span class="price">545</span>
+							<span class="period">/year</span>
+						</div>						
+				            <div class="specs">
+				              <div class="spec">
+				                <span class="variable">Unlimited</span>
+				                users
+				              </div>
+				               <div class="spec">
+				                <span class="variable">No</span>
+				                hidden usage fees
+				              </div>
+				              <div class="spec">
+				                <span class="variable">24/7</span>
+				                tech support
+				              </div>
+				              <div class="spec">
+				                <span class="variable">150+</span>
+				                lectures
+				              </div>
+				              <div class="spec">
+				                <span class="variable">2</span>
+				                subjects
+				              </div>			                                       
+				            </div>
+					<a href="#myModal" role="button" class="btn-signup button-clear" data-toggle="modal">
+						<span>Request free trial</span>
+					</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart last">
+						<div class="plan-name">Full License</div>
+						<div class="quantity">
+							<span class="dollar">£</span>
+							<span class="price">995</span>
+							<span class="period">/year</span>
+						</div>
+				            <div class="specs">
+				              <div class="spec">
+				                <span class="variable">Unlimited</span>
+				                users
+				              </div>
+				               <div class="spec">
+				                <span class="variable">No</span>
+				                hidden usage fees
+				              </div>
+				              <div class="spec">
+				                <span class="variable">24/7</span>
+				                tech support
+				              </div>
+				              <div class="spec">
+				                <span class="variable">All</span>
+				                lectures
+				              </div>
+				              <div class="spec">
+				                <span class="variable">All</span>
+				                subjects
+				              </div>			                                       
+				            </div>
+					<a href="#myModal" role="button" class="btn-signup button-clear" data-toggle="modal">
+						<span>Request free trial</span>
+					</a>
+					<%= render 'contact' %>
+					</div>
+				</div>				
+			  </div>
+
+			<div class="row message">
+				<p>
+					Please note that all prices are quoted exclusive of VAT.
+				</p>
+			</div>
+			<div class="row faq">
+				<div class="col-md-12">
+					<div class="row header">
+						<div class="col-md-12">
+							<h3>Frequently Asked Questions</h3>
+						</div>
+					</div>
+					<div class="row questions">
+						<div class="col-md-6">
+							<div class="question">
+								<strong>Can students access lectures outside of school?</strong>
+								<p>
+									Yes. Every student will have their own username and password, meaning they can log on to MASSOLIT whenever and wherever they like. In fact, lots of schools set MASSOLIT videos for homework.
+								</p>
+							</div>
+							<div class="question">
+								<strong>Can I request lectures on specific topics?</strong>
+								<p>
+									Yes, definitely. Almost all of the courses we make are the result of requests from teachers. So if you are teaching a specific text next year, get in touch and we'll get a world-class academic to produce a few lectures.
+								</p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="question">
+								<strong>Will the number of lectures increase?</strong>
+								<p>
+									Yes, significantly. We are aiming to at least double the number of lectures by the end of the year. But we do want what we make to be useful, so we really do encourage you to get in touch with suggestions.
+								</p>
+							</div>
+							<div class="question">
+								<strong>Are you planning on adding feature [x]?</strong>
+								<p>
+									It depends. If enough schools ask for a certain feature, we'll definitely add it. However, at the moment we are concentrating most of our energy of increasing the number of lectures on the site - since this is what the majority of schools have asked for.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row contact">
+				<div class="col-md-12">
+					<div class="wrapper clearfix">
+						<h4>
+							Unsure which plan is best for you? Feel free to send an e-mail to 
+							<strong>chris@massolit.io</strong>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-</div>

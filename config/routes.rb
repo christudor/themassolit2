@@ -1,38 +1,38 @@
 Massolit::Application.routes.draw do
 
   mount StripeEvent::Engine => '/stripe'
-  get "content/silver"
-  get "content/gold"
-  get "content/platinum"
-  get "admin/index"
+ 
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  resources :users
+
+  devise_scope :user do
+    match 'teacher/sign_up' => 'registrations#new', :user => { :rolable_type => 'teacher' }
+    match 'student/sign_up' => 'registrations#new', :user => { :rolable_type => 'student' }
+    match 'member/sign_up'  => 'registrations#new', :user => { :rolable_type => 'member'}
+    match 'admin/sign_up'   => 'registrations#new', :user => { :rolable_type => 'admin'}
+  end
+
+  devise_scope :user do
+    put 'update_card', :to => 'registrations#update_card'
+  end
+
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact', :via => :post
 
   authenticated :subscriber do
     root :to => 'static_pages#home'
   end
   root :to => 'static_pages#home'
-  
-  devise_for :subscribers, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
   authenticated :user do
     root :to => 'static_pages#home'
   end
-  root :to => "static_pages#home"
- 
- devise_for :users, :controllers => { :registrations => 'registrations' }
-  devise_scope :user do
-    put 'update_plan', :to => 'registrations#update_plan'
-    put 'update_card', :to => 'registrations#update_card'
-  end
+  root :to => 'static_pages#home'
 
+  devise_for :subscribers
+  
   get 'tags/:tag' => 'courses#index', :as => :tag
   get 'tags/:lessontag' => 'courses#index', :as => :lessontag
-
-
-  devise_scope :user do 
-    root to: 'static_pages#home'
-    match '/sessions/user', to: 'devise/sessions#create', via: :post
-    match '/sessions/user.new', to: 'devise/sessions#create', via: :post
-  end
 
   devise_scope :subscriber do
     root to: 'static_pages#home'
@@ -40,22 +40,38 @@ Massolit::Application.routes.draw do
     match '/sessions/subscriber.new', to: 'devise/sessions#create', via: :post
   end
 
-  resources :users
-  resources :courses
-  resources :providers
+  resources :news_items
+  match '/feed' => 'news_items#feed',
+      :as => :feed,
+      :defaults => { :format => 'atom' }
+
+  resources :mailchimp do
+    collection do
+      get :subscribe, :as => :subscribe
+    end   
+  end
   resources :imports
-  resources :lessons
   resources :relationships, only: [:create, :destroy]
   resources :learners
   resources :teachers
-  scope "/admin" do
+
+  scope '/admin' do
+    resources :schools
+    resources :providers, only: [:new, :edit, :create, :index]
+    resources :lessons,   only: [:new, :edit, :create, :index]
+    resources :courses,   only: [:new, :edit, :create]
+
     resources :subscribers do
       member do
         get :studying
       end
     end
   end
-  resources :schools
+
+  resources :providers, except: [:new, :edit, :create, :index]
+  resources :lessons,   except: [:new, :edit, :create, :index]
+  resources :courses,   except: [:new, :edit, :create]
+  
   resources :videos
   resources :transcripts
   resources :handouts
@@ -72,42 +88,35 @@ Massolit::Application.routes.draw do
   resources :samples
   resources :options
 
-  # The following lines match actions from weirdly-named controllers to simpler paths.
-  # Instead of /static_pages/about, for example, we have /about
+  # Static Pages
 
-  match '/help',    to: 'static_pages#help'
-  match '/about',   to: 'static_pages#about'
-  match '/contact', to: 'static_pages#contact'
-  match '/helpus',  to: 'static_pages#helpus'
-  match '/faqs',    to: 'static_pages#faqs'
-  match '/samplecourses', to: 'static_pages#samples'
-  match '/privacypolicy', to: 'static_pages#privacypolicy'
-  match '/enduseragreement', to: 'static_pages#enduseragreement'
-  match '/pricing', to: 'static_pages#pricing'
+  match '/about',         to: 'static_pages#about'
+  match '/samples',       to: 'static_pages#samples'
+  match '/privacy',       to: 'static_pages#privacy'
+  match '/terms',         to: 'static_pages#terms'
+  match '/pricing',       to: 'static_pages#pricing'
+  match '/testimonials',  to: 'static_pages#testimonials'
+  match '/blog',          to: 'static_pages#blog'
+  match '/jobs',          to: 'static_pages#jobs'
+  match '/press',         to: 'static_pages#press'
 
-  match '/subscribers', to: 'subscribers#index'
 
-  match '/ourschools', to: 'static_pages#ourschools'
-  match '/school_feedback', to: 'static_pages#school_feedback'
-  match '/school_users', to: 'static_pages#school_users'
-  match '/individual_users', to: 'static_pages#individual_users'
-  match '/contributors', to: 'static_pages#contributors'
+  match '/admin/courses',         to: 'courses#coursedash'
+  match '/admin/subscribers',     to: 'subscribers#index'
+  match '/admin/users',           to: 'users#index'
+  match '/admin/lectures',        to: 'lessons#lessondash'
+  match '/admin/videos',          to: 'movies#index'
+  match '/admin/tutors',          to: 'providers#index'
+  match '/admin/trailers',        to: 'trailers#index'
 
-  match '/studentsplash', to: 'static_pages#studentsplash'
-  match '/teachersplash', to: 'static_pages#teachersplash'
+  match '/admin/add-school',      to: 'schools#new'
+  match '/admin/add-tutor',       to: 'providers#new'
+  match '/admin/add-course',      to: 'courses#addcourse'
+  match '/admin/add-lecture',     to: 'lessons#new'
+  match '/admin/add-video',       to: 'movies#addmovie'
+  match '/admin/add-trailer',     to: 'trailers#addtrailer'
 
-  match '/coursedash',    to: 'courses#coursedash'
-  match '/lessondash',    to: 'lessons#lessondash'
- 
-  match '/addcourse',     to: 'courses#addcourse'
-  match '/addlecture',    to: 'lessons#addlecture'
-  match '/addtranscript', to: 'transcripts#addtranscript'
-  match '/addhandout',    to: 'handouts#addhandout'
-  match '/addmovie',      to: 'movies#addmovie'
-  match '/addbanner',     to: 'banners#addbanner'
-  match '/addbook',       to: 'books#addbook'
-  match '/addtrailer',    to: 'trailers#addtrailer'
-  match '/addsample',     to: 'samples#addsample'
+  match '/admin/edit-tutor',       to: 'providers#edit'
 
   match '/check', to: 'quizzes#check'
 

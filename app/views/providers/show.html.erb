@@ -1,65 +1,55 @@
 <% provide(:title, @provider.name) %>
+<%= content_for :body_id, "portfolio-item" %>
 
-<div class="container">
-<h1>
-  <%= @provider.name %>
-</h1>
-</div>
+  <div class="st-container">
+    <div class="st-pusher">
+      <div class="st-content">
+        <div id="showcase">
+          <div class="container">
+            <div class="row gallery_container">
+              <div class="col-md-12">
+                <div class="project">
+                  
+                  <h1>
+                    <%= @provider.name %>
+                  </h1>
+                  <div class="col-md-7 english screens">                   
+                    <h3>About</h3>
+                    <p class="text">
+                      <%= @provider.bio.html_safe %>
+                    </p>
+                    <br />
+                    <p class="text"><%= link_to "« Go back", :back %></p>
+                </div>
 
-<div class="container">
-<div class="span7">
-  <h2>About</h2>
-  <p class="media"><%= @provider.bio.html_safe %></p>
-  <br><br>
-  
-  <center><p class="courselist"><i class="icon-chevron-left"></i> <%= link_to "Go back", :back %></p></center>
-
-</div>
-
-
-
-
-<div class="span3 offset1">
-  <h2>Key Information</h2>
-  <ul class="courselist">
-    <li><i class="icon-user"></i> <%= @provider.position %> </li>
-    <li><i class="icon-book"></i> <%= @provider.department %> </li>
-    <li><i class="icon-home"></i> University of <%= @provider.university %> </li>
-  </ul>
-
-<br><br>
-
-  <h2>Courses</h2>
-  <ul class="courselist">
-  	<% @provider.courses.each do |course| %>
-      <% if course.lessons.blank? %>
-        <li><i class="icon-list"></i> <%= course.name %>
-      <% else %>
-  		  <li><i class="icon-list"></i> <%= link_to course.name, course %>
-      <% end %>
-  	<% end %>
-  </ul>
-
-<br><br>
-
-  <h2>More Information</h2>
-  <ul class="courselist">
-  	<% unless @provider.facebook.empty? %>
-  		<li><i class="fi-social-facebook"></i> <%= @provider.facebook %></li>
-  	<% end %>
-  	<% unless @provider.twitter.empty? %>
-    	<li><i class="fi-social-twitter"></i> <%= link_to "@#{@provider.twitter}", "http://www.twitter.com/#{@provider.twitter}", :target => "_blank" %> </li>
-    <% end %>
-    <% unless @provider.blog.empty? %>
-    	<li><i class="icon-pencil"></i> <%= link_to "Personal Website", @provider.blog, :target => "_blank" %> </li>
-    <% end %>
-    <% unless @provider.huffpo.empty? %>
-    	<li><i class="icon-comment"></i> <%= link_to "Huffington Post", @provider.huffpo, :target => "_blank" %> </li>
-    <% end %>
-    <% unless @provider.academiaedu.empty? %>
-    	<li><i class="icon-book"></i> <%= link_to "Academia.edu", @provider.academiaedu, :target => "_blank" %> </li>
-    <% end %>
-  </ul>
-
-</div>
-</div>
+                  <div class="col-md-4 col-md-offset-1 description">
+                    <div class="info">
+                      <h3>Key Information</h3>
+                      <br />
+                      <p>
+                        <strong>Position:</strong>
+                        <%= @provider.position %>
+                      </p>
+                      <p>
+                        <strong>Department:</strong>
+                        <%= @provider.department %>
+                      </p>
+                      <p>
+                        <strong>University of <%= @provider.university %></strong>
+                      </p>
+                      <br><br>
+                      <% unless @provider.courses.blank? %>
+                        <h3>Courses</h3>
+                          <br />
+                          <% @provider.courses.each do |course| %>
+                            <%= link_to course.name, course %>
+                        <% end %>
+                      <% end %>
+                    </div>              
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

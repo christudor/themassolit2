@@ -1,0 +1,25 @@
+  <%= hidden_field_tag 'plan', params[:plan] %>
+
+  <br />
+
+    <div class="form-group">
+      <%= label_tag :card_number, "Card Number:" %>
+      <%= text_field_tag :card_number, nil, name: nil, :class => 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= label_tag :card_code, "Card Security Code (CVV)" %>
+      <%= text_field_tag :card_code, nil, name: nil, :class => 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= label_tag :card_month, "Card Expiration:" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", class: 'form-control'} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, {name: nil, id: "card_year", class: 'form-control'} %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.input :coupon, :label => 'Promotional Coupon (if any):', input_html: { class: 'form-control' } %>
+    </div>
+
+  <%= f.hidden_field :stripe_token %>

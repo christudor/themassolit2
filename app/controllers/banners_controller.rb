@@ -1,6 +1,6 @@
 class BannersController < ApplicationController
 
- def show
+  def show
     @banner = Banner.find(params[:id])
   end
 

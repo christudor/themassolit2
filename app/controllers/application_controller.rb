@@ -5,6 +5,32 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  after_filter :store_location
+
+  def store_location
+    if (!request.fullpath.match("/subscribers") &&
+      !request.xhr?) # don't store ajax calls
+      session[:previous_url] = request.fullpath
+    end
+  end
+
+  def after_sign_in_path_for(resource)
+    case current_user.rolable_type
+    when "Admin"
+        return root_path
+    when "Teacher"
+        return root_path
+    when "Student"
+        return root_path
+    when "Member"
+        return root_path
+    end
+  end
+
+  def after_sign_out_path_for(resource)
+    session[:previous_url] || root_path
+  end  
+
   def current_auth_resource
     if subscriber_signed_in?
       current_subscriber
@@ -29,11 +55,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
   def render_error(status, exception)
     respond_to do |format|
       format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
       format.all { render nothing: true, status: status }
-    end
+  end
+
   end
 
 end
