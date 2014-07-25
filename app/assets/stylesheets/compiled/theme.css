@@ -1,3 +1,17 @@
+$roboto: "Roboto";
+$arial: "Arial";
+$lato: 'Lato', 'Helvetica Neue', Arial;
+$helvetica: "Helvetica Neue", Helvetica, Arial;
+$myriad: Myriad Pro, Lato, Helvetica Neue, Arial;
+$sourceSans: Source Sans Pro, Helvetica Neue, Arial;
+$merriweather: "Merriweather", Georgia;
+$helvetica: "Helvetica Neue", Arial;
+
+$sidebarBg: #2F343D;
+$maxMedium: 991px;
+$minMedium: 768px;
+$maxSmall: 767px;
+
 /* modules */
 /* this mixin makes possible to add transition to a specific vendor, example: */
 /* -webkit-transition: -webkit-transform 0.5s linear; */
