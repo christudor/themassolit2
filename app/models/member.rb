@@ -27,12 +27,12 @@ def update_plan(role)
       end
       if coupon.blank?
         customer = Stripe::Customer.create(
-          :card => stripe_token
+          :card => stripe_token,
           :plan => "topaz"
         )
       else
         customer = Stripe::Customer.create(
-          :card => stripe_token
+          :card => stripe_token,
           :plan => "topaz"
         )
       end
