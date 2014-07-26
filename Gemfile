@@ -14,6 +14,7 @@ gem 'omniauth-twitter'
 gem 'ionicons-rails'
 gem 'gibbon'
 gem 'coffee-rails', '3.2.2'
+gem 'turbolinks'
 
 # Simple Form for form construction (for use with Stripe)
 
