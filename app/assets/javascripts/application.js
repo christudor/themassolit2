@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.readyselector
 //= require jquery.externalscript
+//= require bootstrap/bootstrap.min
 //= require turbolinks
 //= require ../../../vendor/assets/javascripts/jquery.flot/jquery.flot
 //= require ../../../vendor/assets/javascripts/jquery.flot/jquery.flot.time
@@ -25,4 +26,4 @@
 //= require_directory ../../../vendor/assets/javascripts/.
 //= require theme
 //= require_directory ./pages/.
-//= require_tree
+//= require courses.js.coffee
