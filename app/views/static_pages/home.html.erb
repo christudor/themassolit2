@@ -11,12 +11,8 @@
         Super-charge your teaching with video lectures from the best academics in the world.
       </p>
       <div class="cta animated fadeInDown">
-        <a href="#" class="button-outline">Watch the video</a>
-        <% if user_signed_in? %>
+        <a href="#myModal" class="button-outline" data-toggle="modal">Request free trial</a>
           <%= link_to "Browse our lectures", '/courses', :class => "button" %>
-        <% else %>
-          <%= link_to "Sign up", 'student/sign_up', :class => "button" %>
-        <% end %>
       </div>
     </div>
   </div>
@@ -255,7 +251,7 @@
 
   <div id="cta">
     <p>
-      Ready to get started with MASSOLIT?
+      School already registered with MASSOLIT?
     </p>
     <% if user_signed_in? %>
       <%= link_to "Browse our lectures", '/courses' %>

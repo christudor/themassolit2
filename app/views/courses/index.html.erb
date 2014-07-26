@@ -6,8 +6,9 @@
       <div class="row header">
         <div class="col-md-12">
           <h3>Our Courses</h3>
-          <p>Here's a selection of our courses.</p>
-        </div>   
+          <p>Here's our selection of courses.</p>
+
+        </div>
       </div>
 
       <div class="col-md-12 filtering">
@@ -31,43 +32,14 @@
         </ul>
       </div>
 
-      <% @courses.each do |course| %>
+      <div id="courses">
+        <%= render 'courses' %>
+      </div>
 
-        <div class="col-md-12 project">
-          <div class="col-md-3 devices interfaces web no-padding">
-            <%= link_to course do %>
-              <%= image_tag course.avatar_url.to_s, :size => "210x210", :class => "img-circle" %>
-            <% end %>
-          </div>
-          
-          <div class="col-md-7 some-lateral-padding">
-            <h3><%= link_to course.name, course %></h3>
-            <p class="description">
-              <%= truncate(course.description, :length => 380, :separator => ' ') %>
-              <%= link_to "Read more", course %>
-            </p>
-          </div>
-            
-          <div class="col-md-2 no-lateral-padding">
-            <div id="cta">
-              <%= link_to "Go to course", course %>
-            </div>
 
-            <div class="description some-vertical-padding">
-              <p><%= link_to course.provider.name, course.provider %></p>
-              <p>
-                <% unless course.provider.website.blank? %>
-                  <%= link_to course.provider.website, :target => '_blank' do %>
-                    <%= course.provider.university %>
-                  <% end %>
-                <% end %>
-              <p><%= raw course.genre_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
-            </div>
-          </div>
+        <%= will_paginate @courses %>
 
-        </div>
-      
-      <% end %>
 
   </div>
 </div>
+

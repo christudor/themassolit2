@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap/bootstrap.min
-//= require_directory ./vendor
 //= require ../../../vendor/assets/javascripts/jquery.flot/jquery.flot
 //= require ../../../vendor/assets/javascripts/jquery.flot/jquery.flot.time
 //= require ../../../vendor/assets/javascripts/jquery.flot/jquery.flot.categories
@@ -23,9 +21,6 @@
 //= require ../../../vendor/assets/javascripts/messenger/messenger-theme-flat
 //= require ../../../vendor/assets/javascripts/moment.min
 //= require_directory ../../../vendor/assets/javascripts/.
-//= require jquery.readyselector
-//= require jquery.externalscript
-//= require registrations
-
 //= require theme
 //= require_directory ./pages/.
+//= require_tree
