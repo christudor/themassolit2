@@ -12,8 +12,8 @@ gem 'cancan', '1.6.8'
 gem 'rolify', '3.2.0'
 gem 'omniauth-twitter'
 gem 'ionicons-rails'
-gem 'turbolinks'
 gem 'gibbon'
+gem 'coffee-rails', '3.2.2'
 
 # Simple Form for form construction (for use with Stripe)
 
@@ -62,7 +62,6 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '3.2.5'
-  gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
   gem 'foundation-icons-sass-rails'
 end
