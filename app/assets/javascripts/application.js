@@ -23,4 +23,4 @@
 //= require_directory ../../../vendor/assets/javascripts/.
 //= require theme
 //= require_directory ./pages/.
-//= require_tree
+//= require courses
