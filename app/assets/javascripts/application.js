@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require jquery.readyselector
 //= require jquery.externalscript
 //= require turbolinks
@@ -25,3 +26,4 @@
 //= require_directory ../../../vendor/assets/javascripts/.
 //= require_directory ./pages/.
 //= require theme
+//= require_tree
