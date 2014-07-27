@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @password = password
     mail(:to => user.email,
-         :subject => 'MASSOLIT Relaunch: Password Reset')
+         :subject => 'MASSOLIT: New Password')
   end
 
 end
