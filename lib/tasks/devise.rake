@@ -5,7 +5,7 @@ namespace :devise do
   desc 'Mass password reset and send email instructions'
   task :mass_password_reset => :environment do
     begin
-      User.all do |u|
+      User.all.each do |u|
         # Assign a random password
         random_password = Devise.friendly_token.first(8)
         u.password = random_password
