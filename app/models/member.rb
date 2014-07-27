@@ -33,7 +33,8 @@ def update_plan(role)
       else
         customer = Stripe::Customer.create(
           :card => stripe_token,
-          :plan => "topaz"
+          :plan => "topaz",
+          :coupon => coupon
         )
       end
     else

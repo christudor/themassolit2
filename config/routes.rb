@@ -8,7 +8,7 @@ Massolit::Application.routes.draw do
   devise_scope :user do
     match 'teacher/sign_up' => 'registrations#new', :user => { :rolable_type => 'teacher' }
     match 'student/sign_up' => 'registrations#new', :user => { :rolable_type => 'student' }
-    match 'member/sign_up'  => 'registrations#new', :user => { :rolable_type => 'member'}
+    match 'member/sign_up'  => 'registrations#new', :user => { :rolable_type => 'member'}, :plan => 'topaz'
     match 'admin/sign_up'   => 'registrations#new', :user => { :rolable_type => 'admin'}
   end
 
