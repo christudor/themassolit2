@@ -77,11 +77,15 @@
 	</div>
 
 <script type="text/javascript">
-	  	$(function() {
-			$('.flexslider').flexslider({
-				directionNav: false,
-				slideshowSpeed: 4000
-			});
-			$('[data-toggle="tooltip"]').tooltip();
-	  	});
-	</script>
+   (function($) {
+      $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+   })(jQuery);
+
+</script>

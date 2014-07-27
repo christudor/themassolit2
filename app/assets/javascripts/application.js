@@ -24,5 +24,15 @@
 //= require ../../../vendor/assets/javascripts/moment.min
 //= require_directory ../../../vendor/assets/javascripts/.
 //= require_directory ./pages/.
+//= require_directory ./vendor/.
 //= require theme
 //= require_tree
+
+$('.dropdown-toggle').click(function(e) {
+  e.preventDefault();
+  setTimeout($.proxy(function() {
+    if ('ontouchstart' in document.documentElement) {
+      $(this).siblings('.dropdown-backdrop').off().remove();
+    }
+  }, this), 0);
+});

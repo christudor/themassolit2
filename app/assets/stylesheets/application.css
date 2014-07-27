@@ -11,7 +11,6 @@
  * file per style scope.
  *
  *= require_self
- *= require_directory ./vendor
  *= require bootstrap/bootstrap.min
  *= require ../../../vendor/assets/stylesheets/select2
  *= require ../../../vendor/assets/stylesheets/select2-bootstrap
