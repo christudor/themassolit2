@@ -1,3 +1,6 @@
+# Assign an new random password for each user and send them a email notification
+# path: lib/tasks/devise.rake
+
 namespace :devise do
   desc 'Mass password reset and send email instructions'
   task :mass_password_reset => :environment do
@@ -5,7 +8,7 @@ namespace :devise do
     begin
       model_mailer = "#{model}Mailer".constantize
       model = model.constantize
- 
+
       model.find_each(:conditions => 'id > 70720') do |record|
         # Assign a random password
         random_password = User.send(:generate_token, 'encrypted_password').slice(0, 8)

@@ -31,11 +31,11 @@
                                      
                     <h3>About this Course</h3>
                     <p class="text">
-                      <%= @course.description %>
+                      <%= @course.description.html_safe %>
                     </p>
                     <h3>About the Tutor: <%= @course.provider.name %></h3>
                     <p class="text">
-                      <%= @course.provider.bio %>
+                      <%= @course.provider.bio.html_safe %>
                     </p>
                     <br />
                     <p class="text"><%= link_to "« Back to Courses", "/courses" %></p>
