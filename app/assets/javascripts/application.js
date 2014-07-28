@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap
+//= require bootstrap/bootstrap
 //= require jquery_ujs
 //= require jquery.readyselector
 //= require jquery.externalscript
