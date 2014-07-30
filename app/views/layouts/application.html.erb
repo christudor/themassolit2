@@ -5,12 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title><%= full_title(yield(:title)) %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="erMRrZoUb_db8e1Y7ANl-50u3xgVOvCizOacP3bJrr8" />
   
   <%= stylesheet_link_tag    "application", media: 'all' %>
   <%= javascript_include_tag "application" %>
 
   <%= csrf_meta_tags %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+
 
   <%= render 'layouts/shim' %>
   <%= render 'layouts/analytics' %>
