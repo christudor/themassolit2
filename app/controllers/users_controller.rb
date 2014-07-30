@@ -37,7 +37,7 @@ load_and_authorize_resource
         customer.delete
       end
       user.destroy
-      redirect_to 'admin/users', :notice => "User deleted"
+      redirect_to '/admin/users', :notice => "User deleted"
     end
   end
 
