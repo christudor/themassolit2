@@ -13,7 +13,7 @@
                   <h1>
                     <%= @provider.name %>
                   </h1>
-                  <div class="col-md-7 english screens">                   
+                  <div class="col-md-7">                   
                     <h3>About</h3>
                     <p class="text">
                       <%= @provider.bio.html_safe %>
@@ -27,23 +27,25 @@
                       <h3>Key Information</h3>
                       <br />
                       <p>
-                        <strong>Position:</strong>
+                        Position:
                         <%= @provider.position %>
                       </p>
                       <p>
-                        <strong>Department:</strong>
+                        Department:
                         <%= @provider.department %>
                       </p>
                       <p>
-                        <strong>University of <%= @provider.university %></strong>
+                        <%= @provider.university %>
                       </p>
                       <br><br>
                       <% unless @provider.courses.blank? %>
                         <h3>Courses</h3>
                           <br />
                           <% @provider.courses.each do |course| %>
-                            <%= link_to course.name, course %>
-                        <% end %>
+                          <p class="text">
+                          <%= link_to course.name, course %></li>
+                          </p>
+                          <% end %>
                       <% end %>
                     </div>              
                   </div>

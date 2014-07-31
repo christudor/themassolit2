@@ -42,7 +42,7 @@
                 <td><%= course.lessons.count %></td>
                 <td>
                   <%= link_to "Ed", edit_course_path(course) %>
-                  <%= link_to "Del", course_path(course), :data => { :confirm => "Delete user?" }, :method => :delete %>
+                  <%= link_to "Del", course_path(course), :data => { :confirm => "Delete course?" }, :method => :delete %>
                 </td>
             </tr>
             <% end %>
