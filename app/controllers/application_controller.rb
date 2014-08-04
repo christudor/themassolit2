@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
 
   def store_location
-    if (!request.fullpath.match("/subscribers") &&
+    if (!request.fullpath.match("/users") &&
       !request.xhr?) # don't store ajax calls
       session[:previous_url] = request.fullpath
     end
@@ -17,18 +17,18 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case current_user.rolable_type
     when "Admin"
-        return root_path
+        return session[:previous_url] || root_path
     when "Teacher"
-        return root_path
+        return session[:previous_url] || root_path
     when "Student"
-        return root_path
+        return session[:previous_url] || root_path
     when "Member"
-        return root_path
+        return session[:previous_url] || root_path
     end
   end
 
   def after_sign_out_path_for(resource)
-    session[:previous_url] || root_path
+      root_path
   end  
 
   def current_auth_resource

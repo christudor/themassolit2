@@ -11,21 +11,27 @@ class LessonsController < ApplicationController
     @unique_lessontag_list.flatten!
     @unique_lessontag_list.uniq!
 
-    if subscriber_signed_in? && current_subscriber.school.active?
-      authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
-    elsif subscriber_signed_in? && !current_subscriber.school.active?
-      redirect_to root_path, :notice => "Your school's subscription has now expired."
-    elsif user_signed_in?
-      authorize! :view, :lesson, :message => 'Please sign up or log in to see modules.'
+    if user_signed_in? 
+      if current_user.rolable_type == "Student"
+        school = School.find_by_id(current_user.rolable.school_id)
+        if !school.active?
+          redirect_to root_path, :notice => "Sorry, your school does not have access to this content!"
+        elsif school.active?
+        else
+        end
+      elsif current_user.rolable_type == "Teacher"
+        school = School.find_by_id(current_user.rolable.school_id)
+        if !school.active?
+          redirect_to root_path, :notice => "Sorry, your school does not have access to this content!"
+        elsif school.active?
+        else
+        end
+      elsif current_user.rolable_type == "Member"
+      elsif current_user.rolable_type == "OldMember"
+      else
+      end
     else
-      redirect_to root_path, :notice => "Sorry, you need to be logged in access this!"
-    end
-    
-    if subscriber_signed_in?
-      @sub_scores = @lesson.scores.where(:subscriber_id => current_subscriber.id)
-    elsif user_signed_in?
-      @sub_scores = @lesson.scores.where(:user_id => current_user.id)
-    else
+      redirect_to root_path, :notice => "Sorry, you need to be logged in to access this!"
     end
 
     @recs = []
