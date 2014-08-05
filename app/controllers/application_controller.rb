@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
 
   def store_location
-    if (!request.fullpath.match("/sign_up") && !request.fullpath.match("sign_in") &&
+    if (!request.fullpath.match("/sign_up") && !request.fullpath.match("sign_in") && !request.fullpath.match("users") &&
       !request.xhr?) # don't store ajax calls
       session[:previous_url] = request.fullpath
     end
