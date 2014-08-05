@@ -6,15 +6,17 @@
       <div class="col-md-12">
         <h4>
           Set up your new
-          <% if params[:user][:rolable_type].downcase.eql? 'member' %>
+          <% if request.fullpath.match("/member") %>
             account today.</h4>
             <p>Get unlimited access to MASSOLIT for just £4.99 a month.
-          <% elsif params[:user][:rolable_type].downcase.eql? 'admin' %>
+          <% elsif request.fullpath.match("/admin")  %>
             account today.</h4>
              <p>This sign-up is for admins only.
-          <% elsif params[:user][:rolable_type].downcase.eql? 'teacher' %>
+          <% elsif request.fullpath.match("/teacher")  %>
             account today.</h4>
              <p>This sign-up is for teachers. If you're a student, you should <%= link_to "sign up here", student_sign_up_path %>
+          <% elsif request.fullpath.match("/users")  %>
+            account today.</h4>
           <% else %>
             account today.</h4>
              <p>Are you a teacher? <%= link_to "Sign up here", teacher_sign_up_path %>
