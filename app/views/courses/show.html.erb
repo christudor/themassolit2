@@ -66,7 +66,7 @@
                         <% end %>
                           <% if user_signed_in? %>
                           <% else %>
-                            <p>Please <%= link_to "sign in", new_user_session_path %> or <%= link_to "sign up", 'student/sign_up' %> in order to view lectures.
+                            <p>Please <%= link_to "sign in", new_user_session_path %> or <%= link_to "sign up", '/student/sign_up' %> in order to view lectures.
                           <% end %>
 
                       <% end %>
