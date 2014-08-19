@@ -43,7 +43,9 @@
                 <td><%= u.rolable_type %></td>
                 <td>
                 <% if ['Student', 'Teacher'].include? u.rolable_type %>
+                    <% unless u.rolable.school_id.blank? %>
                     <%= link_to School.find_by_id(u.rolable.school_id).name, School.find_by_id(u.rolable.school_id) %>
+                    <% end %>
                 <% else %>
                     -
                 <% end %>
