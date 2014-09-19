@@ -40,11 +40,6 @@ Massolit::Application.routes.draw do
     match '/sessions/subscriber.new', to: 'devise/sessions#create', via: :post
   end
 
-  resources :news_items
-  match '/feed' => 'news_items#feed',
-      :as => :feed,
-      :defaults => { :format => 'atom' }
-
   resources :mailchimp do
     collection do
       get :subscribe, :as => :subscribe

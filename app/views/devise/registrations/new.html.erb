@@ -80,14 +80,6 @@
                       <% render "#{child_class_name.underscore}_fields", :f => rf %>
                     <% end %>
                   <% end %>
-
-
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> I have read & agree to the 
-                      <%= link_to "Terms of service", terms_path %>.
-                    </label>
-                  </div>
                   
                   <br>
 
@@ -96,7 +88,7 @@
                       <span>Create my account</span>
                   </button>
                   </center>
-                  
+
                   <% end %>
               </div>
             </div>            
@@ -112,6 +104,8 @@
             <br />
             Still at school? <%= link_to "Sign up via your school instead", student_sign_up_path %>
           <% end %>
+          <br />
+            By signing up, you are agreeing to our <%= link_to "terms of service", terms_path %>
         </div>
       </div>
     </div>
