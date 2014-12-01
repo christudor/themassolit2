@@ -10,7 +10,7 @@
           <div class="col-md-7 some-lateral-padding">
             <h3><%= link_to course.name, course %></h3>
             <p class="description">
-              <%= truncate(course.description, :length => 380, :separator => ' ') %>
+              <%= truncate(course.description.html_safe, :length => 380, :separator => ' ') %>
               <%= link_to "Read more", course %>
             </p>
           </div>
